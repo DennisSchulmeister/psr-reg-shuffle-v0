@@ -75,5 +75,5 @@ for filename in inputFiles:
         pass
 
     # Build man page
-    command = "help2man --locale=%s --include=%s --output=%s --no-info ../../start-dev-version" % (localeName, filename, outputFilename)
+    command = "help2man --locale=%s --include=%s --output=%s --no-info ../../start_dev_version" % (localeName, filename, outputFilename)
     os.system(command)
