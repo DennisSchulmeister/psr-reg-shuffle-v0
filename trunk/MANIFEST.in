@@ -1,0 +1,13 @@
+include *
+
+recursive-include data *
+recursive-include doc *
+recursive-include locale *
+
+global-exclude build
+global-exclude build/*
+global-exclude build/*/*
+global-exclude build/*/*/*
+global-exclude build/*/*/*/*
+global-exclude build/*/*/*/*/*
+global-exclude build/*/*/*/*/*/*

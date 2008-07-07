@@ -1,0 +1,15 @@
+2008-07-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Created project directories and empty modules
+ * Created modules const and main as well as class Man. The program can
+   already display --help and --version strings.
+ * Created startup scripts for installed and local source versions
+ * Created setup script (distutils)
+ * Created man page build script
+ * Created english man page
+
+2008-07-06  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Start of development
+ * Analysis of bank file format
+ * Design of the user-interface using glade
