@@ -90,3 +90,5 @@ class Main:
         # HINT: Don't add options here. Do so in __init__(...) instead.
         # But respond to given options here if necessay.
         (options, args) = self.parser.parse_args()
+
+        print _("Welcome.")

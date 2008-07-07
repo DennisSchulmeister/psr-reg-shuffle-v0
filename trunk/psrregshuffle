@@ -30,15 +30,19 @@ This script starts the system-wide installed version of the application.
 
 # Import global modules
 import __builtin__
+import gtk.glade
 import gettext
 import sys
 import os
 
+
 # Initialize l8n support
 domain_name = "psr-reg-shuffle-0.1"
-locale_dir     = os.path.join(sys.prefix, domain_name, "locale")
+locale_dir     = os.path.join(sys.prefix, "share", "locale")
 
 gettext.install(domain_name, locale_dir, unicode=1)
+gtk.glade.bindtextdomain(domain_name, locale_dir)
+gtk.glade.textdomain(domain_name)
 
 
 # Set path of data directory

@@ -1,5 +1,13 @@
 2008-07-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
+ * Wrote a python script which uses xgettext for extracting all
+   translateable strings from the source and glade files.
+ * Wrote a python script which uses msgfmt for building binary catalog
+   files from available translations.
+
+
+2008-07-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
  * Created project directories and empty modules
  * Created modules const and main as well as class Man. The program can
    already display --help and --version strings.
@@ -7,6 +15,7 @@
  * Created setup script (distutils)
  * Created man page build script
  * Created english man page
+
 
 2008-07-06  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 

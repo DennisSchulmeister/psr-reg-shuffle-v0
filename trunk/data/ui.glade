@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Sun Jul  6 01:15:19 2008 -->
+<!--Generated with glade3 3.4.5 on Mon Jul  7 15:16:23 2008 -->
 <glade-interface>
   <widget class="GtkWindow" id="wndMain">
-    <property name="title" translatable="yes">PSR Reg-Shuffle</property>
+    <property name="title" translatable="yes">PSR Registration Shuffler</property>
     <property name="destroy_with_parent">True</property>
     <child>
       <widget class="GtkVBox" id="vbox1">

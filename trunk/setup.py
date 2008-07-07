@@ -141,6 +141,18 @@ for root, dirs, files in os.walk(manBuildDir):
     DATA_FILES.append(entry)
 
 
+# Build language dependant catalog files (l18n)
+# NOTE: Unfortunately there is no way to limit this to the distutils
+# commands "build" or "install". So it gets executed every time the script
+# runs.
+cwd = os.getcwd()
+os.chdir("locale")
+
+import l18n.import_translations
+
+os.chdir(cwd)
+
+
 # Add l8n files to list of data files
 ## TODO ##
 print "INSTALLATION OF L8N FILES IS NOT YET SUPPORTED."

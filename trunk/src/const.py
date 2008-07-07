@@ -35,7 +35,8 @@ import os.path
 #
 # ATTENTION: When program name or version number changes don't forget to change
 # ../psr-reg-shuffle.py -> domain_name so that a new localization domain will
-# be established!!
+# be established!! Also don't forget to adopt ../locale/extract-all-strings.py
+# by adjusting the parameters for xgettext.
 
 progname       = "PSR Registration Shuffler"
 shortname      = "psr-reg-shuffle"
@@ -44,7 +45,7 @@ techname       = "%s-%s" % (shortname, version)
 description    = _("A program for organizing PSR registration bank files")
 author         = "Dennis Schulmeister"
 author_email   = "dennis -at- ncc-1701a.homelinux.net"
-url            = "http://ncc-1701a.homelinux.net/WikiBerd/index.php?page=psr-reg-shuffler"
+url            = "http://ncc-1701a.homelinux.net/WikiBerd/index.php?page=psrregshuffle"
 
 copyright      = "Copyright (C) 2008 %s" % (author)
 copyright_long = _("""%s
@@ -57,4 +58,11 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 """) % (copyright)
 
-version_string = _("%s %s\n\n%s\nWritten by %s <%s>") % (progname, version, copyright_long, author, author_email)
+version_string = _("%(progname)s %(version)s\n\n%(copyright_long)s\nWritten by %(author)s <%(author_email)s>") % \
+{
+    "progname":       progname,
+    "version":        version,
+    "copyright_long": copyright_long,
+    "author":         author,
+    "author_email":   author_email
+}
