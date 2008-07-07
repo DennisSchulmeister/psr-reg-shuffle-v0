@@ -37,7 +37,7 @@ import os
 
 
 # Initialize l8n support
-domain_name = "psr-reg-shuffle-0.1"
+domain_name = "psrregshuffle"
 locale_dir     = os.path.join(sys.prefix, "share", "locale")
 
 gettext.install(domain_name, locale_dir, unicode=1)

@@ -33,9 +33,9 @@ import os.path
 
 # Declare constant values
 #
-# ATTENTION: When program name or version number changes don't forget to change
-# ../psr-reg-shuffle.py -> domain_name so that a new localization domain will
-# be established!! Also don't forget to adopt ../locale/extract-all-strings.py
+# ATTENTION: When program name (or version number) changes don't forget to
+# change ../psrregshuffle -> domain_name so that a new localization domain will
+# be established!! Also don't forget to adopt ../l18n/extract_all_strings.py
 # by adjusting the parameters for xgettext.
 
 progname       = "PSR Registration Shuffler"

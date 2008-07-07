@@ -1,3 +1,2 @@
- * Let setup.py install gettext l8n files.
  * Investigate (and integrate) doctests and unit tests while in early stages.
  * Investigate in pydoc, source code documentation extractor

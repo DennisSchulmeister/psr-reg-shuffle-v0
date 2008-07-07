@@ -4,6 +4,8 @@
    translateable strings from the source and glade files.
  * Wrote a python script which uses msgfmt for building binary catalog
    files from available translations.
+ * Extended setup.py to install localized message catalogs.
+ * Cleaned up subversion repository from unwanted files (like *.pyc and so on).
 
 
 2008-07-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>

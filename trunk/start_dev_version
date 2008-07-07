@@ -43,8 +43,8 @@ sys.argv[0] = "psrregshuffle"
 
 
 # Initialize l8n support
-domain_name = "psr-reg-shuffle"
-locale_dir  = os.path.join(sys.path[0], "locale")
+domain_name = "psrregshuffle"
+locale_dir  = os.path.join(sys.path[0], "l18n", "build")
 
 gettext.install(domain_name, locale_dir, unicode=1)
 gtk.glade.bindtextdomain(domain_name, locale_dir)

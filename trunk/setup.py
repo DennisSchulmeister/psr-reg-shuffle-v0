@@ -31,7 +31,7 @@ and packaging.
 TODO
 ====
 
-* Installation of gettext l8n files.
+* More sensible detection of data directories (data, l18n, ...) (low priority)
 '''
 
 # Provide global dummy _() function since we're not using gettext here.
@@ -146,19 +146,38 @@ for root, dirs, files in os.walk(manBuildDir):
 # commands "build" or "install". So it gets executed every time the script
 # runs.
 cwd = os.getcwd()
-os.chdir("locale")
+os.chdir("l18n")
 
 import l18n.import_translations
 
 os.chdir(cwd)
 
 
-# Add l8n files to list of data files
-## TODO ##
-print "INSTALLATION OF L8N FILES IS NOT YET SUPPORTED."
+# Add l18n files to list of data files
+l18nBuildDir   = os.path.join("l18n", "build")
+l18nInstallDir = os.path.join(sys.prefix, "share", "locale")
+
+for root, dirs, files in os.walk(l18nBuildDir):
+    # Assemble list of source files per directory
+    srcFiles = []
+
+    for file in files:
+        srcFiles.append(os.path.join(root, file))
+
+    if not srcFiles:
+        continue
+
+    # Derive destination directory name
+    dstDir = root.replace(l18nBuildDir, l18nInstallDir)
+
+    # Append files to list of data files
+    entry = (dstDir, srcFiles)
+    DATA_FILES.append(entry)
 
 
 # Start setup-script
+print
+
 setup(
     name=NAME,
     version=VERSION,
