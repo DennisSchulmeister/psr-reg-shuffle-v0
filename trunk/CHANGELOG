@@ -1,3 +1,21 @@
+2008-07-09  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Extended helper scripts by additional command line option --clean (or -c)
+   which removes previously generated files.
+ * Extended setup script to use the newly introduced cleanup services in order
+   remove files generated with root permissions. Those files could break the
+   helper scripts otherwise as they weren't allowed to overwrite the files
+   when re-run with user-privileges.
+ * Extended setup script to assume "--help" option if no option is given
+   by the user. Otherwise the call to setup(...) would not return and there
+   would be no chance to clean up afterwards.
+
+
+2008-07-08  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Made setup script output the licence name if requested by --licence.
+
+
 2008-07-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Wrote a python script which uses xgettext for extracting all

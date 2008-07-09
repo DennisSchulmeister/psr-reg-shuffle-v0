@@ -51,10 +51,17 @@ import os
 from src import const
 
 
+# Set default options if no options are given by user. Otherwise the setup()
+# function won't return without giving us a chance to cleanup afterwards.
+if len(sys.argv) < 2:
+    sys.argv.append("--help")
+
+
 # Package meta-data
 NAME         = const.progname
 VERSION      = const.version
 DESCRIPTION  = const.description
+LICENCE      = const.licence
 AUTHOR       = const.author
 AUTHOR_EMAIL = const.author_email
 URL          = const.url
@@ -108,13 +115,14 @@ DATA_FILES   = [
 
 
 # Build man pages
-# NOTE: Unfortunately there is no way to limit this to the distutils
+# NOTE: Unfortunately there is no (easy) way to limit this to the distutils
 # commands "build" or "install". So it gets executed every time the script
 # runs.
 cwd = os.getcwd()
 os.chdir(os.path.join("doc", "man"))
 
-import doc.man.make
+#import doc.man.make
+os.system("./make.py")
 
 os.chdir(cwd)
 
@@ -142,13 +150,14 @@ for root, dirs, files in os.walk(manBuildDir):
 
 
 # Build language dependant catalog files (l18n)
-# NOTE: Unfortunately there is no way to limit this to the distutils
+# NOTE: Unfortunately there is no (easy) way to limit this to the distutils
 # commands "build" or "install". So it gets executed every time the script
 # runs.
 cwd = os.getcwd()
 os.chdir("l18n")
 
-import l18n.import_translations
+#import l18n.import_translations
+os.system("./import_translations.py")
 
 os.chdir(cwd)
 
@@ -184,6 +193,7 @@ setup(
     description=DESCRIPTION,
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
+    license=LICENCE,
     url=URL,
     classifiers=CLASSIFIERS,
     scripts=SCRIPTS,
@@ -192,3 +202,17 @@ setup(
     data_files=DATA_FILES,
     requires=REQUIRES
 )
+
+
+# Clean up automatically generated helper files.
+# HINT: This is especially importand if the script runs with root privileges.
+# Otherwise helper scripts couldn't be run with user-privileges afterwards.
+cwd = os.getcwd()
+os.chdir(os.path.join("doc", "man"))
+os.system("./make.py --clean")
+os.chdir(cwd)
+
+cwd = os.getcwd()
+os.chdir("l18n")
+os.system("./import_translations.py --clean")
+os.chdir(cwd)

@@ -27,12 +27,16 @@ Purpose
 
 This script uses xgettext for extracting all translatable strings from
 all source and glade files. Output is stored to psrregshuffle.po.
+
+If run with the command line option "--clean" (or "-c" for short) a cleanup
+will be performed where all generated files will be removed.
 '''
 
 # Import modules
 import os
 import os.path
 import glob
+import sys
 
 
 # Define parameters
@@ -49,6 +53,17 @@ xgettextArgs    = "--join-existing --indent --add-location --width=%(width)s --s
     "outputFilename": outputFilename,
 }
 knownFiletypes  = ["*.py", "*.glade"]
+
+
+
+# Define cleanup function
+def cleanup_build_files():
+    '''
+    This function removes all possibly generated files. Its meant for cleanup
+    either at the users request or before building new files.
+    '''
+    global outputFilename
+    os.remove(outputFilename)
 
 
 # Define processing function
@@ -86,6 +101,16 @@ def process_dir(dirName, recursive):
                 continue
 
             process_dir(os.path.join(root, dir), recursive=True)
+
+
+
+# Check command line options
+for arg in sys.argv[1:]:
+    if arg == "--clean" or arg == "-c":
+        # Cleanup request detected
+        print "CLEANING UP"
+        cleanup_build_files()
+        sys.exit()
 
 
 # Clear existing output file

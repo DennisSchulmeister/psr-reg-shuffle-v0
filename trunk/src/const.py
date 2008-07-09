@@ -42,6 +42,7 @@ progname       = "PSR Registration Shuffler"
 shortname      = "psr-reg-shuffle"
 version        = "0.1"
 techname       = "%s-%s" % (shortname, version)
+licence        = "GNU General Public Licence 3"
 description    = _("A program for organizing PSR registration bank files")
 author         = "Dennis Schulmeister"
 author_email   = "dennis -at- ncc-1701a.homelinux.net"

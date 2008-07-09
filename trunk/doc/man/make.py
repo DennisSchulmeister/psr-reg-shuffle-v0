@@ -37,25 +37,51 @@ psrregshuffle.LOCALE.txt
 
 whereas LOCALE has to be substituted by the locale for which the man page
 has to be built.
+
+If run with the command line option "--clean" (or "-c" for short) a cleanup
+will be performed where all generated files will be removed.
 '''
 
 # Import modules
 import glob
 import os
 import os.path
+import sys
+
+
+# Define cleanup function
+def cleanup_build_files():
+    '''
+    This function removes all possibly generated files. Its meant for cleanup
+    either at the users request or before building new files.
+    '''
+    for root, dirs, files in os.walk("build", topdown=False):
+        for name in files:
+            os.remove(os.path.join(root, name))
+        for name in dirs:
+            os.rmdir(os.path.join(root, name))
+
+
+# Check command line options
+for arg in sys.argv[1:]:
+    if arg == "--clean" or arg == "-c":
+        # Cleanup request detected
+        print "CLEANING UP"
+        cleanup_build_files()
+        sys.exit()
+
 
 # Print info message (mainly for setup.py)
 print "BUILDING MAN PAGES"
 
+
 # Assemble list of input files
 inputFiles = glob.glob("psrregshuffle.*.txt")
 
+
 # Remove sub-directories with old man page versions
-for root, dirs, files in os.walk("build", topdown=False):
-    for name in files:
-        os.remove(os.path.join(root, name))
-    for name in dirs:
-        os.rmdir(os.path.join(root, name))
+cleanup_build_files()
+
 
 # Create man pages from input files
 for filename in inputFiles:
