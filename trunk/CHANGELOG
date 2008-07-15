@@ -1,3 +1,13 @@
+2008-07-16  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Wrote script for quick running of all available tests.
+
+
+2008-07-12  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Established sub-packages called tests to hold unit tests.
+
+
 2008-07-09  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Extended helper scripts by additional command line option --clean (or -c)

@@ -1,5 +1,8 @@
- * Investigate (and integrate) doctests and unit tests while in early stages.
  * Investigate in pydoc, source code documentation extractor
+
  * Adopt helper scripts for including src/const and using const.progname
    or const.techname instead of literals. For this to work move dummy
    definition of _() from setup.py to its own module file.
+
+ * More sensible detection of data directories (data, l18n, ...) in setup
+   script (low priority)
