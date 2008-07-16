@@ -11,7 +11,3 @@
    files. Think about sensible tests.
 
  * Make GUI work and make it use the fleshed out access classes.
-    * During mainwindow.__init__(...) insert directory chooser widget and
-      insert about text.
-
- * Fix bug of Kiwi preventing automatic creation of man files
