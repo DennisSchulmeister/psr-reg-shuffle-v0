@@ -29,8 +29,10 @@ This module provides the main application class.
 
 # Import global modules
 import optparse
+import kiwi.environ
 
 # Import application modules
+import mainwindow
 import exceptions
 import const
 
@@ -72,6 +74,14 @@ class Main:
         # Store path of data directory as set by startup script
         self.dataDir = __PSR_DATA_DIR__
 
+        # Add data directory to kiwi's list of resource paths.
+        # NOTE: Kiwi provides its own way of finding resources like glade
+        # files and images which can also distinguish between running an
+        # installed or an uninstalled version of the application. In future
+        # it might be wise to better use that feature instead of the dataDir
+        # as determined by two seperate startup scripts.
+        kiwi.environ.environ.add_resource("glade", self.dataDir)
+
         # Prepare command line parser
         # HINT: Add option definitions here if necessary.
         self.parser = optparse.OptionParser(version=const.version_string)
@@ -87,8 +97,10 @@ class Main:
         '''
 
         # Parse command line arguments
-        # HINT: Don't add options here. Do so in __init__(...) instead.
+        # HINT: Don't add options here. Do so in __init__(self, ...) instead.
         # But respond to given options here if necessay.
         (options, args) = self.parser.parse_args()
 
-        print _("Welcome.")
+        # Show main window
+        wnd = mainwindow.MainWindow()
+        wnd.run()

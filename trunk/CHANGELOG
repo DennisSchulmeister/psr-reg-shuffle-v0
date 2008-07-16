@@ -5,6 +5,7 @@
  * Defined API for editing registrations (Class regbank.registration.Registration)
  * Defined API for registration files (Class regfile.regfile.RegFile)
  * Introduced constants for keyboard models (regbank.models)
+ * Introduced main window class.
 
 
 2008-07-12  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
