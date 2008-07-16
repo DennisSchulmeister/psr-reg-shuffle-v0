@@ -1,9 +1,9 @@
 2008-07-16  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Wrote script for quick running of all available tests.
- * Defined API for bank files. (Class regbank.BankFile.BankFile)
- * Defined API for editing registrations (Class regbank.Registration.Registration)
- * Defined API for registration files (Class regfile.RegFile)
+ * Defined API for bank files. (Class regbank.bankfile.BankFile)
+ * Defined API for editing registrations (Class regbank.registration.Registration)
+ * Defined API for registration files (Class regfile.regfile.RegFile)
  * Introduced constants for keyboard models (regbank.models)
 
 
