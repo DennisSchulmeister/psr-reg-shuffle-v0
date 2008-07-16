@@ -7,6 +7,8 @@
  * More sensible detection of data directories (data, l18n, ...) in setup
    script (low priority)
 
+ * Deos extraction of translateable strings from glade file work?
+
  * Flesh out classes for accessing bank files, registrations and registration
    files. Think about sensible tests.
 

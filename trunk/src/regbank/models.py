@@ -30,4 +30,11 @@ keyboard models. Since these names are meant to be used within data files
 languages.
 '''
 
+# Constants with technical short names for keyboard models
 YAMAHA_PSR2000 = "YAMAHA PSR2000"
+
+
+# Dictionary with user-friendly product names. (Not translateable)
+name = {
+    YAMAHA_PSR2000: "Yamaha PSR-2000"
+}

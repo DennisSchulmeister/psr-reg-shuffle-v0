@@ -6,6 +6,9 @@
  * Defined API for registration files (Class regfile.regfile.RegFile)
  * Introduced constants for keyboard models (regbank.models)
  * Introduced main window class.
+ * Introduced classes for coordinating the import of registrations and the
+   assembly of bank files. For this certain signals from the main window are
+   delegated to the coordinator objects.
 
 
 2008-07-12  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>

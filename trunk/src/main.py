@@ -126,8 +126,8 @@ class Main(gobject.GObject):
         (options, args) = self.parser.parse_args()
 
         # Show main window
-        wnd = mainwindow.MainWindow()
-        wnd.run()
+        self.wnd = mainwindow.MainWindow()
+        self.wnd.run()
 
 
     def setWorkDir(self, workDir):

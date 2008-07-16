@@ -29,12 +29,15 @@ This module provides the main window class.
 
 # Import system modules
 from kiwi.ui.delegates import GladeDelegate
+import webbrowser
 import os.path
 import gtk
 
 # Import application modules
 import const
 import main
+import createbanktab
+import importregstab
 
 
 class MainWindow(GladeDelegate):
@@ -118,6 +121,10 @@ class MainWindow(GladeDelegate):
         self.linkAbout.set_label(_("Click here for more information"))
         self.linkAbout.set_uri(const.url)
 
+        # Prepare delegates for driving the tab's contents
+        self.createBankTab = createbanktab.CreateBankTab(wndMain=self)
+        self.importRegsTab = importregstab.ImportRegsTab(wndMain=self)
+
 
     def run(self):
         '''
@@ -170,41 +177,54 @@ class MainWindow(GladeDelegate):
 
     def on_btnSaveBank__clicked(self, *args):
         '''
+        Event handler for save bank button. Delegates the call to an
+        object of type CreateBankTab.
         '''
-        print "Save bank"
-        pass
+        self.createBankTab.saveBankFile()
 
 
     def on_btnRemoveSelected__clicked(self, *args):
         '''
+        Event handler for remove selected button. Delegates the call to an
+        object of type CreateBankTab.
         '''
-        print "Remove selected"
-        pass
+        self.createBankTab.removeSelectedItemsFromExportList()
 
 
     def on_btnClearList__clicked(self, *args):
         '''
+        Event handler for remove all button. Delegates the call to an object
+        of type CreateBankTab.
         '''
-        print "Clear list"
-        pass
+        self.createBankTab.removeAllItemsFromExportList()
 
 
     def on_btnOpenBankFile__clicked(self, *args):
         '''
+        Event handler for the open bank file button. Delegates the call to an
+        object of type ImportRegsTab.
         '''
-        print "Open bank file"
-        pass
+        self.importRegsTab.openBankFile()
 
 
     def on_btnImportSelectedRegs__clicked(self, *args):
         '''
+        Event handler for import selected regs button. Delegates the call to an
+        object of type ImportRegsTab.
         '''
-        print "Import selected"
-        pass
+        self.importRegsTab.importSelectedRegs()
 
 
     def on_linkAbout__clicked(self, *args):
         '''
+        Event handle for the link button on the about pane. Tries to open
+        the website URI as given by const.url in a browser.
         '''
-        print "www link"
-        pass
+        # Open website URI in browser
+        success = webbrowser.open(const.url)
+
+        # Give message on the statusbar
+        if success:
+            self.setStatusMessage(_("Sucessfully opened web browser."))
+        else:
+            self.setStatusMessage(_("Unable to launch web browser."))
