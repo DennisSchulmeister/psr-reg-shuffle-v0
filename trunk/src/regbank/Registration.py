@@ -33,13 +33,14 @@ class Registration(object):
     This class is the base for all model specific registration objects.
     '''
 
+    # Name of the keyboard model
+    keyboardName = ""
+
     def __init__(self):
         '''
         Default contructor.
         '''
         self.binaryContent = None
-        self.keyboardName  = ""
-        pass
 
     def setBinaryContent(self, binary):
         '''
@@ -57,21 +58,22 @@ class Registration(object):
         '''
         return self.binaryContent
 
-    def setKeyboardName(self, name):
-        '''
-        Sets the name of the keyboard model for which the given registration
-        is valid. This information usually comes from a bank file or a
-        registration file together with its binary content.
-        '''
-        self.keyboardName = name
-
     def getKeyboardName(self, name):
         '''
         Returns the name of the keyboard model for which the given registration
         is valid. This is usually needed for determining the file type of a
         bank file or a registration file to be written to disk.
         '''
-        return self.keyboardName
+        return self.__class__.keyboardName
+
+    def canUnderstandKeyboardName(cls, name):
+        '''
+        Class method for checking whether a class can be used for manipulating
+        data of the given keyboard make.
+        '''
+        return name == cls.keyboardName
+
+    canUnderstandKeyboardName = classmethod(canUnderstandKeyboardName)
 
     def setName(self, name):
         '''
