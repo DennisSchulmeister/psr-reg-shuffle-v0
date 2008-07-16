@@ -80,3 +80,5 @@ for root, dirs, files in os.walk(SRCDIR):
             print "# %s" % (os.path.join(root, filename))
             print TEST_BROKEN
             print
+
+        del(module)
