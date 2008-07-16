@@ -6,3 +6,8 @@
 
  * More sensible detection of data directories (data, l18n, ...) in setup
    script (low priority)
+
+ * Flesh out classes for accessing bank files, registrations and registration
+   files. Think about sensible tests.
+
+ * Make GUI work and make it use the fleshed out access classes.
