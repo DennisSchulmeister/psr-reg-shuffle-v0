@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Jul 16 17:26:46 2008 -->
+<!--Generated with glade3 3.4.5 on Wed Jul 16 20:24:51 2008 -->
 <glade-interface>
   <widget class="GtkWindow" id="wndMain">
     <property name="title" translatable="yes">PSR Registration Shuffler</property>
@@ -9,45 +9,40 @@
       <widget class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <child>
+          <widget class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <property name="spacing">6</property>
+            <child>
+              <widget class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Data Directory:</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkFileChooserButton" id="fcBtnDataDir">
+                <property name="visible">True</property>
+                <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
+                <property name="local_only">False</property>
+                <property name="title" translatable="yes">Data Directory</property>
+              </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+          </packing>
+        </child>
+        <child>
           <widget class="GtkNotebook" id="nbMain">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="scrollable">True</property>
-            <child>
-              <widget class="GtkLabel" id="lblDataDirChooser">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Replace me with a directory chooser.
-
-&lt;b&gt;NOTE:&lt;/b&gt; &lt;i&gt;Unfortunately the application
-would crash if the chooser widget was
-directly embedded into the glade file.&lt;/i&gt;</property>
-                <property name="use_markup">True</property>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkHBox" id="hbox1">
-                <property name="visible">True</property>
-                <child>
-                  <widget class="GtkImage" id="image4">
-                    <property name="visible">True</property>
-                    <property name="stock">gtk-directory</property>
-                  </widget>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label1">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Data directory</property>
-                  </widget>
-                  <packing>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="type">tab</property>
-                <property name="tab_fill">False</property>
-              </packing>
-            </child>
             <child>
               <widget class="GtkHPaned" id="hpaned1">
                 <property name="visible">True</property>
@@ -91,7 +86,7 @@ directly embedded into the glade file.&lt;/i&gt;</property>
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkHButtonBox" id="hbuttonbox1">
+                      <widget class="GtkHButtonBox" id="btnBoxCreateBankFiles">
                         <property name="visible">True</property>
                         <property name="layout_style">GTK_BUTTONBOX_START</property>
                         <child>
@@ -204,6 +199,7 @@ directly embedded into the glade file.&lt;/i&gt;</property>
                 </child>
               </widget>
               <packing>
+                <property name="menu_label">Create bank files</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -228,6 +224,7 @@ directly embedded into the glade file.&lt;/i&gt;</property>
               </widget>
               <packing>
                 <property name="type">tab</property>
+                <property name="menu_label">Create bank files</property>
                 <property name="position">1</property>
                 <property name="tab_fill">False</property>
               </packing>
@@ -242,7 +239,7 @@ directly embedded into the glade file.&lt;/i&gt;</property>
                     <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                     <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                     <child>
-                      <widget class="GtkTreeView" id="treeImportedRegs">
+                      <widget class="GtkTreeView" id="treeImportRegs">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="headers_clickable">True</property>
@@ -285,7 +282,7 @@ directly embedded into the glade file.&lt;/i&gt;</property>
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkButton" id="btnImportBanks">
+                      <widget class="GtkButton" id="btnImportSelectedRegs">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -325,6 +322,7 @@ directly embedded into the glade file.&lt;/i&gt;</property>
                 </child>
               </widget>
               <packing>
+                <property name="menu_label">About</property>
                 <property name="position">2</property>
               </packing>
             </child>
@@ -349,6 +347,7 @@ directly embedded into the glade file.&lt;/i&gt;</property>
               </widget>
               <packing>
                 <property name="type">tab</property>
+                <property name="menu_label">Import registrations</property>
                 <property name="position">2</property>
                 <property name="tab_fill">False</property>
               </packing>
@@ -363,21 +362,23 @@ directly embedded into the glade file.&lt;/i&gt;</property>
                   <widget class="GtkViewport" id="viewport1">
                     <property name="visible">True</property>
                     <property name="resize_mode">GTK_RESIZE_QUEUE</property>
+                    <property name="shadow_type">GTK_SHADOW_NONE</property>
                     <child>
                       <widget class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="spacing">6</property>
                         <child>
-                          <widget class="GtkImage" id="image5">
+                          <widget class="GtkImage" id="imgAbout">
                             <property name="visible">True</property>
                             <property name="stock">gtk-about</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="padding">10</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label5">
+                          <widget class="GtkLabel" id="lblAbout">
                             <property name="visible">True</property>
                             <property name="yalign">0</property>
                             <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;Program name&lt;/b&gt;&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;
@@ -386,10 +387,27 @@ directly embedded into the glade file.&lt;/i&gt;</property>
 Long copyright</property>
                             <property name="use_markup">True</property>
                             <property name="justify">GTK_JUSTIFY_CENTER</property>
-                            <property name="wrap">True</property>
                           </widget>
                           <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
                             <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLinkButton" id="linkAbout">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">Click me!</property>
+                            <property name="relief">GTK_RELIEF_NONE</property>
+                            <property name="response_id">0</property>
+                            <property name="uri">http://glade.gnome.org</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </widget>
@@ -398,6 +416,7 @@ Long copyright</property>
                 </child>
               </widget>
               <packing>
+                <property name="menu_label">About</property>
                 <property name="position">3</property>
               </packing>
             </child>
@@ -422,11 +441,15 @@ Long copyright</property>
               </widget>
               <packing>
                 <property name="type">tab</property>
+                <property name="menu_label">About</property>
                 <property name="position">3</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
           </widget>
+          <packing>
+            <property name="position">1</property>
+          </packing>
         </child>
         <child>
           <widget class="GtkStatusbar" id="sbMain">
@@ -435,7 +458,7 @@ Long copyright</property>
           </widget>
           <packing>
             <property name="expand">False</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </widget>

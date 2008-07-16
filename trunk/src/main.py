@@ -29,7 +29,10 @@ This module provides the main application class.
 
 # Import global modules
 import optparse
+import gobject
 import kiwi.environ
+import os.path
+import os
 
 # Import application modules
 import mainwindow
@@ -37,11 +40,17 @@ import exceptions
 import const
 
 
-class Main:
+class Main(gobject.GObject):
     '''
     This is the main application class. It's a singleton an provides global
     methods and variables. Note that global constants are defined in the
     module const.
+
+    Emited signals:
+    ---------------
+
+    *work-dir-changed:* The working directory has been changed. The new
+    directory is given as soley parameter to the signal.
     '''
     _singleton = None
 
@@ -80,11 +89,26 @@ class Main:
         # installed or an uninstalled version of the application. In future
         # it might be wise to better use that feature instead of the dataDir
         # as determined by two seperate startup scripts.
-        kiwi.environ.environ.add_resource("glade", self.dataDir)
+        if os.path.exists(self.dataDir) and os.path.isdir(self.dataDir):
+            kiwi.environ.environ.add_resource("glade", self.dataDir)
 
         # Prepare command line parser
         # HINT: Add option definitions here if necessary.
         self.parser = optparse.OptionParser(version=const.version_string)
+
+        # Define work-dir-changed signal
+        gobject.GObject.__init__(self)
+
+        gobject.signal_new(
+            "work-dir-changed",
+            Main,
+            gobject.SIGNAL_RUN_LAST,
+            gobject.TYPE_NONE,
+            (gobject.TYPE_STRING,)
+        )
+
+        # Add additional instance variables
+        self.workDir = os.getcwd()
 
 
     def run(self):
@@ -104,3 +128,22 @@ class Main:
         # Show main window
         wnd = mainwindow.MainWindow()
         wnd.run()
+
+
+    def setWorkDir(self, workDir):
+        '''
+        This method should be used for changing the work directory instead
+        of direct manipulation of the instance variable workDir. The method
+        has the advantage that it checks for a valid path and that it emits
+        the work-dir-changed signal for letting other objects know about the
+        change.
+        '''
+        # Check whether a valid directory was given
+        if not os.path.exists(workDir) or not os.path.isdir(workDir):
+            return
+
+        # Change work directory
+        self.workDir = workDir
+
+        # Emit work-dir-changed signal
+        self.emit("work-dir-changed", self.workDir)

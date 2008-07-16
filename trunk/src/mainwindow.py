@@ -30,8 +30,10 @@ This module provides the main window class.
 # Import system modules
 from kiwi.ui.delegates import GladeDelegate
 import os.path
+import gtk
 
 # Import application modules
+import const
 import main
 
 
@@ -41,7 +43,29 @@ class MainWindow(GladeDelegate):
     '''
 
     # List of controlled widgets
-    widgets = []
+    widgets = [
+        # Top level widgets
+        "fcBtnDataDir",            # needs handler (current-folder-changed)
+        "nbMain",
+        "sbMain",
+
+        # Create bank files pane
+        "treeAvailableRegs",
+        "treeNewBank",
+        "btnSaveBank",             # needs handler (clicked)
+        "btnRemoveSelected",       # needs handler (clicked)
+        "btnClearList",            # needs handler (clicked)
+
+        # Import registrations pane
+        "treeImportRegs",
+        "btnOpenBankFile",         # needs handler (clicked)
+        "btnImportSelectedRegs",   # needs handler (clicked)
+
+        # About pane
+        "imgAbout",
+        "lblAbout",
+        "linkAbout"                # needs handler (clicked)
+    ]
 
 
     def __init__(self):
@@ -64,9 +88,123 @@ class MainWindow(GladeDelegate):
             delete_handler = self.quit_if_last
         )
 
+        # Set window icon
+        icon_filename = os.path.join(self.main.dataDir, "icon.png")
+        self.wndMain.set_icon_from_file(icon_filename)
+
+        # Set up status bar
+        self.sbContext   = self.sbMain.get_context_id("main")
+        self.sbLastMsgId = 0
+        self.setStatusMessage(_("Ready."))
+
+        # Set directory chooser's current path
+        self.fcBtnDataDir.set_filename(self.main.workDir)
+
+        # Set image and text of about pane
+        logo_filename = os.path.join(self.main.dataDir, "logo_medium.png")
+        self.imgAbout.set_from_file(logo_filename)
+
+        about_txt = "<big><big><big><b>%(progname)s %(version)s</b></big></big></big>\n<i>%(descr)s</i>\n\n%(licence)s" % \
+        {
+            "progname": const.progname,
+            "version":  const.version,
+            "descr":    const.description,
+            "licence":  const.copyright_long
+        }
+
+        self.lblAbout.set_use_markup(True)
+        self.lblAbout.set_markup(about_txt)
+
+        self.linkAbout.set_label(_("Click here for more information"))
+        self.linkAbout.set_uri(const.url)
+
 
     def run(self):
         '''
         Shows the main window and starts the main event loop.
         '''
         self.show_and_loop()
+
+
+    def setStatusMessage(self, msg):
+        '''
+        This method sets the text displayed in the status bar.
+        '''
+        # Remove previous mesage from statusbar's stack (saves memory)
+        if self.sbLastMsgId:
+            self.sbMain.remove(self.sbContext, self.sbLastMsgId)
+
+        # Push new message onto statusbar
+        self.sbLastMsgId = self.sbMain.push(self.sbContext, msg)
+
+
+    def on_wndMain__destroy(self, *args):
+        '''
+        Event handler called at destroyment of the main window. Usually this
+        will also be the application's end.
+        '''
+        # Manually decrese main loop nesting level.
+        # ATTENTION: This is needed due to the file chooser button which
+        # silently increases the main loop level by one. The effect of this
+        # is that Kiwi's quit_on_last doesn't really quit the application
+        # but leaves it running within a spare main loop.
+        gtk.main_quit()
+
+
+    def on_fcBtnDataDir__current_folder_changed(self, *args):
+        '''
+        Event handler for responding on the user having changed the data (work)
+        directory. Calls self.main.setWorkDir() which in turn emits a
+        work-dir-changed signal.
+        '''
+        # Leave of directory hasn't been changed
+        if self.main.workDir == args[0].get_filename():
+            return
+
+        # Remember directory and emit notification signal
+        self.main.setWorkDir(args[0].get_filename())
+
+        # Give message on the statusbar
+        self.setStatusMessage(_("Changed directory to %s." % (self.main.workDir)))
+
+
+    def on_btnSaveBank__clicked(self, *args):
+        '''
+        '''
+        print "Save bank"
+        pass
+
+
+    def on_btnRemoveSelected__clicked(self, *args):
+        '''
+        '''
+        print "Remove selected"
+        pass
+
+
+    def on_btnClearList__clicked(self, *args):
+        '''
+        '''
+        print "Clear list"
+        pass
+
+
+    def on_btnOpenBankFile__clicked(self, *args):
+        '''
+        '''
+        print "Open bank file"
+        pass
+
+
+    def on_btnImportSelectedRegs__clicked(self, *args):
+        '''
+        '''
+        print "Import selected"
+        pass
+
+
+    def on_linkAbout__clicked(self, *args):
+        '''
+        '''
+        print "www link"
+        pass

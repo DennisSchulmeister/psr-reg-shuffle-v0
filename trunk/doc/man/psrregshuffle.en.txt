@@ -31,7 +31,7 @@ each holding a registration. In that regard the data directory resembles a
 library with all available registrations.
 
 Afterwards you can assemble new bank files of all registrations. This means
-the application will create ready to use bank files which you can transfer
+the application will create ready-to-use bank files which you can transfer
 to your keyboard. Note that the act of transfer is out of scope for PSR
 Registration Shuffler. Depending on your keyboard model you can use a floppy
 disc, an USB storage device or some other kind of connection.
@@ -46,10 +46,8 @@ on the instrument, anyway since on the computer you can't listen to your
 changes.
 
 [ABOUT THE USER-INTERFACE]
-The user-interface consists of four tabs:
+The user-interface mainly consists of three tabs:
 
-.br
-\h'3' \(bu Data directory
 .br
 \h'3' \(bu Create bank files
 .br
@@ -57,23 +55,22 @@ The user-interface consists of four tabs:
 .br
 \h'3' \(bu About
 
-The first tab is meant for selecting the data directory where the singular
-registration files created by the application reside. Be sure the double-click
-on a directory so you branch into it and can see its sub-directories if it
-contains any. Simply highlighting it doesn't work.
+Yet above all tabs there is the data directory chooser. Use it in order to
+select the data directory where you want to import your registrations to and
+where you want to draw them from for assembling registration banks.
 
-The second tab is where you can see all available registrations and build
-new banks. Therefor two lists are shown side by side. In order to create a
-new bank just drag and drop the registrations from the left list to the right
-one and push "Save bank file". You'll be asked for a filename for the new
-bank file then.
+The first tab is where you can see all available registrations of the data
+directory and build new banks. Therefor two lists are shown side by side. In
+order to create a new bank just drag and drop the registrations from the left
+list to the right one and push "Save bank file". You'll be asked for a filename
+for the new bank file then.
 
 In order to populate your data directory you need to import registrations
-from existing bank files. This is what the third tab is for. Please make sure
+from existing bank files. This is what the second tab is for. Please make sure
 to highlight (select) all registrations which you want to import. Not-selected
 registrations won't be imported.
 
-The fourth tab finally shows credits and copyright information.
+The third tab finally shows credits and copyright information.
 
 [KNOWN BUGS]
 As I don't own any other PSR keyboard except the PSR-2000 and since the file
