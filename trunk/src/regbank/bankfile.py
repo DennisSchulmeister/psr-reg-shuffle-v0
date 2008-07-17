@@ -48,7 +48,7 @@ __all__ = [
 
 
 # Import modules
-import exceptions
+import appexceptions
 
 
 # Define BankFile class
@@ -101,9 +101,9 @@ def BankFile(object):
         '''
         Class method which determines the class object of type BankFile which
         can handle the given keyboard model. Raises
-        exceptions.UnknownKeyboardModel is no class can be found
+        appexceptions.UnknownKeyboardModel is no class can be found
         '''
-        raise exceptions.UnknownKeyboardModel()
+        raise appexceptions.UnknownKeyboardModel()
 
     getClassForKeyboardName = classmethod(getClassForKeyboardName)
 
@@ -125,9 +125,9 @@ def BankFile(object):
         Class method which determines the class object of type BankFile which
         can handle the given file. The file can be given either by its filename
         or by a file object. If both are given the file object will be ignored.
-        Raises exceptions.UnknownKeyboardModel is no class can be found
+        Raises appexceptions.UnknownKeyboardModel is no class can be found
         '''
-        raise exceptions.UnknownKeyboardModel()
+        raise appexceptions.UnknownKeyboardModel()
 
     getClassForBankFile = classmethod(getClassForBankFile)
 

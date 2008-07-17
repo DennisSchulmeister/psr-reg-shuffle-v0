@@ -42,7 +42,7 @@ import os
 
 # Import application modules
 import mainwindow
-import exceptions
+import appexceptions
 import const
 
 
@@ -85,7 +85,7 @@ class Main(gobject.GObject):
 
         # Check for wrong usage of constructor instead of instance accessor
         if not InternalUsage:
-            raise exceptions.ClassIsSingleton(self)
+            raise appexceptions.ClassIsSingleton(self)
 
         # Store path of data directory as set by startup script
         self.dataDir = __PSR_DATA_DIR__

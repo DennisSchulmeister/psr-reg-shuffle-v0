@@ -42,7 +42,7 @@ import glob
 import sys
 
 # Import applicaiton modules
-import exceptions
+import appexceptions
 
 
 # Define Registration class
@@ -103,7 +103,7 @@ class Registration(object):
         '''
         Class method which determines the class object of type Registration
         which can handle registrations from the given keyboard model. Raises
-        exceptions.UnknownKeyboardModel is no class can be found
+        appexceptions.UnknownKeyboardModel is no class can be found
         '''
         # Calculate package name
         global __file__
@@ -154,7 +154,7 @@ class Registration(object):
                 return foundClass
 
         # No class found. Raise exception
-        raise exceptions.UnknownKeyboardModel()
+        raise appexceptions.UnknownKeyboardModel()
 
     getClassForKeyboardName = classmethod(getClassForKeyboardName)
 
