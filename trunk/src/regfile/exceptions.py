@@ -27,6 +27,12 @@ PURPOSE
 This module provides all exceptions known in the regfile package.
 '''
 
+# Public export of module content
+__all__ = [
+    ""
+]
+
+
 #class ClassIsSingleton(Exception):
     #'''
     #This exception gets thrown whenever it's tried to instanciate a singleton

@@ -30,6 +30,13 @@ is the class which receives all events on the tab page and which delegates
 them over here.
 '''
 
+# Public export of module content
+__all__ = [
+    "CreateBankTab"
+]
+
+
+# Class definition
 class CreateBankTab:
     '''
     This delegate class coordinates the assembly of bank files.

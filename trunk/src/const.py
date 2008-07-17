@@ -27,6 +27,23 @@ PURPOSE
 This module declares application wide constants.
 '''
 
+# Public export of module content
+__all__ = [
+    "progname",
+    "shortname",
+    "version",
+    "techname",
+    "licence",
+    "description",
+    "author",
+    "author_email",
+    "url",
+    "copyright",
+    "copyright_long",
+    "version_string",
+]
+
+
 # Import modules
 import sys
 import os.path

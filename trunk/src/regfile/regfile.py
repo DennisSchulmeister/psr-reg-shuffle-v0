@@ -29,6 +29,12 @@ for registration objects. Each registration file hold one registration
 object.
 '''
 
+# Public export of module content
+__all__ = [
+    "RegFile"
+]
+
+
 class RegFile:
     '''
     Class for using registration files.

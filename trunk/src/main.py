@@ -27,6 +27,12 @@ PURPOSE
 This module provides the main application class.
 '''
 
+# Public export of module content
+__all__ = [
+    "Main"
+]
+
+
 # Import global modules
 import optparse
 import gobject
@@ -40,6 +46,7 @@ import exceptions
 import const
 
 
+# Class definition
 class Main(gobject.GObject):
     '''
     This is the main application class. It's a singleton an provides global

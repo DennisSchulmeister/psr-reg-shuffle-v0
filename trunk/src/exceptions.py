@@ -27,25 +27,78 @@ PURPOSE
 This module provides all exceptions known in the main (psrregshuffle) package.
 '''
 
-class ClassIsSingleton(Exception):
+# Public export of module content
+__all__ = [
+    "ClassIsSingleton",
+    "NoClassObject",
+    "NoClassFound",
+]
+
+
+# Class definitions
+class ExceptionWithMessage(Exception):
     '''
-    This exception gets thrown whenever it's tried to instanciate a singleton
-    class through one of its constructors instead of the dedicated accessor
-    methods.
+    This is a super-class for all self-defined exceptions which need to output
+    a message on the call trace.
     '''
 
-    _class   = None
-    _message = _("The object is a singleton object which shouldn't be instanciated through a constructor. Use getInstance() instead.")
+    _message = ""
 
     def __init__(self, cls=None):
         '''
-        Constructor. Takes the class object as optional parameter cls.
+        Constructor.
         '''
-        self._class = cls
+        pass
 
     def __str__(self):
         '''
         Returns string representation of the exception with a useful error
         message.
         '''
-        return "%s (%s)" % (self._message, str(self._class))
+        return "%s" % (self._message)
+
+
+class ClassIsSingleton(ExceptionWithMessage):
+    '''
+    This exception gets thrown whenever it's tried to instanciate a singleton
+    class through one of its constructors instead of the dedicated accessor
+    methods.
+    '''
+
+    _message = _("The object is a singleton object which shouldn't be instanciated through a constructor. Use getInstance() instead.")
+
+    def __init__(self, cls=None):
+        '''
+        Constructor. Takes the class object as optional parameter cls.
+        '''
+        self._message = "%s (%s)" % (self._message, str(cls))
+
+
+class NoClassObject(ExceptionWithMessage):
+    '''
+    This exception gets thrown whenever a class object is expected for an
+    argument but some other type was given.
+    '''
+
+    _message = _("The given object is not of type Class.")
+
+    def __init__(self, cls):
+        '''
+        Constructor. Takes the class object as optional parameter cls.
+        '''
+        self._message = "%s (%s)" % (self._message, str(cls))
+
+
+class NoClassFound(ExceptionWithMessage):
+    '''
+    This exception gets thrown whenever the ClassFinder is unable to find
+    a suitable class.
+    '''
+
+    _message = _("Couldn't find a suitable class. Most propably the feature is not implemented.")
+
+    def __init__(self):
+        '''
+        Constructor.
+        '''
+        pass

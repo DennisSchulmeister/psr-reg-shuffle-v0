@@ -27,6 +27,12 @@ PURPOSE
 This module provides the main window class.
 '''
 
+# Public export of module content
+__all__ = [
+    "MainWindow"
+]
+
+
 # Import system modules
 from kiwi.ui.delegates import GladeDelegate
 import webbrowser
@@ -40,6 +46,7 @@ import createbanktab
 import importregstab
 
 
+# Class definition
 class MainWindow(GladeDelegate):
     '''
     This is the main window class.

@@ -30,6 +30,13 @@ class which receives all events on the tab page and which delegates them over
 here.
 '''
 
+# Public export of module content
+__all__ = [
+    "ImportRegsTab"
+]
+
+
+# Class definition
 class ImportRegsTab:
     '''
     This delegate class coordinates the import of registrations.

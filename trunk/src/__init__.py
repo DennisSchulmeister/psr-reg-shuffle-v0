@@ -27,3 +27,6 @@ PURPOSE
 This is the main module (psr-reg-shuffle). It holds the application.
 '''
 
+# Public export of module content
+__all__ = [
+]

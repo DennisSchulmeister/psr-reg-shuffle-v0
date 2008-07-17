@@ -1,3 +1,13 @@
+2008-07-17  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Equiped all modules with global __all__ list which contains all publicly
+   exported symbol names.
+ * Refactored algorithm for finding subclasses of RegBank and Registrations.
+   Now contained in ClassFinder which also makes use of caching.
+ * Renamed modules named "exceptions" due to naming conflict with Python's
+   standard library.
+
+
 2008-07-16  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Wrote script for quick running of all available tests.

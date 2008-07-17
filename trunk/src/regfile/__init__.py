@@ -28,3 +28,7 @@ This module allows manipulation of internal regfiles. They hold one
 registration per file which can be combined to a regbank using the regbank
 module
 '''
+
+# Public export of module content
+__all__ = [
+]
