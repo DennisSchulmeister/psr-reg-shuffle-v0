@@ -9,6 +9,10 @@
  * Introduced classes for coordinating the import of registrations and the
    assembly of bank files. For this certain signals from the main window are
    delegated to the coordinator objects.
+ * Introduced exception sub-modules for packages regfile and regbank.
+ * Made modules export public members (__all__).
+ * Sketched out algorithm for automatically determining apropriate subclass
+   of Registration according to a given keyboard model.
 
 
 2008-07-12  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>

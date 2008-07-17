@@ -1,6 +1,6 @@
 #encoding=utf-8
 
-# models.py
+# exceptions.py
 # This file is part of PSR Registration Shuffler
 #
 # Copyright (C) 2008 - Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
@@ -24,23 +24,35 @@
 PURPOSE
 =======
 
-This module holds simple constants with the short names of available
-keyboard models. Since these names are meant to be used within data files
-(registration files mostly) they should never be translated to foreign
-languages.
+This module provides all exceptions known in the regbank package.
 '''
 
 # Public export of module content
 __all__ = [
-    "YAMAHA_PSR2000"
+    "UnknownKeyboardModel"
 ]
 
 
-# Constants with technical short names for keyboard models
-YAMAHA_PSR2000 = "YAMAHA PSR2000"
+class UnknownKeyboardModel(Exception):
+    '''
+    This exception gets thrown whenever no BankFile or Registration class
+    for a given keyboard model can be determined. Appearance of this class
+    simply indicates that the keyboard model is not supported by the
+    application.
+    '''
 
+    _class   = None
+    _message = _("Cannot handle data of the given keyboard model.")
 
-# Dictionary with user-friendly product names. (Not translateable)
-name = {
-    YAMAHA_PSR2000: "Yamaha PSR-2000"
-}
+    def __init__(self, cls=None):
+        '''
+        Constructor. Takes the class object as optional parameter cls.
+        '''
+        self._class = cls
+
+    def __str__(self):
+        '''
+        Returns string representation of the exception with a useful error
+        message.
+        '''
+        return "%s (%s)" % (self._message, str(self._class))

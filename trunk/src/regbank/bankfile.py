@@ -41,6 +41,17 @@ files as a container for registrations. The package regfile works the same
 by acting as a container accessor for files which hold registration objects.
 '''
 
+# Public export of module content
+__all__ = [
+    "BankFile"
+]
+
+
+# Import modules
+import exceptions
+
+
+# Define BankFile class
 def BankFile(object):
     '''
     This is the base class which defines a common API for all classes dealing
@@ -86,6 +97,17 @@ def BankFile(object):
     canUnderstandKeyboardName = classmethod(canUnderstandKeyboardName)
 
 
+    def getClassForKeyboardName(cls, name):
+        '''
+        Class method which determines the class object of type BankFile which
+        can handle the given keyboard model. Raises
+        exceptions.UnknownKeyboardModel is no class can be found
+        '''
+        raise exceptions.UnknownKeyboardModel()
+
+    getClassForKeyboardName = classmethod(getClassForKeyboardName)
+
+
     def canUnderstandFile(cls, filename="", file=None):
         '''
         A class method which checks whether the class can be used for
@@ -94,7 +116,20 @@ def BankFile(object):
         object will be ignored.
         '''
         return False
+
     canUnderstandFile = classmethod(canUnterstandFile)
+
+
+    def getClassForBankFile(cls, filename="", file=None):
+        '''
+        Class method which determines the class object of type BankFile which
+        can handle the given file. The file can be given either by its filename
+        or by a file object. If both are given the file object will be ignored.
+        Raises exceptions.UnknownKeyboardModel is no class can be found
+        '''
+        raise exceptions.UnknownKeyboardModel()
+
+    getClassForBankFile = classmethod(getClassForBankFile)
 
 
     def getRegistrationObjects(self):

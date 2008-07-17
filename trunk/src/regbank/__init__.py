@@ -27,3 +27,7 @@ PURPOSE
 This module allows manipulation of regbank files as they are used by the
 Yamaha PSR and Tyros Keyboards.
 '''
+
+# Public export of module content
+__all__ = [
+]

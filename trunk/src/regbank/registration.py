@@ -28,19 +28,39 @@ This module contains the Registration class which is the base for all
 model specific registration objects.
 '''
 
+# Public export of module content
+__all__ = [
+    "Registration"
+]
+
+
+# Import system modules
+import os
+import os.path
+import types
+import glob
+import sys
+
+# Import applicaiton modules
+import exceptions
+
+
+# Define Registration class
 class Registration(object):
     '''
     This class is the base for all model specific registration objects.
     '''
 
     # Name of the keyboard model
-    keyboardName = ""
+    keyboardName = "ABC"
+
 
     def __init__(self):
         '''
         Default contructor.
         '''
         self.binaryContent = None
+
 
     def setBinaryContent(self, binary):
         '''
@@ -51,12 +71,14 @@ class Registration(object):
         '''
         self.binaryContent = binary
 
+
     def getBinaryContent(self):
         '''
         Accesses the binary content of the registration. Usually this is needed
         for storing it to a bank file or to a registration file.
         '''
         return self.binaryContent
+
 
     def getKeyboardName(self, name):
         '''
@@ -65,6 +87,7 @@ class Registration(object):
         bank file or a registration file to be written to disk.
         '''
         return self.__class__.keyboardName
+
 
     def canUnderstandKeyboardName(cls, name):
         '''
@@ -75,12 +98,74 @@ class Registration(object):
 
     canUnderstandKeyboardName = classmethod(canUnderstandKeyboardName)
 
+
+    def getClassForKeyboardName(cls, keyboardName):
+        '''
+        Class method which determines the class object of type Registration
+        which can handle registrations from the given keyboard model. Raises
+        exceptions.UnknownKeyboardModel is no class can be found
+        '''
+        # Calculate package name
+        global __file__
+
+        (dir, dummy) = os.path.split(__file__)
+        dir = dir.replace(os.path.commonprefix([dir, os.getcwd()]), "")
+
+        if dir.startswith(os.sep):
+            dir = dir[1:]
+
+        packageName  = dir.replace(os.sep, ".")
+
+        # Import and check each module file of package directory
+        globPattern = os.path.join(dir, "*.py")
+        foundClass  = None
+
+        for filename in glob.glob(globPattern):
+            # Calculate module name from file name
+            (dummy, moduleName) = os.path.split(filename)
+            moduleName = "%s.%s" % (packageName, moduleName[:-3])
+
+            # Import module
+            module = __import__(name=moduleName, fromlist=[packageName])
+
+            if not module or not hasattr(module, "__all__"):
+                continue
+
+            # Browser module members for subclasses of Registration
+            for name in module.__all__:
+                # Get member object from name
+                member = getattr(module, name)
+
+                # Only process sub-classes of Registration
+                if not isinstance(member, (type, types.ClassType)) \
+                or not issubclass(member, cls):
+                    continue
+
+                # Query class whether it feels suitable
+                if member.canUnderstandKeyboardName(keyboardName):
+                    foundClass = member
+                    break
+
+            # Delete module
+            del(module)
+
+            # Return if a suitable class has been found.
+            if foundClass:
+                return foundClass
+
+        # No class found. Raise exception
+        raise exceptions.UnknownKeyboardModel()
+
+    getClassForKeyboardName = classmethod(getClassForKeyboardName)
+
+
     def setName(self, name):
         '''
         Sets the name of the registration. If possible the name will be
         stored in the registration so that it appears on the keyboard screen.
         '''
         pass
+
 
     def getName(self, name):
         '''
