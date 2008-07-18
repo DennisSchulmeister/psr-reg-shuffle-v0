@@ -47,20 +47,68 @@ __all__ = [
 ]
 
 
-# Import modules
+# Import applicaiton modules
+from .. import classfinder
+from ..appexceptions import NoClassFound
+from .. import main
+
 import appexceptions
 
 
+# Define BankFile meta-class
+class MetaBankFile(type):
+    '''
+    Meta-class for class Registration.
+    '''
+
+    def __init__(cls, name, bases, dict):
+        '''
+        Constructor. Called after class definition or class Registration.
+        Injects a class attribute called "classFinder" for looking up suitable
+        sub-classes by keyboard name.
+        '''
+        # Initialize class as usual
+        super(MetaBankFile, cls).__init__(name, bases, dict)
+
+        # Inject classFinder class attributes
+        classFinderByName = classfinder.ClassFinder(
+            superClass   = cls,
+            packagePath  = __file__,
+            testMethName = "canUnderstandKeyboardName",
+            hashMethName = "hashKeyboardName"
+        )
+        setattr(cls, 'classFinderByName', classFinderByName)
+
+        classFinderByFile = classfinder.ClassFinder(
+            superClass   = cls,
+            packagePath  = __file__,
+            testMethName = "canUnderstandFile",
+            hashMethName = "hashFile"
+        )
+        setattr(cls, 'classFinderByFile', classFinderByFile)
+
+
 # Define BankFile class
-def BankFile(object):
+class BankFile:
     '''
     This is the base class which defines a common API for all classes dealing
     with bank files.
     '''
 
+    # Meta-class for injecting ClassFinder objects as class attribute.
+    # NOTE: You cannot access the class object during definition of a class.
+    # However the ClassFinders need a super-class as an upper search limit so
+    # a meta-class must be used in order to provide that information.
+    __metaclass__ = MetaBankFile
+
+    # Refernce to main singleton class
+    main = main.Main.getInstance()
+
     # Class variables. Mostly constants
     keyboardName = ""                    # Short name of the keyboard model
 
+
+    # Methods to be over-written...............................................
 
     def __init__(self, filename="", file=None):
         '''
@@ -70,66 +118,6 @@ def BankFile(object):
         be ignored.
         '''
         pass
-
-
-    def getKeyboardName(cls):
-        '''
-        Returns a short string (up to 16 chars) of the keyboard model whose
-        files are understood by the class.
-
-        NOTE: This string is meant for being stored in registration files.
-        It's purpose is to identify the class which can be used for editing
-        the registration blocks and for assembling bank files.
-        '''
-        return cls.keyboardName
-
-    getKeyboardName = classmethod(getKeyboardName)
-
-
-    def canUnderstandKeyboardName(cls, name):
-        '''
-        A class method which checks whether the given name of the keyboard
-        model belongs to it. Returns true if self.getKeyboardName returns
-        the same string.
-        '''
-        return name == cls.keyboardName
-
-    canUnderstandKeyboardName = classmethod(canUnderstandKeyboardName)
-
-
-    def getClassForKeyboardName(cls, name):
-        '''
-        Class method which determines the class object of type BankFile which
-        can handle the given keyboard model. Raises
-        appexceptions.UnknownKeyboardModel is no class can be found
-        '''
-        raise appexceptions.UnknownKeyboardModel()
-
-    getClassForKeyboardName = classmethod(getClassForKeyboardName)
-
-
-    def canUnderstandFile(cls, filename="", file=None):
-        '''
-        A class method which checks whether the class can be used for
-        accessing the given file's contents. The file can be given either
-        by its filename or by a file object. If both are given the file
-        object will be ignored.
-        '''
-        return False
-
-    canUnderstandFile = classmethod(canUnterstandFile)
-
-
-    def getClassForBankFile(cls, filename="", file=None):
-        '''
-        Class method which determines the class object of type BankFile which
-        can handle the given file. The file can be given either by its filename
-        or by a file object. If both are given the file object will be ignored.
-        Raises appexceptions.UnknownKeyboardModel is no class can be found
-        '''
-        raise appexceptions.UnknownKeyboardModel()
-
-    getClassForBankFile = classmethod(getClassForBankFile)
 
 
     def getRegistrationObjects(self):
@@ -159,3 +147,107 @@ def BankFile(object):
         bank file.
         '''
         pass
+
+
+    def canUnderstandFile(cls, file=None):
+        '''
+        A class method which checks whether the class can be used for
+        accessing the given file's contents. A file object which can be
+        read from gets passed to the method. Method must return either
+        True or False.
+        '''
+        # Super-class doesn't support any file
+        return False
+
+    canUnderstandFile = classmethod(canUnderstandFile)
+
+
+    # Lookup of suitable sub-class by keyboard name............................
+
+    def getKeyboardName(cls):
+        '''
+        Returns a short string (up to 16 chars) of the keyboard model whose
+        files are understood by the class.
+
+        NOTE: This string is meant for being stored in registration files.
+        It's purpose is to identify the class which can be used for editing
+        the registration blocks and for assembling bank files.
+        '''
+        return cls.keyboardName
+
+    getKeyboardName = classmethod(getKeyboardName)
+
+
+    def canUnderstandKeyboardName(cls, name):
+        '''
+        A class method which checks whether the given name of the keyboard
+        model belongs to it. Returns true if self.getKeyboardName returns
+        the same string.
+        '''
+        return name == cls.keyboardName
+
+    canUnderstandKeyboardName = classmethod(canUnderstandKeyboardName)
+
+
+    def hashKeyboardName(cls, name):
+        '''
+        Hash function for keyboard name. Needed for class lookup below.
+        Since keyboard names are short and unique just the given name will be
+        returned.
+        '''
+        return name
+
+    hashKeyboardName = classmethod(hashKeyboardName)
+
+
+    def getClassForKeyboardName(cls, keyboardName):
+        '''
+        Class method which determines the class object of type BankFile which
+        can handle the given keyboard model. Raises
+        appexceptions.UnknownKeyboardModel is no class can be found
+        '''
+        # Lookup suitable sub-class
+        try:
+            return cls.classFinderByName.lookup(keyboardName)
+        except NoClassFound:
+            raise appexceptions.UnknownKeyboardModel(cls)
+
+    getClassForKeyboardName = classmethod(getClassForKeyboardName)
+
+
+    # Lookup of suitable sub-class by bank file................................
+
+    def hashFile(cls, file):
+        '''
+        A class method which generates hash code from the given file object.
+        The hash code gets used for lookup of a sub-class which can handel the
+        file. So on the one hand the hash code must be unique for each file of
+        a different keyboard model but it must be identical within one model.
+        As the hash function cannot be defined by the sub-classes the files
+        leading 32 Byte get used which should in any case contain the file
+        type's magic number.
+        '''
+        # Read up to 16 Bytes
+        file.seek(0)
+        return file.read(32)
+
+    hashFile = classmethod(hashFile)
+
+
+    def getClassForBankFile(cls, filename="", file=None):
+        '''
+        Class method which determines the class object of type BankFile which
+        can handle the given file. The file can be given either by its filename
+        or by a file object. If both are given the file object will be ignored.
+        Raises appexceptions.UnknownKeyboardModel is no class can be found
+        '''
+        # Make sure to have a file object at hand
+        file = cls.main.getFileObject(filename, file)
+
+        # Lookup suitable sub-class
+        try:
+            return cls.classFinderByFile.lookup(file)
+        except NoClassFound:
+            raise appexceptions.UnknownKeyboardModel(cls)
+
+    getClassForBankFile = classmethod(getClassForBankFile)

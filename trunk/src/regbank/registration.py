@@ -35,25 +35,57 @@ __all__ = [
 
 
 # Import system modules
-import os
-import os.path
-import types
-import glob
-import sys
+## TODO
 
 # Import applicaiton modules
+from .. import classfinder
+from ..appexceptions import NoClassFound
+
 import appexceptions
 
 
+# Define Registration meta-class
+class MetaRegistration(type):
+    '''
+    Meta-class for class Registration.
+    '''
+
+    def __init__(cls, name, bases, dict):
+        '''
+        Constructor. Called after class definition or class Registration.
+        Injects a class attribute called "classFinder" for looking up suitable
+        sub-classes by keyboard name.
+        '''
+        # Initialize class as usual
+        super(MetaRegistration, cls).__init__(name, bases, dict)
+
+        # Inject classFinder class attribute
+        classFinder = classfinder.ClassFinder(
+            superClass   = cls,
+            packagePath  = __file__,
+            testMethName = "canUnderstandKeyboardName",
+            hashMethName = "hashKeyboardName"
+        )
+        setattr(cls, 'classFinder', classFinder)
+
+
 # Define Registration class
-class Registration(object):
+class Registration:
     '''
     This class is the base for all model specific registration objects.
     '''
 
-    # Name of the keyboard model
-    keyboardName = "ABC"
+    # Meta-class for injecting ClassFinder object as class attribute.
+    # NOTE: You cannot access the class object during definition of a class.
+    # However the ClassFinder needs a super-class as an upper search limit so
+    # a meta-class must be used in order to provide that information.
+    __metaclass__ = MetaRegistration
 
+    # Name of the keyboard model (needs to be overwritten)
+    keyboardName = ""
+
+
+    # Methods to be over-written...............................................
 
     def __init__(self):
         '''
@@ -61,6 +93,24 @@ class Registration(object):
         '''
         self.binaryContent = None
 
+
+    def setName(self, name):
+        '''
+        Sets the name of the registration. If possible the name will be
+        stored in the registration so that it appears on the keyboard screen.
+        '''
+        pass
+
+
+    def getName(self, name):
+        '''
+        Returns the name of the registration. If possible the name as it
+        appears on the keyboard screen will be given.
+        '''
+        pass
+
+
+    # Access to binary data....................................................
 
     def setBinaryContent(self, binary):
         '''
@@ -79,6 +129,8 @@ class Registration(object):
         '''
         return self.binaryContent
 
+
+    # Lookup of suitable sub-class.............................................
 
     def getKeyboardName(self, name):
         '''
@@ -99,77 +151,27 @@ class Registration(object):
     canUnderstandKeyboardName = classmethod(canUnderstandKeyboardName)
 
 
+    def hashKeyboardName(cls, name):
+        '''
+        Hash function for keyboard name. Needed for class lookup below.
+        Since keyboard names are short and unique just the given name will be
+        returned.
+        '''
+        return name
+
+    hashKeyboardName = classmethod(hashKeyboardName)
+
+
     def getClassForKeyboardName(cls, keyboardName):
         '''
         Class method which determines the class object of type Registration
         which can handle registrations from the given keyboard model. Raises
-        appexceptions.UnknownKeyboardModel is no class can be found
+        appexceptions.UnknownKeyboardModel is no class can be found.
         '''
-        # Calculate package name
-        global __file__
-
-        (dir, dummy) = os.path.split(__file__)
-        dir = dir.replace(os.path.commonprefix([dir, os.getcwd()]), "")
-
-        if dir.startswith(os.sep):
-            dir = dir[1:]
-
-        packageName  = dir.replace(os.sep, ".")
-
-        # Import and check each module file of package directory
-        globPattern = os.path.join(dir, "*.py")
-        foundClass  = None
-
-        for filename in glob.glob(globPattern):
-            # Calculate module name from file name
-            (dummy, moduleName) = os.path.split(filename)
-            moduleName = "%s.%s" % (packageName, moduleName[:-3])
-
-            # Import module
-            module = __import__(name=moduleName, fromlist=[packageName])
-
-            if not module or not hasattr(module, "__all__"):
-                continue
-
-            # Browser module members for subclasses of Registration
-            for name in module.__all__:
-                # Get member object from name
-                member = getattr(module, name)
-
-                # Only process sub-classes of Registration
-                if not isinstance(member, (type, types.ClassType)) \
-                or not issubclass(member, cls):
-                    continue
-
-                # Query class whether it feels suitable
-                if member.canUnderstandKeyboardName(keyboardName):
-                    foundClass = member
-                    break
-
-            # Delete module
-            del(module)
-
-            # Return if a suitable class has been found.
-            if foundClass:
-                return foundClass
-
-        # No class found. Raise exception
-        raise appexceptions.UnknownKeyboardModel()
+        # Lookup suitable sub-class
+        try:
+            return cls.classFinder.lookup(keyboardName)
+        except NoClassFound:
+            raise appexceptions.UnknownKeyboardModel(cls)
 
     getClassForKeyboardName = classmethod(getClassForKeyboardName)
-
-
-    def setName(self, name):
-        '''
-        Sets the name of the registration. If possible the name will be
-        stored in the registration so that it appears on the keyboard screen.
-        '''
-        pass
-
-
-    def getName(self, name):
-        '''
-        Returns the name of the registration. If possible the name as it
-        appears on the keyboard screen will be given.
-        '''
-        pass

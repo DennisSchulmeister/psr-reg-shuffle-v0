@@ -13,15 +13,3 @@
    files. Think about sensible tests.
 
  * Make GUI work and make it use the fleshed out access classes.
-
- * Refactor regbank.registration.Registration.getClassForKeyboardName:
-    * Global function classSearcher
-    * Takes class object whose sub-classes are explored
-    * Takes a lambda hash function which hashes one test subject (Keyboard name,
-      registration file) into a string of the keyboard make
-    * Takes a lambda test function which calls a found classes's test
-      function
-    * Uses the hash value for speedy dictionaly lookup. Performs deep class
-      search only if no class found from dictionary.
-
- * Introduce __all__ to all modules and packages.

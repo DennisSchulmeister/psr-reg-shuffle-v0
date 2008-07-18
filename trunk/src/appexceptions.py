@@ -32,6 +32,7 @@ __all__ = [
     "ClassIsSingleton",
     "NoClassObject",
     "NoClassFound",
+    "NoFileGiven",
 ]
 
 
@@ -95,7 +96,22 @@ class NoClassFound(ExceptionWithMessage):
     a suitable class.
     '''
 
-    _message = _("Couldn't find a suitable class. Most propably the feature is not implemented.")
+    _message = _("Couldn't find a suitable class. Most probably the feature is not implemented.")
+
+    def __init__(self):
+        '''
+        Constructor.
+        '''
+        pass
+
+
+class NoFileGiven(ExceptionWithMessage):
+    '''
+    This exception indicates that a method which usually takes a file name or
+    a file object wasn't equiped with either.
+    '''
+
+    _message = _("No file was given at all when one was expected.")
 
     def __init__(self):
         '''

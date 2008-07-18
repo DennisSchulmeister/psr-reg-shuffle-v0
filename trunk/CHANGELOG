@@ -4,6 +4,7 @@
    exported symbol names.
  * Refactored algorithm for finding subclasses of RegBank and Registrations.
    Now contained in ClassFinder which also makes use of caching.
+ * Implmented sub-class lookup for classes RegBank and Registration.
  * Renamed modules named "exceptions" due to naming conflict with Python's
    standard library.
 
