@@ -49,8 +49,10 @@ __all__ = [
 
 # Import applicaiton modules
 from .. import classfinder
-from ..appexceptions import NoClassFound
 from .. import main
+
+from ..appexceptions import NoClassFound
+from ..appexceptions import NoFileGiven
 
 import appexceptions
 
@@ -110,33 +112,24 @@ class BankFile:
 
     # Methods to be over-written...............................................
 
-    def __init__(self, filename="", file=None):
+    def initEmptyFile(self):
         '''
-        Constructor. If neither a filename nor a file object is given a new
-        bank file will be created in memory. If at least one is given the
-        existing file will be used. If both are given the file object will
-        be ignored.
+        This method gets called by the default constructor. It's meant to be
+        overwritten by sub-classes in order to initialize a new object as being
+        an empty bank file.
         '''
         pass
 
 
-    def getRegistrationObjects(self):
+    def initFromExistingFile(self, file):
         '''
-        Extracts all registrations found in the bank file and returns a
-        list registration objects containing those registrations. Empty
-        registrations will be given as None.
-        '''
-        return [None, None, None, None, None, None, None, None]
+        This method gets called by the default constructor. It's meant to be
+        overwritten by sub-classes in order to initialize a new object from an
+        existing bank file whise file object gets passed as argument.
 
-
-    def setRegistrationObjects(self, regList):
-        '''
-        Takes a list of registration objects and keeps it in memory. This
-        method is the pendant to self.getRegistrationObjects() so the list
-        must stick to the same format.
-
-        Using self.storeBankFile() the contents of the list are stored to
-        a keyboard readable bank file.
+        The most important taske to be carried out here is to extract all
+        registrations from the given file, nicely pack them into Registration
+        objects and to line them up in a list called self.regList.
         '''
         pass
 
@@ -160,6 +153,50 @@ class BankFile:
         return False
 
     canUnderstandFile = classmethod(canUnderstandFile)
+
+
+    # Default constructor .....................................................
+
+    def __init__(self, filename="", file=None):
+        '''
+        Constructor. If neither a filename nor a file object is given a new
+        bank file will be created in memory. If at least one is given the
+        existing file will be used. If both are given the file object will
+        be ignored.
+        '''
+        # Initialize list of registration objects
+        self.regList = [None, None, None, None, None, None, None, None]
+
+        # Call overridden initialization methods
+        try:
+            file = self.__class__.main.getFileObject(filename=filename, file=file)
+            self.initFromExistingFile(file)
+        except NoFileGiven:
+            self.initEmptyFile()
+
+
+    # Access to list of registration objects...................................
+
+    def getRegistrationObjects(self):
+        '''
+        Extracts all registrations found in the bank file and returns a
+        list registration objects containing those registrations. Empty
+        registrations will be given as None.
+        '''
+        return self.regList
+
+
+    def setRegistrationObjects(self, regList):
+        '''
+        Takes a list of registration objects and keeps it in memory. This
+        method is the pendant to self.getRegistrationObjects() so the list
+        must stick to the same format.
+
+        Using self.storeBankFile() the contents of the list are stored to
+        a keyboard readable bank file.
+        '''
+        # Store registration objects
+        self.regList = regList
 
 
     # Lookup of suitable sub-class by keyboard name............................

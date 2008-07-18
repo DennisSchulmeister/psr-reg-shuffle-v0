@@ -48,6 +48,7 @@ class RegFile:
         '''
         pass
 
+
     def canUnderstandFile(cls, filename="", file=None):
         '''
         A class method for checking whether the given file is a valid
@@ -58,6 +59,7 @@ class RegFile:
 
     canUnderstandFile = classmethod(canUnderstandFile)
 
+
     def getKeyboardName(self):
         '''
         Returns the name of the keyboard model of this file. This is the
@@ -65,11 +67,13 @@ class RegFile:
         '''
         return ""
 
+
     def setKeyboardName(self, name):
         '''
         Sets the name of the keyboard model.
         '''
         pass
+
 
     def getRegistrationObject(self):
         '''
@@ -77,12 +81,14 @@ class RegFile:
         '''
         return None
 
+
     def setRegistrationObject(self, regObject):
         '''
         Inserts a registration object into the file and replaces a previously
         existing one.
         '''
         pass
+
 
     def storeRegFile(self, filename):
         '''

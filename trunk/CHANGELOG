@@ -7,6 +7,7 @@
  * Implmented sub-class lookup for classes RegBank and Registration.
  * Renamed modules named "exceptions" due to naming conflict with Python's
    standard library.
+ * Merged module regbank.models with const.
 
 
 2008-07-16  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>

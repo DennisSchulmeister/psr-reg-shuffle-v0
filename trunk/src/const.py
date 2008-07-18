@@ -85,3 +85,12 @@ version_string = _("%(progname)s %(version)s\n\n%(copyright_long)s\nWritten by %
     "author":         author,
     "author_email":   author_email
 }
+
+
+# Constants with technical short names for keyboard models
+YAMAHA_PSR2000 = "YAMAHA PSR2000"
+
+# Dictionary with user-friendly product names. (Not translateable)
+keyboardNameLong = {
+    YAMAHA_PSR2000: "Yamaha PSR-2000"
+}
