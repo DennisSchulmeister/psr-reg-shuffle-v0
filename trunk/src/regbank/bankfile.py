@@ -63,9 +63,9 @@ class MetaBankFile(type):
 
     def __init__(cls, name, bases, dict):
         '''
-        Constructor. Called after class definition or class Registration.
-        Injects a class attribute called "classFinder" for looking up suitable
-        sub-classes by keyboard name.
+        Constructor. Called after class definition or class BankFile.
+        Injects class attributes "classFinderByName" and "classFinderByFile"
+        for looking up suitable sub-classes by keyboard name and bank file.
         '''
         # Initialize class as usual
         super(MetaBankFile, cls).__init__(name, bases, dict)
