@@ -36,6 +36,18 @@ __all__ = [
 ]
 
 
+# Import global modules
+import kiwi.ui.dialogs
+import os.path
+
+# Import application modules
+import regbank.bankfile
+import regfile.regfile
+import mainwindow
+import main
+import util
+
+
 # Class definition
 class ImportRegsTab:
     '''
@@ -47,7 +59,10 @@ class ImportRegsTab:
         Constructor. Takes a MainWindow instance as parameter because as
         coordinating controller class access to the UI is needed.
         '''
-        pass
+        # Initialize attributes
+        self.main    = main.Main.getInstance()
+        self.wndMain = wndMain
+        self.regList = []
 
 
     def openBankFile(self):
@@ -55,8 +70,41 @@ class ImportRegsTab:
         Delegate method called by the UI. Asks the user for a bank file to
         open, reads the file contents and populates the import list.
         '''
-        print "open bank file"
-        pass
+        # Open bank file given by user
+        filename = kiwi.ui.dialogs.open(
+            title    = _("Open bank file"),
+            parent   = self.wndMain.wndMain,
+            patterns = ["*.REG", "*.reg"]
+        )
+
+        if not filename:
+            return
+
+        # Search suitable RegBank class
+        regBankClass = regbank.bankfile.BankFile.getClassForBankFile(filename=filename)
+        regBankObj   = regBankClass(filename=filename)
+        keyModel     = regBankObj.getKeyboardName()
+
+        # Retrieve registrations and populate import list
+        self.regList = regBankObj.getRegistrationObjects()
+        self.wndMain.oblImportRegs.clear()
+
+        i = 0
+        for regObj in self.regList:
+            i += 1
+
+            entry = mainwindow.ImportRegsEntry(
+                mark   = True,
+                pos    = i,
+                name   = regObj.getName(),
+                model  = keyModel,
+                regObj = regObj
+            )
+
+            self.wndMain.oblImportRegs.append(entry)
+
+        # Show success message
+        self.wndMain.setStatusMessage(_("Successfully opened registration bank file."))
 
 
     def importSelectedRegs(self):
@@ -65,5 +113,38 @@ class ImportRegsTab:
         from the import list. Each registration will be stored in its own
         file in the working directory.
         '''
-        print "import selected regs"
-        pass
+        # Store each selected registration to its own file
+        count = 0
+
+        for regEntry in self.wndMain.oblImportRegs:
+            # Skip entry if not marked for import
+            if not regEntry.mark:
+                continue
+
+            # Count imported registrations
+            count += 1
+
+            # Rename registration
+            regEntry.regObj.setName(regEntry.name)
+
+            # Create registration file in memory
+            regFile = regfile.regfile.RegFile()
+            regFile.setKeyboardName(regEntry.model)
+            regFile.setRegistrationObject(regEntry.regObj)
+
+            # Calculate file name
+            fileName = util.calculateFileNameFromRegName(regEntry.name, self.main.workDir)
+
+            # Store file
+            regFile.storeRegFile(fileName)
+
+        # Break if no registration could be imported
+        if not count:
+            self.wndMain.setStatusMessage(_("Nothing imported."))
+            return
+
+        # Update list of available registrations
+        self.wndMain.updateAvailableRegList()
+
+        # Show success message
+        self.wndMain.setStatusMessage(_("Imported %i registrations.") % (count))

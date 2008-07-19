@@ -31,4 +31,8 @@ module
 
 # Public export of module content
 __all__ = [
+    "extension"
 ]
+
+# File extension of registration files
+extension = "regfile"

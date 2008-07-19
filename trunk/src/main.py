@@ -1,6 +1,6 @@
 #encoding=utf-8
 
-# const.py
+# main.py
 # This file is part of PSR Registration Shuffler
 #
 # Copyright (C) 2008 - Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
@@ -155,26 +155,3 @@ class Main(gobject.GObject):
         # Emit work-dir-changed signal
         self.emit("work-dir-changed", self.workDir)
 
-
-    def getFileObject(self, filename="", file=None):
-        '''
-        This method can either take a filename or a file object or both.
-        In any case it returns a file object which can be used for read
-        the given file.
-
-        If only file is given it gets straight returned. If filename is given
-        a new file object will be created and be returen. If both are given
-        a new file object will be created, too.
-
-        If none is given appexceptions.NoFileGiven gets raised.
-        '''
-        # Return file object if given
-        if file:
-            return file
-
-        # Try to open a new file
-        if filename:
-            return open(filename, "rb")
-
-        # Throw exception
-        raise appexceptions.NoFileGiven()

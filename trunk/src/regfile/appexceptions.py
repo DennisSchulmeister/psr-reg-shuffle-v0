@@ -29,29 +29,27 @@ This module provides all exceptions known in the regfile package.
 
 # Public export of module content
 __all__ = [
-    ""
+    "UnknownFileFormat"
 ]
 
 
-#class ClassIsSingleton(Exception):
-    #'''
-    #This exception gets thrown whenever it's tried to instanciate a singleton
-    #class through one of its constructors instead of the dedicated accessor
-    #methods.
-    #'''
+class UnknownFileFormat(Exception):
+    '''
+    This exception indicates that it was tried to open an invalid
+    registration file.
+    '''
 
-    #_class   = None
-    #_message = _("The object is a singleton object which shouldn't be instanciated through a constructor. Use getInstance() instead.")
+    _message = _("The given file doesn't seem to be a registration file. Note that registration files hold only one registration as oppsed to registration banks used by your instrument.")
 
-    #def __init__(self, cls=None):
-        #'''
-        #Constructor. Takes the class object as optional parameter cls.
-        #'''
-        #self._class = cls
+    def __init__(self):
+        '''
+        Constructor. Takes the class object as optional parameter cls.
+        '''
+        pass
 
-    #def __str__(self):
-        #'''
-        #Returns string representation of the exception with a useful error
-        #message.
-        #'''
-        #return "%s (%s)" % (self._message, str(self._class))
+    def __str__(self):
+        '''
+        Returns string representation of the exception with a useful error
+        message.
+        '''
+        return "%s" % (self._message)

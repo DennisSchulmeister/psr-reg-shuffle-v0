@@ -49,12 +49,13 @@ __all__ = [
 
 # Import applicaiton modules
 from .. import classfinder
-from .. import main
+from .. import util
 
 from ..appexceptions import NoClassFound
 from ..appexceptions import NoFileGiven
 
 import appexceptions
+import registration
 
 
 # Define BankFile meta-class
@@ -103,11 +104,11 @@ class BankFile:
     # a meta-class must be used in order to provide that information.
     __metaclass__ = MetaBankFile
 
-    # Refernce to main singleton class
-    main = main.Main.getInstance()
+    # Short name of the keyboard model
+    keyboardName = ""
 
-    # Class variables. Mostly constants
-    keyboardName = ""                    # Short name of the keyboard model
+    # Maximum amount of registrations
+    maxReg = 512
 
 
     # Methods to be over-written...............................................
@@ -169,7 +170,7 @@ class BankFile:
 
         # Call overridden initialization methods
         try:
-            file = self.__class__.main.getFileObject(filename=filename, file=file)
+            file = util.getFileObject(filename=filename, file=file)
             self.initFromExistingFile(file)
         except NoFileGiven:
             self.initEmptyFile()
@@ -197,6 +198,27 @@ class BankFile:
         '''
         # Store registration objects
         self.regList = regList
+
+
+    def createRegistrationObject(self, binary):
+        '''
+        Creates a Registration object from the given binary data. Makes sure
+        that the right type of Registration objects gets created. Returns a
+        new Registraion object on success or raises NoClassFound.
+        '''
+        # Search usable Registration class
+        try:
+            regClass = registration.Registration.getClassForKeyboardName(self.__class__.keyboardName)
+        except NoClassFound:
+            raise NoClassFound()
+
+        # Create new Registration object
+        regObj = regClass()
+        regObj.setBinaryContent(binary)
+
+        # Return newly created object
+        return regObj
+
 
 
     # Lookup of suitable sub-class by keyboard name............................
@@ -261,12 +283,15 @@ class BankFile:
         file. So on the one hand the hash code must be unique for each file of
         a different keyboard model but it must be identical within one model.
         As the hash function cannot be defined by the sub-classes the files
-        leading 32 Byte get used which should in any case contain the file
+        leading 28 Byte get used which should in any case contain the file
         type's magic number.
+
+        NOTE: A value greater than 28 Bytes will break PSR-2000 compatibility.
+        Bytes 29-32 hold the amount of registrations in the PSR-2000 format.
         '''
-        # Read up to 16 Bytes
+        # Read up to 28 Bytes
         file.seek(0)
-        return file.read(32)
+        return file.read(28)
 
     hashFile = classmethod(hashFile)
 
@@ -279,7 +304,7 @@ class BankFile:
         Raises appexceptions.UnknownKeyboardModel is no class can be found
         '''
         # Make sure to have a file object at hand
-        file = cls.main.getFileObject(filename, file)
+        file = util.getFileObject(filename, file)
 
         # Lookup suitable sub-class
         try:

@@ -88,9 +88,11 @@ version_string = _("%(progname)s %(version)s\n\n%(copyright_long)s\nWritten by %
 
 
 # Constants with technical short names for keyboard models
+ALL_MODELS     = ""
 YAMAHA_PSR2000 = "YAMAHA PSR2000"
 
 # Dictionary with user-friendly product names. (Not translateable)
 keyboardNameLong = {
+    ALL_MODELS:     _("All models"),
     YAMAHA_PSR2000: "Yamaha PSR-2000"
 }

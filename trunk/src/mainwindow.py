@@ -29,12 +29,16 @@ This module provides the main window class.
 
 # Public export of module content
 __all__ = [
-    "MainWindow"
+    "MainWindow",
+    "AvailableRegsEntry",
+    "ImportRegsEntry",
 ]
 
 
 # Import system modules
-from kiwi.ui.delegates import GladeDelegate
+from kiwi.ui.delegates  import GladeDelegate
+from kiwi.ui.objectlist import ObjectList
+from kiwi.ui.objectlist import Column
 import webbrowser
 import os.path
 import gtk
@@ -60,14 +64,16 @@ class MainWindow(GladeDelegate):
         "sbMain",
 
         # Create bank files pane
-        "treeAvailableRegs",
-        "treeNewBank",
+        "evtAvailableRegs",
+        "evtNewBank",
         "btnSaveBank",             # needs handler (clicked)
         "btnRemoveSelected",       # needs handler (clicked)
         "btnClearList",            # needs handler (clicked)
+        "btnNewUp",                # needs handler (clicked)
+        "btnNewDown",              # needs handler (clicked)
 
         # Import registrations pane
-        "treeImportRegs",
+        "evtImportRegs",
         "btnOpenBankFile",         # needs handler (clicked)
         "btnImportSelectedRegs",   # needs handler (clicked)
 
@@ -128,6 +134,46 @@ class MainWindow(GladeDelegate):
         self.linkAbout.set_label(_("Click here for more information"))
         self.linkAbout.set_uri(const.url)
 
+        # Insertin ObjectLists into the main window
+        self.oblAvailableRegs = ObjectList(
+            [
+                Column("name",    title=_("Registration Name"), order=gtk.SORT_ASCENDING, searchable=True, editable=True, expand=True),
+                Column("keyName", title=_("Keyboard"), order=gtk.SORT_ASCENDING),
+            ],
+            sortable = True
+        )
+
+        self.oblNewBank = ObjectList(
+            [
+                Column("name", title=_("Registration Name"), order=-1, searchable=True, editable=True, expand=True),
+            ]
+        )
+
+        self.oblImportRegs = ObjectList(
+            [
+                Column("mark", title=_("Import"), data_type=bool, editable=True),
+                Column("pos",  title=_("Number"), editable=False),
+                Column("name", title=_("Registration Name"), editable=True, searchable=True, expand=True),
+            ]
+        )
+
+        self.evtAvailableRegs.add(self.oblAvailableRegs)
+        self.evtNewBank.add(self.oblNewBank)
+        self.evtImportRegs.add(self.oblImportRegs)
+
+        self.oblAvailableRegs.show()
+        self.oblNewBank.show()
+        self.oblImportRegs.show()
+
+        self.oblAvailableRegs.enable_dnd()
+        self.oblNewBank.enable_dnd()
+
+        # NOTE: Don't set the TreeView reorderable except you're in for some
+        # nasty exceptions if someone really tries to reorder the tree.
+        ## self.oblNewBank.get_treeview().set_reorderable(True)
+
+        self.oblAvailableRegs.connect("cell-edited", self.on_oblAvailableRegs_cell_edited)
+
         # Prepare delegates for driving the tab's contents
         self.createBankTab = createbanktab.CreateBankTab(wndMain=self)
         self.importRegsTab = importregstab.ImportRegsTab(wndMain=self)
@@ -150,6 +196,13 @@ class MainWindow(GladeDelegate):
 
         # Push new message onto statusbar
         self.sbLastMsgId = self.sbMain.push(self.sbContext, msg)
+
+
+    def updateAvailableRegList(self):
+        '''
+        This method updates the list of available registrations.
+        '''
+        self.createBankTab.on_main__work_dir_changed(None, self.main.workDir)
 
 
     def on_wndMain__destroy(self, *args):
@@ -182,6 +235,15 @@ class MainWindow(GladeDelegate):
         self.setStatusMessage(_("Changed directory to %s." % (self.main.workDir)))
 
 
+    def on_oblAvailableRegs_cell_edited(self, *args):      # Manually connected
+        '''
+        Event handler which responds whenever the user edits the name of
+        an available registration. The change will be stored to the associated
+        regfile which will also renamed.
+        '''
+        self.createBankTab.availableRegRename(args[1])
+
+
     def on_btnSaveBank__clicked(self, *args):
         '''
         Event handler for save bank button. Delegates the call to an
@@ -204,6 +266,20 @@ class MainWindow(GladeDelegate):
         of type CreateBankTab.
         '''
         self.createBankTab.removeAllItemsFromExportList()
+
+
+    def on_btnNewUp__clicked(self, *args):
+        '''
+        Event handler for moving a registration within a bank file up.
+        '''
+        self.createBankTab.newBankMoveSelectedUp()
+
+
+    def on_btnNewDown__clicked(self, *args):
+        '''
+        Event handler for moving a registration within a bank file down.
+        '''
+        self.createBankTab.newBankMoveSelectedDown()
 
 
     def on_btnOpenBankFile__clicked(self, *args):
@@ -235,3 +311,72 @@ class MainWindow(GladeDelegate):
             self.setStatusMessage(_("Sucessfully opened web browser."))
         else:
             self.setStatusMessage(_("Unable to launch web browser."))
+
+
+# Class definition of list entries
+class AvailableRegsEntry:
+    '''
+    List entry class for the "Available Registrations" list. Holds the
+    following values:
+
+    * name,     Name of the registration
+    * keyname,  Long name of the keyboard model
+    * model,    Internal name of the keyboard model
+    * filename, File name of the registration file
+    * reg,  Registration Object
+    '''
+
+    def __init__(self, name="", keyName="", model="", fileName=""):
+        '''
+        Constructor. Just stores the given parameters.
+        '''
+        self.name     = name
+        self.keyName  = keyName
+        self.model    = model
+        self.fileName = fileName
+
+    def copy(self):
+        '''
+        Returns a flat copy of the object.
+        '''
+        return self.__class__(
+            name     = self.name,
+            keyName  = self.keyName,
+            model    = self.model,
+            fileName = self.fileName
+        )
+
+
+class ImportRegsEntry:
+    '''
+    List entry class for the "Import Registrations" list. Holds the following
+    values which can all be accessed from the list.
+
+    * mark,  Boolean check
+    * pos,   Position in registration bank
+    * name,  Name of registration
+    * model, Internal name of the keyboard model
+    * reg,   Registration Object
+    '''
+
+    def __init__(self, mark=False, pos=0, name="", model="", regObj=None):
+        '''
+        Constructor. Just stores the given parameters.
+        '''
+        self.mark   = mark
+        self.pos    = pos
+        self.name   = name
+        self.model  = model
+        self.regObj = regObj
+
+    def copy(self):
+        '''
+        Returns a flat copy of the object.
+        '''
+        return self.__class__(
+            mark   = self.mark,
+            pos    = self.pos,
+            name   = self.name,
+            model  = self.model,
+            regObj = self.regObj
+        )

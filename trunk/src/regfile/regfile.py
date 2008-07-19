@@ -34,7 +34,17 @@ __all__ = [
     "RegFile"
 ]
 
+# Import application modules
+from .. import util
+from ..regbank import registration
 
+import appexceptions
+
+# Import system modules
+import codecs
+
+
+# Class definition
 class RegFile:
     '''
     Class for using registration files.
@@ -46,7 +56,45 @@ class RegFile:
         or file object or creates a new one in memory if none of these is
         given. If both are given a new file object will be created.
         '''
-        pass
+        # Retrieve ascii encoder / decoder
+        self.encoder  = codecs.getencoder("ascii")
+        self.decoder  = codecs.getdecoder("ascii")
+
+        self.to_ascii = lambda t: self.encoder(t)[0]
+        self.to_ucode = lambda t: self.decoder(t)[0]
+
+        # Initialize attributes
+        self.keyboardName = ""
+        self.regObj = None
+
+
+        # Import file if given
+        if file or filename:
+            # Open file for reading
+            file = util.getFileObject(filename=filename, file=file)
+
+            # Check for valid file
+            if not self.__class__.canUnderstandFile(file=file):
+                file.close()
+                raise appexceptions.UnknownFileFormat()
+
+            # Read keyboard name
+            file.seek(4)
+            self.keyboardName = file.read(16)
+            self.keyboardName = self.to_ucode(self.keyboardName)
+            tail = self.keyboardName.find("\x00")
+
+            if tail > -1:
+                self.keyboardName = self.keyboardName[:tail]
+
+            # Read registration block
+            file.seek(20)
+            regBinary = file.read()
+
+            regClass    = registration.Registration.getClassForKeyboardName(self.keyboardName)
+            self.regObj = regClass()
+
+            self.regObj.setBinaryContent(regBinary)
 
 
     def canUnderstandFile(cls, filename="", file=None):
@@ -55,9 +103,44 @@ class RegFile:
         registration file. File can be given either by its path (filename) or
         by a file object. If both is given the file object will be ignored.
         '''
-        return False
+        # Get temporary decoder
+        decoder  = codecs.getdecoder("ascii")
+        to_ucode = lambda t: decoder(t)[0]
+
+        # Open file for reading
+        file = util.getFileObject(filename=filename, file=file)
+
+        # Check for valid file
+        file.seek(0)
+        magic = file.read(4)
+        magic = to_ucode(magic)
+
+        return magic == "RS01"
 
     canUnderstandFile = classmethod(canUnderstandFile)
+
+
+    def storeRegFile(self, filename):
+        '''
+        Stores the file to disk using the given path (filename).
+        '''
+        # Open file for writing
+        file = open(filename, "wb+")
+
+        # Prepare file content
+        magic     = self.to_ascii("RS01")
+        keyName   = self.to_ascii(self.keyboardName) \
+                  + (16 - len(self.keyboardName)) * "\x00"
+        regBinary = self.regObj.getBinaryContent()
+
+        # Write file
+        file.seek(0)
+        file.write(magic)
+        file.write(keyName)
+        file.write(regBinary)
+
+        # Close file
+        file.close
 
 
     def getKeyboardName(self):
@@ -65,33 +148,26 @@ class RegFile:
         Returns the name of the keyboard model of this file. This is the
         same string as it gets stored in the file.
         '''
-        return ""
+        return self.keyboardName
 
 
     def setKeyboardName(self, name):
         '''
         Sets the name of the keyboard model.
         '''
-        pass
+        self.keyboardName = name
 
 
     def getRegistrationObject(self):
         '''
         Extracts a registration object from the file.
         '''
-        return None
+        return self.regObj
 
 
-    def setRegistrationObject(self, regObject):
+    def setRegistrationObject(self, regObj):
         '''
         Inserts a registration object into the file and replaces a previously
         existing one.
         '''
-        pass
-
-
-    def storeRegFile(self, filename):
-        '''
-        Stores the file to disk using the given path (filename).
-        '''
-        pass
+        self.regObj = regObj

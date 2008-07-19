@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Jul 16 20:24:51 2008 -->
+<!--Generated with glade3 3.4.5 on Sat Jul 19 02:43:15 2008 -->
 <glade-interface>
   <widget class="GtkWindow" id="wndMain">
     <property name="title" translatable="yes">PSR Registration Shuffler</property>
@@ -48,47 +48,60 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <child>
-                  <widget class="GtkScrolledWindow" id="scrolledwindow3">
+                  <widget class="GtkVBox" id="vbox5">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                     <child>
-                      <widget class="GtkTreeView" id="treeAvailableRegs">
+                      <widget class="GtkLabel" id="label11">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="headers_clickable">True</property>
+                        <property name="label" translatable="yes">Available Registrations</property>
                       </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEventBox" id="evtAvailableRegs">
+                        <property name="visible">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
                     </child>
                   </widget>
                   <packing>
                     <property name="resize">False</property>
-                    <property name="shrink">False</property>
+                    <property name="shrink">True</property>
                   </packing>
                 </child>
                 <child>
                   <widget class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
                     <child>
-                      <widget class="GtkScrolledWindow" id="scrolledwindow2">
+                      <widget class="GtkLabel" id="label5">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                        <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                        <child>
-                          <widget class="GtkTreeView" id="treeNewBank">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="headers_clickable">True</property>
-                            <property name="reorderable">True</property>
-                          </widget>
-                        </child>
+                        <property name="label" translatable="yes">New Registration Bank</property>
                       </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                      </packing>
                     </child>
                     <child>
-                      <widget class="GtkHButtonBox" id="btnBoxCreateBankFiles">
+                      <widget class="GtkEventBox" id="evtNewBank">
                         <property name="visible">True</property>
-                        <property name="layout_style">GTK_BUTTONBOX_START</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkHBox" id="hboxCreateBankFiles">
+                        <property name="visible">True</property>
                         <child>
                           <widget class="GtkButton" id="btnSaveBank">
                             <property name="visible">True</property>
@@ -103,6 +116,9 @@
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-save-as</property>
                                   </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                  </packing>
                                 </child>
                                 <child>
                                   <widget class="GtkLabel" id="label6">
@@ -112,12 +128,16 @@
                                     <property name="use_underline">True</property>
                                   </widget>
                                   <packing>
+                                    <property name="expand">False</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
                               </widget>
                             </child>
                           </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
                         </child>
                         <child>
                           <widget class="GtkButton" id="btnRemoveSelected">
@@ -133,6 +153,9 @@
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-delete</property>
                                   </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                  </packing>
                                 </child>
                                 <child>
                                   <widget class="GtkLabel" id="label7">
@@ -142,6 +165,7 @@
                                     <property name="use_underline">True</property>
                                   </widget>
                                   <packing>
+                                    <property name="expand">False</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -149,6 +173,7 @@
                             </child>
                           </widget>
                           <packing>
+                            <property name="expand">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -175,6 +200,7 @@
                                     <property name="use_underline">True</property>
                                   </widget>
                                   <packing>
+                                    <property name="expand">False</property>
                                     <property name="position">1</property>
                                   </packing>
                                 </child>
@@ -182,13 +208,42 @@
                             </child>
                           </widget>
                           <packing>
+                            <property name="expand">False</property>
                             <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="btnNewUp">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">gtk-go-up</property>
+                            <property name="use_stock">True</property>
+                            <property name="response_id">0</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="btnNewDown">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">gtk-go-down</property>
+                            <property name="use_stock">True</property>
+                            <property name="response_id">0</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </widget>
@@ -215,7 +270,7 @@
                 <child>
                   <widget class="GtkLabel" id="label2">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Create bank files</property>
+                    <property name="label" translatable="yes">Create Bank Files</property>
                   </widget>
                   <packing>
                     <property name="position">1</property>
@@ -233,19 +288,24 @@
               <widget class="GtkVBox" id="vbox4">
                 <property name="visible">True</property>
                 <child>
-                  <widget class="GtkScrolledWindow" id="scrolledwindow1">
+                  <widget class="GtkLabel" id="label12">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                    <property name="label" translatable="yes">Registration Bank Content</property>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkEventBox" id="evtImportRegs">
+                    <property name="visible">True</property>
                     <child>
-                      <widget class="GtkTreeView" id="treeImportRegs">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="headers_clickable">True</property>
-                      </widget>
+                      <placeholder/>
                     </child>
                   </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
                 <child>
                   <widget class="GtkHButtonBox" id="hbuttonbox2">
@@ -317,7 +377,7 @@
                   </widget>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="position">1</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </widget>
@@ -338,7 +398,7 @@
                 <child>
                   <widget class="GtkLabel" id="label3">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Import registrations</property>
+                    <property name="label" translatable="yes">Import Registrations</property>
                   </widget>
                   <packing>
                     <property name="position">1</property>

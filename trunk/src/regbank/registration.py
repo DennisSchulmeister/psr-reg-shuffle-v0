@@ -102,7 +102,7 @@ class Registration:
         pass
 
 
-    def getName(self, name):
+    def getName(self):
         '''
         Returns the name of the registration. If possible the name as it
         appears on the keyboard screen will be given.
