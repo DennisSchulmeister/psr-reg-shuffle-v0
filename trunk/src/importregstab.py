@@ -93,10 +93,17 @@ class ImportRegsTab:
         for regObj in self.regList:
             i += 1
 
+            if regObj:
+                regName = regObj.getName()
+                mark    = True
+            else:
+                regName = ""
+                mark    = False
+
             entry = mainwindow.ImportRegsEntry(
-                mark   = True,
+                mark   = mark,
                 pos    = i,
-                name   = regObj.getName(),
+                name   = regName,
                 model  = keyModel,
                 regObj = regObj
             )
@@ -117,8 +124,8 @@ class ImportRegsTab:
         count = 0
 
         for regEntry in self.wndMain.oblImportRegs:
-            # Skip entry if not marked for import
-            if not regEntry.mark:
+            # Skip entry if not marked for import or if empty
+            if not regEntry.mark or not regEntry.regObj:
                 continue
 
             # Count imported registrations
