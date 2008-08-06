@@ -62,7 +62,7 @@ class MetaRegistration(type):
         # Inject classFinder class attribute
         classFinder = classfinder.ClassFinder(
             superClass   = cls,
-            packagePath  = __file__,
+            classes      = __CLASSES__,
             testMethName = "canUnderstandKeyboardName",
             hashMethName = "hashKeyboardName"
         )

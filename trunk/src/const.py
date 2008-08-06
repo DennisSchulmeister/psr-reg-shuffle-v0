@@ -63,7 +63,7 @@ licence        = "GNU General Public Licence 3"
 description    = _("A program for organizing PSR registration bank files")
 author         = "Dennis Schulmeister"
 author_email   = "dennis -at- ncc-1701a.homelinux.net"
-url            = "http://ncc-1701a.homelinux.net/WikiBerd/index.php?page=psrregshuffle"
+url            = "http://www.psrregshuffle.de"
 
 copyright      = "Copyright (C) 2008 %s" % (author)
 copyright_long = _("""%s

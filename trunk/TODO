@@ -11,9 +11,6 @@
 
  * UnitTests, pyLint, Profiler, et al.
 
- * ClassFinder doesn't work with installed version. (It's over-engineered,
-   anyway)
-
- * Rename available reg. os.path.samefile -> Exception: file existiert nicht
+ * Rename available reg. os.path.samefile -> Exception: file does not exist.
 
  * Remove keyboard names from const.py. Move to individual classes instead.

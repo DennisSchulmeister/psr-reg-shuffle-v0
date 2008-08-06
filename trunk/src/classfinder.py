@@ -69,7 +69,7 @@ class ClassFinder:
     within a dictionary in order to avoind unnecessary package scanning.
     '''
 
-    def __init__(self, superClass, packagePath, testMethName, hashMethName):
+    def __init__(self, superClass, classes, testMethName, hashMethName):
         '''
         Constructor. Takes the following arguments:
 
@@ -77,8 +77,7 @@ class ClassFinder:
         Argument       Description
         ============== ========================================================
         superClass     Class object which marks beginning of the search tree.
-        packagePath    Path of the package where classes reside. Can simple be
-                       __file__ since it'll be internaly converted.
+        classes        List of scaned class objects
         testMethName   Name of the test method. (Only one parameter)
         hashMethName   Hash method. Like test method but returns a hash value.
         ============== ========================================================
@@ -90,27 +89,10 @@ class ClassFinder:
 
         # Store parameters
         self.superClass   = superClass
+        self.classes      = classes
         self.testMethName = testMethName
         self.hashMeth     = getattr(superClass, hashMethName)
         self.cache        = {}
-
-        # Make sure that self.packagename holds a valid package name
-        if packagePath.endswith(".py") or packagePath.endswith(".pyc"):
-            (packagePath, dummy) = os.path.split(packagePath)
-
-        self.packagePath = os.path.abspath(packagePath)
-
-        packageName = self.packagePath.replace(
-            os.path.commonprefix(
-                [self.packagePath, os.getcwd()]
-            ),
-            ""
-        )
-
-        if packageName.startswith(os.sep):
-            packageName = packageName[1:]
-
-        self.packageName  = packageName.replace(os.sep, ".")
 
 
     def lookupCache(self, search):
@@ -144,43 +126,24 @@ class ClassFinder:
         its class will be returned. Otherwise appexceptions.NoClassFound will be
         raised.
         '''
-        # Import and check each module file of package directory
-        globPattern = os.path.join(self.packagePath, "*.py")
-        foundClass  = None
+        # Visit each class and query
+        foundClass = None
 
-        for filename in glob.glob(globPattern):
-            # Calculate module name from file name
-            (dummy, moduleName) = os.path.split(filename)
-            moduleName = "%s.%s" % (self.packageName, moduleName[:-3])
-
-            # Import module
-            module = __import__(name=moduleName, fromlist=[self.packageName])
-
-            if not module or not hasattr(module, "__all__"):
+        for cls in self.classes:
+            # Only process sub-classes of given super-class
+            if not isinstance(cls, (type, types.ClassType)) \
+            or not issubclass(cls, self.superClass):
                 continue
 
-            # Browser module members for sub-classes
-            for name in module.__all__:
-                # Get member object from name
-                member = getattr(module, name)
+            # Query class whether it feels suitable
+            testMeth = getattr(cls, self.testMethName)
+            if testMeth and testMeth(search):
+                foundClass = cls
+                break
 
-                # Only process sub-classes of given super-class
-                if not isinstance(member, (type, types.ClassType)) \
-                or not issubclass(member, self.superClass):
-                    continue
-
-                # Query class whether it feels suitable
-                testMeth = getattr(member, self.testMethName)
-                if testMeth and testMeth(search):
-                    foundClass = member
-                    break
-
-            # Delete module
-            del(module)
-
-            # Return if a suitable class has been found.
-            if foundClass:
-                return foundClass
+        # Return if a suitable class has been found.
+        if foundClass:
+            return foundClass
 
         # No class found. Raise exception
         raise appexceptions.NoClassFound()

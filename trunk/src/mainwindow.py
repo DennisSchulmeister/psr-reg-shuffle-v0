@@ -131,10 +131,10 @@ class MainWindow(GladeDelegate):
         self.lblAbout.set_use_markup(True)
         self.lblAbout.set_markup(about_txt)
 
-        self.linkAbout.set_label(_("Click here for more information"))
+        self.linkAbout.set_label(const.url)
         self.linkAbout.set_uri(const.url)
 
-        # Insertin ObjectLists into the main window
+        # Insert ObjectLists into the main window
         self.oblAvailableRegs = ObjectList(
             [
                 Column("name",    title=_("Registration Name"), order=gtk.SORT_ASCENDING, searchable=True, editable=True, expand=True),

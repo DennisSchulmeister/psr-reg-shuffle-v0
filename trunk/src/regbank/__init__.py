@@ -28,6 +28,46 @@ This module allows manipulation of regbank files as they are used by the
 Yamaha PSR and Tyros Keyboards.
 '''
 
+# Imports
+import __builtin__
+import types
+
+import os.path
+import os
+
+
 # Public export of module content
 __all__ = [
+  "classes"
 ]
+
+
+# Get all modules except __init__.py
+modPath = os.path.dirname(os.path.join(os.getcwd(), __file__))
+classes = []
+
+# Visit each module and get classes
+__builtin__.__dict__["__CLASSES__"] = classes
+
+for filename in os.listdir(modPath):
+    (base, ext) = os.path.splitext(filename)
+
+    if ext == ".py" and not base == "__init__":
+        # Import module
+        try:
+            exec("import %s" % (base))
+        except SyntaxError:
+            pass
+
+        # Get list of classes
+        try:
+            exec("mod = %s" % (base))
+
+            for name in dir(mod):
+                thing = getattr(mod, name)
+
+                if thing and isinstance(thing, (type, types.ClassType)):
+                    classes.append(thing)
+
+        except SyntaxError:
+            pass

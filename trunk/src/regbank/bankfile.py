@@ -76,7 +76,7 @@ class MetaBankFile(type):
         # Inject classFinder class attributes
         classFinderByName = classfinder.ClassFinder(
             superClass   = cls,
-            packagePath  = __file__,
+            classes      = __CLASSES__,
             testMethName = "canUnderstandKeyboardName",
             hashMethName = "hashKeyboardName"
         )
@@ -84,7 +84,7 @@ class MetaBankFile(type):
 
         classFinderByFile = classfinder.ClassFinder(
             superClass   = cls,
-            packagePath  = __file__,
+            classes      = __CLASSES__,
             testMethName = "canUnderstandFile",
             hashMethName = "hashFile"
         )

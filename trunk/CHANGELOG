@@ -1,3 +1,8 @@
+2008-08-06  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Changed URL to http://www.psrregshuffle.de
+
+
 2008-07-17  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Equiped all modules with global __all__ list which contains all publicly
