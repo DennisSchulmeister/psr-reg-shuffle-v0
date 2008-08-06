@@ -1,6 +1,8 @@
 2008-08-06  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Changed URL to http://www.psrregshuffle.de
+ * Reengineered class finder algorithm to work with system-wide installed
+   version, too and to be easier to understand.
 
 
 2008-07-17  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
