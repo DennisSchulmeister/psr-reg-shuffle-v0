@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+#encoding=utf-8
+
+# run_test_suites
+# This file is part of PSR Registration Shuffler
+#
+# Copyright (C) 2008 - Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+#
+# This is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# It is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file. If not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor,
+# Boston, MA  02110-1301  USA
+
+'''
+PURPOSE
+=======
+
+This script automatically runs all test suites and test cases it can find.
+For this to work the tests must reside in sub-packages called "tests" of the
+package they are testing.
+'''
+
+# Import global modules
+import unittest
+import imp
+import os
+
+
+# Define global constants
+LOAD_ERROR  = "##### ERROR LOADING MODULE #####"
+TEST_BROKEN = "##### TEST FAILED ####"
+
+SRCDIR  = "src"
+TESTDIR = "tests"
+
+
+# Traverse source directory and run all tests which reside in a TESTDIR
+# package and whose module and class names start with PREFIX.
+loader = unittest.TestLoader()
+
+for root, dirs, files in os.walk(SRCDIR):
+    # Skip ordinary package directories but visit TESTDIR sub-directories
+    if root.find(TESTDIR) < 0:
+        continue
+
+    for filename in files:
+        # Skip package initialization file
+        if filename.startswith("__init__"):
+            continue
+
+        # Skip non-source files
+        if not filename.endswith(".py"):
+            continue
+
+        # Run test classes of found module
+        ### print "# %s" % (os.path.join(root, filename))
+
+        try:
+            packagename = root.replace(os.sep, ".")
+            modulename  = packagename + "." + filename[:-3]
+            module      = __import__(name=modulename, fromlist=[packagename])
+        except Exception:
+            print LOAD_ERROR
+
+        suite  = loader.loadTestsFromModule(module)
+        result = unittest.TestResult()
+        suite.run(result)
+
+        if not result.wasSuccessful():
+            print "# %s" % (os.path.join(root, filename))
+            print TEST_BROKEN
+            print
+
+        del(module)

@@ -1,0 +1,104 @@
+2008-08-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Fixed bug: Renaming an available registration now works again.
+ * Changed behaviour of renaming: Renaming a registration from the list of
+   available registrations (left) now changes the name of the exported
+   registration if the name of the exported registration hasn't been changed
+   before.
+
+
+2008-08-06  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Changed URL to http://www.psrregshuffle.de
+ * Reengineered class finder algorithm to work with system-wide installed
+   version, too and to be easier to understand.
+
+
+2008-07-17  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Equiped all modules with global __all__ list which contains all publicly
+   exported symbol names.
+ * Refactored algorithm for finding subclasses of RegBank and Registrations.
+   Now contained in ClassFinder which also makes use of caching.
+ * Implmented sub-class lookup for classes RegBank and Registration.
+ * Renamed modules named "exceptions" due to naming conflict with Python's
+   standard library.
+ * Merged module regbank.models with const.
+ * Created and implemented BankFile_PSR2000 class for accessing registration
+   banks of the Yamaha PSR-2000 keyboard.
+ * Created and implemented Registration_PSR2000 class for accessing and
+   manipulating registration data of the Yamaha PSR-2000 keyboard.
+ * Implemented RegFile class for storing single registrations to disc.
+ * Importing registrations now works.
+ * New class EasyDragAndDrop to simplify drag and drop implementation for
+   "new registration bank" panel.
+ * Implemented complete panel "New Registrtion Bank". Thus the application
+   has reached it's full planed feature set.
+
+
+2008-07-16  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Wrote script for quick running of all available tests.
+ * Defined API for bank files. (Class regbank.bankfile.BankFile)
+ * Defined API for editing registrations (Class regbank.registration.Registration)
+ * Defined API for registration files (Class regfile.regfile.RegFile)
+ * Introduced constants for keyboard models (regbank.models)
+ * Introduced main window class.
+ * Introduced classes for coordinating the import of registrations and the
+   assembly of bank files. For this certain signals from the main window are
+   delegated to the coordinator objects.
+ * Introduced exception sub-modules for packages regfile and regbank.
+ * Made modules export public members (__all__).
+ * Sketched out algorithm for automatically determining apropriate subclass
+   of Registration according to a given keyboard model.
+
+
+2008-07-12  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Established sub-packages called tests to hold unit tests.
+
+
+2008-07-09  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Extended helper scripts by additional command line option --clean (or -c)
+   which removes previously generated files.
+ * Extended setup script to use the newly introduced cleanup services in order
+   remove files generated with root permissions. Those files could break the
+   helper scripts otherwise as they weren't allowed to overwrite the files
+   when re-run with user-privileges.
+ * Extended setup script to assume "--help" option if no option is given
+   by the user. Otherwise the call to setup(...) would not return and there
+   would be no chance to clean up afterwards.
+
+
+2008-07-08  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Made setup script output the licence name if requested by --licence.
+
+
+2008-07-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Wrote a python script which uses xgettext for extracting all
+   translateable strings from the source and glade files.
+ * Wrote a python script which uses msgfmt for building binary catalog
+   files from available translations.
+ * Extended setup.py to install localized message catalogs.
+ * Cleaned up subversion repository from unwanted files (like *.pyc and so on).
+
+
+2008-07-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Created project directories and empty modules
+ * Created modules const and main as well as class Main. The program can
+   already display --help and --version strings.
+ * Created startup scripts for installed and local source versions
+ * Created setup script (distutils)
+ * Created man page build script
+ * Created english man page
+
+
+2008-07-06  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Start of development
+ * Analysis of bank file format
+ * Design of the user-interface using glade

@@ -1,0 +1,253 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Dennis Schulmeister
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: psrregshuffle 0.1\n"
+        "Report-Msgid-Bugs-To: dennis -at- ncc-1701a.homelinux.net\n"
+        "POT-Creation-Date: 2008-08-07 19:38+0200\n"
+        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+        "Language-Team: LANGUAGE <LL@li.org>\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=CHARSET\n"
+        "Content-Transfer-Encoding: 8bit\n"
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:118
+msgid   "### EMPTY ###"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/const.py:80
+#, python-format
+msgid   "%(progname)s %(version)s\n"
+        "\n"
+        "%(copyright_long)s\n"
+        "Written by %(author)s <%(author_email)s>"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/const.py:69
+#, python-format
+msgid   "%s\n"
+        "\n"
+        "This is free software; you can redistribute it and/or modify it under "
+        "the terms\n"
+        "of the GNU General Public License as published by the Free Software "
+        "Foundation;\n"
+        "either version 3 of the License, or (at your option) any later "
+        "version.\n"
+        "\n"
+        "The software is distributed in the hope that it will be useful, but "
+        "WITHOUT ANY\n"
+        "WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+        "FITNESS FOR A\n"
+        "PARTICULAR PURPOSE.  See the GNU General Public License for more "
+        "details.\n"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:444
+msgid   "<big><big><big><b>Program name</b></big></big></big>\n"
+        "<i>Short description</i>\n"
+        "\n"
+        "Long copyright"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/const.py:63
+msgid   "A program for organizing PSR registration bank files"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:359
+#, python-format
+msgid   "ATTENTION: A bank file for this instrument can only hold up to %i "
+        "registrations."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:352
+msgid   "ATTENTION: Cannot mix registrations of different instruments."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:495
+msgid   "About"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:390
+#, python-format
+msgid   "Added '%s' to new bank."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/const.py:96
+msgid   "All models"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:56
+msgid   "Available Registrations"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/regbank/appexceptions.py:45
+msgid   "Cannot handle data of the given keyboard model."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:235
+#, python-format
+msgid   "Changed directory to %s."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:217
+msgid   "Cleared new registration bank."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:462
+msgid   "Click me!"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/appexceptions.py:99
+msgid   "Couldn't find a suitable class. Most probably the feature is not "
+        "implemented."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:273
+msgid   "Create Bank Files"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:30
+msgid   "Data Directory"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:18
+msgid   "Data Directory:"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:154
+msgid   "Import"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:401
+msgid   "Import Registrations"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/importregstab.py:157
+#, python-format
+msgid   "Imported %i registrations."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:141
+msgid   "Keyboard"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:265
+#, python-format
+msgid   "Moved '%s' down one position."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:241
+#, python-format
+msgid   "Moved '%s' up one position."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:85
+msgid   "New Registration Bank"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/appexceptions.py:114
+msgid   "No file was given at all when one was expected."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/importregstab.py:150
+msgid   "Nothing imported."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:155
+msgid   "Number"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/importregstab.py:75
+msgid   "Open bank file"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:6
+msgid   "PSR Registration Shuffler"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:114
+msgid   "Ready."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:293
+msgid   "Registration Bank Content"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:140
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:148
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:156
+msgid   "Registration Name"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:400
+#, python-format
+msgid   "Removed '%s' from new bank."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:275
+msgid   "Save Registration Bank"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/createbanktab.py:314
+#, python-format
+msgid   "Saved registration bank to '%s'."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/importregstab.py:114
+msgid   "Successfully opened registration bank file."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:311
+msgid   "Sucessfully opened web browser."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/regfile/appexceptions.py:42
+msgid   "The given file doesn't seem to be a registration file. Note that "
+        "registration files hold only one registration as oppsed to "
+        "registration banks used by your instrument."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/appexceptions.py:84
+msgid   "The given object is not of type Class."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/appexceptions.py:69
+msgid   "The object is a singleton object which shouldn't be instanciated "
+        "through a constructor. Use getInstance() instead."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/src/mainwindow.py:313
+msgid   "Unable to launch web browser."
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:198
+msgid   "_Clear list"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:362
+msgid   "_Import selected"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:332
+msgid   "_Open bank file"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:163
+msgid   "_Remove selected"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:126
+msgid   "_Save bank file"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:234
+msgid   "gtk-go-down"
+msgstr  ""
+
+#: /home/dennis/src/own/psr-reg-shuffle/tags/0.1/data/ui.glade:220
+msgid   "gtk-go-up"
+msgstr  ""
