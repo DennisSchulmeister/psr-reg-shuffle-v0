@@ -160,27 +160,40 @@ class CreateBankTab:
             return
 
         # Store changed name into binary data
+        oldName = regObj.getName()
         regObj.setName(regEntry.name)
 
-        # Save registration file with new file name
+        # Save registration file with new file name (but keep old file)
+        oldFileName = regEntry.fileName
         newFileName = util.calculateFileNameFromRegName(regEntry.name, self.main.workDir)
         regFile.storeRegFile(newFileName)
-
-        oldFileName = regEntry.fileName
-        if not os.path.samefile(oldFileName, newFileName):
-            os.unlink(oldFileName)
 
         # Change entry of available registration list in-place (no list reload)
         regEntry.fileName = newFileName
 
         # Scan list of new bank file and replace old filename if found
         for newReg in self.wndMain.oblNewBank:
+            # Skip dummy registrations
+            if not newReg.fileName:
+                continue
+
             # Skip files whose file name doesn't match anyway
             if not os.path.samefile(newReg.fileName, oldFileName):
                 continue
 
             # Change file name
             newReg.fileName = newFileName
+
+            # Change name if it matches old name
+            if newReg.name == oldName:
+                newReg.name = regEntry.name
+
+            # Update displayed list
+            self.wndMain.oblNewBank.update(newReg)
+
+        # Delete old file with old name
+        if not os.path.samefile(oldFileName, newFileName):
+            os.unlink(oldFileName)
 
 
     # Export list of new bank file ............................................
@@ -336,7 +349,6 @@ class CreateBankTab:
         if not newBankModel  == RegModel         \
         and not RegModel     == const.ALL_MODELS \
         and not newBankModel == const.ALL_MODELS:
-
             self.wndMain.setStatusMessage(_("ATTENTION: Cannot mix registrations of different instruments."))
             return False
 

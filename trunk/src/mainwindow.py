@@ -323,7 +323,6 @@ class AvailableRegsEntry:
     * keyname,  Long name of the keyboard model
     * model,    Internal name of the keyboard model
     * filename, File name of the registration file
-    * reg,  Registration Object
     '''
 
     def __init__(self, name="", keyName="", model="", fileName=""):

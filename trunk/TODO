@@ -11,6 +11,4 @@
 
  * UnitTests, pyLint, Profiler, et al.
 
- * Rename available reg. os.path.samefile -> Exception: file does not exist.
-
  * Remove keyboard names from const.py. Move to individual classes instead.

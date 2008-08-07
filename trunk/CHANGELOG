@@ -1,3 +1,12 @@
+2008-08-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Fixed bug: Renaming an available registration now works again.
+ * Changed behaviour of renaming: Renaming a registration from the list of
+   available registrations (left) now changes the name of the exported
+   registration if the name of the exported registration hasn't been changed
+   before.
+
+
 2008-08-06  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Changed URL to http://www.psrregshuffle.de
