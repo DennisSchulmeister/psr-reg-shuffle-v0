@@ -1,0 +1,58 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ HOW TO BUILD A READY-TO-USE WINDOWS-DISTRIBUTION OF PSR-REG-SHUFFLE?         ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(C) 2008 - Dennis Schulmeister  <dennist -at- ncc-1701a.homelinux.net>
+Licenced under the terms of the GPL for free documentation
+
+Building a ready-to-run Windows distribution of »PSR Registrations Shuffler« is
+straight forward once you got all packaged together. It's basically just a
+regular python distribution with all python modules pre-installed. Note, that
+this doesn't include GTK+ which needs to be installed separately by the user.
+
+On a Windows machine perform the following steps:
+
+ 1. Make a clean install of python somewhere like D:\PYTHON25\.
+
+ 2. Install all needed python modules there:
+
+     * pyGTK 2.12.1
+     * pyGObject 2.14.1-1
+     * pyCairo 1.4.12.1
+     * kiwi 1.9.22
+
+     Later version should probably work, too.[*]
+
+ 3. Use distutils from the program's source tree in order to build a setup file
+    for Windows:
+
+    \> python setup.py bdist --format=wininst
+
+ 4. Use the installer to install psr-reg-shuffle into your python directory.
+
+ 5. Clean up by removing unnecessary documentation and test file from the python
+    directory. This way you can shrink from ~ 89 Meg to 20 Meg.
+
+ 6. Rename pythons README and LICENCE to python-README and python-LICENCE
+
+ 7. Copy psrregshuffle.bat into the top-directory. (See python25-template)
+
+ 8. Rename the python directory to: psr-reg-shuffle_A.B_winXY_python where as
+    A.B is the program version and XY the windows version like win32 or win64.
+
+ 9. Use your favorite packager for building a neat ZIP-file.
+
+That's all there is to do. But of course you should also test-run your newly
+created distribution. Especially since the Windows versions of the employed
+python modules might contain bugs of their own.
+
+________________________
+
+[*] ATTENTION: Don't use pyGTK 2.12.1-2. It actually lacks the following
+method used by the »PSR Registration Shuffler«.
+
+ --> gtk.gdk.DragContext.get_source_widget()
+
+The pre-built Windows version simply doesn't include it. Unfortunately the
+program won't run without. So either stick to pGTK 2.12.1-1 or any later
+version. But anyway, make sure to test your distribution.
