@@ -6,7 +6,7 @@
 Licenced under the terms of the GPL for free documentation
 
 Building a ready-to-run Windows distribution of »PSR Registrations Shuffler« is
-straight forward once you got all packaged together. It's basically just a
+straight forward once you got all packages together. It's basically just a
 regular python distribution with all python modules pre-installed. Note, that
 this doesn't include GTK+ which needs to be installed separately by the user.
 
