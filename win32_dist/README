@@ -14,7 +14,9 @@ On a Windows machine perform the following steps:
 
  1. Make a clean install of python somewhere like D:\PYTHON25\.
 
- 2. Install all needed python modules there:
+ 2. Copy python25.dll from C:\WINDOWS\SYSTEM32 into the program directory.
+
+ 3. Install all needed python modules there:
 
      * pyGTK 2.12.1
      * pyGObject 2.14.1-1
@@ -23,24 +25,24 @@ On a Windows machine perform the following steps:
 
      Later version should probably work, too.[*]
 
- 3. Use distutils from the program's source tree in order to build a setup file
+ 4. Use distutils from the program's source tree in order to build a setup file
     for Windows:
 
     \> python setup.py bdist --format=wininst
 
- 4. Use the installer to install psr-reg-shuffle into your python directory.
+ 5. Use the installer to install psr-reg-shuffle into your python directory.
 
- 5. Clean up by removing unnecessary documentation and test file from the python
+ 6. Clean up by removing unnecessary documentation and test file from the python
     directory. This way you can shrink from ~ 89 Meg to 20 Meg.
 
- 6. Rename pythons README and LICENCE to python-README and python-LICENCE
+ 7. Rename pythons README and LICENCE to python-README and python-LICENCE
 
- 7. Copy psrregshuffle.bat into the top-directory. (See python25-template)
+ 8. Copy psrregshuffle.bat into the top-directory. (See python25-template)
 
- 8. Rename the python directory to: psr-reg-shuffle_A.B_winXY_python where as
+ 9. Rename the python directory to: psr-reg-shuffle_A.B_winXY_python where as
     A.B is the program version and XY the windows version like win32 or win64.
 
- 9. Use your favorite packager for building a neat ZIP-file.
+10. Use your favorite packager for building a neat ZIP-file.
 
 That's all there is to do. But of course you should also test-run your newly
 created distribution. Especially since the Windows versions of the employed
