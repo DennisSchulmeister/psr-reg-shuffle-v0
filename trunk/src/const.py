@@ -86,13 +86,23 @@ version_string = _("%(progname)s %(version)s\n\n%(copyright_long)s\nWritten by %
     "author_email":   author_email
 }
 
+thanks = _("""Special thanks go to:
+""")
 
 # Constants with technical short names for keyboard models
 ALL_MODELS     = ""
+UNKNOWN_MODEL  = "UNKNOWN"
 YAMAHA_PSR2000 = "YAMAHA PSR2000"
+YAMAHA_TYROS1  = "YAMAHA TYROS1"
+YAMAHA_TYROS2  = "YAMAHA TYROS2"
+YAMAHA_S900    = "YAMAHA S900"
 
-# Dictionary with user-friendly product names. (Not translateable)
+# Dictionary with user-friendly product names. (Not all translateable)
 keyboardNameLong = {
     ALL_MODELS:     _("All models"),
-    YAMAHA_PSR2000: "Yamaha PSR-2000"
+    UNKNOWN_MODEL:  _("Unknown model"),
+    YAMAHA_PSR2000: "Yamaha PSR-2000",
+    YAMAHA_TYROS1:  "Yamaha Tyros 1",
+    YAMAHA_TYROS2:  "Yamaha Tyros 2",
+    YAMAHA_S900:    "Yamaha S900",
 }

@@ -1,6 +1,6 @@
 #encoding=utf-8
 
-# bankfile_psr2000.py
+# bankfile_tyros.py
 # This file is part of PSR Registration Shuffler
 #
 # Copyright (C) 2008 - Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
@@ -25,12 +25,12 @@ PURPOSE
 =======
 
 This module contains the BankFile sub-class for dealing with registration
-bank files from the YAMAHA PSR-2000 keyboard.
+bank files from the YAMAHA Tyros and Tyros 2 keyboards.
 '''
 
 # Public export of module content
 __all__ = [
-    "BankFile_PSR2000"
+    "BankFile_Tyros"
 ]
 
 
@@ -44,19 +44,23 @@ from .. import util
 
 
 # Define class
-class BankFile_PSR2000(bankfile.BankFile):
+class BankFile_Tyros(bankfile.BankFile):
     '''
-    This class provides support for YAMAHA PSR-2000 bank files.
+    This class provides support for YAMAHA Tyros and Tyros 2 bank files.
     '''
 
     # Short names of supported keyboard models
-    keyboardNames = [const.YAMAHA_PSR2000]
+    keyboardNames = [
+        const.YAMAHA_TYROS1,    # Yamaha Tyros 1
+        const.YAMAHA_TYROS2,    # Yamaha Tyros 2
+        const.YAMAHA_S900,      # Yamaha S900
+    ]
 
     # Magic file header
     fileHeader = "\x52\x45\x47\x2D\x31\x30\x30\x2D" \
                + "\x31\x30\x30\x2D\x31\x30\x30\x30" \
                + "\x50\x53\x52\x32\x30\x30\x30\x78" \
-               + "\x00\x08\x00\x40"
+               + "\x00\x08\x00\x40 ---REPLACE ME---"
 
     # Special padding between header and data blocks
     specialPadding = "\x24\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \

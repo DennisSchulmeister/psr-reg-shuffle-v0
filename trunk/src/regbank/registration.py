@@ -38,59 +38,26 @@ __all__ = [
 ## TODO
 
 # Import applicaiton modules
-from .. import classfinder
-from ..appexceptions import NoClassFound
-
 import appexceptions
-
-
-# Define Registration meta-class
-class MetaRegistration(type):
-    '''
-    Meta-class for class Registration.
-    '''
-
-    def __init__(cls, name, bases, dict):
-        '''
-        Constructor. Called after class definition or class Registration.
-        Injects a class attribute called "classFinder" for looking up suitable
-        sub-classes by keyboard name.
-        '''
-        # Initialize class as usual
-        super(MetaRegistration, cls).__init__(name, bases, dict)
-
-        # Inject classFinder class attribute
-        classFinder = classfinder.ClassFinder(
-            superClass   = cls,
-            classes      = __CLASSES__,
-            testMethName = "canUnderstandKeyboardName",
-            hashMethName = "hashKeyboardName"
-        )
-        setattr(cls, 'classFinder', classFinder)
+import modelspecific
 
 
 # Define Registration class
-class Registration:
+class Registration(modelspecific.ModelSpecific):
     '''
     This class is the base for all model specific registration objects.
     '''
 
-    # Meta-class for injecting ClassFinder object as class attribute.
-    # NOTE: You cannot access the class object during definition of a class.
-    # However the ClassFinder needs a super-class as an upper search limit so
-    # a meta-class must be used in order to provide that information.
-    __metaclass__ = MetaRegistration
-
-    # Name of the keyboard model (needs to be overwritten)
-    keyboardName = ""
-
-
     # Methods to be over-written...............................................
 
-    def __init__(self):
+    def __init__(self, keyboardName=""):
         '''
         Default contructor.
         '''
+        # Call super-constructor
+        modelspecific.ModelSpecific.__init__(self, keyboardName=keyboardName)
+
+        # Initialize binary blobl
         self.binaryContent = None
 
 
@@ -128,50 +95,3 @@ class Registration:
         for storing it to a bank file or to a registration file.
         '''
         return self.binaryContent
-
-
-    # Lookup of suitable sub-class.............................................
-
-    def getKeyboardName(self, name):
-        '''
-        Returns the name of the keyboard model for which the given registration
-        is valid. This is usually needed for determining the file type of a
-        bank file or a registration file to be written to disk.
-        '''
-        return self.__class__.keyboardName
-
-
-    def canUnderstandKeyboardName(cls, name):
-        '''
-        Class method for checking whether a class can be used for manipulating
-        data of the given keyboard make.
-        '''
-        return name == cls.keyboardName
-
-    canUnderstandKeyboardName = classmethod(canUnderstandKeyboardName)
-
-
-    def hashKeyboardName(cls, name):
-        '''
-        Hash function for keyboard name. Needed for class lookup below.
-        Since keyboard names are short and unique just the given name will be
-        returned.
-        '''
-        return name
-
-    hashKeyboardName = classmethod(hashKeyboardName)
-
-
-    def getClassForKeyboardName(cls, keyboardName):
-        '''
-        Class method which determines the class object of type Registration
-        which can handle registrations from the given keyboard model. Raises
-        appexceptions.UnknownKeyboardModel is no class can be found.
-        '''
-        # Lookup suitable sub-class
-        try:
-            return cls.classFinder.lookup(keyboardName)
-        except NoClassFound:
-            raise appexceptions.UnknownKeyboardModel(cls)
-
-    getClassForKeyboardName = classmethod(getClassForKeyboardName)

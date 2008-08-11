@@ -48,16 +48,16 @@ class Registration_PSR2000(registration.Registration):
     This class provides support for YAMAHA PSR-2000 registrations.
     '''
 
-    # Short name of the keyboard model
-    keyboardName = const.YAMAHA_PSR2000
+    # Short names of supported keyboard models
+    keyboardNames = [const.YAMAHA_PSR2000]
 
 
-    def __init__(self):
+    def __init__(self, keyboardName=""):
         '''
         Default contructor.
         '''
-        # Initialize attributes
-        self.binaryContent = None
+        # Call super-constructor
+        registration.Registration.__init__(self, keyboardName)
 
         # Retrieve ascii encoder / decoder
         self.encoder  = codecs.getencoder("ascii")

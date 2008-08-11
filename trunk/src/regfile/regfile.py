@@ -92,7 +92,7 @@ class RegFile:
             regBinary = file.read()
 
             regClass    = registration.Registration.getClassForKeyboardName(self.keyboardName)
-            self.regObj = regClass()
+            self.regObj = regClass(keyboardName=self.keyboardName)
 
             self.regObj.setBinaryContent(regBinary)
 

@@ -74,7 +74,7 @@ class ImportRegsTab:
         filename = kiwi.ui.dialogs.open(
             title    = _("Open bank file"),
             parent   = self.wndMain.wndMain,
-            patterns = ["*.REG", "*.reg"]
+            patterns = ["*.REG", "*.reg", "*.RGT", "*.rgt"]
         )
 
         if not filename:
@@ -97,7 +97,7 @@ class ImportRegsTab:
                 regName = regObj.getName()
                 mark    = True
             else:
-                regName = ""
+                regName = _("### EMPTY ###")
                 mark    = False
 
             entry = mainwindow.ImportRegsEntry(

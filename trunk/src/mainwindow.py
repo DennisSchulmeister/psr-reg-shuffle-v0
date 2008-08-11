@@ -36,9 +36,11 @@ __all__ = [
 
 
 # Import system modules
-from kiwi.ui.delegates  import GladeDelegate
-from kiwi.ui.objectlist import ObjectList
-from kiwi.ui.objectlist import Column
+from kiwi.ui.delegates     import GladeDelegate
+from kiwi.ui.objectlist    import ObjectList
+from kiwi.ui.objectlist    import Column
+from kiwi.ui.widgets.combo import ProxyComboBox
+
 import webbrowser
 import os.path
 import gtk
@@ -66,6 +68,7 @@ class MainWindow(GladeDelegate):
         # Create bank files pane
         "evtAvailableRegs",
         "evtNewBank",
+        "evtNewBankKeyModel",
         "btnSaveBank",             # needs handler (clicked)
         "btnRemoveSelected",       # needs handler (clicked)
         "btnClearList",            # needs handler (clicked)
@@ -120,12 +123,13 @@ class MainWindow(GladeDelegate):
         logo_filename = os.path.join(self.main.dataDir, "logo_medium.png")
         self.imgAbout.set_from_file(logo_filename)
 
-        about_txt = "<big><big><big><b>%(progname)s %(version)s</b></big></big></big>\n<i>%(descr)s</i>\n\n%(licence)s" % \
+        about_txt = "<big><big><big><b>%(progname)s %(version)s</b></big></big></big>\n<i>%(descr)s</i>\n\n%(licence)s\n\n%(thanks)s" % \
         {
             "progname": const.progname,
             "version":  const.version,
             "descr":    const.description,
-            "licence":  const.copyright_long
+            "licence":  const.copyright_long,
+            "thanks":   const.thanks,
         }
 
         self.lblAbout.set_use_markup(True)
@@ -173,10 +177,21 @@ class MainWindow(GladeDelegate):
         ## self.oblNewBank.get_treeview().set_reorderable(True)
 
         self.oblAvailableRegs.connect("cell-edited", self.on_oblAvailableRegs_cell_edited)
+        self.oblNewBank.connect("has-rows", self.on_oblNewBank_has_rows)
+
+        # Insert combobox for selecting keyboard model of new bank files
+        self.cbxNewBankKeyModel = ProxyComboBox()
+        self.evtNewBankKeyModel.add(self.cbxNewBankKeyModel)
+        self.cbxNewBankKeyModel.show()
 
         # Prepare delegates for driving the tab's contents
         self.createBankTab = createbanktab.CreateBankTab(wndMain=self)
         self.importRegsTab = importregstab.ImportRegsTab(wndMain=self)
+
+        # Connect to content-changed of keyboard model combobox
+        # NOTE: Must be after initialization of delegates above because the
+        # signal will be triggered right after connecting.
+        self.cbxNewBankKeyModel.connect("content-changed", self.on_cbxNewBankKeyModek_content_changed)
 
 
     def run(self):
@@ -242,6 +257,24 @@ class MainWindow(GladeDelegate):
         regfile which will also renamed.
         '''
         self.createBankTab.availableRegRename(args[1])
+
+
+    def on_cbxNewBankKeyModek_content_changed(self, widget):
+        '''
+        Event handler which gets triggered whenever the user changes the
+        keyboard model of a new registration bank. The call gets delegated
+        to a CreateBankTab object.
+        '''
+        self.createBankTab.onKeyboardModelChanged(widget)
+
+
+    def on_oblNewBank_has_rows(self, list, hasRows):
+        '''
+        Event handler which gets triggered whenever a new bank goes from
+        empty to non-empty or vice versa. The call gets delegated to a
+        CreateBankTab object.
+        '''
+        self.createBankTab.onNewBankEmptyChanged(list, hasRows)
 
 
     def on_btnSaveBank__clicked(self, *args):

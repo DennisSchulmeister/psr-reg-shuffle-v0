@@ -10,3 +10,5 @@
  * Deos extraction of translateable strings from glade file work?
 
  * UnitTests, pyLint, Profiler, et al.
+
+ * Finish support for Tyros-style registrations

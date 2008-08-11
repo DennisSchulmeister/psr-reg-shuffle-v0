@@ -1,3 +1,28 @@
+2008-08-11  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Refactored classes regbank.Bankfile and regbank.Registration to be
+   derived by a common super-class called regbank.ModelSpecific. This class
+   holds all methods needed for searching classes by keyboard name.
+ * Finished re-engineering of keyboard model support. If a regbank.bankfile.
+   BankFile sub-class now supports more than one keyboard model the
+   registrations of all models can be mixed. If this is unwanted sub-classes
+   need to be created for each keyboard model.
+
+
+2008-08-10  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Forcing the user to decide in advance which kind of registration she
+   wants to create. Needed because file formats for Yamaha Tyros 1 & 2
+   seem to differ in file header only. It also helps to prevent a bug when
+   the user starts with adding more ##EMPTY## registrations as a certain
+   keyboard model understands. She could still add at least one regular
+   registration.
+ * Re-engineered bankfile and registration class search to allow for
+   more than one keyboard model to be supported by a class.
+ * The import list now shows ### EMPTY ### for blank registrations just like
+   the export list.
+
+
 2008-08-07  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Fixed bug: Renaming an available registration now works again.

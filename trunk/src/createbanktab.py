@@ -98,6 +98,24 @@ class CreateBankTab:
             dataFunc   = lambda: self.getDataAvailableRegs()
         )
 
+        # Pre-fill keyboard model combobox
+        self.wndMain.cbxNewBankKeyModel.clear()
+
+        models = const.keyboardNameLong.items()
+        models.sort()
+
+        for model in models:
+            if model[0] == const.ALL_MODELS:
+                continue
+
+            label = model[1]
+            self.wndMain.cbxNewBankKeyModel.append_item(label, model[0])
+
+        self.wndMain.cbxNewBankKeyModel.select(const.UNKNOWN_MODEL)
+        self.wndMain.cbxNewBankKeyModel.update(const.UNKNOWN_MODEL)
+
+        self.allowedKeyboardNames = []
+
 
     # Work directory access ...................................................
 
@@ -197,6 +215,14 @@ class CreateBankTab:
 
 
     # Export list of new bank file ............................................
+    def onNewBankEmptyChanged(self, list, hasRows):
+        '''
+        Delegate methode called by the UI. Gets called whenever the list of
+        a new bank becomes empty or non-empty. This is cruical for activating
+        and deactivating the keyboard model combobox.
+        '''
+        self.wndMain.cbxNewBankKeyModel.set_sensitive(not hasRows)
+
 
     def removeSelectedItemsFromExportList(self):
         '''
@@ -304,7 +330,7 @@ class CreateBankTab:
                 regList.append(None)
 
         # Create new bank file object
-        bankFile = bankClass()
+        bankFile = bankClass(keyboardName=model)
         bankFile.setRegistrationObjects(regList)
 
         # Store file to disk
@@ -317,22 +343,28 @@ class CreateBankTab:
     def getNewBankKeyboardName(self):
         '''
         Determines the technical keyboard name (model) for which the new
-        registration bank shall be created. Basically it's just the model
-        of the most top registration except "### EMPTY ###" registrations
-        which don't have a keyboard model.
-
-        If the list is empty const.ALL_MODELS (No model) gets returned.
+        registration bank shall be created. As of version 0.2 this is just
+        the model selected in the keyboard model combobox.
         '''
-        # Scan list until non-empty registration found
-        model = const.ALL_MODELS
+        # Retrieve selected keyboard model
+        return self.wndMain.cbxNewBankKeyModel.get_selected_data()
 
-        for row in self.wndMain.oblNewBank:
-            if not row.model == const.ALL_MODELS:
-                model = row.model
-                break
 
-        # Return found model name
-        return model
+    def onKeyboardModelChanged(self, widget):
+        '''
+        Delegate methode called by the UI whenever the user selects another
+        keyboard model from the combobox.
+        '''
+        # Retrieve list of allowed keyboard models (for mix-in)
+        keyName = self.getNewBankKeyboardName()
+
+        if keyName == const.UNKNOWN_MODEL \
+        or keyName == const.ALL_MODELS:
+            self.allowedKeyboardNames = []
+            return
+
+        regClass = regbank.bankfile.BankFile.getClassForKeyboardName(keyboardName=keyName)
+        self.allowedKeyboardNames = regClass.getAllKeyboardNames()
 
 
     # Drag and drop support....................................................
@@ -346,10 +378,19 @@ class CreateBankTab:
         newBankModel = self.getNewBankKeyboardName()
         RegModel     = row.model
 
-        if not newBankModel  == RegModel         \
-        and not RegModel     == const.ALL_MODELS \
-        and not newBankModel == const.ALL_MODELS:
-            self.wndMain.setStatusMessage(_("ATTENTION: Cannot mix registrations of different instruments."))
+        if newBankModel == const.UNKNOWN_MODEL:
+            self.wndMain.setStatusMessage(_("ATTENTION: Please choose a keyboard model first."))
+            return False
+
+        elif not RegModel     in self.allowedKeyboardNames \
+        and  not RegModel     == const.ALL_MODELS          \
+        and  not newBankModel == const.ALL_MODELS:
+            self.wndMain.setStatusMessage(
+                _("ATTENTION: %(dstName)s cannot read registrations from %(srcName)s." % {
+                    "srcName": const.keyboardNameLong[RegModel],
+                    "dstName": const.keyboardNameLong[newBankModel],
+                })
+            )
             return False
 
         # Check maximum amount
@@ -396,5 +437,8 @@ class CreateBankTab:
         not meant for direct use. Instead it's passed to an EasyDragAndDrop
         instance.
         '''
+        if not row:
+            return
+
         self.wndMain.oblNewBank.remove(row)
         self.wndMain.setStatusMessage(_("Removed '%s' from new bank.") % (row.name))
