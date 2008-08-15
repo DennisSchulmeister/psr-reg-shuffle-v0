@@ -7,8 +7,24 @@
  * More sensible detection of data directories (data, l18n, ...) in setup
    script (low priority)
 
- * Deos extraction of translateable strings from glade file work?
+ * Deos extraction of translateable strings from glade file work? (Yes, but
+   does translation of the glade ui during run-time work?)
 
  * UnitTests, pyLint, Profiler, et al.
 
  * Finish support for Tyros-style registrations
+
+ * Fix UI Button trouble (uggly looking picture / text positions and widget
+   sizes
+
+ * Add Acknowledgements to About pane
+
+ * Add info pane where all supported keyboard models can be seen and which
+   model understands which registration data
+
+ * Show exception output in a popup window ???
+
+ * Respond to ascii-exception UnicodeEncodeError (Umlauts). Maybe filter them
+   out or so ...
+
+ * Make Open dialog not loose current directory (cd)

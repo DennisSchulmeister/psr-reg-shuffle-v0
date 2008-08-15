@@ -224,6 +224,26 @@ class CreateBankTab:
         self.wndMain.cbxNewBankKeyModel.set_sensitive(not hasRows)
 
 
+    def addSelectedItemsToExport(self):
+        '''
+        Delegate method called by the UI. Copies the selected items from the
+        available list to the export list.
+        '''
+        # Get selected row
+        row = self.wndMain.oblAvailableRegs.get_selected()
+
+        if not row:
+            return
+
+
+        # Check whether copying is allowed (just like DnD would do)
+        if not self.checkCopyRegToNewBank(row):
+            return
+
+        # Copy row to export list
+        self.copyColumn(self.wndMain.oblAvailableRegs, self.wndMain.oblNewBank, row)
+
+
     def removeSelectedItemsFromExportList(self):
         '''
         Delegate method called by the UI. Removes all selected items from the
@@ -296,7 +316,13 @@ class CreateBankTab:
         Delegate method called by the UI. Asks the user for a filename and
         stores all registrations from the export list in it.
         '''
-        # Aks user for file name
+        # Check for valid keyboard model
+        if self.getNewBankKeyboardName() == const.UNKNOWN_MODEL \
+        or self.getNewBankKeyboardName() == const.ALL_MODELS:
+            self.wndMain.setStatusMessage(_("ATTENTION: Please choose a keyboard model first."))
+            return
+
+        # Ask user for file name
         fileName = kiwi.ui.dialogs.save(
             title  = _("Save Registration Bank"),
             parent = self.wndMain.wndMain

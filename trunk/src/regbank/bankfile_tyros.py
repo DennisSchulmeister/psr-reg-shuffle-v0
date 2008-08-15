@@ -51,24 +51,64 @@ class BankFile_Tyros(bankfile.BankFile):
 
     # Short names of supported keyboard models
     keyboardNames = [
-        const.YAMAHA_TYROS1,    # Yamaha Tyros 1
-        const.YAMAHA_TYROS2,    # Yamaha Tyros 2
-        const.YAMAHA_S900,      # Yamaha S900
+        const.YAMAHA_TYROS1,
+        const.YAMAHA_TYROS2,
+        const.YAMAHA_S900,
+        const.YAMAHA_PSR3000,
     ]
 
-    # Magic file header
-    fileHeader = "\x52\x45\x47\x2D\x31\x30\x30\x2D" \
-               + "\x31\x30\x30\x2D\x31\x30\x30\x30" \
-               + "\x50\x53\x52\x32\x30\x30\x30\x78" \
-               + "\x00\x08\x00\x40 ---REPLACE ME---"
+    # Magic file headers
+    fileHeaders = {
+        const.YAMAHA_TYROS1:  "\x53\x70\x66\x46\x00\x10\x0A\xD9" \
+                              "\x52\x47\x53\x54\x00\x00\x00\x07",
+
+        const.YAMAHA_TYROS2:  "\x53\x70\x66\x46\x00\x10\x0B\x75" \
+                              "\x52\x47\x53\x54\x00\x02\x00\x00",
+
+        const.YAMAHA_S900:    "\x53\x70\x66\x46\x00\x10\x0B\xC6" \
+                              "\x52\x47\x53\x54\x00\x02\x00\x00",
+
+        const.YAMAHA_PSR3000: "\x53\x70\x66\x46\x00\x10\x0B\x20" \
+                              "\x52\x47\x53\x54\x00\x01\x00\x02",
+    }
+
+    # File footer
+    fileFooter = "\x46\x45\x6E\x64\x00\x00"        # FEnd\x00\x00
 
     # Special padding between header and data blocks
-    specialPadding = "\x24\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
-                   + "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
-                   + "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
-                   + "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
-                   + "\xFF\xFF\xFF\xFF\xFF\x00\x00\x00" \
-                   + "\x00\x00\x00\x00\x00\x00\x00\x00"
+    specialPaddings = {
+        const.YAMAHA_TYROS1:  "\x15\x5C" \
+                              "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF",
+
+        const.YAMAHA_TYROS2:  "\x00\x82" \
+                              "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF",
+
+        const.YAMAHA_S900:    "\x00\x78" \
+                              "\x42\x48\x64\x01\x00\x24\x00\x01" \
+                              "\xFF\x04\x05\x06\x07\xFF\x00\x00" \
+                              "\x00\x00\x00\x00\x00\x00\x00\x00" \
+                              "\x00\x00\x00\x00\x00\x00\x00\x00" \
+                              "\x00\x00\x00\x00\x00\x00\x00\x00" \
+                              "\x00\x00",
+
+        const.YAMAHA_PSR3000: "\x00\x00" \
+                              "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF",
+    }
 
     # Maximum amount of registrations
     maxReg = 8
@@ -106,31 +146,34 @@ class BankFile_Tyros(bankfile.BankFile):
         registrations from the given file, nicely pack them into Registration
         objects and to line them up in a list called self.regList.
         '''
+        # Start with empty registration list
+        self.regList = []
+
         # Slice out registrations into self.regList
-        # NOTE: 0xffffffff marks non-existing registration. Other values
-        # give absolute byte pointer within file.
-        for i in range(self.__class__.maxReg):
-            # Read location of registration
-            file.seek(32 + (4 * i))
-            startPos = file.read(4)
+        # NOTE: Empty (non-existing) registrations are stored as reigstrions
+        # with zero-size.
+        file.seek(64)
 
-            # Skip empty registrations
-            if startPos == "\xff\xff\xff\xff":
-                continue
+        while True:
+            # Check for adjacent registration block
+            blockMagic = file.read(4)
 
-            # Read length of registration block
-            start = struct.unpack(">I", startPos)[0]
-            file.seek(start + 6)                          # RGST01..
+            if not blockMagic == "BHd\x00":
+                break
 
+            # Read block length
             blockLength = file.read(2)
             length      = struct.unpack(">H", blockLength)[0]
 
-            # Slice out binary data of registration
-            file.seek(start)
-            binary = file.read(length)
+            # Slice out binary data and create registration object
+            if length > 0:
+                binary = blockMagic + blockLength + file.read(length)
+                regObj = self.createRegistrationObject(binary)
+            else:
+                regObj = None
 
-            # Create Registration object and put it into the list
-            self.regList[i] = self.createRegistrationObject(binary)
+            # Put registration object into the list
+            self.regList.append(regObj)
 
 
     # File access..............................................................
@@ -145,43 +188,39 @@ class BankFile_Tyros(bankfile.BankFile):
         ========= ======= =====================================================
         Position  Length  Description
         ========= ======= =====================================================
-        0         28      File header
-        28        4       Amount of registrations
-        32        32      Access list with location of registration (8x)
-        64        48      Special padding
-        112       ..      Registration blocks (up to 8x)
+        0         16      File header
+        16        4       File-size in bytes
+        20        44      Special Padding (BHd\x01 block)
+        64        --      Exactly 8 registration blocks of variable length
+        -6        6       File footer
         ========= ======= =====================================================
 
         All numbers are stored as BigEndian, 4-Byte, Unsigned Integer.
         '''
-        # Prepare access list and large data block
-        nRegs      = 0
-        startPosi  = 112
-        accessList = ""
+        # Prepare data block with registration data
         dataBlock  = ""
 
-        for reg in self.regList:
-            # Skip empty registrations
-            if not reg:
-                accessList += "\xFF\xFF\xFF\xFF"
-                continue
+        for regObj in self.regList:
+            if not regObj:
+                dataBlock += "BHd\x00\x00\x00"
+            else:
+                dataBlock += regObj.getBinaryContent()
 
-            # Determine effective amount of registrations
-            nRegs += 1
+        # Calculate file length
+        header  = self.__class__.fileHeaders[self.actualKeyboardName]
+        padding = self.__class__.specialPaddings[self.actualKeyboardName]
+        footer  = self.__class__.fileFooter
 
-            # Write access list and update location for next registration
-            posi = startPosi + len(dataBlock)
-
-            accessList += struct.pack(">I", posi)     # BE, UInt, 4 Bytes
-            dataBlock  += reg.getBinaryContent()
+        length      = len(header) + 4 + len(padding) + len(dataBlock) + len(footer)
+        lengthBytes = struct.pack(">I", length)
 
         # Write file contents
         file = open(filename, "wb+")
-        file.write(self.__class__.fileHeader)         # File header
-        file.write(struct.pack("<I", nRegs))          # Amount of registrations (LE???)
-        file.write(accessList)                        # Location pointers
-        file.write(self.__class__.specialPadding)     # Special padding
-        file.write(dataBlock)                         # Registration block
+        file.write(header)               # File header
+        file.write(lengthBytes)          # File-size (4-Byte uint, BE)
+        file.write(padding)              # Special padding (BHd\x01 block)
+        file.write(dataBlock)            # Registration data
+        file.write(footer)               # File footer
         file.close()
 
 
@@ -193,12 +232,20 @@ class BankFile_Tyros(bankfile.BankFile):
         True or False.
         '''
         # Compare file header
-        headerSize = len(cls.fileHeader)
+        hit = False
 
-        file.seek(0)
-        fileHeader = file.read(headerSize)
+        for keyName in cls.fileHeaders:
+            testHeader = cls.fileHeaders[keyName]
+            headerSize = len(testHeader)
 
-        return fileHeader == cls.fileHeader
+            file.seek(0)
+            fileHeader = file.read(headerSize)
+
+            if fileHeader == testHeader:
+                hit = True
+                break
+
+        return hit
 
     canUnderstandFile = classmethod(canUnderstandFile)
 
@@ -213,8 +260,23 @@ class BankFile_Tyros(bankfile.BankFile):
         # Make sure to have a file object at hand
         file = util.getFileObject(filename, file)
 
-        if cls.canUnderstandFile(file=file):
-            return const.YAMAHA_PSR2000
+        # Compare file header
+        foundKeyName = ""
+
+        for keyName in cls.fileHeaders:
+            testHeader = cls.fileHeaders[keyName]
+            headerSize = len(testHeader)
+
+            file.seek(0)
+            fileHeader = file.read(headerSize)
+
+            if fileHeader == testHeader:
+                foundKeyName = keyName
+                break
+
+        # Return result
+        if foundKeyName:
+            return foundKeyName
         else:
             raise appexceptions.UnknownKeyboardModel(cls)
 

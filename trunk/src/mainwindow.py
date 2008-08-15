@@ -69,6 +69,7 @@ class MainWindow(GladeDelegate):
         "evtAvailableRegs",
         "evtNewBank",
         "evtNewBankKeyModel",
+        "btnAddSelected",          # needs handler (clicked)
         "btnSaveBank",             # needs handler (clicked)
         "btnRemoveSelected",       # needs handler (clicked)
         "btnClearList",            # needs handler (clicked)
@@ -169,8 +170,12 @@ class MainWindow(GladeDelegate):
         self.oblNewBank.show()
         self.oblImportRegs.show()
 
-        self.oblAvailableRegs.enable_dnd()
-        self.oblNewBank.enable_dnd()
+        try:
+            self.oblAvailableRegs.enable_dnd()
+            self.oblNewBank.enable_dnd()
+        except AttributeError:
+            # Work around mising DnD-support in older kiwi versions
+            pass
 
         # NOTE: Don't set the TreeView reorderable except you're in for some
         # nasty exceptions if someone really tries to reorder the tree.
@@ -277,12 +282,12 @@ class MainWindow(GladeDelegate):
         self.createBankTab.onNewBankEmptyChanged(list, hasRows)
 
 
-    def on_btnSaveBank__clicked(self, *args):
+    def on_btnAddSelected__clicked(self, *args):
         '''
-        Event handler for save bank button. Delegates the call to an
+        Evemt handler for the add selected button. Delegates the call to an
         object of type CreateBankTab.
         '''
-        self.createBankTab.saveBankFile()
+        self.createBankTab.addSelectedItemsToExport()
 
 
     def on_btnRemoveSelected__clicked(self, *args):
@@ -291,6 +296,14 @@ class MainWindow(GladeDelegate):
         object of type CreateBankTab.
         '''
         self.createBankTab.removeSelectedItemsFromExportList()
+
+
+    def on_btnSaveBank__clicked(self, *args):
+        '''
+        Event handler for save bank button. Delegates the call to an
+        object of type CreateBankTab.
+        '''
+        self.createBankTab.saveBankFile()
 
 
     def on_btnClearList__clicked(self, *args):

@@ -1,3 +1,14 @@
+2008-08-14  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Fixed problem with missing method ObjectList.enable_dnd in older versios
+   of the kiwi library. (e.g. kiwi 1.9.16 as available on Ubuntu 7.10)
+   Added a "Add selected" button as an alternative to Drag'n'Drop.
+ * "Save Registration Bank" button now checks for a valid keyboard model first.
+ * Finished experimental support for Yamaha Tyros 1, Yamaha Tyros 2,
+   Yamaha S900 and Yamaha PSR-3000 which all share a very similar file format.
+ * Minor UI tweaks
+
+
 2008-08-11  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Refactored classes regbank.Bankfile and regbank.Registration to be

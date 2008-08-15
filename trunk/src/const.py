@@ -93,6 +93,7 @@ thanks = _("""Special thanks go to:
 ALL_MODELS     = ""
 UNKNOWN_MODEL  = "UNKNOWN"
 YAMAHA_PSR2000 = "YAMAHA PSR2000"
+YAMAHA_PSR3000 = "YAMAHA PSR3000"
 YAMAHA_TYROS1  = "YAMAHA TYROS1"
 YAMAHA_TYROS2  = "YAMAHA TYROS2"
 YAMAHA_S900    = "YAMAHA S900"
@@ -102,6 +103,7 @@ keyboardNameLong = {
     ALL_MODELS:     _("All models"),
     UNKNOWN_MODEL:  _("Unknown model"),
     YAMAHA_PSR2000: "Yamaha PSR-2000",
+    YAMAHA_PSR3000: "Yamaha PSR-3000",
     YAMAHA_TYROS1:  "Yamaha Tyros 1",
     YAMAHA_TYROS2:  "Yamaha Tyros 2",
     YAMAHA_S900:    "Yamaha S900",

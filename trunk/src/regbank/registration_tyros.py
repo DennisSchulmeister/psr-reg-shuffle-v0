@@ -50,9 +50,10 @@ class Registration_Tyros(registration.Registration):
 
     # Short names of supported keyboard models
     keyboardNames = [
-        const.YAMAHA_TYROS1,    # Yamaha Tyros 1
-        const.YAMAHA_TYROS2,    # Yamaha Tyros 2
-        const.YAMAHA_S900,      # Yamaha S900
+        const.YAMAHA_TYROS1,
+        const.YAMAHA_TYROS2,
+        const.YAMAHA_S900,
+        const.YAMAHA_PSR3000,
     ]
 
 
@@ -78,7 +79,7 @@ class Registration_Tyros(registration.Registration):
 
         NOTE: Unlike previous file formats (PSR-2000) the name string is
         not null-terminated anymore. Instead of the block length the length
-        now give the exact string length.
+        now gives the exact string length (2-Byte Big Endian, unsigned int).
         '''
         # Find position of GPm\x01 Block (name of registration).
         position = self.binaryContent.find("GPm\x01")
@@ -88,7 +89,7 @@ class Registration_Tyros(registration.Registration):
 
         # Get old string length
         oldLength = self.binaryContent[position + 4 : position + 6]
-        oldLength = struct.unpack(">H", length)[0]
+        oldLength = struct.unpack(">H", oldLength)[0]
 
         # Calculate new length bytes
         length = len(name)
@@ -115,7 +116,7 @@ class Registration_Tyros(registration.Registration):
 
         NOTE: Unlike previous file formats (PSR-2000) the name string is
         not null-terminated anymore. Instead of the block length the length
-        now give the exact string length.
+        now gives the exact string length. (2-Byte Big Endian, unsigned int)
         '''
         # Find position of GPm\x01 Block (name of registration).
         position = self.binaryContent.find("GPm\x01")
@@ -152,7 +153,7 @@ class Registration_Tyros(registration.Registration):
         ===== ====== ==========================================================
         '''
         # Calculate length bytes
-        length = len(self.binaryData)
+        length = len(self.binaryContent)
         lengthBytes = struct.pack(">H", length)
 
         # Calculate new registration header
