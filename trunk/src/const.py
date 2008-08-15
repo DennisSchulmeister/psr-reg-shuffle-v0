@@ -86,7 +86,73 @@ version_string = _("%(progname)s %(version)s\n\n%(copyright_long)s\nWritten by %
     "author_email":   author_email
 }
 
-thanks = _("""Special thanks go to:
+thanks = _("""Special thanks go to the following people. Without their help this program
+would still support Yamaha PSR-2000 and Linux only.
+
+<b>Heiko Plate</b>
+For his documentation of the Yamaha PSR-2000 registration file format. Without
+it I would have never started to write this program
+
+<b>Leroy Luc</b>
+For trying to run the program in Windows when there hasn't been a dedicated
+package yet
+
+<b>Jim Wincell</b>
+For being one of the first who tried out the Windows package
+
+<b>Bob Gelman</b>
+For spreading the word and hiring volunteers who'd provide test data
+
+<b>Brian Haylett</b>
+For helping Tom to manage his Yamaha Tyros 2 keyboard and for answering questions
+
+<b>Tom G</b>
+For providing Yamaha Tyros 2 registraion files and for being a friend on Yahoogroups
+
+<b>Ray from downunder</b>
+For providing Yamaha Tyros 1 registration files
+
+<b>Jeff from the Netherlands</b>
+For being a friend on yamaha-psr-Yahoogroups and for spreading the word there
+
+<b>Hennie van Rooyen</b>
+For alerting the community on a possible threat from the Windows package
+
+<b>Michael P. Bedesem</b>
+For being a friend on Yahoogroups and for encouraging me to continue working
+on the program
+
+<b>Mike Comley</b>
+For providing Yamaha S900 registration files
+
+<b>Norm Ruttle</b>
+For providing Yamaha PSR-3000 registration files
+
+<b>Jørgen Sørensen</b>
+For writing excelent music related software which encourged me to try the same
+
+<b>Alan Paganelli</b>
+For providing Yamaha Tyros 1 registration files
+
+<b>Claudio Bizzarri</b>
+For trying to run this program on Ubuntu GNU/Linux 7.10 and reporting about a
+missing method in the kiwi library.
+
+Also for offering his help with the Italian translation.
+
+<b>The nice folks who hang around the Internet</b>
+Including members of the Yamaha-psr-Yahoogroups, the German Yamaha music forum,
+SVPWorld.com and many more.
+
+Also including all those programmers who spend their time in the Usenet,
+mailing lists and blogs etc.
+
+All members and friends of free and open-sourced software. Without you guys
+not only this program but many many more would have never been possible.
+
+<b>Anyone whom I left out</b>
+Sorry, if I missed you here. Just drop me a message if you want and I'll add
+your name to the list.
 """)
 
 # Constants with technical short names for keyboard models

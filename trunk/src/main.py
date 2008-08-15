@@ -134,6 +134,7 @@ class Main(gobject.GObject):
 
         # Show main window
         self.wnd = mainwindow.MainWindow()
+        self.wnd.wndMain.maximize()
         self.wnd.run()
 
 
@@ -152,6 +153,36 @@ class Main(gobject.GObject):
         # Change work directory
         self.workDir = workDir
 
+        # Change processe's working directory (for file dialogs remembering it)
+        self.chdirFromFilename(
+            filename = workDir,
+            isdir    = True
+        )
+
         # Emit work-dir-changed signal
         self.emit("work-dir-changed", self.workDir)
 
+
+    def chdirFromFilename(self, filename, isdir=False):
+        '''
+        This method takes a filename and changes the processe's current
+        working directory to the path of that file, provided it exists.
+
+        The method is menat as a easy helper for making load and save
+        dialogs not loose the last used directory. Besides that the processe's
+        working directory won't be using within the program.
+        '''
+        # Extract directory name and check for existence
+        if not filename:
+            return
+
+        if not isdir:
+            dirname = os.path.dirname(filename)
+        else:
+            dirname = filename
+
+        if not os.path.exists(dirname):
+            return
+
+        # Change working directory
+        os.chdir(dirname)

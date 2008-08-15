@@ -331,6 +331,11 @@ class CreateBankTab:
         if not fileName:
             return
 
+        # Change processe's working directory so that file dialogs remember it
+        self.main.chdirFromFilename(
+            filename = fileName
+        )
+
         # Read binary registration data from disk
         # And assemble list of Registration objects.
         # While at it also apply name changes.

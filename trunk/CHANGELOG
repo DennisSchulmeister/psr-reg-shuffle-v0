@@ -1,3 +1,16 @@
+2008-08-15  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Revamped UI layout. Instead of aligning buttons bellow lists they now
+   reside next to the list they belong to. The window now always opens
+   maximized. In total this makes for a more aesthetical and consistent look.
+ * When opening a registration bank for import the status message now
+   contains the file name instead of a generic success message.
+ * Version 0.2 now comes with acknowledgements on the "About" pane.
+ * File dialogs now change the processe's working directory when resolved.
+   Because the directory won't be used otherwise in the program this makes the
+   dialogs remember their last directory position.
+
+
 2008-08-14  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Fixed problem with missing method ObjectList.enable_dnd in older versios

@@ -84,7 +84,8 @@ class MainWindow(GladeDelegate):
         # About pane
         "imgAbout",
         "lblAbout",
-        "linkAbout"                # needs handler (clicked)
+        "linkAbout",               # needs handler (clicked)
+        "lblThanks",
     ]
 
 
@@ -124,7 +125,7 @@ class MainWindow(GladeDelegate):
         logo_filename = os.path.join(self.main.dataDir, "logo_medium.png")
         self.imgAbout.set_from_file(logo_filename)
 
-        about_txt = "<big><big><big><b>%(progname)s %(version)s</b></big></big></big>\n<i>%(descr)s</i>\n\n%(licence)s\n\n%(thanks)s" % \
+        about_txt = "<big><big><big><b>%(progname)s %(version)s</b></big></big></big>\n<i>%(descr)s</i>\n\n%(licence)s" % \
         {
             "progname": const.progname,
             "version":  const.version,
@@ -138,6 +139,9 @@ class MainWindow(GladeDelegate):
 
         self.linkAbout.set_label(const.url)
         self.linkAbout.set_uri(const.url)
+
+        self.lblThanks.set_use_markup(True)
+        self.lblThanks.set_markup(const.thanks)
 
         # Insert ObjectLists into the main window
         self.oblAvailableRegs = ObjectList(

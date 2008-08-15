@@ -80,6 +80,11 @@ class ImportRegsTab:
         if not filename:
             return
 
+        # Change processe's working directory so that file dialogs remember it
+        self.main.chdirFromFilename(
+            filename = filename
+        )
+
         # Search suitable RegBank class
         regBankClass = regbank.bankfile.BankFile.getClassForBankFile(filename=filename)
         regBankObj   = regBankClass(filename=filename)
@@ -111,7 +116,10 @@ class ImportRegsTab:
             self.wndMain.oblImportRegs.append(entry)
 
         # Show success message
-        self.wndMain.setStatusMessage(_("Successfully opened registration bank file."))
+        self.wndMain.setStatusMessage(_("Successfully opened %(filename)s registration bank file.") % {
+                "filename": filename,
+            }
+        )
 
 
     def importSelectedRegs(self):
