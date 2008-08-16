@@ -1,3 +1,17 @@
+2008-08-16  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Introduced a common base-class for all exceptions of all packages.
+ * Extended bankfile.ModelSpecific by user documentation
+ * New classmethod bankfile.ModelSpecific.getAllSubclasses. Uses a re-modeled
+   ClassFinder which now returns a list instead of one value.
+ * Using the new getAllSubclasses method in order to build the keyboard list
+   for new registration out of actually existing classes instead of a
+   pre-definied list.
+ * Extended pre-defined list of keyboard models in turn.
+ * Added descriptive information about supported keyboard models and finished
+   the keyboard information page to display them.
+
+
 2008-08-15  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Revamped UI layout. Instead of aligning buttons bellow lists they now

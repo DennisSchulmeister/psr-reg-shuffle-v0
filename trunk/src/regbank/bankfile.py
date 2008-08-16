@@ -256,7 +256,7 @@ class BankFile(modelspecific.ModelSpecific):
 
         # Lookup suitable sub-class
         try:
-            return cls.classFinderByFile.lookup(file)
+            return cls.classFinderByFile.lookup(file)[0]
         except NoClassFound:
             raise appexceptions.UnknownKeyboardModel(cls)
 

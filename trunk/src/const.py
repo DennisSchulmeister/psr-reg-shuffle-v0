@@ -93,6 +93,12 @@ would still support Yamaha PSR-2000 and Linux only.
 For his documentation of the Yamaha PSR-2000 registration file format. Without
 it I would have never started to write this program
 
+<b>Jørgen Sørensen</b>
+For writing excelent music related software which encourged me to try the same
+
+<b>Michael P. Bedesem</b>
+For all his music related software
+
 <b>Leroy Luc</b>
 For trying to run the program in Windows when there hasn't been a dedicated
 package yet
@@ -100,36 +106,20 @@ package yet
 <b>Jim Wincell</b>
 For being one of the first who tried out the Windows package
 
-<b>Bob Gelman</b>
-For spreading the word and hiring volunteers who'd provide test data
-
 <b>Brian Haylett</b>
-For helping Tom to manage his Yamaha Tyros 2 keyboard and for answering questions
+For answering questions on the different keyboard models
 
 <b>Tom G</b>
-For providing Yamaha Tyros 2 registraion files and for being a friend on Yahoogroups
+For providing Yamaha Tyros 2 registraion files
 
 <b>Ray from downunder</b>
 For providing Yamaha Tyros 1 registration files
-
-<b>Jeff from the Netherlands</b>
-For being a friend on yamaha-psr-Yahoogroups and for spreading the word there
-
-<b>Hennie van Rooyen</b>
-For alerting the community on a possible threat from the Windows package
-
-<b>Michael P. Bedesem</b>
-For being a friend on Yahoogroups and for encouraging me to continue working
-on the program
 
 <b>Mike Comley</b>
 For providing Yamaha S900 registration files
 
 <b>Norm Ruttle</b>
 For providing Yamaha PSR-3000 registration files
-
-<b>Jørgen Sørensen</b>
-For writing excelent music related software which encourged me to try the same
 
 <b>Alan Paganelli</b>
 For providing Yamaha Tyros 1 registration files
@@ -144,33 +134,43 @@ Also for offering his help with the Italian translation.
 Including members of the Yamaha-psr-Yahoogroups, the German Yamaha music forum,
 SVPWorld.com and many more.
 
-Also including all those programmers who spend their time in the Usenet,
-mailing lists and blogs etc.
-
-All members and friends of free and open-sourced software. Without you guys
-not only this program but many many more would have never been possible.
-
 <b>Anyone whom I left out</b>
-Sorry, if I missed you here. Just drop me a message if you want and I'll add
-your name to the list.
+You know who you are. Drop me a message if you want and I'll add your name to
+the list.
 """)
 
 # Constants with technical short names for keyboard models
 ALL_MODELS     = ""
 UNKNOWN_MODEL  = "UNKNOWN"
+YAMAHA_PSR740  = "YAMAHA PSR740"
+YAMAHA_PSR1000 = "YAMAHA PSR1000"
+YAMAHA_PSR1100 = "YAMAHA PSR1100"
 YAMAHA_PSR2000 = "YAMAHA PSR2000"
+YAMAHA_PSR2100 = "YAMAHA PSR2100"
 YAMAHA_PSR3000 = "YAMAHA PSR3000"
+YAMAHA_PSR8000 = "YAMAHA PSR8000"
+YAMAHA_PSR9000 = "YAMAHA PSR9000"
 YAMAHA_TYROS1  = "YAMAHA TYROS1"
 YAMAHA_TYROS2  = "YAMAHA TYROS2"
+YAMAHA_S500    = "YAMAHA S500"
+YAMAHA_S700    = "YAMAHA S700"
 YAMAHA_S900    = "YAMAHA S900"
 
 # Dictionary with user-friendly product names. (Not all translateable)
 keyboardNameLong = {
     ALL_MODELS:     _("All models"),
     UNKNOWN_MODEL:  _("Unknown model"),
+    YAMAHA_PSR740:  "Yamaha PSR-740",
+    YAMAHA_PSR1000: "Yamaha PSR-1000",
+    YAMAHA_PSR1100: "Yamaha PSR-1100",
     YAMAHA_PSR2000: "Yamaha PSR-2000",
+    YAMAHA_PSR2100: "Yamaha PSR-2100",
     YAMAHA_PSR3000: "Yamaha PSR-3000",
+    YAMAHA_PSR8000: "Yamaha PSR-8000",
+    YAMAHA_PSR9000: "Yamaha PSR-9000 / 9000pro",
     YAMAHA_TYROS1:  "Yamaha Tyros 1",
     YAMAHA_TYROS2:  "Yamaha Tyros 2",
-    YAMAHA_S900:    "Yamaha S900",
+    YAMAHA_S500:    "Yamaha PSR-S500",
+    YAMAHA_S700:    "Yamaha PSR-S700",
+    YAMAHA_S900:    "Yamaha PSR-S900",
 }

@@ -57,6 +57,10 @@ class BankFile_Tyros(bankfile.BankFile):
         const.YAMAHA_PSR3000,
     ]
 
+    # User-information shown on the keyboard information page
+    groupName   = _("Yamaha Tyros descendants")
+    information = _("The Yamaha Tyros holds as a milestone for a new generation of Yamaha's top- and mid-level arranger keyboards. Being loosely based upon its predecessors it introduced a new technical platform as a base for much offspring. Those models share very similar file formats and can generally read each-other's data.")
+
     # Magic file headers
     fileHeaders = {
         const.YAMAHA_TYROS1:  "\x53\x70\x66\x46\x00\x10\x0A\xD9" \

@@ -30,33 +30,16 @@ This module provides all exceptions known in the regbank package.
 # Public export of module content
 __all__ = [
     "UnknownKeyboardModel",
-    "CannotDetermineKeyboardModel"
+    "CannotDetermineKeyboardModel",
+    "NoSubclassFound",
 ]
 
 
+# Importing ExceptionWithMessage base-class
+from ..appexceptions import ExceptionWithMessage
+
+
 # Class definitions
-class ExceptionWithMessage(Exception):
-    '''
-    This is a super-class for all self-defined exceptions which need to output
-    a message on the call trace.
-    '''
-
-    _message = ""
-
-    def __init__(self, cls=None):
-        '''
-        Constructor.
-        '''
-        pass
-
-    def __str__(self):
-        '''
-        Returns string representation of the exception with a useful error
-        message.
-        '''
-        return "%s" % (self._message)
-
-
 class UnknownKeyboardModel(ExceptionWithMessage):
     '''
     This exception gets thrown whenever no BankFile or Registration class
@@ -67,21 +50,12 @@ class UnknownKeyboardModel(ExceptionWithMessage):
 
     _message = _("Cannot handle data of the given keyboard model.")
 
-    def __init__(self, cls=None):
-        '''
-        Constructor. Takes the class object as optional parameter cls.
-        '''
-        self._message = "%s (%s)" % (self._message, str(cls))
-
 
 class CannotDetermineKeyboardModel(ExceptionWithMessage):
     '''
+    This exception gets thrown whenever it's tried to create a BankFile object
+    without specifying either a keyboard name (for an initialy blank file) or
+    giving an already existing file.
     '''
 
     _message = _("Neither keyboard model nor file given. Cannot create an empty object without hint about the keyboard model.")
-
-    def __init__(self, cls=None):
-        '''
-        Constructor. Takes the class object as optional parameter cls.
-        '''
-        self._message = "%s (%s)" % (self._message, str(cls))

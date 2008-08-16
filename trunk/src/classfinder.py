@@ -98,8 +98,8 @@ class ClassFinder:
     def lookupCache(self, search):
         '''
         This method uses the given hash method in order to lookup previous
-        search results in the internal cache. Positive lookups return a class
-        object. Raises appexceptions.NoClassFound otherwise.
+        search results in the internal cache. Positive lookups return a list of
+        class objects. Raises appexceptions.NoClassFound otherwise.
         '''
         # Lookup search result
         try:
@@ -109,14 +109,14 @@ class ClassFinder:
             raise appexceptions.NoClassFound()
 
 
-    def appendCache(self, search, foundClass):
+    def appendCache(self, search, foundClasses):
         '''
         This method uses the given hash method in order to store a search
         result into the internal cache.
         '''
         # Store search result
         hashValue = self.hashMeth(search)
-        self.cache[hashValue] = foundClass
+        self.cache[hashValue] = foundClasses
 
 
     def scanClasses(self, search):
@@ -127,7 +127,7 @@ class ClassFinder:
         raised.
         '''
         # Visit each class and query
-        foundClass = None
+        foundClasses = []
 
         for cls in self.classes:
             # Only process sub-classes of given super-class
@@ -138,12 +138,11 @@ class ClassFinder:
             # Query class whether it feels suitable
             testMeth = getattr(cls, self.testMethName)
             if testMeth and testMeth(search):
-                foundClass = cls
-                break
+                foundClasses.append(cls)
 
-        # Return if a suitable class has been found.
-        if foundClass:
-            return foundClass
+        # Return if suitable classes has been found.
+        if foundClasses:
+            return foundClasses
 
         # No class found. Raise exception
         raise appexceptions.NoClassFound()
@@ -164,9 +163,9 @@ class ClassFinder:
 
         # Perform deep scan and remember result
         try:
-            foundClass = self.scanClasses(search)
-            self.appendCache(search, foundClass)
+            foundClasses = self.scanClasses(search)
+            self.appendCache(search, foundClasses)
 
-            return foundClass
+            return foundClasses
         except appexceptions.NoClassFound:
             raise appexceptions.NoClassFound()

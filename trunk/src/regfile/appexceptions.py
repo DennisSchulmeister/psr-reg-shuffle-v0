@@ -33,23 +33,14 @@ __all__ = [
 ]
 
 
-class UnknownFileFormat(Exception):
+# Importing ExceptionWithMessage base-class
+from ..appexceptions import ExceptionWithMessage
+
+
+class UnknownFileFormat(ExceptionWithMessage):
     '''
     This exception indicates that it was tried to open an invalid
     registration file.
     '''
 
     _message = _("The given file doesn't seem to be a registration file. Note that registration files hold only one registration as oppsed to registration banks used by your instrument.")
-
-    def __init__(self):
-        '''
-        Constructor. Takes the class object as optional parameter cls.
-        '''
-        pass
-
-    def __str__(self):
-        '''
-        Returns string representation of the exception with a useful error
-        message.
-        '''
-        return "%s" % (self._message)

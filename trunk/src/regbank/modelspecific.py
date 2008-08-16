@@ -60,7 +60,7 @@ class MetaModelSpecific(type):
         # Initialize class as usual
         super(MetaModelSpecific, cls).__init__(name, bases, dict)
 
-        # Inject classFinder class attribute
+        # Inject classFinder class attribute for search by keyboard name
         classFinder = classfinder.ClassFinder(
             superClass   = cls,
             classes      = __CLASSES__,
@@ -68,6 +68,15 @@ class MetaModelSpecific(type):
             hashMethName = "hashKeyboardName"
         )
         setattr(cls, 'classFinderByName', classFinder)
+
+        # Inject classFinder attribute for search of all sub-classes
+        classFinder = classfinder.ClassFinder(
+            superClass   = cls,
+            classes      = __CLASSES__,
+            testMethName = "testNoBaseClass",
+            hashMethName = "hashClass"
+        )
+        setattr(cls, 'classFinderAllSubclasses', classFinder)
 
 
 # Define base-class
@@ -85,6 +94,10 @@ class ModelSpecific:
 
     # Short names of the supported keyboard models (needs to be overwritten)
     keyboardNames = []
+
+    # User-information shown on the keyboard information page
+    groupName   = ""
+    information = ""
 
 
     def __init__(self, keyboardName=""):
@@ -150,8 +163,46 @@ class ModelSpecific:
         '''
         # Lookup suitable sub-class
         try:
-            return cls.classFinderByName.lookup(keyboardName)
+            return cls.classFinderByName.lookup(keyboardName)[0]
         except NoClassFound:
             raise appexceptions.UnknownKeyboardModel(cls)
 
     getClassForKeyboardName = classmethod(getClassForKeyboardName)
+
+
+    # Lookup of all sub-classes................................................
+
+    def testNoBaseClass(cls, subclass):
+        '''
+        This test methods is used by the ClassFinderAllSubclasses object. In
+        most cases it returns True, because the ClassFinder needs all
+        candidates to give a positive test result. It returns False though
+        if the base-class is tested in order to sort it out.
+        '''
+        return cls != subclass
+
+    testNoBaseClass = classmethod(testNoBaseClass)
+
+
+    def hashClass(cls, search):
+        '''
+        This method is used by the ClassFinderAllSubclasses object in order
+        to hash the given classobject. This implementation simply returns
+        the given value.
+        '''
+        return search
+
+    hashClass = classmethod(hashClass)
+
+
+    def getAllSubclasses(cls):
+        '''
+        Class method which uses a ClassFinder object in order to return a
+        flat list of all subclasses of its class. Use this in order to get
+        a list of all supported keyboard models by class.
+
+        Doesn't catch the NoClassFound exception of the ClassFinder.
+        '''
+        return cls.classFinderAllSubclasses.lookup(cls)
+
+    getAllSubclasses = classmethod(getAllSubclasses)

@@ -50,6 +50,7 @@ import const
 import main
 import createbanktab
 import importregstab
+import informationtab
 
 
 # Class definition
@@ -80,6 +81,9 @@ class MainWindow(GladeDelegate):
         "evtImportRegs",
         "btnOpenBankFile",         # needs handler (clicked)
         "btnImportSelectedRegs",   # needs handler (clicked)
+
+        # Keyboard information pane
+        "lblKeyboards",
 
         # About pane
         "imgAbout",
@@ -194,8 +198,9 @@ class MainWindow(GladeDelegate):
         self.cbxNewBankKeyModel.show()
 
         # Prepare delegates for driving the tab's contents
-        self.createBankTab = createbanktab.CreateBankTab(wndMain=self)
-        self.importRegsTab = importregstab.ImportRegsTab(wndMain=self)
+        self.createBankTab  = createbanktab.CreateBankTab(wndMain=self)
+        self.importRegsTab  = importregstab.ImportRegsTab(wndMain=self)
+        self.informationTab = informationtab.InformationTab(wndMain=self)
 
         # Connect to content-changed of keyboard model combobox
         # NOTE: Must be after initialization of delegates above because the

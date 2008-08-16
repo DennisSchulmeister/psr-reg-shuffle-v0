@@ -43,6 +43,7 @@ import gtk.gdk
 import kiwi.ui.dialogs
 
 # Import application modules
+import appexceptions
 import regfile
 import mainwindow
 import const
@@ -101,15 +102,38 @@ class CreateBankTab:
         # Pre-fill keyboard model combobox
         self.wndMain.cbxNewBankKeyModel.clear()
 
-        models = const.keyboardNameLong.items()
-        models.sort()
+#        models = const.keyboardNameLong.items()
+#        models.sort()
 
-        for model in models:
-            if model[0] == const.ALL_MODELS:
-                continue
+#        for model in models:
+#            if model[0] == const.ALL_MODELS:
+#                continue
+#
+#            label = model[1]
+#            self.wndMain.cbxNewBankKeyModel.append_item(label, model[0])
 
-            label = model[1]
-            self.wndMain.cbxNewBankKeyModel.append_item(label, model[0])
+        self.wndMain.cbxNewBankKeyModel.append_item(const.keyboardNameLong[const.UNKNOWN_MODEL], const.UNKNOWN_MODEL)
+
+        try:
+            models  = []
+            classes = regbank.bankfile.BankFile.getAllSubclasses()
+
+            for cls in classes:
+                for model in cls.keyboardNames:
+                    if not model in models:
+                        models.append(model)
+
+            models.sort()
+
+            for model in models:
+                if model == const.ALL_MODELS \
+                or model == const.UNKNOWN_MODEL:
+                    continue
+
+                label = const.keyboardNameLong[model]
+                self.wndMain.cbxNewBankKeyModel.append_item(label, model)
+        except appexceptions.NoClassFound:
+            pass
 
         self.wndMain.cbxNewBankKeyModel.select(const.UNKNOWN_MODEL)
         self.wndMain.cbxNewBankKeyModel.update(const.UNKNOWN_MODEL)

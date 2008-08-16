@@ -52,6 +52,10 @@ class BankFile_PSR2000(bankfile.BankFile):
     # Short names of supported keyboard models
     keyboardNames = [const.YAMAHA_PSR2000]
 
+    # User-information shown on the keyboard information page
+    groupName   = _("Yamaha PSR-2000 and alike")
+    information = "Released in 2001 the Yamaha PSR-2000 marks the end of the highly successful PSR-9000 line. It shares many features of its big brothers the PSR-9000 and 9000pro, among them most sounds, styles and a very similar albeit updated operating system. Updates include a largely re-designed main screen, notation display as well as icons next to each object name (with the icon descriptor being a sufix to the name)."
+
     # Magic file header
     fileHeader = "\x52\x45\x47\x2D\x31\x30\x30\x2D" \
                + "\x31\x30\x30\x2D\x31\x30\x30\x30" \
