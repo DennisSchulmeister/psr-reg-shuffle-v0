@@ -12,9 +12,6 @@
 
  * UnitTests, pyLint, Profiler, et al.
 
- * Add info pane where all supported keyboard models can be seen and which
-   model understands which registration data (FINISH 3RD TAB PAGE)
-
  * UPDATE MANUAL
 
  * Show exception output in a popup window ???
