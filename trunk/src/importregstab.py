@@ -39,6 +39,7 @@ __all__ = [
 # Import global modules
 import kiwi.ui.dialogs
 import os.path
+import gtk
 
 # Import application modules
 import regbank.bankfile
@@ -63,6 +64,17 @@ class ImportRegsTab:
         self.main    = main.Main.getInstance()
         self.wndMain = wndMain
         self.regList = []
+
+        # Add images to buttons
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_OPEN, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnOpenBankFile.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnOpenBankFile.set_image(img)
+
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnImportSelectedRegs.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnImportSelectedRegs.set_image(img)
 
 
     def openBankFile(self):

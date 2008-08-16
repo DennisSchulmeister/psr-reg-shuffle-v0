@@ -9,6 +9,11 @@
  * File dialogs now change the processe's working directory when resolved.
    Because the directory won't be used otherwise in the program this makes the
    dialogs remember their last directory position.
+ * Button images now get added by program code and using gtk.Button.set_
+   image(). This makes sure that the image will always be displayed correctly
+   and it will respect the user's settings about showing or hiding images from
+   buttons. Unfortunately Glade 3 doesn't support this function, yet.
+
 
 
 2008-08-14  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>

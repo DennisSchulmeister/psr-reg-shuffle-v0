@@ -117,6 +117,28 @@ class CreateBankTab:
         self.allowedKeyboardNames = []
 
 
+        # Add images to buttons
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnAddSelected.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnAddSelected.set_image(img)
+
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_GO_BACK, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnRemoveSelected.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnRemoveSelected.set_image(img)
+
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnClearList.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnClearList.set_image(img)
+
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_SAVE_AS, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnSaveBank.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnSaveBank.set_image(img)
+
+
     # Work directory access ...................................................
 
     def on_main__work_dir_changed(self, obj, workDir):
