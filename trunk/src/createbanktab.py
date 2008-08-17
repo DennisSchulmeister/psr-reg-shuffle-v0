@@ -40,12 +40,14 @@ import os
 import os.path
 import glob
 import gtk.gdk
+import gobject
 import kiwi.ui.dialogs
 
 # Import application modules
 import appexceptions
 import regfile
 import mainwindow
+import batchdialog
 import const
 import main
 import easydraganddrop
@@ -53,9 +55,18 @@ import regbank
 import util
 
 # Class definition
-class CreateBankTab:
+class CreateBankTab(gobject.GObject):
     '''
     This delegate class coordinates the assembly of bank files.
+
+    Emited signals:
+    ---------------
+
+    *reglist-updated*: Emited after the list of available registrations
+    has changed. (Without renames)
+
+    *newlist-updated*: Emited after the export list has changed. (Without
+    renames)
     '''
 
     # Object creation..........................................................
@@ -68,6 +79,25 @@ class CreateBankTab:
         # Initialize attributes
         self.main    = main.Main.getInstance()
         self.wndMain = wndMain
+
+        # Define signals
+        gobject.GObject.__init__(self)
+
+        gobject.signal_new(
+            "reglist-updated",
+            CreateBankTab,
+            gobject.SIGNAL_RUN_LAST,
+            gobject.TYPE_NONE,
+            (),
+        )
+
+        gobject.signal_new(
+            "newlist-updated",
+            CreateBankTab,
+            gobject.SIGNAL_RUN_LAST,
+            gobject.TYPE_NONE,
+            (),
+        )
 
         # Connect to main.work_dir_changed signal
         self.main.connect("work-dir-changed", self.on_main__work_dir_changed)
@@ -99,19 +129,17 @@ class CreateBankTab:
             dataFunc   = lambda: self.getDataAvailableRegs()
         )
 
+        # Pre-fill filter combobx
+        self.wndMain.cbxNewBankAvailFilter.clear()
+        self.wndMain.cbxNewBankAvailFilter.append_item(_("Show All"),        "ALL")
+        self.wndMain.cbxNewBankAvailFilter.append_item(_("Compatible Only"), "COMPATIBLE")
+        self.wndMain.cbxNewBankAvailFilter.append_item(_("Selected Model"),  "MODEL")
+
+        self.wndMain.cbxNewBankAvailFilter.select("ALL")
+        self.wndMain.cbxNewBankAvailFilter.update("ALL")
+
         # Pre-fill keyboard model combobox
         self.wndMain.cbxNewBankKeyModel.clear()
-
-#        models = const.keyboardNameLong.items()
-#        models.sort()
-
-#        for model in models:
-#            if model[0] == const.ALL_MODELS:
-#                continue
-#
-#            label = model[1]
-#            self.wndMain.cbxNewBankKeyModel.append_item(label, model[0])
-
         self.wndMain.cbxNewBankKeyModel.append_item(const.keyboardNameLong[const.UNKNOWN_MODEL], const.UNKNOWN_MODEL)
 
         try:
@@ -153,6 +181,11 @@ class CreateBankTab:
         self.wndMain.btnRemoveSelected.set_image(img)
 
         img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_EXECUTE, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnBatch.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnBatch.set_image(img)
+
+        img = gtk.Image()
         img.set_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
         self.wndMain.btnClearList.set_property("image_position", gtk.POS_TOP)
         self.wndMain.btnClearList.set_image(img)
@@ -161,6 +194,11 @@ class CreateBankTab:
         img.set_from_stock(gtk.STOCK_SAVE_AS, gtk.ICON_SIZE_BUTTON)
         self.wndMain.btnSaveBank.set_property("image_position", gtk.POS_TOP)
         self.wndMain.btnSaveBank.set_image(img)
+
+        # Events for checking allowed buttons
+        self.connect("reglist-updated", self.checkAllowedButtons)
+        self.connect("newlist-updated", self.checkAllowedButtons)
+        self.wndMain.cbxNewBankKeyModel.connect("content-changed", self.checkAllowedButtons)
 
 
     # Work directory access ...................................................
@@ -204,6 +242,9 @@ class CreateBankTab:
             )
 
             self.wndMain.oblAvailableRegs.append(entry)
+
+        # Emit reglist-updated signal
+        self.emit("reglist-updated")
 
 
     def availableRegRename(self, regEntry):
@@ -259,15 +300,55 @@ class CreateBankTab:
         if not os.path.samefile(oldFileName, newFileName):
             os.unlink(oldFileName)
 
+        # Emit reglist-updated signal
+        self.emit("reglist-updated")
+
+
+    # List of available registrations .........................................
+
+    def doBatch(self):
+        '''
+        Delegate method called by the UI. Gets called when the user activates
+        the "Batch" button. Uses a BatchDialog object in order to show a
+        modal dialog which performs the processing.
+        '''
+        # Make sure a valid keyboard model was selected
+        keyboardName = self.getNewBankKeyboardName()
+
+        if keyboardName == const.ALL_MODELS \
+        or keyboardName == const.UNKNOWN_MODEL:
+            self.wndMain.setStatusMessage(const.msg["invalid-key-name"])
+            return
+
+        # Collect registrations for the dialog
+        regEntryList = []
+
+        for entry in self.wndMain.oblAvailableRegs:
+            if not entry.fileName:
+                continue
+
+            regEntryList.append(entry)
+
+        batchDialog = batchdialog.BatchDialog(keyboardName, regEntryList)
+        batchDialog.show()
+        batchDialog.destroy()
+
+
+########## TODO: Filter ####################
 
     # Export list of new bank file ............................................
+
     def onNewBankEmptyChanged(self, list, hasRows):
         '''
         Delegate methode called by the UI. Gets called whenever the list of
         a new bank becomes empty or non-empty. This is cruical for activating
         and deactivating the keyboard model combobox.
         '''
+        # Disable keyboard selection when export list is not empty
         self.wndMain.cbxNewBankKeyModel.set_sensitive(not hasRows)
+
+        # Emit newlist-changed signal
+        self.emit("newlist-updated")
 
 
     def addSelectedItemsToExport(self):
@@ -289,6 +370,9 @@ class CreateBankTab:
         # Copy row to export list
         self.copyColumn(self.wndMain.oblAvailableRegs, self.wndMain.oblNewBank, row)
 
+        # Emit newlist-changed signal
+        self.emit("newlist-updated")
+
 
     def removeSelectedItemsFromExportList(self):
         '''
@@ -299,6 +383,9 @@ class CreateBankTab:
         #    self.wndMain.oblNewBank.remove(entry)
         self.removeColumn(None, None, self.wndMain.oblNewBank.get_selected())
 
+        # Emit newlist-changed signal
+        self.emit("newlist-updated")
+
 
     def removeAllItemsFromExportList(self):
         '''
@@ -306,7 +393,7 @@ class CreateBankTab:
         list.
         '''
         self.wndMain.oblNewBank.clear()
-        self.wndMain.setStatusMessage(_("Cleared new registration bank."))
+        self.wndMain.setStatusMessage(const.msg["clear-ok"])
 
 
     def newBankMoveSelectedUp(self):
@@ -330,7 +417,7 @@ class CreateBankTab:
         )
 
         # Give short success message
-        self.wndMain.setStatusMessage(_("Moved '%s' up one position.") % (row.name))
+        self.wndMain.setStatusMessage(const.msg["moved-one-up"] % (row.name))
 
 
     def newBankMoveSelectedDown(self):
@@ -354,7 +441,7 @@ class CreateBankTab:
         )
 
         # Give short success message
-        self.wndMain.setStatusMessage(_("Moved '%s' down one position.") % (row.name))
+        self.wndMain.setStatusMessage(const.msg["moved-one-down"] % (row.name))
 
 
     def saveBankFile(self):
@@ -365,13 +452,17 @@ class CreateBankTab:
         # Check for valid keyboard model
         if self.getNewBankKeyboardName() == const.UNKNOWN_MODEL \
         or self.getNewBankKeyboardName() == const.ALL_MODELS:
-            self.wndMain.setStatusMessage(_("ATTENTION: Please choose a keyboard model first."))
+            self.wndMain.setStatusMessage(const.msg["invalid-key-name"])
             return
+
+        model = self.getNewBankKeyboardName()
+        bankClass = regbank.bankfile.BankFile.getClassForKeyboardName(model)
 
         # Ask user for file name
         fileName = kiwi.ui.dialogs.save(
-            title  = _("Save Registration Bank"),
-            parent = self.wndMain.wndMain
+            title        = _("Save Registration Bank"),
+            parent       = self.wndMain.wndMain,
+            current_name = "*.%s" % (bankClass.fileExt)
         )
 
         if not fileName:
@@ -397,9 +488,6 @@ class CreateBankTab:
             regList.append(regObj)
 
         # Append empty registrations as necessary
-        model = self.getNewBankKeyboardName()
-        bankClass = regbank.bankfile.BankFile.getClassForKeyboardName(model)
-
         missing = bankClass.maxReg - len(regList)
 
         if missing > 0:
@@ -414,7 +502,7 @@ class CreateBankTab:
         bankFile.storeBankFile(fileName)
 
         # Show success message
-        self.wndMain.setStatusMessage(_("Saved registration bank to '%s'.") % (fileName))
+        self.wndMain.setStatusMessage(const.msg["bank-save-ok"] % (fileName))
 
 
     def getNewBankKeyboardName(self):
@@ -456,17 +544,17 @@ class CreateBankTab:
         RegModel     = row.model
 
         if newBankModel == const.UNKNOWN_MODEL:
-            self.wndMain.setStatusMessage(_("ATTENTION: Please choose a keyboard model first."))
+            self.wndMain.setStatusMessage(const.msg["invalid-key-name"])
             return False
 
         elif not RegModel     in self.allowedKeyboardNames \
         and  not RegModel     == const.ALL_MODELS          \
         and  not newBankModel == const.ALL_MODELS:
             self.wndMain.setStatusMessage(
-                _("ATTENTION: %(dstName)s cannot read registrations from %(srcName)s." % {
+                const.msg["incompatible-keys"] % {
                     "srcName": const.keyboardNameLong[RegModel],
                     "dstName": const.keyboardNameLong[newBankModel],
-                })
+                }
             )
             return False
 
@@ -474,7 +562,7 @@ class CreateBankTab:
         bankClass = regbank.bankfile.BankFile.getClassForKeyboardName(newBankModel)
 
         if len(self.wndMain.oblNewBank) >= bankClass.maxReg:
-            self.wndMain.setStatusMessage(_("ATTENTION: A bank file for this instrument can only hold up to %i registrations.") % (bankClass.maxReg))
+            self.wndMain.setStatusMessage(const.msg["max-allowed-regs"] % (bankClass.maxReg))
             return False
 
         # Grant if nothing found
@@ -505,7 +593,11 @@ class CreateBankTab:
         passed to an EasyDragAndDrop instance.
         '''
         dst.append(row.copy())
-        self.wndMain.setStatusMessage(_("Added '%s' to new bank.") % (row.name))
+        self.wndMain.setStatusMessage(const.msg["added-to-bank"] % (row.name))
+
+        # Emit newlist-changed signal
+        if dst == self.wndMain.oblNewBank:
+            self.emit("newlist-updated")
 
 
     def removeColumn(self, src, dst, row):
@@ -518,4 +610,49 @@ class CreateBankTab:
             return
 
         self.wndMain.oblNewBank.remove(row)
-        self.wndMain.setStatusMessage(_("Removed '%s' from new bank.") % (row.name))
+        self.wndMain.setStatusMessage(const.msg["removed-from-bank"] % (row.name))
+
+
+    # User aids ...............................................................
+
+    def checkAllowedButtons(self, *data):
+        '''
+        Event handler which reacts to several events. It checks which buttons
+        after the event are valid and disables all invalid buttons.
+        '''
+        # Calculate button validity
+        btnAdd    = True
+        btnRemove = True
+        btnBatch  = True
+        btnSave   = True
+        btnClear  = True
+        btnUp     = True
+        btnDown   = True
+
+        if self.getNewBankKeyboardName() == const.UNKNOWN_MODEL \
+        or self.getNewBankKeyboardName() == const.ALL_MODELS:
+            btnAdd   = False
+            btnBatch = False
+            btnSave  = False
+
+        if len(self.wndMain.oblNewBank) < 1:
+            btnRemove = False
+            btnClear  = False
+
+        if len(self.wndMain.oblNewBank) < 2:
+            btnUp     = False
+            btnDown   = False
+
+        if len(self.wndMain.oblAvailableRegs) < 2:
+            # NOTE: ### EMPTY ### entry does always exist
+            btnAdd   = False
+            btnBatch = False
+
+        # Disable invalid buttons
+        self.wndMain.btnAddSelected.set_sensitive(btnAdd)
+        self.wndMain.btnRemoveSelected.set_sensitive(btnRemove)
+        self.wndMain.btnBatch.set_sensitive(btnBatch)
+        self.wndMain.btnSaveBank.set_sensitive(btnSave)
+        self.wndMain.btnClearList.set_sensitive(btnClear)
+        self.wndMain.btnNewUp.set_sensitive(btnUp)
+        self.wndMain.btnNewDown.set_sensitive(btnDown)

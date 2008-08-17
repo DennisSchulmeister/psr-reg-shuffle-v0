@@ -47,6 +47,7 @@ import regfile.regfile
 import mainwindow
 import main
 import util
+import const
 
 
 # Class definition
@@ -75,6 +76,15 @@ class ImportRegsTab:
         img.set_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
         self.wndMain.btnImportSelectedRegs.set_property("image_position", gtk.POS_TOP)
         self.wndMain.btnImportSelectedRegs.set_image(img)
+
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
+        self.wndMain.btnImportClear.set_property("image_position", gtk.POS_TOP)
+        self.wndMain.btnImportClear.set_image(img)
+
+        # Assume empty list
+        self.wndMain.oblImportRegs.clear()
+        self.onListEmptyChanged(self.wndMain.oblImportRegs, False)
 
 
     def openBankFile(self):
@@ -128,7 +138,7 @@ class ImportRegsTab:
             self.wndMain.oblImportRegs.append(entry)
 
         # Show success message
-        self.wndMain.setStatusMessage(_("Successfully opened %(filename)s registration bank file.") % {
+        self.wndMain.setStatusMessage(const.msg["bank-open-success"] % {
                 "filename": filename,
             }
         )
@@ -167,11 +177,28 @@ class ImportRegsTab:
 
         # Break if no registration could be imported
         if not count:
-            self.wndMain.setStatusMessage(_("Nothing imported."))
+            self.wndMain.setStatusMessage(const.msg["nothing-imported"])
             return
 
         # Update list of available registrations
         self.wndMain.updateAvailableRegList()
 
         # Show success message
-        self.wndMain.setStatusMessage(_("Imported %i registrations.") % (count))
+        self.wndMain.setStatusMessage(const.msg["import-ok"] % (count))
+
+
+    def clearList(self):
+        '''
+        Delegate method called by the UI. Clears the import list.
+        '''
+        self.wndMain.oblImportRegs.clear()
+
+
+    def onListEmptyChanged(self, list, hasRows):
+        '''
+        Delegate method called by the UI whenever the list of registrations
+        to be imported changes its empty state. Used to disable or enable
+        buttons.
+        '''
+        self.wndMain.btnImportSelectedRegs.set_sensitive(hasRows)
+        self.wndMain.btnImportClear.set_sensitive(hasRows)

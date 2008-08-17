@@ -95,11 +95,6 @@ class ModelSpecific:
     # Short names of the supported keyboard models (needs to be overwritten)
     keyboardNames = []
 
-    # User-information shown on the keyboard information page
-    groupName   = ""
-    information = ""
-
-
     def __init__(self, keyboardName=""):
         '''
         Default constructor. Remembers the actually used keyboard name. This

@@ -51,6 +51,7 @@ import main
 import createbanktab
 import importregstab
 import informationtab
+import abouttab
 
 
 # Class definition
@@ -68,11 +69,15 @@ class MainWindow(GladeDelegate):
 
         # Create bank files pane
         "evtAvailableRegs",
+        "evtNewBankAvailFilter",
         "evtNewBank",
         "evtNewBankKeyModel",
+        "vbbAvailableRegs",
         "btnAddSelected",          # needs handler (clicked)
-        "btnSaveBank",             # needs handler (clicked)
         "btnRemoveSelected",       # needs handler (clicked)
+        "btnBatch",                # needs handler (clicked)
+        "vbbNewBank",
+        "btnSaveBank",             # needs handler (clicked)
         "btnClearList",            # needs handler (clicked)
         "btnNewUp",                # needs handler (clicked)
         "btnNewDown",              # needs handler (clicked)
@@ -81,6 +86,7 @@ class MainWindow(GladeDelegate):
         "evtImportRegs",
         "btnOpenBankFile",         # needs handler (clicked)
         "btnImportSelectedRegs",   # needs handler (clicked)
+        "btnImportClear",          # needs handler (clicked)
 
         # Keyboard information pane
         "lblKeyboards",
@@ -120,32 +126,10 @@ class MainWindow(GladeDelegate):
         # Set up status bar
         self.sbContext   = self.sbMain.get_context_id("main")
         self.sbLastMsgId = 0
-        self.setStatusMessage(_("Ready."))
+        self.setStatusMessage(const.msg["ready"])
 
         # Set directory chooser's current path
         self.fcBtnDataDir.set_filename(self.main.workDir)
-
-        # Set image and text of about pane
-        logo_filename = os.path.join(self.main.dataDir, "logo_medium.png")
-        self.imgAbout.set_from_file(logo_filename)
-
-        about_txt = "<big><big><big><b>%(progname)s %(version)s</b></big></big></big>\n<i>%(descr)s</i>\n\n%(licence)s" % \
-        {
-            "progname": const.progname,
-            "version":  const.version,
-            "descr":    const.description,
-            "licence":  const.copyright_long,
-            "thanks":   const.thanks,
-        }
-
-        self.lblAbout.set_use_markup(True)
-        self.lblAbout.set_markup(about_txt)
-
-        self.linkAbout.set_label(const.url)
-        self.linkAbout.set_uri(const.url)
-
-        self.lblThanks.set_use_markup(True)
-        self.lblThanks.set_markup(const.thanks)
 
         # Insert ObjectLists into the main window
         self.oblAvailableRegs = ObjectList(
@@ -191,6 +175,12 @@ class MainWindow(GladeDelegate):
 
         self.oblAvailableRegs.connect("cell-edited", self.on_oblAvailableRegs_cell_edited)
         self.oblNewBank.connect("has-rows", self.on_oblNewBank_has_rows)
+        self.oblImportRegs.connect("has-rows", self.on_oblImportRegs_has_rows)
+
+        # Insert combobox for selecting display filter of registrations
+        self.cbxNewBankAvailFilter = ProxyComboBox()
+        self.evtNewBankAvailFilter.add(self.cbxNewBankAvailFilter)
+        self.cbxNewBankAvailFilter.show()
 
         # Insert combobox for selecting keyboard model of new bank files
         self.cbxNewBankKeyModel = ProxyComboBox()
@@ -201,6 +191,7 @@ class MainWindow(GladeDelegate):
         self.createBankTab  = createbanktab.CreateBankTab(wndMain=self)
         self.importRegsTab  = importregstab.ImportRegsTab(wndMain=self)
         self.informationTab = informationtab.InformationTab(wndMain=self)
+        self.aboutTab       = abouttab.AboutTab(wndMain=self)
 
         # Connect to content-changed of keyboard model combobox
         # NOTE: Must be after initialization of delegates above because the
@@ -261,7 +252,7 @@ class MainWindow(GladeDelegate):
         self.main.setWorkDir(args[0].get_filename())
 
         # Give message on the statusbar
-        self.setStatusMessage(_("Changed directory to %s." % (self.main.workDir)))
+        self.setStatusMessage(const.msg["changed-dir"] % (self.main.workDir))
 
 
     def on_oblAvailableRegs_cell_edited(self, *args):      # Manually connected
@@ -291,6 +282,15 @@ class MainWindow(GladeDelegate):
         self.createBankTab.onNewBankEmptyChanged(list, hasRows)
 
 
+    def on_oblImportRegs_has_rows(self, list, hasRows):
+        '''
+        Event handler which gets triggeres whenever the import list changes
+        its empty state. The call gets delegated to a ImportRegsTab object
+        mainly for enabling or disabling buttons.
+        '''
+        self.importRegsTab.onListEmptyChanged(list, hasRows)
+
+
     def on_btnAddSelected__clicked(self, *args):
         '''
         Evemt handler for the add selected button. Delegates the call to an
@@ -305,6 +305,14 @@ class MainWindow(GladeDelegate):
         object of type CreateBankTab.
         '''
         self.createBankTab.removeSelectedItemsFromExportList()
+
+
+    def on_btnBatch__clicked(self, *args):
+        '''
+        Event handler for batch processing button. Delegates the coll to an
+        object of type CreateBankTab.
+        '''
+        self.createBankTab.doBatch()
 
 
     def on_btnSaveBank__clicked(self, *args):
@@ -353,6 +361,14 @@ class MainWindow(GladeDelegate):
         self.importRegsTab.importSelectedRegs()
 
 
+    def on_btnImportClear__clicked(self, *args):
+        '''
+        Event handler for the "Clear Import List" button. Delegates the call to
+        an ImportRegsTab object.
+        '''
+        self.importRegsTab.clearList()
+
+
     def on_linkAbout__clicked(self, *args):
         '''
         Event handle for the link button on the about pane. Tries to open
@@ -363,9 +379,9 @@ class MainWindow(GladeDelegate):
 
         # Give message on the statusbar
         if success:
-            self.setStatusMessage(_("Sucessfully opened web browser."))
+            self.setStatusMessage(const.msg["browser-opened"])
         else:
-            self.setStatusMessage(_("Unable to launch web browser."))
+            self.setStatusMessage(const.msg["browser-not-opened"])
 
 
 # Class definition of list entries

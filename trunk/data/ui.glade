@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Sun Aug 17 00:17:21 2008 -->
+<!--Generated with glade3 3.4.5 on Mon Aug 18 00:36:54 2008 -->
 <glade-interface>
   <widget class="GtkWindow" id="wndMain">
     <property name="title" translatable="yes">PSR Registration Shuffler</property>
@@ -51,33 +51,53 @@
                 <child>
                   <widget class="GtkTable" id="table2">
                     <property name="visible">True</property>
-                    <property name="n_rows">2</property>
+                    <property name="n_rows">3</property>
                     <property name="n_columns">2</property>
                     <child>
-                      <widget class="GtkLabel" id="label11">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Available Registrations</property>
-                      </widget>
-                      <packing>
-                        <property name="y_options">GTK_SHRINK | GTK_FILL</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkEventBox" id="evtAvailableRegs">
+                      <widget class="GtkHBox" id="hbox7">
                         <property name="visible">True</property>
                         <child>
-                          <placeholder/>
+                          <widget class="GtkLabel" id="label8">
+                            <property name="visible">True</property>
+                            <property name="xalign">1</property>
+                            <property name="xpad">6</property>
+                            <property name="label" translatable="yes">Filter:</property>
+                          </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkEventBox" id="evtNewBankAvailFilter">
+                            <property name="visible">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </widget>
                       <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="y_options">GTK_FILL</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkVButtonBox" id="vbuttonbox1">
+                      <widget class="GtkLabel" id="lblDummy1">
                         <property name="visible">True</property>
-                        <property name="homogeneous">True</property>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options">GTK_FILL</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkVButtonBox" id="vbbAvailableRegs">
+                        <property name="visible">True</property>
                         <property name="layout_style">GTK_BUTTONBOX_CENTER</property>
                         <child>
                           <widget class="GtkButton" id="btnAddSelected">
@@ -103,11 +123,11 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkButton" id="btnClearList">
+                          <widget class="GtkButton" id="btnBatch">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="label" translatable="yes">_Clear</property>
+                            <property name="label" translatable="yes">_Batch</property>
                             <property name="use_underline">True</property>
                             <property name="response_id">0</property>
                           </widget>
@@ -119,8 +139,30 @@
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
                         <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEventBox" id="evtAvailableRegs">
+                        <property name="visible">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label11">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Available Registrations</property>
+                      </widget>
+                      <packing>
                         <property name="y_options">GTK_FILL</property>
                       </packing>
                     </child>
@@ -136,79 +178,12 @@
                     <property name="n_rows">3</property>
                     <property name="n_columns">2</property>
                     <child>
-                      <widget class="GtkLabel" id="label5">
+                      <widget class="GtkLabel" id="lblDummy">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">New Registration Bank</property>
-                      </widget>
-                      <packing>
-                        <property name="y_options">GTK_FILL</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkEventBox" id="evtNewBank">
-                        <property name="visible">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkVButtonBox" id="vbuttonbox2">
-                        <property name="visible">True</property>
-                        <property name="homogeneous">True</property>
-                        <property name="layout_style">GTK_BUTTONBOX_CENTER</property>
-                        <child>
-                          <widget class="GtkButton" id="btnSaveBank">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="label" translatable="yes">_Save...</property>
-                            <property name="use_underline">True</property>
-                            <property name="response_id">0</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkButton" id="btnNewUp">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="label" translatable="yes">gtk-go-up</property>
-                            <property name="use_stock">True</property>
-                            <property name="image_position">GTK_POS_TOP</property>
-                            <property name="response_id">0</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkButton" id="btnNewDown">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="label" translatable="yes">gtk-go-down</property>
-                            <property name="use_stock">True</property>
-                            <property name="image_position">GTK_POS_TOP</property>
-                            <property name="response_id">0</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
                       </widget>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
-                        <property name="bottom_attach">2</property>
                         <property name="x_options">GTK_FILL</property>
                         <property name="y_options">GTK_FILL</property>
                       </packing>
@@ -232,6 +207,7 @@
                             </child>
                           </widget>
                           <packing>
+                            <property name="expand">False</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
@@ -240,6 +216,99 @@
                         <property name="right_attach">2</property>
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
+                        <property name="y_options">GTK_FILL</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkVButtonBox" id="vbbNewBank">
+                        <property name="visible">True</property>
+                        <property name="homogeneous">True</property>
+                        <property name="layout_style">GTK_BUTTONBOX_CENTER</property>
+                        <child>
+                          <widget class="GtkButton" id="btnSaveBank">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">_Save...</property>
+                            <property name="use_underline">True</property>
+                            <property name="response_id">0</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="btnClearList">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">_Clear</property>
+                            <property name="use_underline">True</property>
+                            <property name="response_id">0</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="btnNewUp">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">gtk-go-up</property>
+                            <property name="use_stock">True</property>
+                            <property name="image_position">GTK_POS_TOP</property>
+                            <property name="response_id">0</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkButton" id="btnNewDown">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">gtk-go-down</property>
+                            <property name="use_stock">True</property>
+                            <property name="image_position">GTK_POS_TOP</property>
+                            <property name="response_id">0</property>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEventBox" id="evtNewBank">
+                        <property name="visible">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label5">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">New Registration Bank</property>
+                      </widget>
+                      <packing>
                         <property name="y_options">GTK_FILL</property>
                       </packing>
                     </child>
@@ -261,6 +330,7 @@
                 <child>
                   <widget class="GtkImage" id="image3">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="stock">gtk-save</property>
                   </widget>
                   <packing>
@@ -270,6 +340,7 @@
                 <child>
                   <widget class="GtkLabel" id="label2">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">Create Bank Files</property>
                   </widget>
                   <packing>
@@ -288,6 +359,27 @@
                 <property name="visible">True</property>
                 <property name="n_rows">2</property>
                 <property name="n_columns">2</property>
+                <child>
+                  <widget class="GtkLabel" id="label12">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Registration Bank Content</property>
+                  </widget>
+                  <packing>
+                    <property name="y_options">GTK_FILL</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkEventBox" id="evtImportRegs">
+                    <property name="visible">True</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                  </packing>
+                </child>
                 <child>
                   <widget class="GtkVButtonBox" id="vbuttonbox3">
                     <property name="visible">True</property>
@@ -319,33 +411,25 @@
                         <property name="position">1</property>
                       </packing>
                     </child>
+                    <child>
+                      <widget class="GtkButton" id="btnImportClear">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="label" translatable="yes">_Clear</property>
+                        <property name="use_underline">True</property>
+                        <property name="response_id">0</property>
+                      </widget>
+                      <packing>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="right_attach">2</property>
                     <property name="bottom_attach">2</property>
                     <property name="x_options">GTK_FILL</property>
-                    <property name="y_options">GTK_FILL</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkEventBox" id="evtImportRegs">
-                    <property name="visible">True</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label12">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Registration Bank Content</property>
-                  </widget>
-                  <packing>
                     <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
@@ -362,6 +446,7 @@
                 <child>
                   <widget class="GtkImage" id="image2">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="stock">gtk-open</property>
                   </widget>
                   <packing>
@@ -371,6 +456,7 @@
                 <child>
                   <widget class="GtkLabel" id="label3">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">Import Registrations</property>
                   </widget>
                   <packing>
@@ -445,6 +531,7 @@
                 <child>
                   <widget class="GtkImage" id="image4">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="stock">gtk-info</property>
                   </widget>
                   <packing>
@@ -454,9 +541,11 @@
                 <child>
                   <widget class="GtkLabel" id="label4">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">Keyboard Information</property>
                   </widget>
                   <packing>
+                    <property name="expand">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -554,6 +643,7 @@ Long copyright</property>
                 <child>
                   <widget class="GtkImage" id="image1">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="stock">gtk-about</property>
                   </widget>
                   <packing>
@@ -563,9 +653,11 @@ Long copyright</property>
                 <child>
                   <widget class="GtkLabel" id="label6">
                     <property name="visible">True</property>
+                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">About</property>
                   </widget>
                   <packing>
+                    <property name="expand">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -590,6 +682,173 @@ Long copyright</property>
           <packing>
             <property name="expand">False</property>
             <property name="position">2</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="GtkDialog" id="dlgBatch">
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Batch Creation</property>
+    <property name="resizable">False</property>
+    <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="skip_pager_hint">True</property>
+    <property name="has_separator">False</property>
+    <child internal-child="vbox">
+      <widget class="GtkVBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="spacing">2</property>
+        <child>
+          <widget class="GtkTable" id="table4">
+            <property name="visible">True</property>
+            <property name="n_rows">4</property>
+            <property name="n_columns">2</property>
+            <property name="column_spacing">12</property>
+            <property name="row_spacing">6</property>
+            <child>
+              <widget class="GtkEntry" id="entBatchFilename">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkFileChooserButton" id="fcBtnBatchSave">
+                <property name="visible">True</property>
+                <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
+                <property name="local_only">False</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkEventBox" id="evtBatchSortBy">
+                <property name="visible">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label15">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">All created files will have similar filenames. They need at least one distinguishing characteristic, though in order to not overwrite each other.
+
+Write &lt;b&gt;&amp;amp;n&lt;/b&gt; for serial numbers and &lt;b&gt;&amp;amp;hash&lt;/b&gt; for abbreviations of the first and last registration's name of each file. e.g.
+&lt;i&gt;&amp;amp;n - Dance Party (&amp;amp;hash).reg&lt;/i&gt;</property>
+                <property name="use_markup">True</property>
+                <property name="use_underline">True</property>
+                <property name="wrap">True</property>
+              </widget>
+              <packing>
+                <property name="right_attach">2</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label14">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Filename _Pattern:</property>
+                <property name="use_markup">True</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">entBatchFilename</property>
+              </widget>
+              <packing>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label10">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Save _Directory:</property>
+                <property name="use_markup">True</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">fcBtnBatchSave</property>
+              </widget>
+              <packing>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="lblBatchSortBy">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">_Sort Criterion:</property>
+                <property name="use_markup">True</property>
+                <property name="use_underline">True</property>
+              </widget>
+              <packing>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child internal-child="action_area">
+          <widget class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <widget class="GtkButton" id="btnBatchCancel">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">gtk-cancel</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">-2</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkButton" id="btnBatchExecute">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">gtk-execute</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">1</property>
+              </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">GTK_PACK_END</property>
           </packing>
         </child>
       </widget>

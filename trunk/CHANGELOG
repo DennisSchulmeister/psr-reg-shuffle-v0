@@ -1,3 +1,18 @@
+2008-08-17  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Extended UI by display filter selection and batch button.
+ * Moved keybiard information from ModelSpecific class to BankFile. Added
+   default file extension.
+ * The save dialog (bank files) now gives a hint about the needed file
+   extension. (In form of a wild-card like *.reg or *.rgt)
+ * Intrdocued AboutTab class in order to shrink MainWindow class a bit.
+ * The "Keyboard Information" tab now shows some technical data derived from
+   the BankFile classes, too.
+ * Moved all message texts to const.msg for enhancing reusability.
+ * Added clear button for import list
+ * Added smart disabling of invalid buttons (for extended user guidance)
+
+
 2008-08-16  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Introduced a common base-class for all exceptions of all packages.

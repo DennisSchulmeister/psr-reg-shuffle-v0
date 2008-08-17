@@ -57,7 +57,7 @@ import os.path
 
 progname       = "PSR Registration Shuffler"
 shortname      = "psr-reg-shuffle"
-version        = "0.1"
+version        = "0.2"
 techname       = "%s-%s" % (shortname, version)
 licence        = "GNU General Public Licence 3"
 description    = _("A program for organizing PSR registration bank files")
@@ -173,4 +173,25 @@ keyboardNameLong = {
     YAMAHA_S500:    "Yamaha PSR-S500",
     YAMAHA_S700:    "Yamaha PSR-S700",
     YAMAHA_S900:    "Yamaha PSR-S900",
+}
+
+
+# Constants with message texts
+msg = {
+    "ready":              _("Ready."),
+    "invalid-key-name":   _("ATTENTION: Please choose a keyboard model first."),
+    "changed-dir":        _("Changed directory to %s."),
+    "browser-opened":     _("Sucessfully opened web browser."),
+    "browser-not-opened": _("Unable to launch web browser."),
+    "bank-open-success":  _("Successfully opened %(filename)s registration bank file."),
+    "nothing-imported":   _("Nothing imported."),
+    "import-ok":          _("Nothing imported."),
+    "clear-ok":           _("Cleared new registration bank."),
+    "moved-one-up":       _("Moved '%s' up one position."),
+    "moved-one-down":     _("Moved '%s' down one position."),
+    "bank-save-ok":       _("Saved registration bank to '%s'."),
+    "incompatible-keys":  _("ATTENTION: %(dstName)s cannot read registrations from %(srcName)s."),
+    "max-allowed-regs":   _("ATTENTION: A bank file for this instrument can only hold up to %i registrations."),
+    "added-to-bank":      _("Added '%s' to new bank."),
+    "removed-from-bank":  _("Removed '%s' from new bank."),
 }

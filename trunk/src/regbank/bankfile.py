@@ -97,8 +97,15 @@ class BankFile(modelspecific.ModelSpecific):
     # a meta-class must be used in order to provide that information.
     __metaclass__ = MetaBankFile
 
+    # User-information shown on the keyboard information page
+    groupName   = ""
+    information = ""
+
     # Maximum amount of registrations
     maxReg = 512
+
+    # File extension (without leading dot)
+    fileExt = ""
 
 
     # Methods to be over-written...............................................

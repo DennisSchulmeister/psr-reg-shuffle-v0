@@ -77,8 +77,9 @@ class InformationTab:
             for className in classNames:
                 cls = classes[className]
 
-                supportedModels  = _("Models supported by this class:")
-                supportedModels += "\n\n"
+                maximumRegsPerBank = _("Registrations per bank: Up to %i") % (cls.maxReg)
+                fileExtension      = _("Typical file extension: *.%s") % (cls.fileExt)
+                supportedModels    = _("Models supported by this class:") + "\n\n"
 
                 for name in cls.keyboardNames:
                     supportedModels += "\t» %s\n" % const.keyboardNameLong[name]
@@ -86,12 +87,15 @@ class InformationTab:
                 if txt:
                     txt += "\n\n\n"
 
-                txt += "<b>%(group)s</b>\n<i>%(descr)s</i>\n\n%(models)s" % {
-                    "group":  cls.groupName,
-                    "descr":  cls.information,
-                    "models": supportedModels,
+                txt += "<b>%(group)s</b>\n<i>%(descr)s</i>\n\n%(models)s\n%(maxReg)s\n%(fileExt)s" % {
+                    "group":   cls.groupName,
+                    "descr":   cls.information,
+                    "models":  supportedModels,
+                    "maxReg":  maximumRegsPerBank,
+                    "fileExt": fileExtension,
                 }
 
+            txt += "\n"
             self.wndMain.lblKeyboards.set_markup(txt)
         except appexceptions.NoClassFound:
             self.wndMain.lblKeyboards = _("This installation comes with no keyboard support at all. In most cases this is not intended. Please check your installation for possible errors.")

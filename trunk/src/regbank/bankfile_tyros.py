@@ -61,6 +61,12 @@ class BankFile_Tyros(bankfile.BankFile):
     groupName   = _("Yamaha Tyros descendants")
     information = _("The Yamaha Tyros holds as a milestone for a new generation of Yamaha's top- and mid-level arranger keyboards. Being loosely based upon its predecessors it introduced a new technical platform as a base for much offspring. Those models share very similar file formats and can generally read each-other's data.")
 
+    # Maximum amount of registrations
+    maxReg = 8
+
+    # File extension
+    fileExt = "rgt"
+
     # Magic file headers
     fileHeaders = {
         const.YAMAHA_TYROS1:  "\x53\x70\x66\x46\x00\x10\x0A\xD9" \
@@ -113,9 +119,6 @@ class BankFile_Tyros(bankfile.BankFile):
                               "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
                               "\xFF\xFF",
     }
-
-    # Maximum amount of registrations
-    maxReg = 8
 
 
     # Object initialization....................................................
