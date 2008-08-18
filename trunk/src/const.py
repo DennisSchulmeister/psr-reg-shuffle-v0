@@ -139,6 +139,19 @@ You know who you are. Drop me a message if you want and I'll add your name to
 the list.
 """)
 
+
+# Filter modes
+FILTER_UNDEFINED  = ""
+FILTER_NONE       = "NONE"
+FILTER_COMPATIBLE = "COMP"
+FILTER_MODEL      = "MODEL"
+
+
+# Sort modes
+SORT_BY_NAME_ASC  = "NAME ASC"
+SORT_BY_NAME_DESC = "NAME DESC"
+SORT_RANDOM       = "RAND"
+
 # Constants with technical short names for keyboard models
 ALL_MODELS     = ""
 UNKNOWN_MODEL  = "UNKNOWN"

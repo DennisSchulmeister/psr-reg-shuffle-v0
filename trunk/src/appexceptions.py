@@ -69,12 +69,6 @@ class ClassIsSingleton(ExceptionWithMessage):
 
     _message = _("The object is a singleton object which shouldn't be instanciated through a constructor. Use getInstance() instead.")
 
-    def __init__(self, cls=None):
-        '''
-        Constructor. Takes the class object as optional parameter cls.
-        '''
-        self._message = "%s (%s)" % (self._message, str(cls))
-
 
 class NoClassObject(ExceptionWithMessage):
     '''
@@ -83,12 +77,6 @@ class NoClassObject(ExceptionWithMessage):
     '''
 
     _message = _("The given object is not of type Class.")
-
-    def __init__(self, cls):
-        '''
-        Constructor. Takes the class object as optional parameter cls.
-        '''
-        self._message = "%s (%s)" % (self._message, str(cls))
 
 
 class NoClassFound(ExceptionWithMessage):
@@ -99,12 +87,6 @@ class NoClassFound(ExceptionWithMessage):
 
     _message = _("Couldn't find a suitable class. Most probably the feature is not implemented.")
 
-    def __init__(self):
-        '''
-        Constructor.
-        '''
-        pass
-
 
 class NoFileGiven(ExceptionWithMessage):
     '''
@@ -114,8 +96,17 @@ class NoFileGiven(ExceptionWithMessage):
 
     _message = _("No file was given at all when one was expected.")
 
-    def __init__(self):
+
+class DoesNotMatchFilter(ExceptionWithMessage):
+    '''
+    Exception used by available registration display filter. Indicates a
+    negative test result for a given entry.
+    '''
+
+    _message = _("The given registration doesn't match the given filter criterion.")
+
+    def __init__(self, regEntry, Filter):
         '''
-        Constructor.
+        Constructor. Takes regEntry and Filter model, too.
         '''
-        pass
+        self._message = "%s (%s, %s)" % (self._message, str(regEntry), str(Filter))

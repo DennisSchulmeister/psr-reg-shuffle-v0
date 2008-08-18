@@ -102,12 +102,12 @@ class BatchDialog(GladeDelegate):
         self.evtBatchSortBy.add(self.cbxBatchSortBy)
         self.cbxBatchSortBy.show()
 
-        self.cbxBatchSortBy.append_item(_("Registration name (ascending)"), "REG ASC")
-        self.cbxBatchSortBy.append_item(_("Registration name (descending)"), "REG DESC")
-        self.cbxBatchSortBy.append_item(_("Random order"), "RANDOM")
+        self.cbxBatchSortBy.append_item(_("Registration name (ascending)"),  const.SORT_BY_NAME_ASC)
+        self.cbxBatchSortBy.append_item(_("Registration name (descending)"), const.SORT_BY_NAME_DESC)
+        self.cbxBatchSortBy.append_item(_("Random order"), const.SORT_RANDOM)
 
-        self.cbxBatchSortBy.select("REG ASC")
-        self.cbxBatchSortBy.update("REG ASC")
+        self.cbxBatchSortBy.select(const.SORT_BY_NAME_ASC)
+        self.cbxBatchSortBy.update(const.SORT_BY_NAME_ASC)
 
         self.lblBatchSortBy.set_mnemonic_widget(self.cbxBatchSortBy)
 

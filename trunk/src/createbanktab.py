@@ -65,6 +65,9 @@ class CreateBankTab(gobject.GObject):
     *reglist-updated*: Emited after the list of available registrations
     has changed. (Without renames)
 
+    *keyboard-model-changed*: Emited after a change of the selected keyboard
+    model (for a new bank) has been successfuly processed.
+
     *newlist-updated*: Emited after the export list has changed. (Without
     renames)
     '''
@@ -92,12 +95,28 @@ class CreateBankTab(gobject.GObject):
         )
 
         gobject.signal_new(
+            "keyboard-model-changed",
+            CreateBankTab,
+            gobject.SIGNAL_RUN_LAST,
+            gobject.TYPE_NONE,
+            (),
+        )
+
+        gobject.signal_new(
             "newlist-updated",
             CreateBankTab,
             gobject.SIGNAL_RUN_LAST,
             gobject.TYPE_NONE,
             (),
         )
+
+        # Initialize and kickstart filter
+        self.allRegs    = []
+        self.prevFilter = const.FILTER_UNDEFINED
+
+        self.connect("reglist-updated", self.filterToAvailableList)
+        self.connect("keyboard-model-changed", self.filterToAvailableList)
+        self.wndMain.cbxNewBankAvailFilter.connect("content-changed", self.filterToAvailableList)
 
         # Connect to main.work_dir_changed signal
         self.main.connect("work-dir-changed", self.on_main__work_dir_changed)
@@ -131,12 +150,12 @@ class CreateBankTab(gobject.GObject):
 
         # Pre-fill filter combobx
         self.wndMain.cbxNewBankAvailFilter.clear()
-        self.wndMain.cbxNewBankAvailFilter.append_item(_("Show All"),        "ALL")
-        self.wndMain.cbxNewBankAvailFilter.append_item(_("Compatible Only"), "COMPATIBLE")
-        self.wndMain.cbxNewBankAvailFilter.append_item(_("Selected Model"),  "MODEL")
+        self.wndMain.cbxNewBankAvailFilter.append_item(_("Show All"),        const.FILTER_NONE)
+        self.wndMain.cbxNewBankAvailFilter.append_item(_("Compatible Only"), const.FILTER_COMPATIBLE)
+        self.wndMain.cbxNewBankAvailFilter.append_item(_("Selected Model"),  const.FILTER_MODEL)
 
-        self.wndMain.cbxNewBankAvailFilter.select("ALL")
-        self.wndMain.cbxNewBankAvailFilter.update("ALL")
+        self.wndMain.cbxNewBankAvailFilter.select(const.FILTER_NONE)
+        self.wndMain.cbxNewBankAvailFilter.update(const.FILTER_NONE)
 
         # Pre-fill keyboard model combobox
         self.wndMain.cbxNewBankKeyModel.clear()
@@ -209,7 +228,7 @@ class CreateBankTab(gobject.GObject):
         available registrations.
         '''
         # Remove all items from list
-        self.wndMain.oblAvailableRegs.clear()
+        self.allRegs = []
 
         # Retrieve list of available files
         pattern   = os.path.join(workDir, "*.%s" % (regfile.extension))
@@ -223,7 +242,7 @@ class CreateBankTab(gobject.GObject):
             fileName = ""
         )
 
-        self.wndMain.oblAvailableRegs.append(entry)
+        self.allRegs.append(entry)
 
         # Read files and append to list
         for filename in filenames:
@@ -241,7 +260,10 @@ class CreateBankTab(gobject.GObject):
                 fileName = filename
             )
 
-            self.wndMain.oblAvailableRegs.append(entry)
+            self.allRegs.append(entry)
+
+        # Make sure that values get filtered to display
+        self.prevFilter = const.FILTER_UNDEFINED
 
         # Emit reglist-updated signal
         self.emit("reglist-updated")
@@ -334,7 +356,65 @@ class CreateBankTab(gobject.GObject):
         batchDialog.destroy()
 
 
-########## TODO: Filter ####################
+    def filterToAvailableList(self, *data):
+        '''
+        Event handler method which fills the available registrations ObjectList
+        by piping all registrations through the filter method
+        »filterSingleEntry«.
+
+        This handler responds to »reglist-updated« and »keyboard-model-changed«
+        events of the own class. But it also connects to the filter criterion's
+        combobox so that it gets called whenever the user selects a different
+        criterion.
+        '''
+        # Update only if filter mode changed
+        currentFilter = self.wndMain.cbxNewBankAvailFilter.get_selected()
+
+        if currentFilter == self.prevFilter:
+            return
+
+        # Pipe entries through filter to ObjectList
+        self.wndMain.oblAvailableRegs.clear()
+
+        for regEntry in self.allRegs:
+            try:
+                # Test for filter and add to display list
+                self.filterSingleEntry(regEntry, currentFilter)
+                self.wndMain.oblAvailableRegs.append(regEntry)
+            except appexceptions.DoesNotMatchFilter:
+                # Filtered out entry
+                pass
+
+        # Remember filter criterion
+        self.prevFilter = currentFilter
+
+
+    def filterSingleEntry(self, regEntry, filter):
+        '''
+        Filter test method which tests the given RegEntry object against the
+        given filter. Return nothing on success, throws an exception of type
+        appexceptions.DoesNotMatchFilter on negative result.
+        '''
+        # Check for universal models
+        if regEntry.model == const.ALL_MODELS:
+            return
+
+        # Check filter criteria
+        if filter == const.FILTER_NONE:
+            return
+
+        elif filter == const.FILTER_MODEL:
+            if regEntry.model == self.getNewBankKeyboardName():
+                return
+            else:
+                raise appexceptions.DoesNotMatchFilter(regEntry, filter)
+
+        elif filter == const.FILTER_COMPATIBLE:
+            if regEntry.model in self.allowedKeyboardNames:
+                return
+            else:
+                raise appexceptions.DoesNotMatchFilter(regEntry, filter)
+
 
     # Export list of new bank file ............................................
 
@@ -530,6 +610,13 @@ class CreateBankTab(gobject.GObject):
 
         regClass = regbank.bankfile.BankFile.getClassForKeyboardName(keyboardName=keyName)
         self.allowedKeyboardNames = regClass.getAllKeyboardNames()
+
+        # Update filter
+        if not self.prevFilter == const.FILTER_NONE:
+            self.prevFilter = const.FILTER_UNDEFINED
+
+        # Notify handlers
+        self.emit("keyboard-model-changed")
 
 
     # Drag and drop support....................................................
