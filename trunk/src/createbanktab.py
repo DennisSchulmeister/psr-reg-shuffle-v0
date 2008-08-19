@@ -349,10 +349,21 @@ class CreateBankTab(gobject.GObject):
             if not entry.fileName:
                 continue
 
+            if not entry.model in self.allowedKeyboardNames:
+                continue
+
             regEntryList.append(entry)
 
         batchDialog = batchdialog.BatchDialog(keyboardName, regEntryList)
-        batchDialog.show()
+
+        try:
+            amountFiles = batchDialog.show()
+
+            # Display status message
+            self.wndMain.setStatusMessage(const.msg["n-banks-created"] % (amountFiles))
+        except appexceptions.Cancel:
+            pass
+
         batchDialog.destroy()
 
 

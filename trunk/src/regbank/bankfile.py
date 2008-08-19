@@ -208,6 +208,15 @@ class BankFile(modelspecific.ModelSpecific):
         # Store registration objects
         self.regList = regList
 
+        # Fix list length
+        missing = self.maxReg - len(regList)
+
+        if missing > 0:
+            for i in range(missing):
+                self.regList.append(None)
+        elif missing < 0:
+            self.regList = self.regList[:self.maxReg]
+
 
     def createRegistrationObject(self, binary):
         '''

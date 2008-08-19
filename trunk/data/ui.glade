@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Mon Aug 18 00:36:54 2008 -->
+<!--Generated with glade3 3.4.5 on Mon Aug 18 23:18:27 2008 -->
 <glade-interface>
   <widget class="GtkWindow" id="wndMain">
     <property name="title" translatable="yes">PSR Registration Shuffler</property>
@@ -54,45 +54,24 @@
                     <property name="n_rows">3</property>
                     <property name="n_columns">2</property>
                     <child>
-                      <widget class="GtkHBox" id="hbox7">
+                      <widget class="GtkLabel" id="label11">
                         <property name="visible">True</property>
-                        <child>
-                          <widget class="GtkLabel" id="label8">
-                            <property name="visible">True</property>
-                            <property name="xalign">1</property>
-                            <property name="xpad">6</property>
-                            <property name="label" translatable="yes">Filter:</property>
-                          </widget>
-                        </child>
-                        <child>
-                          <widget class="GtkEventBox" id="evtNewBankAvailFilter">
-                            <property name="visible">True</property>
-                            <child>
-                              <placeholder/>
-                            </child>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="label" translatable="yes">Available Registrations</property>
                       </widget>
                       <packing>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
                         <property name="y_options">GTK_FILL</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="lblDummy1">
+                      <widget class="GtkEventBox" id="evtAvailableRegs">
                         <property name="visible">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
                       </widget>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="x_options">GTK_FILL</property>
-                        <property name="y_options">GTK_FILL</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
                       </packing>
                     </child>
                     <child>
@@ -146,39 +125,7 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkEventBox" id="evtAvailableRegs">
-                        <property name="visible">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkLabel" id="label11">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">Available Registrations</property>
-                      </widget>
-                      <packing>
-                        <property name="y_options">GTK_FILL</property>
-                      </packing>
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="resize">False</property>
-                    <property name="shrink">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkTable" id="table1">
-                    <property name="visible">True</property>
-                    <property name="n_rows">3</property>
-                    <property name="n_columns">2</property>
-                    <child>
-                      <widget class="GtkLabel" id="lblDummy">
+                      <widget class="GtkLabel" id="lblDummy1">
                         <property name="visible">True</property>
                       </widget>
                       <packing>
@@ -189,18 +136,18 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkHBox" id="hbox5">
+                      <widget class="GtkHBox" id="hbox7">
                         <property name="visible">True</property>
                         <child>
-                          <widget class="GtkLabel" id="label13">
+                          <widget class="GtkLabel" id="label8">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
                             <property name="xpad">6</property>
-                            <property name="label" translatable="yes">Keyboard model:</property>
+                            <property name="label" translatable="yes">Filter:</property>
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkEventBox" id="evtNewBankKeyModel">
+                          <widget class="GtkEventBox" id="evtNewBankAvailFilter">
                             <property name="visible">True</property>
                             <child>
                               <placeholder/>
@@ -217,6 +164,38 @@
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
                         <property name="y_options">GTK_FILL</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="resize">False</property>
+                    <property name="shrink">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkTable" id="table1">
+                    <property name="visible">True</property>
+                    <property name="n_rows">3</property>
+                    <property name="n_columns">2</property>
+                    <child>
+                      <widget class="GtkLabel" id="label5">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">New Registration Bank</property>
+                      </widget>
+                      <packing>
+                        <property name="y_options">GTK_FILL</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEventBox" id="evtNewBank">
+                        <property name="visible">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
                       </packing>
                     </child>
                     <child>
@@ -292,23 +271,44 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkEventBox" id="evtNewBank">
+                      <widget class="GtkHBox" id="hbox5">
                         <property name="visible">True</property>
                         <child>
-                          <placeholder/>
+                          <widget class="GtkLabel" id="label13">
+                            <property name="visible">True</property>
+                            <property name="xalign">1</property>
+                            <property name="xpad">6</property>
+                            <property name="label" translatable="yes">Keyboard model:</property>
+                          </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkEventBox" id="evtNewBankKeyModel">
+                            <property name="visible">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </widget>
                       <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="y_options">GTK_FILL</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label5">
+                      <widget class="GtkLabel" id="lblDummy">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">New Registration Bank</property>
                       </widget>
                       <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options">GTK_FILL</property>
                         <property name="y_options">GTK_FILL</property>
                       </packing>
                     </child>
@@ -360,27 +360,6 @@
                 <property name="n_rows">2</property>
                 <property name="n_columns">2</property>
                 <child>
-                  <widget class="GtkLabel" id="label12">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Registration Bank Content</property>
-                  </widget>
-                  <packing>
-                    <property name="y_options">GTK_FILL</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkEventBox" id="evtImportRegs">
-                    <property name="visible">True</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                  </packing>
-                </child>
-                <child>
                   <widget class="GtkVButtonBox" id="vbuttonbox3">
                     <property name="visible">True</property>
                     <property name="layout_style">GTK_BUTTONBOX_CENTER</property>
@@ -430,6 +409,27 @@
                     <property name="right_attach">2</property>
                     <property name="bottom_attach">2</property>
                     <property name="x_options">GTK_FILL</property>
+                    <property name="y_options">GTK_FILL</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkEventBox" id="evtImportRegs">
+                    <property name="visible">True</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label12">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Registration Bank Content</property>
+                  </widget>
+                  <packing>
                     <property name="y_options">GTK_FILL</property>
                   </packing>
                 </child>
@@ -704,82 +704,44 @@ Long copyright</property>
         <child>
           <widget class="GtkTable" id="table4">
             <property name="visible">True</property>
-            <property name="n_rows">4</property>
+            <property name="n_rows">6</property>
             <property name="n_columns">2</property>
             <property name="column_spacing">12</property>
             <property name="row_spacing">6</property>
             <child>
-              <widget class="GtkEntry" id="entBatchFilename">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </widget>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
-                <property name="y_options">GTK_FILL</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkFileChooserButton" id="fcBtnBatchSave">
-                <property name="visible">True</property>
-                <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
-                <property name="local_only">False</property>
-              </widget>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
-                <property name="y_options">GTK_FILL</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkEventBox" id="evtBatchSortBy">
-                <property name="visible">True</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </widget>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="y_options">GTK_FILL</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="label15">
+              <widget class="GtkLabel" id="label9">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">All created files will have similar filenames. They need at least one distinguishing characteristic, though in order to not overwrite each other.
-
-Write &lt;b&gt;&amp;amp;n&lt;/b&gt; for serial numbers and &lt;b&gt;&amp;amp;hash&lt;/b&gt; for abbreviations of the first and last registration's name of each file. e.g.
-&lt;i&gt;&amp;amp;n - Dance Party (&amp;amp;hash).reg&lt;/i&gt;</property>
+                <property name="label" translatable="yes">This function respects filter and keyboard model settings.</property>
                 <property name="use_markup">True</property>
-                <property name="use_underline">True</property>
-                <property name="wrap">True</property>
+                <property name="max_width_chars">0</property>
               </widget>
               <packing>
                 <property name="right_attach">2</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
-                <property name="x_options">GTK_FILL</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label14">
+              <widget class="GtkHSeparator" id="hseparator1">
                 <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Filename _Pattern:</property>
-                <property name="use_markup">True</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">entBatchFilename</property>
               </widget>
               <packing>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="lblBatchSortBy">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">_Sort Criterion:</property>
+                <property name="use_markup">True</property>
+                <property name="use_underline">True</property>
+              </widget>
+              <packing>
                 <property name="x_options">GTK_FILL</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
@@ -801,15 +763,78 @@ Write &lt;b&gt;&amp;amp;n&lt;/b&gt; for serial numbers and &lt;b&gt;&amp;amp;has
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="lblBatchSortBy">
+              <widget class="GtkLabel" id="label14">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">_Sort Criterion:</property>
+                <property name="label" translatable="yes">Filename _Pattern:</property>
                 <property name="use_markup">True</property>
                 <property name="use_underline">True</property>
+                <property name="mnemonic_widget">entBatchFilename</property>
               </widget>
               <packing>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
                 <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label15">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">All created files will have similar filenames. They need at least one distinguishing characteristic, though in order to not overwrite each other.
+
+Write &lt;b&gt;&amp;amp;n&amp;amp;&lt;/b&gt; for serial numbers and &lt;b&gt;&amp;amp;hash&amp;amp;&lt;/b&gt; for abbreviations of the first and last registration's name of each file. e.g.
+&lt;i&gt;&amp;amp;n - Dance Party (&amp;amp;hash).reg&lt;/i&gt;</property>
+                <property name="use_markup">True</property>
+                <property name="use_underline">True</property>
+                <property name="wrap">True</property>
+              </widget>
+              <packing>
+                <property name="right_attach">2</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+                <property name="x_options">GTK_FILL</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkEventBox" id="evtBatchSortBy">
+                <property name="visible">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkFileChooserButton" id="fcBtnBatchSave">
+                <property name="visible">True</property>
+                <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
+                <property name="local_only">False</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkEntry" id="entBatchFilename">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>

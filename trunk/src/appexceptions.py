@@ -52,6 +52,12 @@ class ExceptionWithMessage(Exception):
         if cls:
             self._message = "%s (%s)" % (self._message, str(cls))
 
+    def __init__(self):
+        '''
+        Default constructor. Does nothing.
+        '''
+        pass
+
     def __str__(self):
         '''
         Returns string representation of the exception with a useful error
@@ -110,3 +116,11 @@ class DoesNotMatchFilter(ExceptionWithMessage):
         Constructor. Takes regEntry and Filter model, too.
         '''
         self._message = "%s (%s, %s)" % (self._message, str(regEntry), str(Filter))
+
+
+class Cancel(ExceptionWithMessage):
+    '''
+    Exception used to signal that the user wishes to cancal a action.
+    '''
+
+    _message = _("The user wishes to cancel the current action.")
