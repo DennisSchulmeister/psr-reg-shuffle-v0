@@ -147,7 +147,7 @@ class Main(gobject.GObject):
         change.
         '''
         # Check whether a valid directory was given
-        if not os.path.exists(workDir) or not os.path.isdir(workDir):
+        if not os.path.exists(workDir):
             return
 
         # Change work directory

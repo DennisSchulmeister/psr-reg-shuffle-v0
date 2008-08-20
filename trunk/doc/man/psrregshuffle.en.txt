@@ -12,7 +12,7 @@ if you have your banks organized according to your set list.
 In most cases a song's settings don't change (much) between gigs. But the set
 list might change. And than you're spending quite some time with assembling new
 registration banks out of your existing banks. What makes the process so time
-consuming is the fact that you always have to store your new bank to disc in
+consuming is the fact that you always have to store your new bank to disk in
 order to load another one which holds the settings for the next song. Than
 you need to load the new bank again for storing the song in it. And so on.
 
@@ -20,38 +20,55 @@ The PSR Registration Shuffler is meant to set an abrupt end to this. You will
 still need to create your registrations on the keyboard. And you need to apply
 changes to them on the keyboard, too. But when you're preparing for an
 upcoming gig and need to assemble new bank files out of pre-existing
-registrations only you can do so within the comfort of your computer at a
+registrations only, you can do so within the comfort of your computer at a
 speed unmatched by the keyboard.
 
 [HOW IT WORKS]
 PSR Registration Shuffler maintains a data directory where you need to import
 your bank files to. During that process the bank file gets split up into single
-registrations so that the data directory contains many singular files with
-each holding a registration. In that regard the data directory resembles a
-library with all available registrations.
+several singular file which each contain one registration. In that regard the
+data directory resembles a library with all available registrations.
 
-Afterwards you can assemble new bank files of all registrations. This means
-the application will create ready-to-use bank files which you can transfer
-to your keyboard. Note that the act of transfer is out of scope for PSR
-Registration Shuffler. Depending on your keyboard model you can use a floppy
-disc, an USB storage device or some other kind of connection.
+This can be used to assemble new bank files which can be transferred back to the
+instrument. Assembly can either be done manually with the registrations in
+arbitrary order or automatic. The last feature is called »Batch creation«
+because it creates a whole series of bank files with just a few mouse clicks.
+Please note that the act of transfer is out of scope for the PSR Registration
+Shuffler. Depending on your keyboard model you can use a floppy disk, an USB
+storage device or some other kind of connection.
 
 As an added bonus you can set the name of each registration on the computer,
 too. So you don't have to do so on the keyboard which also can take quite a
 lot of time if the instrument doesn't allow to hook up an external keyboard.
 But please keep in mind that this is the only supported manipulation of
-registrations. Since the file format is poorly documented and widely
+registrations. Since the file formats are poorly documented and widely
 unknown to the public there are no other changes allowed. You should do them
 on the instrument, anyway since on the computer you can't listen to your
 changes.
 
-[ABOUT THE USER-INTERFACE]
-The user-interface mainly consists of three tabs:
+[SUPPORTED INSTRUMENTS]
+The current version fully supports the following instruments:
 
 .br
-\h'3' \(bu Create bank files
+\h'3' \(bu Yamaha PSR-2000
 .br
-\h'3' \(bu Import registrations
+\h'3' \(bu Yamaha PSR-3000
+.br
+\h'3' \(bu Yamaha PSR-S900
+.br
+\h'3' \(bu Yamaha Tyros
+.br
+\h'3' \(bu Yamaha Tyros 2
+
+[ABOUT THE USER-INTERFACE]
+The user-interface mainly consists of four tabs:
+
+.br
+\h'3' \(bu Create Bank Files
+.br
+\h'3' \(bu Import Registrations
+.br
+\h'3' \(bu Keyboard Information
 .br
 \h'3' \(bu About
 
@@ -61,19 +78,46 @@ where you want to draw them from for assembling registration banks.
 
 The first tab is where you can see all available registrations of the data
 directory and build new banks. Therefor two lists are shown side by side. In
-order to create a new bank just drag and drop the registrations from the left
-list to the right one and push "Save bank file". You'll be asked for a filename
-for the new bank file then.
+order to create a new bank just select the keyboard model, drag the registrations
+from the left list to the right one and push the "Save" button. You'll be asked
+for the filename of the new bank then.
 
 In order to populate your data directory you need to import registrations
 from existing bank files. This is what the second tab is for. Please make sure
 to highlight (select) all registrations which you want to import. Not-selected
 registrations won't be imported.
 
-The third tab finally shows credits and copyright information.
+The third tab doesn't feature any actions. It just contains an auto-generated
+list of all supported keyboard models plus some information about them. This
+list is in no way hard-coded to the program. It gets generated each time at
+program startup from the detected bank file classes.
+
+The fourth tab finally shows credits and copyright information.
 
 [KNOWN BUGS]
-As I don't own any other PSR keyboard except the PSR-2000 and since the file
-formats used by those keyboards are not well documented if at all the PSR-2000
-is the only supported keyboard. If you own any other keyboard and are willing
-to provide help of whatever type please get in touch with me.
+There could be support for many more keyboard models. Although many keyboards
+of a line share a very similar file format it might be that support for your
+specific model is missing, yet. Unfortunately many file formats remain
+unexplored because there has simply no one stepped forward yet and provided
+sufficient test data. So if you want your certain instrument to be supported
+please come in touch with me.
+
+Although the list of available registration can be sorted alphabetically it
+might happen the in batch mode registrations get stored in a slightly different
+order. The reason for this lies on the behaviour of the displayed list. It
+sorts CAPITALIZED words before mixed-case or lower-cased words disregarding
+the alphabet. Unfortunately this can't be influenced. In batch mode however
+a manual sort algorithm gets used which strictly sorts by alphabet as if all
+words were capitalized.
+
+If you run the program without displaying its console output you might not
+get a visible feedback when you try to use umlauts in registration names. Using
+them is not allowed but the exception generated by the ascii converter when
+it finds an illegal character won't be catched. Instead the runtime system
+dumps it to the console and stops the last operation. If this happens to you
+try to rename your registrations and eliminate special characters.
+
+At the moment this program is maintained by just one person (me). However as
+it is put under an open-source licence it could definitely use more hands
+working on it. This does not necessarily involve programming. There are many
+ways to contribute. If you feel up to the task please get in touch with me.

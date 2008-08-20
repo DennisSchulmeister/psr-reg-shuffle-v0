@@ -174,6 +174,7 @@ class MainWindow(GladeDelegate):
         ## self.oblNewBank.get_treeview().set_reorderable(True)
 
         self.oblAvailableRegs.connect("cell-edited", self.on_oblAvailableRegs_cell_edited)
+        self.oblNewBank.connect("cell-edited", self.on_oblNewBank_cell_edited)
         self.oblNewBank.connect("has-rows", self.on_oblNewBank_has_rows)
         self.oblImportRegs.connect("has-rows", self.on_oblImportRegs_has_rows)
 
@@ -196,7 +197,7 @@ class MainWindow(GladeDelegate):
         # Connect to content-changed of keyboard model combobox
         # NOTE: Must be after initialization of delegates above because the
         # signal will be triggered right after connecting.
-        self.cbxNewBankKeyModel.connect("content-changed", self.on_cbxNewBankKeyModek_content_changed)
+        self.cbxNewBankKeyModel.connect("content-changed", self.on_cbxNewBankKeyModel_content_changed)
 
 
     def run(self):
@@ -264,7 +265,16 @@ class MainWindow(GladeDelegate):
         self.createBankTab.availableRegRename(args[1])
 
 
-    def on_cbxNewBankKeyModek_content_changed(self, widget):
+    def on_oblNewBank_cell_edited(self, *args):            # Manually connected
+        '''
+        Event handler which responds whenever the user edits the name of
+        a registration of a new bank. The call gets delegated by the UI to a
+        CreateBankTab object.
+        '''
+        self.createBankTab.newBankRegRename(args[1])
+
+
+    def on_cbxNewBankKeyModel_content_changed(self, widget):   # Man. connected
         '''
         Event handler which gets triggered whenever the user changes the
         keyboard model of a new registration bank. The call gets delegated
@@ -273,7 +283,7 @@ class MainWindow(GladeDelegate):
         self.createBankTab.onKeyboardModelChanged(widget)
 
 
-    def on_oblNewBank_has_rows(self, list, hasRows):
+    def on_oblNewBank_has_rows(self, list, hasRows):       # Manually connected
         '''
         Event handler which gets triggered whenever a new bank goes from
         empty to non-empty or vice versa. The call gets delegated to a
@@ -282,7 +292,7 @@ class MainWindow(GladeDelegate):
         self.createBankTab.onNewBankEmptyChanged(list, hasRows)
 
 
-    def on_oblImportRegs_has_rows(self, list, hasRows):
+    def on_oblImportRegs_has_rows(self, list, hasRows):    # Manually connected
         '''
         Event handler which gets triggeres whenever the import list changes
         its empty state. The call gets delegated to a ImportRegsTab object

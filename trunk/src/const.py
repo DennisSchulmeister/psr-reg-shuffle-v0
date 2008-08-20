@@ -140,6 +140,10 @@ the list.
 """)
 
 
+# Displayed name for empty registrations
+REG_NAME_EMPTY = _("### EMPTY ###")
+
+
 # Filter modes
 FILTER_UNDEFINED  = ""
 FILTER_NONE       = "NONE"
@@ -151,6 +155,7 @@ FILTER_MODEL      = "MODEL"
 SORT_BY_NAME_ASC  = "NAME ASC"
 SORT_BY_NAME_DESC = "NAME DESC"
 SORT_RANDOM       = "RAND"
+
 
 # Constants with technical short names for keyboard models
 ALL_MODELS     = ""
@@ -168,6 +173,7 @@ YAMAHA_TYROS2  = "YAMAHA TYROS2"
 YAMAHA_S500    = "YAMAHA S500"
 YAMAHA_S700    = "YAMAHA S700"
 YAMAHA_S900    = "YAMAHA S900"
+
 
 # Dictionary with user-friendly product names. (Not all translateable)
 keyboardNameLong = {

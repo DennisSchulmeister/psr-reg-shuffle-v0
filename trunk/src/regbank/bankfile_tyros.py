@@ -59,7 +59,7 @@ class BankFile_Tyros(bankfile.BankFile):
 
     # User-information shown on the keyboard information page
     groupName   = _("Yamaha Tyros descendants")
-    information = _("The Yamaha Tyros holds as a milestone for a new generation of Yamaha's top- and mid-level arranger keyboards. Being loosely based upon its predecessors it introduced a new technical platform as a base for much offspring. Those models share very similar file formats and can generally read each-other's data.")
+    information = _("The Yamaha Tyros holds as a milestone for a new generation of Yamaha's top- and mid-level arranger keyboards. Being loosely based upon its predecessors it introduced a new technical platform as a base for much offspring. Those models share very similar file formats which is why they are assumed to be able to read each-other's data.")
 
     # Maximum amount of registrations
     maxReg = 8

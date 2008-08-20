@@ -148,12 +148,12 @@ class Registration_Tyros(registration.Registration):
         Start Length Description
         ===== ====== ==========================================================
         0     4      Registration magic number (BHd\x00)
-        4     2      Big-endian length byte
+        4     2      Big-endian length byte (without header!)
         6     ...    Registration data
         ===== ====== ==========================================================
         '''
         # Calculate length bytes
-        length = len(self.binaryContent)
+        length = len(self.binaryContent) - 6         # Without header = 6 Bytes
         lengthBytes = struct.pack(">H", length)
 
         # Calculate new registration header

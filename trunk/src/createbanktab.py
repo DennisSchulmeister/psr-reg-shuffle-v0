@@ -110,6 +110,14 @@ class CreateBankTab(gobject.GObject):
             (),
         )
 
+        gobject.signal_new(
+            "filter-updated",
+            CreateBankTab,
+            gobject.SIGNAL_RUN_LAST,
+            gobject.TYPE_NONE,
+            (),
+        )
+
         # Initialize and kickstart filter
         self.allRegs    = []
         self.prevFilter = const.FILTER_UNDEFINED
@@ -187,7 +195,6 @@ class CreateBankTab(gobject.GObject):
 
         self.allowedKeyboardNames = []
 
-
         # Add images to buttons
         img = gtk.Image()
         img.set_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_BUTTON)
@@ -217,6 +224,8 @@ class CreateBankTab(gobject.GObject):
         # Events for checking allowed buttons
         self.connect("reglist-updated", self.checkAllowedButtons)
         self.connect("newlist-updated", self.checkAllowedButtons)
+        self.connect("filter-updated", self.checkAllowedButtons)
+        self.connect("keyboard-model-changed", self.checkAllowedButtons)
         self.wndMain.cbxNewBankKeyModel.connect("content-changed", self.checkAllowedButtons)
 
 
@@ -236,7 +245,7 @@ class CreateBankTab(gobject.GObject):
 
         # Append empty registration entry to list
         entry = mainwindow.AvailableRegsEntry(
-            name     = _("### EMPTY ###"),
+            name     = const.REG_NAME_EMPTY,
             keyName  = const.keyboardNameLong[const.ALL_MODELS],
             model    = const.ALL_MODELS,
             fileName = ""
@@ -274,8 +283,9 @@ class CreateBankTab(gobject.GObject):
         Delegate method called by UI. Responds to a renamed available
         registration by changing the registration file's content and name.
         '''
-        # Dont process dummy registrtions (### EMPTY ###)
+        # Don't process dummy registrtions (### EMPTY ###)
         if not regEntry.fileName:
+            regEntry.name = const.REG_NAME_EMPTY
             return
 
         # Access registration binary data
@@ -399,6 +409,9 @@ class CreateBankTab(gobject.GObject):
         # Remember filter criterion
         self.prevFilter = currentFilter
 
+        # Tell the world
+        self.emit("filter-updated")
+
 
     def filterSingleEntry(self, regEntry, filter):
         '''
@@ -440,6 +453,18 @@ class CreateBankTab(gobject.GObject):
 
         # Emit newlist-changed signal
         self.emit("newlist-updated")
+
+
+    def newBankRegRename(self, regEntry):
+        '''
+        Delegate method called by UI. Responds to a renamed registration by
+        checking for an empty registration. Changes to empty registrations
+        will be undone other changes stay in-tact.
+        '''
+        # Don't allow editing of dummy registrations (### EMPTY ###)
+        if not regEntry.fileName:
+            regEntry.name = const.REG_NAME_EMPTY
+            return
 
 
     def addSelectedItemsToExport(self):
@@ -617,10 +642,9 @@ class CreateBankTab(gobject.GObject):
         if keyName == const.UNKNOWN_MODEL \
         or keyName == const.ALL_MODELS:
             self.allowedKeyboardNames = []
-            return
-
-        regClass = regbank.bankfile.BankFile.getClassForKeyboardName(keyboardName=keyName)
-        self.allowedKeyboardNames = regClass.getAllKeyboardNames()
+        else:
+            regClass = regbank.bankfile.BankFile.getClassForKeyboardName(keyboardName=keyName)
+            self.allowedKeyboardNames = regClass.getAllKeyboardNames()
 
         # Update filter
         if not self.prevFilter == const.FILTER_NONE:

@@ -66,6 +66,20 @@ class ImportRegsTab:
         self.wndMain = wndMain
         self.regList = []
 
+        # Build list of known file extensions
+        self.allExtensions = []
+        classes = regbank.bankfile.BankFile.getAllSubclasses()
+
+        for cls in classes:
+            extLow = "*.%s" % (cls.fileExt.lower())
+            extUp  = "*.%s" % (cls.fileExt.upper())
+
+            if not extLow in self.allExtensions:
+                self.allExtensions.append(extLow)
+
+            if not extUp in self.allExtensions:
+                self.allExtensions.append(extUp)
+
         # Add images to buttons
         img = gtk.Image()
         img.set_from_stock(gtk.STOCK_OPEN, gtk.ICON_SIZE_BUTTON)
@@ -96,7 +110,7 @@ class ImportRegsTab:
         filename = kiwi.ui.dialogs.open(
             title    = _("Open bank file"),
             parent   = self.wndMain.wndMain,
-            patterns = ["*.REG", "*.reg", "*.RGT", "*.rgt"]
+            patterns = self.allExtensions
         )
 
         if not filename:
@@ -124,7 +138,7 @@ class ImportRegsTab:
                 regName = regObj.getName()
                 mark    = True
             else:
-                regName = _("### EMPTY ###")
+                regName = const.REG_NAME_EMPTY
                 mark    = False
 
             entry = mainwindow.ImportRegsEntry(

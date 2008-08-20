@@ -1,3 +1,27 @@
+2008-08-20  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Updated documentation including first version of the README file and the
+   man page.
+ * TAG: Release version 0.2
+
+2008-08-19  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Finished batch processing.
+ * Fixed bug: Wrong length byte of Yamaha Tyros style registrations. Length
+   bytes don't include the registration header.
+ * Changed behaviour of import page. List of known file extension gets
+   derived from BankFile classes now.
+ * Removed unnecessary check which disallows changing the data
+   directory to itself.
+ * Fixed minor bugs with missing filter updates and checking allowed buttons
+   in create bank page for certain scenarios.
+ * Improoved description of Yamaha Tyros style registration banks for
+   better language-style.
+ * Pragmatic bug fix: Since there seems no easy way to disallow editing of
+   single ObjectList lines, changes to dummy registrations (### EMPTY ###) will
+   now be undone after editing.
+
+
 2008-08-18  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Finished display filter for available registrations.

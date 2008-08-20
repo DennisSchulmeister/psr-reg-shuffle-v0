@@ -12,13 +12,14 @@
 
  * UnitTests, pyLint, Profiler, et al.
 
- * FILTER
-
- * BATCH
-
- * UPDATE MANUAL
+ * UPDATE MANUAL, README (Note: Batch might sort different than reg list
+   because reg list orders CAPITAL LETTERS before small letter not considering
+   the alphabet.)
 
  * Show exception output in a popup window ???
 
  * Respond to ascii-exception UnicodeEncodeError (Umlauts). Maybe filter them
    out or so ...
+
+ * On doc/man/make.py CLEAN remove build/, too. Otherwise it belongs to the
+   super-user once the programs gets installed system-wide.

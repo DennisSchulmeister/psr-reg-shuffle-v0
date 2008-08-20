@@ -2,7 +2,7 @@ include *
 
 recursive-include data *
 recursive-include doc *
-recursive-include locale *
+recursive-include l18n *
 
 global-exclude build
 global-exclude build/*
