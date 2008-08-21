@@ -43,7 +43,7 @@ import sys
 # ATTENTION: Command line parameters of xgettextArgs must be shell-like quoted.
 outputDirectory = os.getcwd()
 outputFilename  = os.path.join(outputDirectory, "psrregshuffle.po")
-xgettextArgs    = "--join-existing --indent --add-location --width=%(width)s --sort-output --copyright-holder=%(copyright)s --package-name=%(package)s --package-version=%(version)s --msgid-bugs-address=%(bugmail)s --output=%(outputFilename)s" \
+xgettextArgs    = "--join-existing --add-location --width=%(width)s --sort-output --copyright-holder=%(copyright)s --package-name=%(package)s --package-version=%(version)s --msgid-bugs-address=%(bugmail)s --output=%(outputFilename)s" \
 % {
     "package":       "psrregshuffle",
     "version":       "0.1",
