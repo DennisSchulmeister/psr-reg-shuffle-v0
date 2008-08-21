@@ -113,12 +113,12 @@ for arg in sys.argv[1:]:
         sys.exit()
 
 
-# Clear existing output file
-try:
-    file = open(outputFilename, "w")
-    file.close()
-except:
-    pass
+## Clear existing output file
+#try:
+#    file = open(outputFilename, "w")
+#    file.close()
+#except:
+#    pass
 
 
 # Process files of top-directory
