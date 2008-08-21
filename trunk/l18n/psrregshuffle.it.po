@@ -1,20 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Dennis Schulmeister
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# translation of psrregshuffle.
+# Copyright (C) 2008 Dennis Schulmeister
+# This file is distributed under the same license as the psrregshuffle package.
+# <>, 2008.
+# , fuzzy
+#  <>, 2008.
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: psrregshuffle 0.1\n"
+"Project-Id-Version: psrregshuffle 0.2\n"
 "Report-Msgid-Bugs-To: dennis -at- ncc-1701a.homelinux.net\n"
 "POT-Creation-Date: 2008-08-21 19:13+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2008-08-21 19:19+0200\n"
+"Last-Translator: Claudi BIzzari <>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:239
 #: /home/b0/src/psr-reg-shuffle/trunk/src/importregstab.py:127
@@ -97,7 +99,7 @@ msgid ""
 "ATTENTION: A bank file for this instrument can only hold up to %i "
 "registrations."
 msgstr ""
-"ATTENZIONE: un file banco per questo strumento puÃ² contenere solamente fino a "
+"ATTENZIONE: un file banco per questo strumento può contenere solamente fino a "
 "'%i' Registration."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:195
@@ -114,7 +116,7 @@ msgstr "Informazioni"
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:214
 #, python-format
 msgid "Added '%s' to new bank."
-msgstr "'%s' Ã¨ stato aggiunto al nuovo banco."
+msgstr "'%s' è stato aggiunto al nuovo banco."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:785
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:785
@@ -157,12 +159,12 @@ msgstr "Non posso gestire i dati del modello di tastiera assegnato."
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:202
 #, python-format
 msgid "Changed directory to %s."
-msgstr "La directory Ã¨ stata cambiata in %s."
+msgstr "La directory è stata cambiata in %s."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:202
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:208
 msgid "Cleared new registration bank."
-msgstr "Il banco di Registration Ã¨ stato resettato."
+msgstr "Il banco di Registration è stato resettato."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:605
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:605
@@ -180,7 +182,7 @@ msgid ""
 "Couldn't find a suitable class. Most probably the feature is not implemented."
 msgstr ""
 "Non riesco a trovare una classe adatta. Molto probabilmente questa funzione "
-"non Ã¨ implementata."
+"non è implementata."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:344
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:344
@@ -246,7 +248,7 @@ msgstr "Modelli supportati da questa classe:"
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:210
 #, python-format
 msgid "Moved '%s' down one position."
-msgstr "SpostaoÂ·'%s'Â·diÂ·unaÂ·posizioneÂ·inÂ·basso"
+msgstr "Spostao·'%s'·di·una·posizione·in·basso"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:203
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:209
@@ -260,7 +262,7 @@ msgid ""
 "Neither keyboard model nor file given. Cannot create an empty object without "
 "hint about the keyboard model."
 msgstr ""
-"Non Ã¨ stato fornito nÃ© un modello di tastiera nÃ© un file. Non posso creare un "
+"Non è stato fornito né un modello di tastiera né un file. Non posso creare un "
 "oggetto vuoto senza almeno un indizio sul modello di tastiera."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:183
@@ -271,7 +273,7 @@ msgstr "Nuovo Registration Bank"
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:103
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:103
 msgid "No file was given at all when one was expected."
-msgstr "Non Ã¨ stato fornito un file quando se ne aspettava almeno uno."
+msgstr "Non è stato fornito un file quando se ne aspettava almeno uno."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:200
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:206
@@ -376,7 +378,7 @@ msgid ""
 "Without\n"
 "it I would have never started to write this program\n"
 "\n"
-"<b>JÃ¸rgen SÃ¸rensen</b>\n"
+"<b>Jørgen Sørensen</b>\n"
 "For writing excelent music related software which encourged me to try the "
 "same\n"
 "\n"
@@ -433,7 +435,7 @@ msgstr ""
 "Per la sua documentazione sul formato dei file delle Registration, senza il "
 "quale\n"
 "non avrei mai iniziato a scrivere questo programma.n\n"
-"<b>JÃ¸rgen SÃ¸rensen</b>\n"
+"<b>Jørgen Sørensen</b>\n"
 "Per aver scritto del software eccellente in ambito musicale che mi ha spinto "
 "a\n"
 "fare altrettanto.\n"
@@ -516,7 +518,7 @@ msgid ""
 "models share very similar file formats and can generally read each-other's "
 "data."
 msgstr ""
-"Yamaha Tyros Ã¨ una pietra miliare, capostipite di una nuova generazione di "
+"Yamaha Tyros è una pietra miliare, capostipite di una nuova generazione di "
 "tastiere arrangerdi livello medio e alto. Pur essendo basata su i suoi "
 "predecessori, questa tastiera introduceuna nuova piattaforma tecnica come "
 "base per tutta una nuova serie di apparecchi. Questimodelli condividono un "
@@ -531,6 +533,12 @@ msgid ""
 "models share very similar file formats which is why they are assumed to be "
 "able to read each-other's data."
 msgstr ""
+"Yamaha Tyros è una pietra miliare, capostipite di una nuova generazione di "
+"tastiere arrangerdi livello medio e alto. Pur essendo basata su i suoi "
+"predecessori, questa tastiera introduceuna nuova piattaforma tecnica come "
+"base per tutta una nuova serie di apparecchi. Questimodelli condividono un "
+"formato di file praticamente identico e sono in grado di "
+"leggerereciprocamente i propri file."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regfile/appexceptions.py:46
 msgid ""
@@ -542,7 +550,7 @@ msgstr ""
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:85
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:85
 msgid "The given object is not of type Class."
-msgstr "L'oggetto assegnato non Ã¨ di tipo Classe"
+msgstr "L'oggetto assegnato non è di tipo Classe"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:112
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:112
@@ -575,7 +583,7 @@ msgid ""
 "is not intended. Please check your installation for possible errors."
 msgstr ""
 "Questa installazione non ha alcun supporto per le tastiere. Normalmente "
-"questo non Ã¨ un fatto voluto: controlla la tua installazione per verificare "
+"questo non è un fatto voluto: controlla la tua installazione per verificare "
 "se ci sono errori."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/informationtab.py:81
@@ -665,3 +673,4 @@ msgstr ""
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:238
 msgid "gtk-go-up"
 msgstr ""
+
