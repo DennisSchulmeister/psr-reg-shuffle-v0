@@ -30,19 +30,24 @@ On a Windows machine perform the following steps:
 
     \> python setup.py bdist --format=wininst
 
+    The exe-file will be in .\dist\ !!
+
  5. Use the installer to install psr-reg-shuffle into your python directory.
 
  6. Clean up by removing unnecessary documentation and test file from the python
     directory. This way you can shrink from ~ 89 Meg to 20 Meg.
 
- 7. Rename pythons README and LICENCE to python-README and python-LICENCE
+ 7. If necessary remove .svn directories from complete directory hierarchy.
+    (e.g.: for dir in `ls -R`; do rm $dir/.svn; done; )
 
- 8. Copy psrregshuffle.bat into the top-directory. (See python25-template)
+ 8. Rename pythons README and LICENCE to python-README and python-LICENCE
 
- 9. Rename the python directory to: psr-reg-shuffle_A.B_winXY_python where as
+ 9. Copy psrregshuffle.bat into the top-directory. (See python25-template)
+
+10. Rename the python directory to: psr-reg-shuffle_A.B_winXY_python where as
     A.B is the program version and XY the windows version like win32 or win64.
 
-10. Use your favorite packager for building a neat ZIP-file.
+11. Use your favorite packager for building a neat ZIP-file.
 
 That's all there is to do. But of course you should also test-run your newly
 created distribution. Especially since the Windows versions of the employed

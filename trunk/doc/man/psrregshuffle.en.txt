@@ -117,6 +117,11 @@ it finds an illegal character won't be catched. Instead the runtime system
 dumps it to the console and stops the last operation. If this happens to you
 try to rename your registrations and eliminate special characters.
 
+The MS Windows version doesn't respect the user specific GTK-setting, whether
+images should be shown on buttons or not. This is because the default behaviour
+of GTK's Windows version is to hide images and the average user wouldn't want
+to edit the gtkrc files.
+
 At the moment this program is maintained by just one person (me). However as
 it is put under an open-source licence it could definitely use more hands
 working on it. This does not necessarily involve programming. There are many

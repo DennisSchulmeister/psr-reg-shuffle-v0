@@ -1,8 +1,16 @@
+2008-08-21  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Pragmatic fix for missing button images in Windows version. (overriding
+   the default behaviour of the gtkrc file because the user most probably
+   wouldn't want to deal with that.)
+ * TAG: Version 0.2
+
+
+
 2008-08-20  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Updated documentation including first version of the README file and the
    man page.
- * TAG: Release version 0.2
 
 2008-08-19  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
