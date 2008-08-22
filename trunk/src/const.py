@@ -94,7 +94,7 @@ For his documentation of the Yamaha PSR-2000 registration file format. Without
 it I would have never started to write this program
 
 <b>Jørgen Sørensen</b>
-For writing excelent music related software which encourged me to try the same
+For writing excellent music related software which encouraged me to try the same
 
 <b>Michael P. Bedesem</b>
 For all his music related software
@@ -110,7 +110,7 @@ For being one of the first who tried out the Windows package
 For answering questions on the different keyboard models
 
 <b>Tom G</b>
-For providing Yamaha Tyros 2 registraion files
+For providing Yamaha Tyros 2 registration files
 
 <b>Ray from downunder</b>
 For providing Yamaha Tyros 1 registration files

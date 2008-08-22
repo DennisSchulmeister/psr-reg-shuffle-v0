@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: psrregshuffle 0.2\n"
 "Report-Msgid-Bugs-To: dennis -at- ncc-1701a.homelinux.net\n"
 "POT-Creation-Date: 2008-08-21 19:55+0200\n"
-"PO-Revision-Date: 2008-08-23 00:32+0200\n"
+"PO-Revision-Date: 2008-08-23 00:47+0200\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -121,14 +121,9 @@ msgid ""
 "abbreviations of the first and last registration's name of each file. e.g.\n"
 "<i>&amp;n - Dance Party (&amp;hash).reg</i>"
 msgstr ""
-"Alle Dateien werden mit ähnlichen Dateinamen abgespeichert. Sie"
-"benötigen aber ein unterscheidendes Merkmal, um sich nicht gegenseitig"
-"zu überschreiben.\n"
+"Alle Dateien werden mit ähnlichen Dateinamen abgespeichert. Sie benötigen aber ein unterscheidendes Merkmal, um sich nicht gegenseitig zu überschreiben.\n"
 "\n"
-"Schreiben Sie <b>&amp;n&amp;</b> für fortlaufende Nummern und"
-"<b>&amp;hash&amp;</b> für die abgekürzten Namen der jeweils ersten"
-"und letzten Registrierung einer Datei. z.B.\n"
-"<i>&amp;n - Dance Party (&amp;hash).reg</i>"
+"Schreiben Sie <b>&amp;n&amp;</b> für fortlaufende Nummern und <b>&amp;hash&amp;</b> für die abgekürzten Namen der jeweils ersten und letzten Registrierung einer Datei. z.B. <i>&amp;n - Dance Party (&amp;hash).reg</i>"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:180
 msgid "All models"
@@ -171,7 +166,7 @@ msgstr ""
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:344
 msgid "Create Bank Files"
-msgstr "Bankdateien erzeugen"
+msgstr "Bankdateien Erzeugen"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:30
 msgid "Data Directory"
@@ -183,7 +178,7 @@ msgstr "Datenverzeichnis:"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:769
 msgid "Filename _Pattern:"
-msgstr "_Muster der Dateinamen:"
+msgstr "_Dateinamen:"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:146
 msgid "Filter:"
@@ -232,8 +227,7 @@ msgid ""
 "Neither keyboard model nor file given. Cannot create an empty object without "
 "hint about the keyboard model."
 msgstr ""
-"Weder ein Keyboardmodell noch eine Datei wurde übergeben. Um ein leeres Objekt"
-"zu erzeugen, muss jedoch das Keyboardmodell irgendwie vorhersagbar sein."
+"Weder ein Keyboardmodell noch eine Datei wurde übergeben. Um ein leeres Objekt zu erzeugen, muss jedoch das Keyboardmodell irgendwie vorhersagbar sein."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:183
 msgid "New Registration Bank"
@@ -297,14 +291,9 @@ msgid ""
 "9000pro, among them most sounds, styles and a very similar albeit updated "
 "operating system. Updates include a largely re-designed main screen, notation "
 "display as well as icons next to each object name (with the icon descriptor "
-"being a sufix to the name)."
+"being a suffix to the name)."
 msgstr ""
-"Im Jahre 2001 erschienen, markiert das PSR-2000 das Ende der höchst erfolgreichen"
-"PSR-9000-Linie. Dabei teilt es viele Funktionalitäten seiner großen Brüder, dem PSR-9000"
-"und dem 9000pro, unter ihnen die meisten Klangfarben, Begleitrhythmen und ein sehr"
-"ähnliches wenn auch verbessertes Betriebssystem. Zu den Verbesserungen gehört ein"
-"größtenteils umgestalteter Hauptbildschirm, Notenanzeige sowie Ikonen neben jedem"
-"Objektnamen (wobei die Ikonenreferenz ein Anhängsel des Namens ist)."
+"Im Jahre 2001 erschienen, markiert das PSR-2000 das Ende der höchst erfolgreichen PSR-9000-Linie. Dabei teilt es viele Funktionalitäten seiner großen Brüder, dem PSR-9000 und dem 9000pro, unter ihnen die meisten Klangfarben, Begleitrhythmen und ein sehr ähnliches wenn auch verbessertes Betriebssystem. Zu den Verbesserungen gehört ein größtenteils umgestalteter Hauptbildschirm, Notenanzeige sowie Ikonen neben jedem Objektnamen (wobei die Ikonenreferenz ein Anhängsel des Namens ist)."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:215
 #, python-format
@@ -343,7 +332,7 @@ msgid ""
 "it I would have never started to write this program\n"
 "\n"
 "<b>Jørgen Sørensen</b>\n"
-"For writing excelent music related software which encourged me to try the "
+"For writing excellent music related software which encouraged me to try the "
 "same\n"
 "\n"
 "<b>Michael P. Bedesem</b>\n"
@@ -360,7 +349,7 @@ msgid ""
 "For answering questions on the different keyboard models\n"
 "\n"
 "<b>Tom G</b>\n"
-"For providing Yamaha Tyros 2 registraion files\n"
+"For providing Yamaha Tyros 2 registration files\n"
 "\n"
 "<b>Ray from downunder</b>\n"
 "For providing Yamaha Tyros 1 registration files\n"
@@ -475,21 +464,15 @@ msgid ""
 "models share very similar file formats which is why they are assumed to be "
 "able to read each-other's data."
 msgstr ""
-"Der Yamaha Tyros gilt als Meilenstein für eine neue Generation von Yamahas Ober-"
-"und Mittelklassemodellen. Nur wage auf seinen Vorgängern basierend, führte er"
-"eine neue technische Plattform als Grundlage vieler Abkömmlinge ein. All diese"
-"Modelle teilen sehr ähnliche Dateiformate, warum von ihnen vermutet wird, ihre"
-"Daten gegenseitig lesen zu können."
+"Der Yamaha Tyros gilt als Meilenstein für eine neue Generation von Yamahas Ober- und Mittelklassemodellen. Nur wage auf seinen Vorgängern basierend, führte er eine neue technische Plattform als Grundlage vieler Abkömmlinge ein. All diese Modelle teilen sehr ähnliche Dateiformate, warum von ihne vermutet wird, ihre Daten gegenseitig lesen zu können."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regfile/appexceptions.py:46
 msgid ""
 "The given file doesn't seem to be a registration file. Note that registration "
-"files hold only one registration as oppsed to registration banks used by your "
+"files hold only one registration as opposed to registration banks used by your "
 "instrument."
 msgstr ""
-"Die gegebene Datei scheint keine Registrierungsdatei zu sein. Bitte beachten"
-"Sie, dass Registrierungsdateien im Gegensatz zu Bankdateien Ihres Instruments"
-"nur genau eine Registrierung beinhalten."
+"Die gegebene Datei scheint keine Registrierungsdatei zu sein. Bitte beachten Sie, dass Registrierungsdateien im Gegensatz zu Bankdateien Ihres Instruments nur genau eine Registrierung beinhalten."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:85
 msgid "The given object is not of type Class."
@@ -504,8 +487,7 @@ msgid ""
 "The object is a singleton object which shouldn't be instanciated through a "
 "constructor. Use getInstance() instead."
 msgstr ""
-"Das Objekt ist ein Singletonobjekt, welches nicht einfach durch Aufruf eines"
-"Konstruktors instantiiert werden solle. Benutzen Sie getInstance() stattdessen."
+"Das Objekt ist ein Singletonobjekt, welches nicht einfach durch Aufruf eines Konstruktors instantiiert werden solle. Benutzen Sie getInstance() stattdessen."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:126
 msgid "The user wishes to cancel the current action."
@@ -520,9 +502,7 @@ msgid ""
 "This installation comes with no keyboard support at all. In most cases this "
 "is not intended. Please check your installation for possible errors."
 msgstr ""
-"Diese Installation unterstützt nicht ein Keyboardmodell. In den meisten Fällen"
-"ist dies nicht beabsichtigt. Bitte überprüfen Sie ihre Installation auf mögliche"
-"Fehler."
+"Diese Installation unterstützt nicht ein Keyboardmodell. In den meisten Fällen ist dies nicht beabsichtigt. Bitte überprüfen Sie ihre Installation auf mögliche Fehler."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/informationtab.py:81
 #, python-format
@@ -547,11 +527,11 @@ msgstr "Abkömmlinge des Yamaha Tyros"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:86
 msgid "_Add"
-msgstr "_Hinzufügen"
+msgstr "Hin_zufügen"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:109
 msgid "_Batch"
-msgstr "_Stapel"
+msgstr "Sta_pel"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:224
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:398

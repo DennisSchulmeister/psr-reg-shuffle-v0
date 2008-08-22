@@ -43,4 +43,4 @@ class UnknownFileFormat(ExceptionWithMessage):
     registration file.
     '''
 
-    _message = _("The given file doesn't seem to be a registration file. Note that registration files hold only one registration as oppsed to registration banks used by your instrument.")
+    _message = _("The given file doesn't seem to be a registration file. Note that registration files hold only one registration as opposed to registration banks used by your instrument.")

@@ -4,7 +4,8 @@
    the default behaviour of the gtkrc file because the user most probably
    wouldn't want to deal with that.)
  * TAG: Version 0.2
-
+ * Marked PSR-2000 description as translatable. (Thanks Claudio for letting
+   me know.)
 
 
 2008-08-20  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
