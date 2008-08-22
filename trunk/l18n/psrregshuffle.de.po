@@ -1,29 +1,26 @@
-# Italian translation of psrregshuffle.
+# translation of psrregshuffle.
 # Copyright (C) 2008 Dennis Schulmeister
-# This file is distributed under the same license as the PACKAGE package.
-# Claudio Bizzarri <claudio@bizzarri.net>, 2008.
+# This file is distributed under the same license as the psrregshuffle package.
+# <>, 2008.
 # , fuzzy
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psrregshuffle 0.1\n"
+"Project-Id-Version: psrregshuffle 0.2\n"
 "Report-Msgid-Bugs-To: dennis -at- ncc-1701a.homelinux.net\n"
 "POT-Creation-Date: 2008-08-21 19:55+0200\n"
-"PO-Revision-Date: 2008-08-22 09:33+0200\n"
-"Last-Translator: Claudio Bizzarri <claudio@bizzarri.net>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2008-08-23 00:32+0200\n"
+"Last-Translator:  <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: "
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:239
-#: /home/b0/src/psr-reg-shuffle/trunk/src/importregstab.py:127
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:144
 msgid "### EMPTY ###"
-msgstr "### VUOTO ###"
+msgstr "### LEER ###"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:80
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:80
 #, python-format
 msgid ""
@@ -35,9 +32,8 @@ msgstr ""
 "%(progname)s %(version)s\n"
 "\n"
 "%(copyright_long)s\n"
-"Scritto da %(author)s <%(author_email)s>"
+"Geschrieben von %(author)s <%(author_email)s>"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:69
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:69
 #, python-format
 msgid ""
@@ -55,18 +51,25 @@ msgid ""
 "A\n"
 "PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
 msgstr ""
+"%s\n"
+"\n"
+"Dies ist freie Software. Sie dürfen sie veröffentlichen und/oder modifizieren unter den Bedingungen\n"
+"der GNU General Public License, wie sie von der Free Software Foundation herausgegeben wird,\n"
+"entweder gemäß der Version 3 der Lizenz oder (nach Ihrem Belieben) jeder neueren Version.\n"
+"\n"
+"Diese Software wird in der Hoffnung weitergegeben, dass sie hilfreich ist, JEDOCH UNTER\n"
+"AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG, nicht einmal mit der implizierten Garantie\n"
+"von FUNKTIONSFÄHIGKEIT oder TÜCHTIGKEIT FÜR EINEN BESTIMMTEN ZWECK. Bitte lesen\n"
+"Sie die GNU General Public License für weitere Details.\n"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:493
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:493
 msgid ""
 "<b><big>The following instruments are supported by this program version:\n"
 "</big></b>"
 msgstr ""
-"<b><big>L'attuale versione di questo programma supporta i seguenti "
-"strumenti:\n"
+"<b><big>Diese Programmversion unterstützt die folgenden Instrumente:\n"
 "</big></b>"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:589
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:589
 msgid ""
 "<big><big><big><b>Program name</b></big></big></big>\n"
@@ -74,50 +77,41 @@ msgid ""
 "\n"
 "Long copyright"
 msgstr ""
-"<big><big><big><b>Nome programma</b></big></big></big>\n"
-"<i>Descrizione breve</i>\n"
+"<big><big><big><b>Programmname</b></big></big></big>\n"
+"<i>Kurzbeschreibung</i>\n"
 "\n"
-"Copyright esteso"
+"Langes Copyright"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:63
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:63
 msgid "A program for organizing PSR registration bank files"
-msgstr "Un programma per la gestione delle Registration delle PSR"
+msgstr "Ein Programm, um PSR Registrierungsbänke zu verwalten"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:206
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:212
 #, python-format
 msgid "ATTENTION: %(dstName)s cannot read registrations from %(srcName)s."
-msgstr ""
-"ATTENZIIONE: %(dstName)s non posso leggere le Registration da %(srcName)s."
+msgstr "ACHTUNG: %(dstName)s kann die Registrierungen eines %(srcName)s nicht lesen."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:207
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:213
 #, python-format
 msgid ""
 "ATTENTION: A bank file for this instrument can only hold up to %i "
 "registrations."
 msgstr ""
-"ATTENZIONE: un file bank per questo strumento può contenere solamente fino a "
-"'%i' Registration."
+"ACHTUNG: Eine Bankdatei dieses Instruments kann maximal %i Registrierungen enthalten."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:195
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:201
 msgid "ATTENTION: Please choose a keyboard model first."
-msgstr "ATTENZIONE: devi prima scegliere un modello di tastiera."
+msgstr "ACHTUNG: Bitte wählen Sie erst ein Keyboardmodell aus."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:657
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:657
 msgid "About"
-msgstr "Informazioni"
+msgstr "Über"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:208
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:214
 #, python-format
 msgid "Added '%s' to new bank."
-msgstr "'%s' è stato aggiunto al nuovo bank."
+msgstr "'%s' wurde der neuen Bank hinzugefügt."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:785
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:785
 msgid ""
 "All created files will have similar filenames. They need at least one "
@@ -127,212 +121,174 @@ msgid ""
 "abbreviations of the first and last registration's name of each file. e.g.\n"
 "<i>&amp;n - Dance Party (&amp;hash).reg</i>"
 msgstr ""
-"Tutti i file creati avranno un nome simile. Avranno bisogno di almeno un "
-"carattere distintivo, perevitare che i file si sovrappongano.\n"
-"Scrivi <b>&amp;n&amp;</b> per un numero progressivo e <b>&amp;hash&amp;</b> "
-"per l'abbreviazione delprimo e dell'ultimo nome della Registration del bank, "
-"per esempio\n"
+"Alle Dateien werden mit ähnlichen Dateinamen abgespeichert. Sie"
+"benötigen aber ein unterscheidendes Merkmal, um sich nicht gegenseitig"
+"zu überschreiben.\n"
+"\n"
+"Schreiben Sie <b>&amp;n&amp;</b> für fortlaufende Nummern und"
+"<b>&amp;hash&amp;</b> für die abgekürzten Namen der jeweils ersten"
+"und letzten Registrierung einer Datei. z.B.\n"
 "<i>&amp;n - Dance Party (&amp;hash).reg</i>"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:174
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:180
 msgid "All models"
-msgstr "Tutti i modelli"
+msgstr "Alle Modelle"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:59
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:59
 msgid "Available Registrations"
-msgstr "Registration disponibili"
+msgstr "Verfügbare Registrierungen"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:692
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:692
 msgid "Batch Creation"
-msgstr "Creazione lavoro batch"
+msgstr "Mehrfachanlage"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/regbank/appexceptions.py:51
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/appexceptions.py:51
 msgid "Cannot handle data of the given keyboard model."
-msgstr "Non posso gestire i dati del modello di tastiera assegnato."
+msgstr "Kann mit den Daten des gegebenen Keyboardmodells nicht umgehen."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:196
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:202
 #, python-format
 msgid "Changed directory to %s."
-msgstr "La directory è stata cambiata in %s."
+msgstr "Wechsel des Arbeitsverzeichnisses nach '%s'."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:202
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:208
 msgid "Cleared new registration bank."
-msgstr "Il bank di Registration è stato resettato."
+msgstr "Die neue Registrierungsbank wurde geleert."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:605
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:605
 msgid "Click me!"
-msgstr "Clicca qui!"
+msgstr "Klick mich!"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:154
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/createbanktab.py:162
 msgid "Compatible Only"
-msgstr "Solo compatibili"
+msgstr "Nur kompatible"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:94
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:94
 msgid ""
 "Couldn't find a suitable class. Most probably the feature is not implemented."
 msgstr ""
-"Non riesco a trovare una classe adatta. Molto probabilmente questa funzione "
-"non è implementata."
+"Konnte keine passende Klasse finden. Höchstwahrscheinlich ist die Funktionalität nicht implementiert."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:344
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:344
 msgid "Create Bank Files"
-msgstr "Crea un file bank"
+msgstr "Bankdateien erzeugen"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:30
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:30
 msgid "Data Directory"
-msgstr "Directory dati"
+msgstr "Datenverzeichnis"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:18
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:18
 msgid "Data Directory:"
-msgstr "Directory dati:"
+msgstr "Datenverzeichnis:"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:769
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:769
 msgid "Filename _Pattern:"
-msgstr "_Pattern del nome del file:"
+msgstr "_Muster der Dateinamen:"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:146
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:146
 msgid "Filter:"
-msgstr "Filtro:"
+msgstr "Filter:"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:151
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:151
 msgid "Import"
-msgstr "Importa"
+msgstr "Importieren"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:460
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:460
 msgid "Import Registrations"
-msgstr "Importa Registration"
+msgstr "Registrierungen Importieren"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:138
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:138
 msgid "Keyboard"
-msgstr "Tastiera"
+msgstr "Keyboard"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:545
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:545
 msgid "Keyboard Information"
-msgstr "Informazioni sulla tastiera"
+msgstr "Keyboard-Informationen"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:281
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:281
 msgid "Keyboard model:"
-msgstr "Modello di tastiera:"
+msgstr "Keyboardmodell:"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:508
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:508
 msgid "Keyboard support"
-msgstr "Tastiera supportata"
+msgstr "Unterstützte Keyboards"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/informationtab.py:82
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/informationtab.py:82
 msgid "Models supported by this class:"
-msgstr "Modelli supportati da questa classe:"
+msgstr "Modelle, welche von dieser Klasse unterstützt werden:"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:204
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:210
 #, python-format
 msgid "Moved '%s' down one position."
-msgstr "Spostao·'%s'·di·una·posizione·in·basso"
+msgstr "'%s' wurde eine Position nach unten verschoben."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:203
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:209
 #, python-format
 msgid "Moved '%s' up one position."
-msgstr "Spostao '%s' di una posizione in alto"
+msgstr "'%s' wurde eine Position nach oben verschoben."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/regbank/appexceptions.py:61
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/appexceptions.py:61
 msgid ""
 "Neither keyboard model nor file given. Cannot create an empty object without "
 "hint about the keyboard model."
 msgstr ""
-"Non è stato fornito né un modello di tastiera né un file. Non posso creare un "
-"oggetto vuoto senza almeno un indizio sul modello di tastiera."
+"Weder ein Keyboardmodell noch eine Datei wurde übergeben. Um ein leeres Objekt"
+"zu erzeugen, muss jedoch das Keyboardmodell irgendwie vorhersagbar sein."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:183
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:183
 msgid "New Registration Bank"
-msgstr "Nuovo Registration bank"
+msgstr "Neue Registrierungsbank"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:103
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:103
 msgid "No file was given at all when one was expected."
-msgstr "Non è stato fornito un file quando se ne aspettava almeno uno."
+msgstr "Als eine Datei erwartet wurde, wurde keine übergeben."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:200
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:206
 msgid "Nothing imported."
-msgstr "Nessun file importato."
+msgstr "Es wurde nichts importiert."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:152
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:152
 msgid "Number"
-msgstr "Numero"
+msgstr "Nummer"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/importregstab.py:97
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/importregstab.py:111
 msgid "Open bank file"
-msgstr "Apri un file bank"
+msgstr "Bankdatei öffnen"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:6
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:6
 msgid "PSR Registration Shuffler"
 msgstr "PSR Registration Shuffler"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/batchdialog.py:113
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/batchdialog.py:113
 msgid "Random order"
-msgstr "Ordine casuale."
+msgstr "Zufällige Reihenfolge"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:194
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:200
 msgid "Ready."
-msgstr "Pronto."
+msgstr "Bereit."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:430
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:430
 msgid "Registration Bank Content"
-msgstr "Contenuto del bank"
+msgstr "Inhalt der Registrierungsbank"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:137
-#: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:145
-#: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:153
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:137
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:145
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:153
 msgid "Registration Name"
-msgstr "Nome della Registration:"
+msgstr "Name der Registrierung"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/batchdialog.py:111
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/batchdialog.py:111
 msgid "Registration name (ascending)"
-msgstr "Nome della Registration (ascendente)"
+msgstr "Name der Registrierung (aufsteigend)"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/batchdialog.py:112
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/batchdialog.py:112
 msgid "Registration name (descending)"
-msgstr "Nome della Registration (discendente)"
+msgstr "Name der Registrierung (absteigend)"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/informationtab.py:80
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/informationtab.py:80
 #, python-format
 msgid "Registrations per bank: Up to %i"
-msgstr "Registration per bank: fino a %i"
+msgstr "Registrierungen je Bank: Bis zu %i"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/bankfile_psr2000.py:57
 msgid ""
@@ -343,45 +299,39 @@ msgid ""
 "display as well as icons next to each object name (with the icon descriptor "
 "being a sufix to the name)."
 msgstr ""
-"Rilasciata nel 2001, la Yamaha PSR-2000 segna la fine della linea di grande "
-"successo della PSR-9000. Questa tastiera condivide molte caratteristiche delle "
-"sue sorelle maggiori, compresi suoni e style. Le differenze sono principalmente "
-"nella schermata principale e nelle icone accanto ad ogni oggetto, identificate "
-"da un prefisso nel nome."
+"Im Jahre 2001 erschienen, markiert das PSR-2000 das Ende der höchst erfolgreichen"
+"PSR-9000-Linie. Dabei teilt es viele Funktionalitäten seiner großen Brüder, dem PSR-9000"
+"und dem 9000pro, unter ihnen die meisten Klangfarben, Begleitrhythmen und ein sehr"
+"ähnliches wenn auch verbessertes Betriebssystem. Zu den Verbesserungen gehört ein"
+"größtenteils umgestalteter Hauptbildschirm, Notenanzeige sowie Ikonen neben jedem"
+"Objektnamen (wobei die Ikonenreferenz ein Anhängsel des Namens ist)."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:209
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:215
 #, python-format
 msgid "Removed '%s' from new bank."
-msgstr "Cancella '%s' dal nuovo bank."
+msgstr "'%s' wurde aus der neuen Bank entfernt."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:554
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/createbanktab.py:579
 msgid "Save Registration Bank"
-msgstr "Salva il Registration bank"
+msgstr "Registrierungsbank speichern"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:753
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:753
 msgid "Save _Directory:"
-msgstr "_Directory di salvataggio:"
+msgstr "_Speicherort:"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:205
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:211
 #, python-format
 msgid "Saved registration bank to '%s'."
-msgstr "Registration bank salvato in '%s'"
+msgstr "Registrierungsbank wurde nach '%s' gespeichert."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:155
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/createbanktab.py:163
 msgid "Selected Model"
-msgstr "Modello selezionato"
+msgstr "Ausgewähltes Modell"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:153
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/createbanktab.py:161
 msgid "Show All"
-msgstr "Mostra tutto"
+msgstr "Alle zeigen"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:89
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:89
 msgid ""
 "Special thanks go to the following people. Without their help this program\n"
@@ -441,88 +391,81 @@ msgid ""
 "to\n"
 "the list.\n"
 msgstr ""
-"Uno speciale ringraziamento alle persone seguenti: senza il loro aiuto "
-"questo\n"
-"programma funzionerebbe solamente per la Yamaha PSR 2000 e solo su Linux.\n"
+"Besonderer Dank gebührt den folgenden Personen. Ohne ihre Hilfe, würde\n"
+"dieses Programm immer noch nur das Yamaha PSR-2000 unterstützen und nur\n"
+"unter Linux laufen.\n"
 "\n"
 "<b>Heiko Plate</b>\n"
-"Per la sua documentazione sul formato dei file delle Registration, senza il "
-"quale\n"
-"non avrei mai iniziato a scrivere questo programma.n\n"
+"Für seine Dokumentation des Dateiformats der Yamaha PSR-2000 Registrierungen.\n"
+"Ohne sie hätte ich niemals angefangen, dieses Programm zu schreiben.\n"
+"\n"
 "<b>Jørgen Sørensen</b>\n"
-"Per aver scritto del software eccellente in ambito musicale che mi ha spinto "
-"a\n"
-"fare altrettanto.\n"
+"Dafür, dass er exzellente Musiksoftware schreibt, welche mich ermutigt hat, das selbe\n"
+"zu probieren.\n"
 "\n"
 "<b>Michael P. Bedesem</b>\n"
-"Per tutti i suoi programmi musicali.\n"
+"Für all seine musikbezogenen Programme.\n"
 "\n"
 "<b>Leroy Luc</b>\n"
-"Per aver provato a far girare il programma sotto Windows quando ancora non\n"
-"esisteva una versione dedicata.\n"
+"Dafür, dass er probierte, das Programm unter Windows zum Laufen zu bringen,\n"
+"als es noch kein spezielles Paket hierfür gab.\n"
 "\n"
 "<b>Jim Wincell</b>\n"
-"Per essere stato uno dei primi a provare la versione Windows\n"
+"Dafür, dass er einer der ersten war, die das Windowspaket ausprobierten.\n"
 "\n"
 "<b>Brian Haylett</b>\n"
-"Per aver risposto alle domande sui differenti modelli di tastiera\n"
+"Für die Beantwortung von Fragen zu den verschiedenen Modellen.\n"
 "\n"
 "<b>Tom G</b>\n"
-"Per aver fornito i file creati con una Yamaha Tyros 2\n"
+"Für die Bereitstellung von Registrierungsdaten des Yamaha Tyros 2.\n"
 "\n"
 "<b>Ray from downunder</b>\n"
-"Per aver fornito i file creati con una Yamaha Tyros 1\n"
+"Für die Bereitstellung von Registrierungsdaten des Yamaha Tyros 1.\n"
 "\n"
 "<b>Mike Comley</b>\n"
-"Per aver fornito i file creati con una Yamaha PSR S900\n"
+"Für die Bereitstellung von Registrierungsdaten des Yamaha PSR-S900.\n"
 "\n"
 "<b>Norm Ruttle</b>\n"
-"Per aver fornito i file creati con una Yamaha PSR 3000\n"
+"Für die Bereitstellung von Registrierungsdaten des Yamaha PSR-3000.\n"
 "\n"
 "<b>Alan Paganelli</b>\n"
-"Per aver fornito i file creati con una Yamaha Tyros 1\n"
+"Für die Bereitstellung von Registrierungsdaten des Yamaha Tyros 1.\n"
 "\n"
 "<b>Claudio Bizzarri</b>\n"
-"Per aver provato il programma su Ubuntu GNU/Linux 7.10, aver scoperto un\n"
-"metodo mancante nella libreria kiwi ed aver tradotto il programma in "
-"italiano.\n"
+"Für den Versuch, dieses Programm unter Ubuntu GNU/Linux 7.10 zu benutzen\n"
+"und für die Rückmeldung über eine fehlende Methode in der hiesigen kiwi Bibliothek.\n"
 "\n"
-"<b>I fantastici tipi che gironzolano su Internet</b>\n"
-"I membri di Yamaha-psr-Yahoogroups, del forum musicale German Yamaha,\n"
-"SVPWorld.com e tanti altri.\n"
+"Ebenso für seine italienische Übersetzung.\n"
 "\n"
-"<b>Tutti coloro che mi sono dimenticato di citare</b>\n"
-"Voi sapete di chi sto parlando. Mandatemi un messaggio se volete che "
-"aggiunga\n"
-"il vostro nome alla lista.\n"
+"<b>Die netten Leute aus dem Internet</b>\n"
+"Einschließlich den Mitgliedern der Yamaha-psr-Yahoogruppen, dem deutschsprachigen\n"
+"Yamaha-Musikforum, SVPWorld.com und vielen mehr.\n"
+"\n"
+"<b>Jeden, den ich vergessen habe</b>\n"
+"Ihr wisst, wer Ihr seid. Schickt mir eine Nachricht, und ich nehme euren Namen in die List auf.\n"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:210
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:216
 #, python-format
 msgid "Successfully created %i registration banks."
-msgstr "Ho creato %i banchi di Registration"
+msgstr "Es wurden %i Registrierungsbänke erfolgreich angelegt."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:201
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:207
 #, python-format
 msgid "Successfully imported %i registrations."
-msgstr "Ho importato %i Registration"
+msgstr "Es wurden %i Registrierungen erfolgreich importiert."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:199
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:205
 #, python-format
 msgid "Successfully opened %(filename)s registration bank file."
-msgstr "Ho aperto il file di Registration %(filename)s."
+msgstr "Die Bankdatei %(filename)s wurde erfolgreich geöffnet."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:197
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:203
 msgid "Successfully opened web browser."
-msgstr "Ho aperto il browser web."
+msgstr "Ein Webbrowser wurde erfolgreich geöffnet."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:620
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:620
 msgid "Thanks"
-msgstr "Grazie"
+msgstr "Danke"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/bankfile_tyros.py:62
 msgid ""
@@ -532,12 +475,11 @@ msgid ""
 "models share very similar file formats which is why they are assumed to be "
 "able to read each-other's data."
 msgstr ""
-"Yamaha Tyros è una pietra miliare, capostipite di una nuova generazione di "
-"tastiere arrangerdi livello medio e alto. Pur essendo basata su i suoi "
-"predecessori, questa tastiera introduce una nuova piattaforma tecnica come "
-"base per tutta una nuova serie di apparecchi. Questi modelli condividono un "
-"formato di file praticamente identico e sono in grado di "
-"leggerere reciprocamente i file dati."
+"Der Yamaha Tyros gilt als Meilenstein für eine neue Generation von Yamahas Ober-"
+"und Mittelklassemodellen. Nur wage auf seinen Vorgängern basierend, führte er"
+"eine neue technische Plattform als Grundlage vieler Abkömmlinge ein. All diese"
+"Modelle teilen sehr ähnliche Dateiformate, warum von ihnen vermutet wird, ihre"
+"Daten gegenseitig lesen zu können."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regfile/appexceptions.py:46
 msgid ""
@@ -545,131 +487,109 @@ msgid ""
 "files hold only one registration as oppsed to registration banks used by your "
 "instrument."
 msgstr ""
+"Die gegebene Datei scheint keine Registrierungsdatei zu sein. Bitte beachten"
+"Sie, dass Registrierungsdateien im Gegensatz zu Bankdateien Ihres Instruments"
+"nur genau eine Registrierung beinhalten."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:85
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:85
 msgid "The given object is not of type Class."
-msgstr "L'oggetto assegnato non è di tipo Classe."
+msgstr "Das gegebene Objekt ist keine Klasse."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:112
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:112
 msgid "The given registration doesn't match the given filter criterion."
-msgstr "La Registration assegnata non soddisfa il criterio del filtro assegnato."
+msgstr "Die gegebene Registrierung passt nicht zum gegebenen Filterkriterium"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:76
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:76
 msgid ""
 "The object is a singleton object which shouldn't be instanciated through a "
 "constructor. Use getInstance() instead."
 msgstr ""
-"L'oggetto è un Singleton che non può essere istanziato da un costruttore. "
-"Si usi al suo posto getInstance()."
+"Das Objekt ist ein Singletonobjekt, welches nicht einfach durch Aufruf eines"
+"Konstruktors instantiiert werden solle. Benutzen Sie getInstance() stattdessen."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:126
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:126
 msgid "The user wishes to cancel the current action."
-msgstr "L'utente desidera annullare l'operazione corrente."
+msgstr "Der Anwender wünscht, die momentane Aktion abzubrechen."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:715
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:715
 msgid "This function respects filter and keyboard model settings."
-msgstr ""
-"Questa funzione soddisfa l'impostazione del filtro e del modello di tastiera."
+msgstr "Diese Funktion beachtet die Einstellungen bezüglich Filter und Keyboardmodell."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/informationtab.py:101
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/informationtab.py:101
 msgid ""
 "This installation comes with no keyboard support at all. In most cases this "
 "is not intended. Please check your installation for possible errors."
 msgstr ""
-"Questa installazione non ha alcun supporto per le tastiere. Normalmente "
-"questo non è un fatto voluto: controlla la tua installazione per verificare "
-"se ci sono errori."
+"Diese Installation unterstützt nicht ein Keyboardmodell. In den meisten Fällen"
+"ist dies nicht beabsichtigt. Bitte überprüfen Sie ihre Installation auf mögliche"
+"Fehler."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/informationtab.py:81
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/informationtab.py:81
 #, python-format
 msgid "Typical file extension: *.%s"
-msgstr "Estensione del file: *.%s"
+msgstr "Typische Dateiendung: *.%s"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:198
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:204
 msgid "Unable to launch web browser."
-msgstr "Non riesco a lanciare il browser web"
+msgstr "Konnte keinen Webbrowser öffnen."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:175
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:181
 msgid "Unknown model"
-msgstr "Modello sconosciuto"
+msgstr "Unbekanntes Modell"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/regbank/bankfile_psr2000.py:56
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/bankfile_psr2000.py:56
 msgid "Yamaha PSR-2000 and alike"
-msgstr "Yamaha PSR-2000 e simili"
+msgstr "Yamaha PSR-2000 und ähnliche"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/regbank/bankfile_tyros.py:61
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/bankfile_tyros.py:61
 msgid "Yamaha Tyros descendants"
-msgstr "Tyros e derivati"
+msgstr "Abkömmlinge des Yamaha Tyros"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:86
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:86
 msgid "_Add"
-msgstr "_Aggiungi"
+msgstr "_Hinzufügen"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:109
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:109
 msgid "_Batch"
-msgstr "_Batch"
+msgstr "_Stapel"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:224
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:398
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:224
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:398
 msgid "_Clear"
-msgstr "_Pulisci"
+msgstr "_Leeren"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:384
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:384
 msgid "_Import Selected"
-msgstr "_Importa selezionati"
+msgstr "Ausgewählte _Importieren"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:371
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:371
 msgid "_Open Bank File..."
-msgstr "_Apri un file bank..."
+msgstr "Bankdatei Ö_ffnen..."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:96
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:96
 msgid "_Remove"
-msgstr "_Rimuovi"
+msgstr "_Entfernen"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:211
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:211
 msgid "_Save..."
-msgstr "_Salva..."
+msgstr "_Speichern..."
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:740
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:740
 msgid "_Sort Criterion:"
-msgstr "Criterio di _ordinamento:"
+msgstr "Sortier_kriterium:"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:855
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:855
 msgid "gtk-cancel"
-msgstr "gtk-cancel"
+msgstr ""
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:865
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:865
 msgid "gtk-execute"
-msgstr "gtk-execute"
+msgstr ""
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:253
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:253
 msgid "gtk-go-down"
-msgstr "gtk-go-down"
+msgstr ""
 
-#: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:238
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:238
 msgid "gtk-go-up"
-msgstr "gtk-go-up"
+msgstr ""
