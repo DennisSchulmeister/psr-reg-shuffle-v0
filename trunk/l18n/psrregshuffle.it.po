@@ -1,20 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Dennis Schulmeister
+# Italian translation of psrregshuffle.
+# Copyright (C) 2008 Dennis Schulmeister
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Claudio Bizzarri <claudio@bizzarri.net>, 2008.
+# , fuzzy
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: psrregshuffle 0.1\n"
 "Report-Msgid-Bugs-To: dennis -at- ncc-1701a.homelinux.net\n"
 "POT-Creation-Date: 2008-08-21 19:55+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2008-08-22 09:33+0200\n"
+"Last-Translator: Claudio Bizzarri <claudio@bizzarri.net>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:239
 #: /home/b0/src/psr-reg-shuffle/trunk/src/importregstab.py:127
@@ -88,7 +89,7 @@ msgstr "Un programma per la gestione delle Registration delle PSR"
 #, python-format
 msgid "ATTENTION: %(dstName)s cannot read registrations from %(srcName)s."
 msgstr ""
-"ATTENZIIONE: %(dstName)s non posso leggere le registrazioni da %(srcName)s."
+"ATTENZIIONE: %(dstName)s non posso leggere le Registration da %(srcName)s."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:207
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:213
@@ -97,7 +98,7 @@ msgid ""
 "ATTENTION: A bank file for this instrument can only hold up to %i "
 "registrations."
 msgstr ""
-"ATTENZIONE: un file banco per questo strumento può contenere solamente fino a "
+"ATTENZIONE: un file bank per questo strumento può contenere solamente fino a "
 "'%i' Registration."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:195
@@ -114,7 +115,7 @@ msgstr "Informazioni"
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:214
 #, python-format
 msgid "Added '%s' to new bank."
-msgstr "'%s' è stato aggiunto al nuovo banco."
+msgstr "'%s' è stato aggiunto al nuovo bank."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:785
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:785
@@ -129,7 +130,7 @@ msgstr ""
 "Tutti i file creati avranno un nome simile. Avranno bisogno di almeno un "
 "carattere distintivo, perevitare che i file si sovrappongano.\n"
 "Scrivi <b>&amp;n&amp;</b> per un numero progressivo e <b>&amp;hash&amp;</b> "
-"per l'abbreviazione delprimo e dell'ultimo nome della Registration del banco, "
+"per l'abbreviazione delprimo e dell'ultimo nome della Registration del bank, "
 "per esempio\n"
 "<i>&amp;n - Dance Party (&amp;hash).reg</i>"
 
@@ -162,7 +163,7 @@ msgstr "La directory è stata cambiata in %s."
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:202
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:208
 msgid "Cleared new registration bank."
-msgstr "Il banco di Registration è stato resettato."
+msgstr "Il bank di Registration è stato resettato."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:605
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:605
@@ -185,7 +186,7 @@ msgstr ""
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:344
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:344
 msgid "Create Bank Files"
-msgstr "Crea un file Bank"
+msgstr "Crea un file bank"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:30
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:30
@@ -266,7 +267,7 @@ msgstr ""
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:183
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:183
 msgid "New Registration Bank"
-msgstr "Nuovo Registration Bank"
+msgstr "Nuovo Registration bank"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:103
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:103
@@ -286,7 +287,7 @@ msgstr "Numero"
 #: /home/b0/src/psr-reg-shuffle/trunk/src/importregstab.py:97
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/importregstab.py:111
 msgid "Open bank file"
-msgstr "Apri un file Bank"
+msgstr "Apri un file bank"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:6
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:6
@@ -306,7 +307,7 @@ msgstr "Pronto."
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:430
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:430
 msgid "Registration Bank Content"
-msgstr "Contenuto del Bank"
+msgstr "Contenuto del bank"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:137
 #: /home/b0/src/psr-reg-shuffle/trunk/src/mainwindow.py:145
@@ -315,7 +316,7 @@ msgstr "Contenuto del Bank"
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:145
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/mainwindow.py:153
 msgid "Registration Name"
-msgstr "Nome della registration:"
+msgstr "Nome della Registration:"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/batchdialog.py:111
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/batchdialog.py:111
@@ -325,13 +326,13 @@ msgstr "Nome della Registration (ascendente)"
 #: /home/b0/src/psr-reg-shuffle/trunk/src/batchdialog.py:112
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/batchdialog.py:112
 msgid "Registration name (descending)"
-msgstr "Nome della registration (discendente)"
+msgstr "Nome della Registration (discendente)"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/informationtab.py:80
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/informationtab.py:80
 #, python-format
 msgid "Registrations per bank: Up to %i"
-msgstr "Registration per Bank: fino a %i"
+msgstr "Registration per bank: fino a %i"
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/bankfile_psr2000.py:57
 msgid ""
@@ -342,17 +343,22 @@ msgid ""
 "display as well as icons next to each object name (with the icon descriptor "
 "being a sufix to the name)."
 msgstr ""
+"Rilasciata nel 2001, la Yamaha PSR-2000 segna la fine della linea di grande "
+"successo della PSR-9000. Questa tastiera condivide molte caratteristiche delle "
+"sue sorelle maggiori, compresi suoni e style. Le differenze sono principalmente "
+"nella schermata principale e nelle icone accanto ad ogni oggetto, identificate "
+"da un prefisso nel nome."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:209
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:215
 #, python-format
 msgid "Removed '%s' from new bank."
-msgstr "Cancella '%s' dal nuovo banco."
+msgstr "Cancella '%s' dal nuovo bank."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:554
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/createbanktab.py:579
 msgid "Save Registration Bank"
-msgstr "Salva il Registration Bank"
+msgstr "Salva il Registration bank"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:753
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:753
@@ -363,7 +369,7 @@ msgstr "_Directory di salvataggio:"
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:211
 #, python-format
 msgid "Saved registration bank to '%s'."
-msgstr "Registration Bank salvato in '%s'"
+msgstr "Registration bank salvato in '%s'"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/createbanktab.py:155
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/createbanktab.py:163
@@ -506,7 +512,7 @@ msgstr "Ho importato %i Registration"
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:205
 #, python-format
 msgid "Successfully opened %(filename)s registration bank file."
-msgstr "Ho aperto il file di registration %(filename)s."
+msgstr "Ho aperto il file di Registration %(filename)s."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/const.py:197
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/const.py:203
@@ -518,21 +524,6 @@ msgstr "Ho aperto il browser web."
 msgid "Thanks"
 msgstr "Grazie"
 
-#: /home/b0/src/psr-reg-shuffle/trunk/src/regbank/bankfile_tyros.py:62
-msgid ""
-"The Yamaha Tyros holds as a milestone for a new generation of Yamaha's top- "
-"and mid-level arranger keyboards. Being loosely based upon its predecessors "
-"it introduced a new technical platform as a base for much offspring. Those "
-"models share very similar file formats and can generally read each-other's "
-"data."
-msgstr ""
-"Yamaha Tyros è una pietra miliare, capostipite di una nuova generazione di "
-"tastiere arrangerdi livello medio e alto. Pur essendo basata su i suoi "
-"predecessori, questa tastiera introduceuna nuova piattaforma tecnica come "
-"base per tutta una nuova serie di apparecchi. Questimodelli condividono un "
-"formato di file praticamente identico e sono in grado di "
-"leggerereciprocamente i propri file."
-
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regbank/bankfile_tyros.py:62
 msgid ""
 "The Yamaha Tyros holds as a milestone for a new generation of Yamaha's top- "
@@ -543,10 +534,10 @@ msgid ""
 msgstr ""
 "Yamaha Tyros è una pietra miliare, capostipite di una nuova generazione di "
 "tastiere arrangerdi livello medio e alto. Pur essendo basata su i suoi "
-"predecessori, questa tastiera introduceuna nuova piattaforma tecnica come "
-"base per tutta una nuova serie di apparecchi. Questimodelli condividono un "
+"predecessori, questa tastiera introduce una nuova piattaforma tecnica come "
+"base per tutta una nuova serie di apparecchi. Questi modelli condividono un "
 "formato di file praticamente identico e sono in grado di "
-"leggerereciprocamente i propri file."
+"leggerere reciprocamente i file dati."
 
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/regfile/appexceptions.py:46
 msgid ""
@@ -558,13 +549,12 @@ msgstr ""
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:85
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:85
 msgid "The given object is not of type Class."
-msgstr "L'oggetto assegnato non è di tipo Classe"
+msgstr "L'oggetto assegnato non è di tipo Classe."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:112
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:112
 msgid "The given registration doesn't match the given filter criterion."
-msgstr ""
-"La Registration assegnata non soddisfa il criterio del filtro assegnato."
+msgstr "La Registration assegnata non soddisfa il criterio del filtro assegnato."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:76
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:76
@@ -572,6 +562,8 @@ msgid ""
 "The object is a singleton object which shouldn't be instanciated through a "
 "constructor. Use getInstance() instead."
 msgstr ""
+"L'oggetto è un Singleton che non può essere istanziato da un costruttore. "
+"Si usi al suo posto getInstance()."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/src/appexceptions.py:126
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/src/appexceptions.py:126
@@ -645,7 +637,7 @@ msgstr "_Importa selezionati"
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:371
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:371
 msgid "_Open Bank File..."
-msgstr "_Apri un file Bank..."
+msgstr "_Apri un file bank..."
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:96
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:96
@@ -665,19 +657,20 @@ msgstr "Criterio di _ordinamento:"
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:855
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:855
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:865
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:865
 msgid "gtk-execute"
-msgstr ""
+msgstr "gtk-execute"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:253
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:253
 msgid "gtk-go-down"
-msgstr ""
+msgstr "gtk-go-down"
 
 #: /home/b0/src/psr-reg-shuffle/trunk/data/ui.glade:238
 #: /home/dennis/src/own/psr-reg-shuffle/trunk/data/ui.glade:238
 msgid "gtk-go-up"
-msgstr ""
+msgstr "gtk-go-up"
+
