@@ -54,6 +54,7 @@ class BankFile_Tyros(bankfile.BankFile):
         const.YAMAHA_TYROS1,
         const.YAMAHA_TYROS2,
         const.YAMAHA_S900,
+        const.YAMAHA_S700,
         const.YAMAHA_PSR3000,
     ]
 
@@ -76,6 +77,9 @@ class BankFile_Tyros(bankfile.BankFile):
                               "\x52\x47\x53\x54\x00\x02\x00\x00",
 
         const.YAMAHA_S900:    "\x53\x70\x66\x46\x00\x10\x0B\xC6" \
+                              "\x52\x47\x53\x54\x00\x02\x00\x00",
+
+        const.YAMAHA_S700:    "\x53\x70\x66\x46\x00\x10\x0B\xC7" \
                               "\x52\x47\x53\x54\x00\x02\x00\x00",
 
         const.YAMAHA_PSR3000: "\x53\x70\x66\x46\x00\x10\x0B\x20" \
@@ -110,6 +114,14 @@ class BankFile_Tyros(bankfile.BankFile):
                               "\x00\x00\x00\x00\x00\x00\x00\x00" \
                               "\x00\x00\x00\x00\x00\x00\x00\x00" \
                               "\x00\x00",
+
+        const.YAMAHA_S700:    "\x00\x66" \
+                              "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF",
 
         const.YAMAHA_PSR3000: "\x00\x00" \
                               "\x42\x48\x64\x01\x00\x24\xFF\xFF" \

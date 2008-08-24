@@ -118,6 +118,9 @@ For providing Yamaha Tyros 1 registration files
 <b>Mike Comley</b>
 For providing Yamaha S900 registration files
 
+<b>Herbert Mauderer</b>
+For providing Yamaha S700 registration files
+
 <b>Norm Ruttle</b>
 For providing Yamaha PSR-3000 registration files
 

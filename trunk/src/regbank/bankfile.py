@@ -252,10 +252,12 @@ class BankFile(modelspecific.ModelSpecific):
 
         NOTE: A value greater than 28 Bytes will break PSR-2000 compatibility.
         Bytes 29-32 hold the amount of registrations in the PSR-2000 format.
+        24 is minimum to detect a PSR-2000. But it's too much to detect Tyros
+        style files.
         '''
-        # Read up to 28 Bytes
+        # Read up to 24 Bytes
         file.seek(0)
-        return file.read(28)
+        return file.read(24)
 
     hashFile = classmethod(hashFile)
 

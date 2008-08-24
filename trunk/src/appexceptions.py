@@ -52,12 +52,6 @@ class ExceptionWithMessage(Exception):
         if cls:
             self._message = "%s (%s)" % (self._message, str(cls))
 
-    def __init__(self):
-        '''
-        Default constructor. Does nothing.
-        '''
-        pass
-
     def __str__(self):
         '''
         Returns string representation of the exception with a useful error
