@@ -64,6 +64,7 @@ class BatchDialog(GladeDelegate):
     widgets = [
         "lblBatchSortBy",
         "evtBatchSortBy",
+        "spinBatchGroup",
         "fcBtnBatchSave",
         "entBatchFilename",
         "btnBatchCancel",          # needs handler (clicked)

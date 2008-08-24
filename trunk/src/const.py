@@ -57,7 +57,7 @@ import os.path
 
 progname       = "PSR Registration Shuffler"
 shortname      = "psr-reg-shuffle"
-version        = "0.2"
+version        = "0.3"
 techname       = "%s-%s" % (shortname, version)
 licence        = "GNU General Public Licence 3"
 description    = _("A program for organizing PSR registration bank files")
@@ -86,62 +86,71 @@ version_string = _("%(progname)s %(version)s\n\n%(copyright_long)s\nWritten by %
     "author_email":   author_email
 }
 
-thanks = _("""Special thanks go to the following people. Without their help this program
-would still support Yamaha PSR-2000 and Linux only.
+thanks = """%(intro)s
 
 <b>Heiko Plate</b>
-For his documentation of the Yamaha PSR-2000 registration file format. Without
-it I would have never started to write this program
+%(Heiko Plate)s
 
 <b>Jørgen Sørensen</b>
-For writing excellent music related software which encouraged me to try the same
+%(Jørgen Sørensen)s
 
 <b>Michael P. Bedesem</b>
-For all his music related software
+%(Michael P. Bedesem)s
 
 <b>Leroy Luc</b>
-For trying to run the program in Windows when there hasn't been a dedicated
-package yet
+%(Leroy Luc)s
 
 <b>Jim Wincell</b>
-For being one of the first who tried out the Windows package
+%(Jim Wincell)s
 
 <b>Brian Haylett</b>
-For answering questions on the different keyboard models
+%(Brian Haylett)s
 
 <b>Tom G</b>
-For providing Yamaha Tyros 2 registration files
+%(Tom G)s
 
 <b>Ray from downunder</b>
-For providing Yamaha Tyros 1 registration files
+%(Ray from downunder)s
 
 <b>Mike Comley</b>
-For providing Yamaha S900 registration files
+%(Mike Comley)s
 
 <b>Herbert Mauderer</b>
-For providing Yamaha S700 registration files
+%(Herbert Mauderer)s
 
 <b>Norm Ruttle</b>
-For providing Yamaha PSR-3000 registration files
+%(Norm Ruttle)s
 
 <b>Alan Paganelli</b>
-For providing Yamaha Tyros 1 registration files
+%(Alan Paganelli)s
 
 <b>Claudio Bizzarri</b>
-For trying to run this program on Ubuntu GNU/Linux 7.10 and reporting about a
-missing method in the kiwi library.
+%(Claudio Bizzarri)s
 
-Also for offering his help with the Italian translation.
+<b>%(internet_name)s</b>
+%(The Internet)s
 
-<b>The nice folks who hang around the Internet</b>
-Including members of the Yamaha-psr-Yahoogroups, the German Yamaha music forum,
-SVPWorld.com and many more.
-
-<b>Anyone whom I left out</b>
-You know who you are. Drop me a message if you want and I'll add your name to
-the list.
-""")
-
+<b>%(anyone_else_name)s</b>
+%(Anyone else)s""" % {
+    "intro":                "Special thanks go to the following people. Without their help this program would still\nsupport Yamaha PSR-2000 and Linux only.",
+    "Heiko Plate":          "For his documentation of the Yamaha PSR-2000 registration file format.\nWithout it I would have never started to write this program.",
+    "Jørgen Sørensen":      "For writing excellent music related software which encouraged me to try the same.",
+    "Michael P. Bedesem":   "For all his music related software.",
+    "Leroy Luc":            "For trying to run the program in Windows when there hasn't been\na dedicated package yet.",
+    "Jim Wincell":          "For being one of the first who tried out the Windows package.",
+    "Brian Haylett":        "For answering questions on the different keyboard models.",
+    "Tom G":                "For providing Yamaha Tyros 2 registration files.",
+    "Ray from downunder":   "For providing Yamaha Tyros 1 registration files.",
+    "Mike Comley":          "For providing Yamaha S900 registration files.",
+    "Herbert Mauderer":     "For providing Yamaha S700 registration files.",
+    "Norm Ruttle":          "For providing Yamaha PSR-3000 registration files.",
+    "Alan Paganelli":       "For providing Yamaha Tyros 1 registration files.",
+    "Claudio Bizzarri":     "For trying to run this program on Ubuntu GNU/Linux 7.10 and reporting about a\nmissing method in the kiwi library.\n\nAlso for offering his help with the Italian translation.",
+    "internet_name":        "The nice folks who hang around the Internet",
+    "The Internet":         "Including members of the Yamaha-psr-Yahoogroups,\nSVPWorld.com and many more.",
+    "anyone_else_name":     "Anyone whom I left out",
+    "Anyone else":          "You know who you are. Drop me a message  if you want\nand I'll add your name to the list.",
+}
 
 # Displayed name for empty registrations
 REG_NAME_EMPTY = _("### EMPTY ###")
@@ -159,6 +168,11 @@ SORT_BY_NAME_ASC  = "NAME ASC"
 SORT_BY_NAME_DESC = "NAME DESC"
 SORT_RANDOM       = "RAND"
 
+
+# Export modes
+EXPORT_PRINT = "PRINT"
+EXPORT_TEXT  = "TEXT"
+EXPORT_CSV   = "CSV"
 
 # Constants with technical short names for keyboard models
 ALL_MODELS     = ""
@@ -206,6 +220,7 @@ msg = {
     "browser-opened":     _("Successfully opened web browser."),
     "browser-not-opened": _("Unable to launch web browser."),
     "bank-open-success":  _("Successfully opened %(filename)s registration bank file."),
+    "bank-add-success":   _("Successfully added %(filename)s to the list."),
     "nothing-imported":   _("Nothing imported."),
     "import-ok":          _("Successfully imported %i registrations."),
     "clear-ok":           _("Cleared new registration bank."),
@@ -217,4 +232,6 @@ msg = {
     "added-to-bank":      _("Added '%s' to new bank."),
     "removed-from-bank":  _("Removed '%s' from new bank."),
     "n-banks-created":    _("Successfully created %i registration banks."),
+    "setlist-export-ok":  _("Successfully exported setlist to '%s'."),
+    "setlist-print-ok":   _("Started print job with setlist."),
 }

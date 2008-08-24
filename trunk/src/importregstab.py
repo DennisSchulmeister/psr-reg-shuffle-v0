@@ -41,6 +41,9 @@ import kiwi.ui.dialogs
 import os.path
 import gtk
 
+from kiwi.ui.objectlist    import ObjectList
+from kiwi.ui.objectlist    import Column
+
 # Import application modules
 import regbank.bankfile
 import regfile.regfile
@@ -68,17 +71,31 @@ class ImportRegsTab:
 
         # Build list of known file extensions
         self.allExtensions = []
-        classes = regbank.bankfile.BankFile.getAllSubclasses()
 
-        for cls in classes:
-            extLow = "*.%s" % (cls.fileExt.lower())
-            extUp  = "*.%s" % (cls.fileExt.upper())
+        for ext in regbank.bankfile.BankFile.getAllFileExtensions():
+            extLow = "*.%s" % (ext.lower())
+            extUp  = "*.%s" % (ext.upper())
 
             if not extLow in self.allExtensions:
                 self.allExtensions.append(extLow)
 
             if not extUp in self.allExtensions:
                 self.allExtensions.append(extUp)
+
+        # Insert ObjectList into main window
+        self.oblImportRegs = ObjectList(
+            [
+                Column("mark", title=_("Import"), data_type=bool, editable=True),
+                Column("pos",  title=_("Number"), editable=False),
+                Column("name", title=_("Registration Name"), editable=True, searchable=True, expand=True),
+            ]
+        )
+
+        self.wndMain.evtImportRegs.add(self.oblImportRegs)
+        self.oblImportRegs.show()
+
+        self.oblImportRegs.connect("has-rows", self.onListEmptyChanged)
+        self.oblImportRegs.connect("cell-edited", self.on_oblImportRegs_cell_edited)
 
         # Add images to buttons
         img = gtk.Image()
@@ -97,8 +114,8 @@ class ImportRegsTab:
         self.wndMain.btnImportClear.set_image(img)
 
         # Assume empty list
-        self.wndMain.oblImportRegs.clear()
-        self.onListEmptyChanged(self.wndMain.oblImportRegs, False)
+        self.oblImportRegs.clear()
+        self.onListEmptyChanged(self.oblImportRegs, False)
 
 
     def openBankFile(self):
@@ -128,7 +145,7 @@ class ImportRegsTab:
 
         # Retrieve registrations and populate import list
         self.regList = regBankObj.getRegistrationObjects()
-        self.wndMain.oblImportRegs.clear()
+        self.oblImportRegs.clear()
 
         i = 0
         for regObj in self.regList:
@@ -149,7 +166,7 @@ class ImportRegsTab:
                 regObj = regObj
             )
 
-            self.wndMain.oblImportRegs.append(entry)
+            self.oblImportRegs.append(entry)
 
         # Show success message
         self.wndMain.setStatusMessage(const.msg["bank-open-success"] % {
@@ -167,7 +184,7 @@ class ImportRegsTab:
         # Store each selected registration to its own file
         count = 0
 
-        for regEntry in self.wndMain.oblImportRegs:
+        for regEntry in self.oblImportRegs:
             # Skip entry if not marked for import or if empty
             if not regEntry.mark or not regEntry.regObj:
                 continue
@@ -205,7 +222,7 @@ class ImportRegsTab:
         '''
         Delegate method called by the UI. Clears the import list.
         '''
-        self.wndMain.oblImportRegs.clear()
+        self.oblImportRegs.clear()
 
 
     def onListEmptyChanged(self, list, hasRows):
@@ -216,3 +233,18 @@ class ImportRegsTab:
         '''
         self.wndMain.btnImportSelectedRegs.set_sensitive(hasRows)
         self.wndMain.btnImportClear.set_sensitive(hasRows)
+
+    # Widget event handlers....................................................
+
+    def on_oblImportRegs_cell_edited(self, *args):         # Manually connected
+        '''
+        Event handler which responds whenever the user edits the name of
+        a registration. Makes sure that no ### EMPTY ### entry can be
+        renamed.
+        '''
+        # Don't allow editing of dummy registrations (### EMPTY ###)
+        regEntry = args[1]
+
+        if not regEntry.regObj:
+            regEntry.name = const.REG_NAME_EMPTY
+            return

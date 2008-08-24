@@ -45,12 +45,12 @@ class ExceptionWithMessage(Exception):
 
     _message = ""
 
-    def __init__(self, cls=None):
+    def __init__(self, data=None):
         '''
         Constructor. Takes the class object as optional parameter cls.
         '''
         if cls:
-            self._message = "%s (%s)" % (self._message, str(cls))
+            self._message = "%s (%s)" % (self._message, str(data))
 
     def __str__(self):
         '''
@@ -118,3 +118,11 @@ class Cancel(ExceptionWithMessage):
     '''
 
     _message = _("The user wishes to cancel the current action.")
+
+
+class InvalidExportFormat(ExceptionWithMessage):
+    '''
+    Exception used to signal an unknown export format.
+    '''
+
+    _message = _("Unknown export format.")

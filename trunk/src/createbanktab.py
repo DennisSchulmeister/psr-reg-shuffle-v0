@@ -41,7 +41,12 @@ import os.path
 import glob
 import gtk.gdk
 import gobject
+
 import kiwi.ui.dialogs
+from kiwi.ui.objectlist    import ObjectList
+from kiwi.ui.objectlist    import Column
+from kiwi.ui.widgets.combo import ProxyComboBox
+
 
 # Import application modules
 import appexceptions
@@ -118,23 +123,58 @@ class CreateBankTab(gobject.GObject):
             (),
         )
 
-        # Initialize and kickstart filter
-        self.allRegs    = []
-        self.prevFilter = const.FILTER_UNDEFINED
+        # Insert ObjectLists into the main window
+        self.oblAvailableRegs = ObjectList(
+            [
+                Column("name",    title=_("Registration Name"), order=gtk.SORT_ASCENDING, searchable=True, editable=True, expand=True),
+                Column("keyName", title=_("Keyboard"), order=gtk.SORT_ASCENDING),
+            ],
+            sortable = True
+        )
 
-        self.connect("reglist-updated", self.filterToAvailableList)
-        self.connect("keyboard-model-changed", self.filterToAvailableList)
-        self.wndMain.cbxNewBankAvailFilter.connect("content-changed", self.filterToAvailableList)
+        self.oblNewBank = ObjectList(
+            [
+                Column("name", title=_("Registration Name"), order=-1, searchable=True, editable=True, expand=True),
+            ]
+        )
 
-        # Connect to main.work_dir_changed signal
-        self.main.connect("work-dir-changed", self.on_main__work_dir_changed)
+        self.wndMain.evtAvailableRegs.add(self.oblAvailableRegs)
+        self.wndMain.evtNewBank.add(self.oblNewBank)
+
+        self.oblAvailableRegs.show()
+        self.oblNewBank.show()
+
+        try:
+            self.oblAvailableRegs.enable_dnd()
+            self.oblNewBank.enable_dnd()
+        except AttributeError:
+            # Work around mising DnD-support in older kiwi versions
+            pass
+
+        # NOTE: Don't set the TreeView reorderable except you're in for some
+        # nasty exceptions if someone really tries to reorder the tree.
+        ## self.oblNewBank.get_treeview().set_reorderable(True)
+
+        self.oblAvailableRegs.connect("cell-edited", self.on_oblAvailableRegs_cell_edited)
+        self.oblNewBank.connect("cell-edited", self.on_oblNewBank_cell_edited)
+        self.oblNewBank.connect("has-rows", self.onNewBankEmptyChanged)
+
+        # Insert combobox for selecting display filter of registrations
+        self.cbxNewBankAvailFilter = ProxyComboBox()
+        self.wndMain.evtNewBankAvailFilter.add(self.cbxNewBankAvailFilter)
+        self.cbxNewBankAvailFilter.show()
+
+        # Insert combobox for selecting keyboard model of new bank files
+        self.cbxNewBankKeyModel = ProxyComboBox()
+        self.wndMain.evtNewBankKeyModel.add(self.cbxNewBankKeyModel)
+        self.cbxNewBankKeyModel.show()
 
         # Connect to drag and drop signals
         # NOTE: Source is always the encapsulated TreeView but destination
         # is the ObjectList which holds the TreeView!
         self.dndAvailableRegs = easydraganddrop.EasyDragAndDrop(
-            srcWidget  = self.wndMain.oblNewBank.get_treeview(),
-            dstWidget  = self.wndMain.oblAvailableRegs,
+            srcWidget  = self.oblNewBank.get_treeview(),
+            dstWidget  = self.oblAvailableRegs,
             checkFunc  = lambda row: True,
             actionFunc = lambda src, dst, row: self.removeColumn(
                 src = src,
@@ -145,8 +185,8 @@ class CreateBankTab(gobject.GObject):
         )
 
         self.dndNewBank = easydraganddrop.EasyDragAndDrop(
-            srcWidget  = self.wndMain.oblAvailableRegs.get_treeview(),
-            dstWidget  = self.wndMain.oblNewBank,
+            srcWidget  = self.oblAvailableRegs.get_treeview(),
+            dstWidget  = self.oblNewBank,
             checkFunc  = lambda row: self.checkCopyRegToNewBank(row),
             actionFunc = lambda src, dst, row: self.copyColumn(
                 src = src,
@@ -156,18 +196,29 @@ class CreateBankTab(gobject.GObject):
             dataFunc   = lambda: self.getDataAvailableRegs()
         )
 
-        # Pre-fill filter combobx
-        self.wndMain.cbxNewBankAvailFilter.clear()
-        self.wndMain.cbxNewBankAvailFilter.append_item(_("Show All"),        const.FILTER_NONE)
-        self.wndMain.cbxNewBankAvailFilter.append_item(_("Compatible Only"), const.FILTER_COMPATIBLE)
-        self.wndMain.cbxNewBankAvailFilter.append_item(_("Selected Model"),  const.FILTER_MODEL)
+        # Initialize and kickstart filter
+        self.allRegs    = []
+        self.prevFilter = const.FILTER_UNDEFINED
 
-        self.wndMain.cbxNewBankAvailFilter.select(const.FILTER_NONE)
-        self.wndMain.cbxNewBankAvailFilter.update(const.FILTER_NONE)
+        self.connect("reglist-updated", self.filterToAvailableList)
+        self.connect("keyboard-model-changed", self.filterToAvailableList)
+        self.cbxNewBankAvailFilter.connect("content-changed", self.filterToAvailableList)
+
+        # Connect to main.work_dir_changed signal
+        self.main.connect("work-dir-changed", self.on_main__work_dir_changed)
+
+        # Pre-fill filter combobx
+        self.cbxNewBankAvailFilter.clear()
+        self.cbxNewBankAvailFilter.append_item(_("Show All"),        const.FILTER_NONE)
+        self.cbxNewBankAvailFilter.append_item(_("Compatible Only"), const.FILTER_COMPATIBLE)
+        self.cbxNewBankAvailFilter.append_item(_("Selected Model"),  const.FILTER_MODEL)
+
+        self.cbxNewBankAvailFilter.select(const.FILTER_NONE)
+        self.cbxNewBankAvailFilter.update(const.FILTER_NONE)
 
         # Pre-fill keyboard model combobox
-        self.wndMain.cbxNewBankKeyModel.clear()
-        self.wndMain.cbxNewBankKeyModel.append_item(const.keyboardNameLong[const.UNKNOWN_MODEL], const.UNKNOWN_MODEL)
+        self.cbxNewBankKeyModel.clear()
+        self.cbxNewBankKeyModel.append_item(const.keyboardNameLong[const.UNKNOWN_MODEL], const.UNKNOWN_MODEL)
 
         try:
             models  = []
@@ -186,14 +237,20 @@ class CreateBankTab(gobject.GObject):
                     continue
 
                 label = const.keyboardNameLong[model]
-                self.wndMain.cbxNewBankKeyModel.append_item(label, model)
+                self.cbxNewBankKeyModel.append_item(label, model)
         except appexceptions.NoClassFound:
             pass
 
-        self.wndMain.cbxNewBankKeyModel.select(const.UNKNOWN_MODEL)
-        self.wndMain.cbxNewBankKeyModel.update(const.UNKNOWN_MODEL)
+        self.cbxNewBankKeyModel.select(const.UNKNOWN_MODEL)
+        self.cbxNewBankKeyModel.update(const.UNKNOWN_MODEL)
 
         self.allowedKeyboardNames = []
+
+        # Connect to content-changed of keyboard model combobox
+        # NOTE: This must be done after the widget has been filled with data
+        # for the first time. Otherwise the event would be triggered with
+        # each new entry and raise a TypeError exception for the first entry.
+        self.cbxNewBankKeyModel.connect("content-changed", self.onKeyboardModelChanged)
 
         # Add images to buttons
         img = gtk.Image()
@@ -226,7 +283,7 @@ class CreateBankTab(gobject.GObject):
         self.connect("newlist-updated", self.checkAllowedButtons)
         self.connect("filter-updated", self.checkAllowedButtons)
         self.connect("keyboard-model-changed", self.checkAllowedButtons)
-        self.wndMain.cbxNewBankKeyModel.connect("content-changed", self.checkAllowedButtons)
+        self.cbxNewBankKeyModel.connect("content-changed", self.checkAllowedButtons)
 
 
     # Work directory access ...................................................
@@ -309,7 +366,7 @@ class CreateBankTab(gobject.GObject):
         regEntry.fileName = newFileName
 
         # Scan list of new bank file and replace old filename if found
-        for newReg in self.wndMain.oblNewBank:
+        for newReg in self.oblNewBank:
             # Skip dummy registrations
             if not newReg.fileName:
                 continue
@@ -326,7 +383,7 @@ class CreateBankTab(gobject.GObject):
                 newReg.name = regEntry.name
 
             # Update displayed list
-            self.wndMain.oblNewBank.update(newReg)
+            self.oblNewBank.update(newReg)
 
         # Delete old file with old name
         if not os.path.samefile(oldFileName, newFileName):
@@ -355,7 +412,7 @@ class CreateBankTab(gobject.GObject):
         # Collect registrations for the dialog
         regEntryList = []
 
-        for entry in self.wndMain.oblAvailableRegs:
+        for entry in self.oblAvailableRegs:
             if not entry.fileName:
                 continue
 
@@ -389,19 +446,19 @@ class CreateBankTab(gobject.GObject):
         criterion.
         '''
         # Update only if filter mode changed
-        currentFilter = self.wndMain.cbxNewBankAvailFilter.get_selected()
+        currentFilter = self.cbxNewBankAvailFilter.get_selected()
 
         if currentFilter == self.prevFilter:
             return
 
         # Pipe entries through filter to ObjectList
-        self.wndMain.oblAvailableRegs.clear()
+        self.oblAvailableRegs.clear()
 
         for regEntry in self.allRegs:
             try:
                 # Test for filter and add to display list
                 self.filterSingleEntry(regEntry, currentFilter)
-                self.wndMain.oblAvailableRegs.append(regEntry)
+                self.oblAvailableRegs.append(regEntry)
             except appexceptions.DoesNotMatchFilter:
                 # Filtered out entry
                 pass
@@ -449,7 +506,7 @@ class CreateBankTab(gobject.GObject):
         and deactivating the keyboard model combobox.
         '''
         # Disable keyboard selection when export list is not empty
-        self.wndMain.cbxNewBankKeyModel.set_sensitive(not hasRows)
+        self.cbxNewBankKeyModel.set_sensitive(not hasRows)
 
         # Emit newlist-changed signal
         self.emit("newlist-updated")
@@ -473,7 +530,7 @@ class CreateBankTab(gobject.GObject):
         available list to the export list.
         '''
         # Get selected row
-        row = self.wndMain.oblAvailableRegs.get_selected()
+        row = self.oblAvailableRegs.get_selected()
 
         if not row:
             return
@@ -484,7 +541,7 @@ class CreateBankTab(gobject.GObject):
             return
 
         # Copy row to export list
-        self.copyColumn(self.wndMain.oblAvailableRegs, self.wndMain.oblNewBank, row)
+        self.copyColumn(self.oblAvailableRegs, self.oblNewBank, row)
 
         # Emit newlist-changed signal
         self.emit("newlist-updated")
@@ -495,9 +552,9 @@ class CreateBankTab(gobject.GObject):
         Delegate method called by the UI. Removes all selected items from the
         export list.
         '''
-        #for entry in self.wndMain.oblNewBank.get_selected_rows():
-        #    self.wndMain.oblNewBank.remove(entry)
-        self.removeColumn(None, None, self.wndMain.oblNewBank.get_selected())
+        #for entry in self.oblNewBank.get_selected_rows():
+        #    self.oblNewBank.remove(entry)
+        self.removeColumn(None, None, self.oblNewBank.get_selected())
 
         # Emit newlist-changed signal
         self.emit("newlist-updated")
@@ -508,7 +565,7 @@ class CreateBankTab(gobject.GObject):
         Delegate method called by the UI. Removes all items from the export
         list.
         '''
-        self.wndMain.oblNewBank.clear()
+        self.oblNewBank.clear()
         self.wndMain.setStatusMessage(const.msg["clear-ok"])
 
 
@@ -518,15 +575,15 @@ class CreateBankTab(gobject.GObject):
         of a new bank file down by one position.
         '''
         # Move selected entry up
-        pos = self.wndMain.oblNewBank.get_selected_row_number()
+        pos = self.oblNewBank.get_selected_row_number()
 
         if not pos or pos < 1:
             return
 
-        row = self.wndMain.oblNewBank.get_selected()
-        self.wndMain.oblNewBank.remove(row)
+        row = self.oblNewBank.get_selected()
+        self.oblNewBank.remove(row)
 
-        self.wndMain.oblNewBank.insert(
+        self.oblNewBank.insert(
             index    = pos - 1,
             instance = row,
             select   = True
@@ -542,15 +599,15 @@ class CreateBankTab(gobject.GObject):
         of a new bank file up by one position.
         '''
         # Move selected entry down
-        pos = self.wndMain.oblNewBank.get_selected_row_number()
+        pos = self.oblNewBank.get_selected_row_number()
 
-        if pos < 0 or pos >= len(self.wndMain.oblNewBank) - 1:
+        if pos < 0 or pos >= len(self.oblNewBank) - 1:
             return
 
-        row = self.wndMain.oblNewBank.get_selected()
-        self.wndMain.oblNewBank.remove(row)
+        row = self.oblNewBank.get_selected()
+        self.oblNewBank.remove(row)
 
-        self.wndMain.oblNewBank.insert(
+        self.oblNewBank.insert(
             index    = pos + 1,
             instance = row,
             select   = True
@@ -594,7 +651,7 @@ class CreateBankTab(gobject.GObject):
         # While at it also apply name changes.
         regList = []
 
-        for regEntry in self.wndMain.oblNewBank:
+        for regEntry in self.oblNewBank:
             regFile = regfile.regfile.RegFile(filename=regEntry.fileName)
             regObj  = regFile.getRegistrationObject()
 
@@ -628,7 +685,7 @@ class CreateBankTab(gobject.GObject):
         the model selected in the keyboard model combobox.
         '''
         # Retrieve selected keyboard model
-        return self.wndMain.cbxNewBankKeyModel.get_selected_data()
+        return self.cbxNewBankKeyModel.get_selected_data()
 
 
     def onKeyboardModelChanged(self, widget):
@@ -683,7 +740,7 @@ class CreateBankTab(gobject.GObject):
         # Check maximum amount
         bankClass = regbank.bankfile.BankFile.getClassForKeyboardName(newBankModel)
 
-        if len(self.wndMain.oblNewBank) >= bankClass.maxReg:
+        if len(self.oblNewBank) >= bankClass.maxReg:
             self.wndMain.setStatusMessage(const.msg["max-allowed-regs"] % (bankClass.maxReg))
             return False
 
@@ -697,7 +754,7 @@ class CreateBankTab(gobject.GObject):
         data dragged from "New Bank" list back to "Available Registrations"
         list.
         '''
-        return self.wndMain.oblNewBank.get_selected()
+        return self.oblNewBank.get_selected()
 
 
     def getDataAvailableRegs(self):
@@ -705,7 +762,7 @@ class CreateBankTab(gobject.GObject):
         Callback function used by EasyDragAndDrop in order to query selected
         data dragged from "Available Registrations" list to "New Bank" list.
         '''
-        return self.wndMain.oblAvailableRegs.get_selected()
+        return self.oblAvailableRegs.get_selected()
 
 
     def copyColumn(self, src, dst, row):
@@ -718,7 +775,7 @@ class CreateBankTab(gobject.GObject):
         self.wndMain.setStatusMessage(const.msg["added-to-bank"] % (row.name))
 
         # Emit newlist-changed signal
-        if dst == self.wndMain.oblNewBank:
+        if dst == self.oblNewBank:
             self.emit("newlist-updated")
 
 
@@ -731,7 +788,7 @@ class CreateBankTab(gobject.GObject):
         if not row:
             return
 
-        self.wndMain.oblNewBank.remove(row)
+        self.oblNewBank.remove(row)
         self.wndMain.setStatusMessage(const.msg["removed-from-bank"] % (row.name))
 
 
@@ -757,15 +814,15 @@ class CreateBankTab(gobject.GObject):
             btnBatch = False
             btnSave  = False
 
-        if len(self.wndMain.oblNewBank) < 1:
+        if len(self.oblNewBank) < 1:
             btnRemove = False
             btnClear  = False
 
-        if len(self.wndMain.oblNewBank) < 2:
+        if len(self.oblNewBank) < 2:
             btnUp     = False
             btnDown   = False
 
-        if len(self.wndMain.oblAvailableRegs) < 2:
+        if len(self.oblAvailableRegs) < 2:
             # NOTE: ### EMPTY ### entry does always exist
             btnAdd   = False
             btnBatch = False
@@ -778,3 +835,23 @@ class CreateBankTab(gobject.GObject):
         self.wndMain.btnClearList.set_sensitive(btnClear)
         self.wndMain.btnNewUp.set_sensitive(btnUp)
         self.wndMain.btnNewDown.set_sensitive(btnDown)
+
+
+    # Widget specific event handlers...........................................
+
+    def on_oblAvailableRegs_cell_edited(self, *args):      # Manually connected
+        '''
+        Event handler which responds whenever the user edits the name of
+        an available registration. The change will be stored to the associated
+        regfile which will also renamed.
+        '''
+        self.availableRegRename(args[1])
+
+
+    def on_oblNewBank_cell_edited(self, *args):            # Manually connected
+        '''
+        Event handler which responds whenever the user edits the name of
+        a registration of a new bank. The call gets delegated to method
+        newBankRegRename of the same class.
+        '''
+        self.newBankRegRename(args[1])

@@ -107,6 +107,9 @@ class BankFile(modelspecific.ModelSpecific):
     # File extension (without leading dot)
     fileExt = ""
 
+    # All known file extensions in a list
+    allFileExtensions = []
+
 
     # Methods to be over-written...............................................
 
@@ -292,3 +295,28 @@ class BankFile(modelspecific.ModelSpecific):
         raise appexceptions.UnknownKeyboardModel(cls)
 
     getKeyboardNameFromFile = classmethod(getKeyboardNameFromFile)
+
+
+    # Helper methods
+    def getAllFileExtensions(cls):
+        '''
+        This static method returns a list of all known file extension. The
+        list gets assembled by visiting all BankFile sub-classes
+        '''
+        # Return already existing list
+        if cls.allFileExtensions:
+            return cls.allFileExtensions
+
+        # Visit BankFile-casses and build new list
+        subClasses = cls.getAllSubclasses()
+
+        for subClass in subClasses:
+            extLow = subClass.fileExt.lower()
+
+            if not extLow in cls.allFileExtensions:
+                cls.allFileExtensions.append(extLow)
+
+        # Return list
+        return cls.allFileExtensions
+
+    getAllFileExtensions = classmethod(getAllFileExtensions)

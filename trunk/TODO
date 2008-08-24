@@ -7,14 +7,7 @@
  * More sensible detection of data directories (data, l18n, ...) in setup
    script (low priority)
 
- * Deos extraction of translateable strings from glade file work? (Yes, but
-   does translation of the glade ui during run-time work?)
-
  * UnitTests, pyLint, Profiler, et al.
-
- * UPDATE MANUAL, README (Note: Batch might sort different than reg list
-   because reg list orders CAPITAL LETTERS before small letter not considering
-   the alphabet.)
 
  * Show exception output in a popup window ???
 
@@ -23,3 +16,9 @@
 
  * On doc/man/make.py CLEAN remove build/, too. Otherwise it belongs to the
    super-user once the programs gets installed system-wide.
+
+ * Print set list tab (V 0.3)
+
+ * Batch processor to not split registrations which go together. (V 0.3)
+
+ * Make sure credits can be translated. (partially done, needs retranslation)

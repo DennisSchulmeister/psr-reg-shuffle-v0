@@ -1,3 +1,17 @@
+2008-08-24  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Added support for YAMAHA PSR-S700.
+ * Refactored MainWindow class. Tab-classes do now create their widgets
+   on their own. The MainWindow object doesn't hold a reference to the tab's
+   widgets anymore.
+ * Splited credits string so that translation works.
+ * Implemented paragmatic prevention of renaming a dummy entry (### EMPTY ###)
+   for import tab.
+ * Implemented "Quick Rename" tab.
+ * Partialy implemented "Print setlist" tab.
+ * Prepared batch dialog for grouping registrations which go together.
+
+
 2008-08-21  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Pragmatic fix for missing button images in Windows version. (overriding

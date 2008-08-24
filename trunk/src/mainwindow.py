@@ -37,9 +37,6 @@ __all__ = [
 
 # Import system modules
 from kiwi.ui.delegates     import GladeDelegate
-from kiwi.ui.objectlist    import ObjectList
-from kiwi.ui.objectlist    import Column
-from kiwi.ui.widgets.combo import ProxyComboBox
 
 import webbrowser
 import os.path
@@ -50,6 +47,8 @@ import const
 import main
 import createbanktab
 import importregstab
+import quickrenametab
+import printsetlisttab
 import informationtab
 import abouttab
 
@@ -67,7 +66,7 @@ class MainWindow(GladeDelegate):
         "nbMain",
         "sbMain",
 
-        # Create bank files pane
+        # Create bank files page
         "evtAvailableRegs",
         "evtNewBankAvailFilter",
         "evtNewBank",
@@ -82,22 +81,45 @@ class MainWindow(GladeDelegate):
         "btnNewUp",                # needs handler (clicked)
         "btnNewDown",              # needs handler (clicked)
 
-        # Import registrations pane
+        # Import registrations page
         "evtImportRegs",
         "btnOpenBankFile",         # needs handler (clicked)
         "btnImportSelectedRegs",   # needs handler (clicked)
         "btnImportClear",          # needs handler (clicked)
 
-        # Keyboard information pane
+        # Quick rename page
+        "lblRenameRegs",
+        "evtRenameRegs",
+        "btnRenameOpen",           # needs handler (clicked)
+        "btnRenameSave",           # needs handler (clicked)
+        "btnRenameUp",             # needs handler (clicked)
+        "btnRenameDown",           # needs handler (clicked)
+        "btnRenameClear",          # needs handler (clicked)
+
+        # Print setlist page
+        "evtSetlist",
+        "btnSetlistAdd",           # needs handler (clicked)
+        "btnSetlistRemove",        # needs handler (clicked)
+        "btnSetlistUp",            # needs handler (clicked)
+        "btnSetlistDown",          # needs handler (clicked)
+        "btnSetlistClear",         # needs handler (clicked)
+        "btnSetlistPrint",         # needs handler (clicked)
+        "btnSetlistExportText",    # needs handler (clicked)
+        "btnSetlistExportCSV",     # needs handler (clicked)
+
+
+        # Keyboard information page
         "lblKeyboards",
 
-        # About pane
+        # About page
         "imgAbout",
         "lblAbout",
         "linkAbout",               # needs handler (clicked)
         "lblThanks",
     ]
 
+
+    # Create and display main window.............................................
 
     def __init__(self):
         '''
@@ -131,73 +153,13 @@ class MainWindow(GladeDelegate):
         # Set directory chooser's current path
         self.fcBtnDataDir.set_filename(self.main.workDir)
 
-        # Insert ObjectLists into the main window
-        self.oblAvailableRegs = ObjectList(
-            [
-                Column("name",    title=_("Registration Name"), order=gtk.SORT_ASCENDING, searchable=True, editable=True, expand=True),
-                Column("keyName", title=_("Keyboard"), order=gtk.SORT_ASCENDING),
-            ],
-            sortable = True
-        )
-
-        self.oblNewBank = ObjectList(
-            [
-                Column("name", title=_("Registration Name"), order=-1, searchable=True, editable=True, expand=True),
-            ]
-        )
-
-        self.oblImportRegs = ObjectList(
-            [
-                Column("mark", title=_("Import"), data_type=bool, editable=True),
-                Column("pos",  title=_("Number"), editable=False),
-                Column("name", title=_("Registration Name"), editable=True, searchable=True, expand=True),
-            ]
-        )
-
-        self.evtAvailableRegs.add(self.oblAvailableRegs)
-        self.evtNewBank.add(self.oblNewBank)
-        self.evtImportRegs.add(self.oblImportRegs)
-
-        self.oblAvailableRegs.show()
-        self.oblNewBank.show()
-        self.oblImportRegs.show()
-
-        try:
-            self.oblAvailableRegs.enable_dnd()
-            self.oblNewBank.enable_dnd()
-        except AttributeError:
-            # Work around mising DnD-support in older kiwi versions
-            pass
-
-        # NOTE: Don't set the TreeView reorderable except you're in for some
-        # nasty exceptions if someone really tries to reorder the tree.
-        ## self.oblNewBank.get_treeview().set_reorderable(True)
-
-        self.oblAvailableRegs.connect("cell-edited", self.on_oblAvailableRegs_cell_edited)
-        self.oblNewBank.connect("cell-edited", self.on_oblNewBank_cell_edited)
-        self.oblNewBank.connect("has-rows", self.on_oblNewBank_has_rows)
-        self.oblImportRegs.connect("has-rows", self.on_oblImportRegs_has_rows)
-
-        # Insert combobox for selecting display filter of registrations
-        self.cbxNewBankAvailFilter = ProxyComboBox()
-        self.evtNewBankAvailFilter.add(self.cbxNewBankAvailFilter)
-        self.cbxNewBankAvailFilter.show()
-
-        # Insert combobox for selecting keyboard model of new bank files
-        self.cbxNewBankKeyModel = ProxyComboBox()
-        self.evtNewBankKeyModel.add(self.cbxNewBankKeyModel)
-        self.cbxNewBankKeyModel.show()
-
         # Prepare delegates for driving the tab's contents
-        self.createBankTab  = createbanktab.CreateBankTab(wndMain=self)
-        self.importRegsTab  = importregstab.ImportRegsTab(wndMain=self)
-        self.informationTab = informationtab.InformationTab(wndMain=self)
-        self.aboutTab       = abouttab.AboutTab(wndMain=self)
-
-        # Connect to content-changed of keyboard model combobox
-        # NOTE: Must be after initialization of delegates above because the
-        # signal will be triggered right after connecting.
-        self.cbxNewBankKeyModel.connect("content-changed", self.on_cbxNewBankKeyModel_content_changed)
+        self.createBankTab   = createbanktab.CreateBankTab(wndMain=self)
+        self.importRegsTab   = importregstab.ImportRegsTab(wndMain=self)
+        self.quickRenameTab  = quickrenametab.QuickRenameTab(wndMain=self)
+        self.printSetlistTab = printsetlisttab.PrintSetlistTab(wndMain=self)
+        self.informationTab  = informationtab.InformationTab(wndMain=self)
+        self.aboutTab        = abouttab.AboutTab(wndMain=self)
 
 
     def run(self):
@@ -218,6 +180,8 @@ class MainWindow(GladeDelegate):
         # Push new message onto statusbar
         self.sbLastMsgId = self.sbMain.push(self.sbContext, msg)
 
+
+    # Main window event handlers...............................................
 
     def updateAvailableRegList(self):
         '''
@@ -256,50 +220,7 @@ class MainWindow(GladeDelegate):
         self.setStatusMessage(const.msg["changed-dir"] % (self.main.workDir))
 
 
-    def on_oblAvailableRegs_cell_edited(self, *args):      # Manually connected
-        '''
-        Event handler which responds whenever the user edits the name of
-        an available registration. The change will be stored to the associated
-        regfile which will also renamed.
-        '''
-        self.createBankTab.availableRegRename(args[1])
-
-
-    def on_oblNewBank_cell_edited(self, *args):            # Manually connected
-        '''
-        Event handler which responds whenever the user edits the name of
-        a registration of a new bank. The call gets delegated by the UI to a
-        CreateBankTab object.
-        '''
-        self.createBankTab.newBankRegRename(args[1])
-
-
-    def on_cbxNewBankKeyModel_content_changed(self, widget):   # Man. connected
-        '''
-        Event handler which gets triggered whenever the user changes the
-        keyboard model of a new registration bank. The call gets delegated
-        to a CreateBankTab object.
-        '''
-        self.createBankTab.onKeyboardModelChanged(widget)
-
-
-    def on_oblNewBank_has_rows(self, list, hasRows):       # Manually connected
-        '''
-        Event handler which gets triggered whenever a new bank goes from
-        empty to non-empty or vice versa. The call gets delegated to a
-        CreateBankTab object.
-        '''
-        self.createBankTab.onNewBankEmptyChanged(list, hasRows)
-
-
-    def on_oblImportRegs_has_rows(self, list, hasRows):    # Manually connected
-        '''
-        Event handler which gets triggeres whenever the import list changes
-        its empty state. The call gets delegated to a ImportRegsTab object
-        mainly for enabling or disabling buttons.
-        '''
-        self.importRegsTab.onListEmptyChanged(list, hasRows)
-
+    # Event handlers for "Create bank file" page...............................
 
     def on_btnAddSelected__clicked(self, *args):
         '''
@@ -355,6 +276,8 @@ class MainWindow(GladeDelegate):
         self.createBankTab.newBankMoveSelectedDown()
 
 
+    # Event handlers from "Import Registrations" page..........................
+
     def on_btnOpenBankFile__clicked(self, *args):
         '''
         Event handler for the open bank file button. Delegates the call to an
@@ -378,6 +301,115 @@ class MainWindow(GladeDelegate):
         '''
         self.importRegsTab.clearList()
 
+
+    # Event handlers for "Quick Rename" page...................................
+    def on_btnRenameOpen__clicked(self, *args):
+        '''
+        Event handler for "Open Bank File..." button on the quick rename page.
+        Delegates the call to an QuickRenameTab object.
+        '''
+        self.quickRenameTab.openBankFile()
+
+
+    def on_btnRenameSave__clicked(self, *args):
+        '''
+        Event handler for "Save" button on the quick rename page. Delegates
+        the call to an QuickRenameTab object.
+        '''
+        self.quickRenameTab.saveBankFile()
+
+
+    def on_btnRenameUp__clicked(self, *args):
+        '''
+        Event handler for "Up" button on the quick rename page. Delegates
+        the call to an QuickRenameTab object.
+        '''
+        self.quickRenameTab.moveSelectedUp()
+
+
+    def on_btnRenameDown__clicked(self, *args):
+        '''
+        Event handler for "Down" button on the quick rename page. Delegates
+        the call to an QuickRenameTab object.
+        '''
+        self.quickRenameTab.moveSelectedDown()
+
+
+    def on_btnRenameClear__clicked(self, *args):
+        '''
+        Event handler for "Clear" button on the quick rename page. Delegates
+        the call to an QuickRenameTab object.
+        '''
+        self.quickRenameTab.clearList()
+
+
+    # Event handlers for "Print Setlist" page..................................
+
+    def on_btnSetlistAdd__clicked(self, *args):
+        '''
+        Event handler for the Add button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.addBankFile()
+
+
+    def on_btnSetlistRemove__clicked(self, *args):
+        '''
+        Event handler for the Remove button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.removeSelected()
+
+
+    def on_btnSetlistUp__clicked(self, *args):
+        '''
+        Event handler for the ### button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.moveSelectedUp()
+
+
+    def on_btnSetlistDown__clicked(self, *args):
+        '''
+        Event handler for the Down button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.moveSelectedDown()
+
+
+    def on_btnSetlistClear__clicked(self, *args):
+        '''
+        Event handler for the Clear button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.clearList()
+
+
+    def on_btnSetlistPrint__clicked(self, *args):
+        '''
+        Event handler for the Print button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.export("PRINT")
+
+
+    def on_btnSetlistExportText__clicked(self, *args):
+        '''
+        Event handler for the ExportText button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.export("TEXT")
+
+
+    def on_btnSetlistExportCSV__clicked(self, *args):
+        '''
+        Event handler for the Export CSV button on the print setlist page.
+        Delegates the call to a PrintSetlistTab object.
+        '''
+        self.printSetlistTab.export("CSV")
+
+
+    # Event handlers for "About" page..........................................
 
     def on_linkAbout__clicked(self, *args):
         '''
