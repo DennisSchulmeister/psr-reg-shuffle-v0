@@ -49,7 +49,7 @@ class ExceptionWithMessage(Exception):
         '''
         Constructor. Takes the class object as optional parameter cls.
         '''
-        if cls:
+        if data:
             self._message = "%s (%s)" % (self._message, str(data))
 
     def __str__(self):

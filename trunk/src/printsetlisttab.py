@@ -378,7 +378,7 @@ class PrintSetlistTab(gobject.GObject):
         pass
 
 
-    def exportRegistration(regObj=regObj, format="", exportData=None):
+    def exportRegistration(regObj=None, format="", exportData=None):
         '''
         Called during the export loop within the export function. Denotes a
         registration within the exported file.
