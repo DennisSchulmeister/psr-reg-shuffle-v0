@@ -98,6 +98,7 @@ class MainWindow(GladeDelegate):
 
         # Print setlist page
         "evtSetlist",
+        "entSetlistName",
         "btnSetlistAdd",           # needs handler (clicked)
         "btnSetlistRemove",        # needs handler (clicked)
         "btnSetlistUp",            # needs handler (clicked)

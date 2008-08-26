@@ -136,6 +136,22 @@ class BankFile_PSR2000(bankfile.BankFile):
             self.regList[i] = self.createRegistrationObject(binary)
 
 
+    # Static helper methods....................................................
+
+    def stripName(cls, name=""):
+        '''
+        This method needs to be reimplemented by subclasses. It's meant to
+        remove file extions and other non-name data (like icons) from name
+        strings.
+        '''
+        return util.stripNameYamaha(
+            fileExt = cls.fileExt,
+            name    = name
+        )
+
+    stripName = classmethod(stripName)
+
+
     # File access..............................................................
 
     def storeBankFile(self, filename):

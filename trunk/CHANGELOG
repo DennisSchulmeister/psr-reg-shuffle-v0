@@ -1,3 +1,10 @@
+2008-08-25  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Object-oriented redesign of export algorithm. (No printing yet)
+ * stripName method for all ModelSpecific sub-classes. Strips file extionsions
+   and other non-name data (like icons) from name strings.
+
+
 2008-08-24  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Added support for YAMAHA PSR-S700.

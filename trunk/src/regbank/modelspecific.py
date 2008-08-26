@@ -105,6 +105,19 @@ class ModelSpecific:
         self.actualKeyboardName = keyboardName
 
 
+    # Static helper methods....................................................
+
+    def stripName(cls, name=""):
+        '''
+        This method needs to be reimplemented by subclasses. It's meant to
+        remove file extions and other non-name data (like icons) from name
+        strings.
+        '''
+        return name
+
+    stripName = classmethod(stripName)
+
+
     # Lookup of suitable sub-class by keyboard model...........................
 
     def getKeyboardName(self):

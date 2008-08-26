@@ -79,3 +79,32 @@ def calculateFileNameFromRegName(name, workDir):
         fileName = os.path.join(workDir, fileName)
 
     return fileName
+
+
+def stripNameYamaha(name="", fileExt=""):
+    '''
+    This function strips object names as they are used by several Yamaha
+    keyboard models. It does so by removing the file extension and the
+    icon descriptor. (Typical name string: "xyz.S136.reg").
+
+    This method is not meant for direct usage. It's just there to prevent
+    duplicate implementation by several Yamaha related BankFile and
+    Registration subclasses.
+
+    Don't use this method directly. Use the regbank.* classes instead.
+    '''
+    # Strip extension
+    nameUpper    = name.upper()
+    fileExtUpper = "." + fileExt.upper()
+
+    if fileExt:
+        if nameUpper.endswith(fileExtUpper):
+            name = name[: - len(fileExtUpper)]
+            nameUpper = name.upper()
+
+    # Strip icon name
+    if nameUpper[-5:-3] == ".S":
+        name = name[:-5]
+        nameUpper = name.upper()
+
+    return name

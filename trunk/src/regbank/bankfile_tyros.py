@@ -134,6 +134,7 @@ class BankFile_Tyros(bankfile.BankFile):
 
 
     # Object initialization....................................................
+
     def __init__(self, filename="", file=None, keyboardName=""):
         '''
         Constructor. If neither a filename nor a file object is given a new
@@ -193,6 +194,22 @@ class BankFile_Tyros(bankfile.BankFile):
 
             # Put registration object into the list
             self.regList.append(regObj)
+
+
+    # Static helper methods....................................................
+
+    def stripName(cls, name=""):
+        '''
+        This method needs to be reimplemented by subclasses. It's meant to
+        remove file extions and other non-name data (like icons) from name
+        strings.
+        '''
+        return util.stripNameYamaha(
+            fileExt = cls.fileExt,
+            name    = name
+        )
+
+    stripName = classmethod(stripName)
 
 
     # File access..............................................................

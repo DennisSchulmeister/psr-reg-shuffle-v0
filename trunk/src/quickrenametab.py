@@ -312,7 +312,7 @@ class QuickRenameTab(gobject.GObject):
             heading = _("No open file")
         else:
             filename = os.path.split(self.filename)[1]
-            heading  = _("Content of %s") % (filename)
+            heading  = _("Content of \"%s\"") % (filename)
 
         self.wndMain.lblRenameRegs.set_text(heading)
 

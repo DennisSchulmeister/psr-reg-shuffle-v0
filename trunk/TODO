@@ -11,9 +11,6 @@
 
  * Show exception output in a popup window ???
 
- * Respond to ascii-exception UnicodeEncodeError (Umlauts). Maybe filter them
-   out or so ...
-
  * On doc/man/make.py CLEAN remove build/, too. Otherwise it belongs to the
    super-user once the programs gets installed system-wide.
 
@@ -21,4 +18,12 @@
 
  * Batch processor to not split registrations which go together. (V 0.3)
 
- * Make sure credits can be translated. (partially done, needs retranslation)
+ * Make sure credits can be translated. (partially done, needs retranslation) (V 0.3)
+
+ * Respond to ascii-exception UnicodeEncodeError (Umlauts). Maybe filter them
+   out or so ...
+
+   OR FIX: Replace ascii converter (reg names) with better match. (At least
+   on Tyros) (V 0.3 ??)
+
+ * FIX: Only glade ui gets localized under Windows. (V 0.3)

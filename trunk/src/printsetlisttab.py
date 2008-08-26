@@ -48,6 +48,8 @@ from kiwi.ui.objectlist    import Column
 
 # Import application modules
 import regbank.bankfile
+import appexceptions
+import exportsetlist
 import mainwindow
 import main
 import util
@@ -101,8 +103,8 @@ class PrintSetlistTab(gobject.GObject):
         # Insert ObjectList into main window
         self.oblSetlist = ObjectList(
             [
-                Column("filename", title=_("Bank File"), order=gtk.SORT_ASCENDING, searchable=True, expand=True),
-                Column("keyName",  title=_("Keyboard"),  order=gtk.SORT_ASCENDING),
+                Column("shortname", title=_("Bank File"), order=gtk.SORT_ASCENDING, searchable=True, expand=True),
+                Column("keyName",   title=_("Keyboard"),  order=gtk.SORT_ASCENDING),
             ]
         )
 
@@ -280,141 +282,28 @@ class PrintSetlistTab(gobject.GObject):
 
         Otherwise appexceptions.InvalidExportFormat is raised.
         '''
-        # Check export format
-        if  not format == const.EXPORT_PRINT \
-        and not format == const.EXPORT_TEXT  \
-        and not format == const.EXPORT_CSV:
-            raise appexceptions.InvalidExportFormat(format)
-
-        # Ask for filename etc.
+        # Perform export
         try:
-            exportData = self.prepareExport(format=format)
-        except appexceptions.Cancel:
-            # Abort
-            return
+            # Get name of setlist
+            name = self.wndMain.entSetlistName.get_text()
 
-        # Export setlist
-        for bankEntry in self.oblSetlist:
-            # Export start of new bank
-            self.exportNewBank(
-                bankEntry  = bankEntry,
-                format     = format,
-                exportData = exportData
+            # Get class according to export type (might throw InvalidExportFormat)
+            exportCls = exportsetlist.ExportSetlistBase.getClassByExportType(format)
+
+            # Process
+            exportObj = exportCls(
+                wndMain = self.wndMain,
+                name = name,
+                setlistEntries = self.oblSetlist[:]
             )
 
-            # Export single registrations
-            for regObj in bankEntry.bankObj.getRegistrationObjects():
-                self.exportRegistration(
-                    regObj     = regObj,
-                    format     = format,
-                    exportData = exportData
-                )
-
-        # Finish export
-        self.finishExport(self, format="", data=exportData)
-
-
-    def prepareExport(self, format=""):
-        '''
-        This is the first step of a setlist export. It asks the user for a
-        filename or does nothing for printing depending on the format string
-        given. Format can be:
-
-        * const.EXPORT_PRINT
-        * const.EXPORT_TEXT
-        * const.EXPORT_CSV
-
-        Otherwise appexceptions.InvalidExportFormat is raised. Raises
-        appexceptions.Cancel if the user hits Cancel or Abort.
-
-        Return value is either a file object or None.
-        '''
-        retValue = None
-
-        # Prepare print job
-        if format == const.EXPORT_PRINT:
-            pass
-
-        # Ask for filename of text file
-        elif format == const.EXPORT_TEXT:
-            fileName = kiwi.ui.dialogs.save(
-                title        = _("Save Text File"),
-                parent       = self.wndMain.wndMain,
-                current_name = "*.txt"
-            )
-
-            if filename:
-                retValue = open(filename, "w")
-            else:
-                raise appexceptions.Cancel()
-
-        # Ask for filename of csv file
-        elif format == const.EXPORT_CSV:
-            fileName = kiwi.ui.dialogs.save(
-                title        = _("Save CSV File"),
-                parent       = self.wndMain.wndMain,
-                current_name = "*.csv"
-            )
-
-            if filename:
-                retValue = open(filename, "w")
-            else:
-                raise appexceptions.Cancel()
-
-        # Unknown format string
-        else:
-            raise appexceptions.InvalidExportFormat(format)
-
-        # Return result
-        return retValue
-
-
-    def exportNewBank(bankEntry=None, format="", exportData=None):
-        '''
-        Called during the export loop within the export function. Denotes a
-        new bank file within the exported file.
-        '''
-        ############## TODO #######################
-        pass
-
-
-    def exportRegistration(regObj=None, format="", exportData=None):
-        '''
-        Called during the export loop within the export function. Denotes a
-        registration within the exported file.
-        '''
-        ############## TODO #######################
-        pass
-
-
-    def finishExport(self, format="", exportData=None):
-        '''
-        Finishes the export operation. Takes a export format string and
-        the data object using during export.
-
-        Might raise appexceptions.InvalidExportFormat
-        '''
-        # Close export file (TEXT, CSV)
-        if format == const.EXPORT_TEXT \
-        or format == const.EXPORT_CSV:
-            if exportData:
-                # Close export file
-                exportData.close()
-
-                # Give success message
-                self.wndMain.setStatusMessage(const.msg["setlist-export-ok"] % (exportData.name))
-
-        # Start print job (PRINT)
-        elif format == const.EXPORT_PRINT:
-            pass
-            ############## TODO #################
+            successMsg = exportObj.do()
 
             # Give success message
-            self.wndMain.setStatusMessage(const.msg["setlist-print-ok"])
-
-        # Unknown format string
-        else:
-            raise appexceptions.InvalidExportFormat(format)
+            if successMsg:
+                self.wndMain.setStatusMessage(successMsg)
+        except appexceptions.Cancel:
+            pass
 
 
     # Widget event handerls.....................................................
@@ -463,8 +352,12 @@ class SetlistEntry:
         '''
         Constructor. Just stores the given parameters
         '''
+        shortname = os.path.split(filename)[1]
+        if bankObj:
+            shortname = bankObj.stripName(shortname)
+
         self.filename  = filename
-        self.shortname = os.path.split(filename)[1]
+        self.shortname = shortname
         self.model     = model
         self.keyName   = keyName
         self.bankObj   = bankObj

@@ -41,6 +41,7 @@ import codecs
 # Import application modules
 import registration
 from .. import const
+from .. import util
 
 
 class Registration_PSR2000(registration.Registration):
@@ -51,6 +52,8 @@ class Registration_PSR2000(registration.Registration):
     # Short names of supported keyboard models
     keyboardNames = [const.YAMAHA_PSR2000]
 
+
+    # Object creation..........................................................
 
     def __init__(self, keyboardName=""):
         '''
@@ -66,6 +69,23 @@ class Registration_PSR2000(registration.Registration):
         self.to_ascii = lambda t: self.encoder(t)[0]
         self.to_ucode = lambda t: self.decoder(t)[0]
 
+
+    # Static helper methods....................................................
+
+    def stripName(cls, name=""):
+        '''
+        This method needs to be reimplemented by subclasses. It's meant to
+        remove file extions and other non-name data (like icons) from name
+        strings.
+        '''
+        return util.stripNameYamaha(
+            name    = name
+        )
+
+    stripName = classmethod(stripName)
+
+
+    # Data access..............................................................
 
     def setName(self, name):
         '''
