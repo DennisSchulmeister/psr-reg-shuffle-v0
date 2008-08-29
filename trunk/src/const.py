@@ -233,5 +233,9 @@ msg = {
     "removed-from-bank":  _("Removed '%s' from new bank."),
     "n-banks-created":    _("Successfully created %i registration banks."),
     "setlist-export-ok":  _("Successfully exported setlist to '%s'."),
-    "setlist-print-ok":   _("Started print job with setlist."),
+    "setlist-print-ok":   _("Started print job: '%s'"),
+    "setlist-print-err":  _("PRINT ERROR: %s"),
+    "setlist-print-cnc":  _("Print operation canceled."),
+    "printjob-name":      _("PSR setlist: %s"),
+    "setlist-page-head":  _("<b>%(name)s</b>\nPage %(page)s from %(pages)s"),
 }

@@ -14,8 +14,6 @@
  * On doc/man/make.py CLEAN remove build/, too. Otherwise it belongs to the
    super-user once the programs gets installed system-wide.
 
- * Print set list tab (V 0.3)
-
  * Batch processor to not split registrations which go together. (V 0.3)
 
  * Make sure credits can be translated. (partially done, needs retranslation) (V 0.3)
@@ -27,3 +25,5 @@
    on Tyros) (V 0.3 ??)
 
  * FIX: Only glade ui gets localized under Windows. (V 0.3)
+
+ * Nice manual (far beyond man page) with lots of pictures
