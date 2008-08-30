@@ -39,6 +39,7 @@ import gobject
 import kiwi.environ
 import os.path
 import os
+import sys
 import gtk
 
 # Import application modules

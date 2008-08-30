@@ -49,8 +49,13 @@ class ExceptionWithMessage(Exception):
         '''
         Constructor. Takes the class object as optional parameter cls.
         '''
-        if data:
-            self._message = "%s (%s)" % (self._message, str(data))
+        pass
+
+        ## NOTE: Commented since the data string doesn't help much and doesn't
+        ## look nice in the excepthook dialog.
+        # if data:
+        #     self._message = "%s\n(%s)" % (self._message, str(data))
+
 
     def __str__(self):
         '''

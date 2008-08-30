@@ -41,10 +41,12 @@ from kiwi.ui.delegates     import GladeDelegate
 import webbrowser
 import os.path
 import gtk
+import sys
 
 # Import application modules
 import const
 import main
+import exceptiondialog
 import createbanktab
 import importregstab
 import quickrenametab
@@ -167,7 +169,23 @@ class MainWindow(GladeDelegate):
         '''
         Shows the main window and starts the main event loop.
         '''
+        # Set up exception hook dialog
+        sys.excepthook = lambda type, value, traceback: self.showExceptionDialog(type, value, traceback)
+
+        # Run GTK+ event loop
         self.show_and_loop()
+
+
+    def showExceptionDialog(self, type, value, traceback):
+        '''
+        Exception hook which catches all exception not handled otherwise by
+        the program. Opens a dialog with an explaining text and traceback. The
+        dialog allows to save the traceback to a file for reporting back.
+        '''
+        dlg = exceptiondialog.ExceptionDialog(type, value, traceback)
+        dlg.show()
+
+        return True
 
 
     def setStatusMessage(self, msg):

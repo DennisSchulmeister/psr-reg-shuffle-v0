@@ -382,7 +382,11 @@ class ExportSetlistPrint(ExportSetlistBase):
         self.addCurrentBank()
 
         # Initialize new bank heading
-        self.currentBank = "<big><b>%s</b></big>\n" % (setlistEntry.shortname)
+        bankName = setlistEntry.shortname
+        bankName = bankName.replace("<", "&lt;")
+        bankName = bankName.replace(">", "&gt;")
+
+        self.currentBank = "<big><b>%s</b></big>\n" % (bankName)
         self.currentBank = self.currentBank.replace("&", "&amp;")
 
         # Reset registration counter
@@ -398,6 +402,8 @@ class ExportSetlistPrint(ExportSetlistBase):
         if regObj:
             regName = regObj.stripName(regObj.getName())
             regName = regName.replace("&", "&amp;")
+            regName = regName.replace("<", "&lt;")
+            regName = regName.replace(">", "&gt;")
         else:
             regName = const.REG_NAME_EMPTY
 

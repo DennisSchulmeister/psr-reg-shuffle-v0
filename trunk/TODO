@@ -9,8 +9,6 @@
 
  * UnitTests, pyLint, Profiler, et al.
 
- * Show exception output in a popup window ???
-
  * On doc/man/make.py CLEAN remove build/, too. Otherwise it belongs to the
    super-user once the programs gets installed system-wide.
 
