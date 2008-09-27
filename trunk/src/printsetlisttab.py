@@ -219,6 +219,7 @@ class PrintSetlistTab(gobject.GObject):
         Delegate method called by the UI. Clears the import list.
         '''
         self.oblSetlist.clear()
+        self.wndMain.entSetlistName.set_text("")
 
 
     def moveSelectedUp(self):

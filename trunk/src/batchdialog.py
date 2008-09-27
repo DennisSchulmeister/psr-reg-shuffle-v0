@@ -138,8 +138,9 @@ class BatchDialog(GladeDelegate):
             sortCriterion = self.cbxBatchSortBy.get_selected()
             savePath      = self.fcBtnBatchSave.get_filename()
             namePattern   = self.entBatchFilename.get_text()
+            trailingCount = self.spinBatchGroup.get_value()
 
-            amount = self.process(sortCriterion, savePath, namePattern)
+            amount = self.process(sortCriterion, savePath, namePattern, trailingCount)
 
             self.dlgBatch.hide()
             return amount
@@ -203,65 +204,99 @@ class BatchDialog(GladeDelegate):
 
     # Batch processing ........................................................
 
-    def process(self, sortCriterion, savePath, namePattern):
+    def process(self, sortCriterion, savePath, namePattern, trailingCount):
         '''
         This method performs the actual processing. It returns the amount of
         created bank files.
         '''
+        # Build list of registration sets thus grouping them
+        regSets = self.buildRegSet(count=trailingCount)
+
         # Sort list by selected criterion
         if sortCriterion == const.SORT_BY_NAME_ASC:
             # Sort by name (ascending)
-            self.regEntryList.sort(key=lambda e: e.name.upper())
+            regSets.sort(key=lambda e: e.baseName.upper())
         elif sortCriterion == const.SORT_BY_NAME_DESC:
             # Sort by name (descending)
-            self.regEntryList.sort(key=lambda e: e.name.upper(), reverse=True)
+            regSets.sort(key=lambda e: e.baseName.upper(), reverse=True)
         else:
             # Random order
-            random.shuffle(self.regEntryList)
+            random.shuffle(regSets)
+
+        # Calculate distribution to bank files
+        regsPerBank = self.bankFileClass.maxReg
+        currentBank = None
+        newBanks    = []
+
+        for rset in regSets:
+            # Try to add current set of registrations
+            redo = True
+
+            while redo:
+                # Create bank container if needed
+                if not currentBank:
+                    currentBank = newBank()
+                    currentBank.firstName = ""
+                    currentBank.lastName  = ""
+                    currentBank.regs = []
+
+                # Add current set if possible otherwise
+                # retry with new bank container
+                remainingRegs  = regsPerBank - len(currentBank.regs)
+                additionalRegs = len(rset.regs)
+
+                if additionalRegs <= remainingRegs:
+                    # Set can safely be added
+                    currentBank.regs += rset.regs
+                    redo = False
+                elif additionalRegs > regsPerBank \
+                and  remainingRegs  > 0:
+                    # Set needs to be splited anyway
+                    currentBank.regs += rset.regs[:remainingRegs]
+                    rset.regs = rset.regs[remainingRegs:]
+                    redo = True
+                else:
+                    # Set doesn't fit anymore
+                    if currentBank.regs:
+                        currentBank.firstName = currentBank.regs[0].name
+                        currentBank.lastName  = currentBank.regs[-1].name
+
+                    currentBank.regs += (None,) * remainingRegs
+                    newBanks.append(currentBank)
+
+                    currentBank = None
+                    redo = True
+
+        # Prevent off-by-one error
+        if currentBank.regs:
+            currentBank.firstName = currentBank.regs[0].name
+            currentBank.lastName  = currentBank.regs[-1].name
+
+        currentBank.regs += (None,) * remainingRegs
+        newBanks.append(currentBank)
 
         # Create bank files
-        storeEntries = []
-        regsPerBank  = self.bankFileClass.maxReg
-        amountFiles  = 0
+        amountFiles = 0
 
-        while self.regEntryList:
-            # Remember adjacend registration names from adjacent packages
+        for index in range(len(newBanks)):
+            # Get adjacent registration names
+            currBank  = newBanks[index]
+            firstName = currBank.firstName
+            lastName  = currBank.lastName
+
             try:
-                leadingName = storeEntries[len(storeEntries) - 1].name
+                prevBank = newBanks[index - 1]
+                leadingName = [regEntry.name for regEntry in prevBank.regs if regEntry][-1]
             except IndexError:
-                # First run
+                prevBank = None
                 leadingName = ""
 
             try:
-                trailingName = self.regEntryList[regsPerBank].name
+                nextBank = newBanks[index + 1]
+                trailingName = [regEntry.name for regEntry in nextBank.regs if regEntry][0]
             except IndexError:
-                # Last run
+                nextBank = None
                 trailingName = ""
-
-            # Slice out next package
-            storeEntries = self.regEntryList[:regsPerBank]
-            self.regEntryList = self.regEntryList[regsPerBank:]
-
-            if not storeEntries:
-                break
-
-            # Remember first and last name of current package
-            firstName = storeEntries[0].name
-            lastName  = storeEntries[len(storeEntries) - 1].name
-
-            # Create registration objects
-            regList = []
-
-            for regEntry in storeEntries:
-                try:
-                    regFile = regfile.regfile.RegFile(filename=regEntry.fileName)
-                    regObj  = regFile.getRegistrationObject()
-                except regfile.appexceptions.UnknownFileFormat:
-                    regObj = None
-                except regbank.appexceptions.UnknownKeyboardModel:
-                    rebObj = None
-
-                regList.append(regObj)
 
             # Calculate filename
             amountFiles += 1
@@ -273,6 +308,23 @@ class BatchDialog(GladeDelegate):
 
             filename = os.path.join(savePath, filename)
 
+            # Create list of registration objects
+            regList = []
+
+            for regEntry in currBank.regs:
+                if regEntry:
+                    try:
+                        regFile = regfile.regfile.RegFile(filename=regEntry.fileName)
+                        regObj  = regFile.getRegistrationObject()
+                    except regfile.appexceptions.UnknownFileFormat:
+                        regObj = None
+                    except regbank.appexceptions.UnknownKeyboardModel:
+                        regObj = None
+                else:
+                    regObj = None
+
+                regList.append(regObj)
+
             # Store bank file
             bankFile = self.bankFileClass(keyboardName=self.keyboardName)
             bankFile.setRegistrationObjects(regList)
@@ -280,6 +332,53 @@ class BatchDialog(GladeDelegate):
 
         # Return amount of created bank files
         return amountFiles
+
+
+    def buildRegSet(self, count):
+        '''
+        Builds a list of registration sets. Each set contains at least one
+        registration. Depending on the amount of trailing letters given it
+        may contain several registraions whose names differ only in the
+        trailing letters.
+
+        Returns a list of regSet objects.
+        '''
+        # Scan adjacent entries of serted list
+        regEntries = self.regEntryList
+        regEntries.sort(key=lambda e: e.name.upper())
+
+        count = int(count)
+        if count:
+            regNames = [regEntry.name[:-count] for regEntry in regEntries]
+        else:
+            regNames = [regEntry.name for regEntry in regEntries]
+
+        regSets  = []
+        prevName = "~" * 100
+        prevSet  = None
+
+        for name, entry in zip(regNames, regEntries):
+            # Find current entrie's set
+            if not name == prevName:
+                if prevSet:
+                    prevSet.regs.sort(key=lambda e: e.name.upper())
+                    regSets.append(prevSet)
+
+                prevSet = regSet()
+                prevSet.baseName = name
+                prevSet.regs = []
+
+            prevSet.regs.append(entry)
+
+            # Remember previous entrie's data
+            prevName = name
+
+        # Prevent off-by-one error
+        prevSet.regs.sort(key=lambda e: e.name.upper())
+        regSets.append(prevSet)
+
+        # Return set list
+        return regSets
 
 
     def hash_names(self, leading, first, last, trailing):
@@ -349,3 +448,29 @@ class BatchDialog(GladeDelegate):
                 break
 
         return distinguish
+
+
+class regSet:
+    '''
+    Resembles a set of registrations which by definition belong together. Those
+    sets are meant to keep registrations together which - if possible - should
+    never the separated even if the user requested random ordering.
+
+    Instances should have the following attributes:
+
+    * baseName (Common name prefix of all registrations)
+    * regs     (List of registration objects)
+    '''
+    pass
+
+
+class newBank:
+    '''
+    Resembles a registration bank to be created by the algorithm. Instances
+    should include the following attributes:
+
+    * regs      (List of registration objects)
+    * firstName (Name of first registration)
+    * listName  (Name of last registration)
+    '''
+    pass

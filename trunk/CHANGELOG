@@ -1,3 +1,9 @@
+2008-09-25  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Completly reimplemented batch processing algorithm. Now it is possible
+   to prevent splitting of registrations with common suffix.
+
+
 2008-08-30  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Added exception hook which shows uncatched exceptions in a dialog.
