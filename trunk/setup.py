@@ -36,10 +36,8 @@ TODO
 
 # Provide global dummy _() function since we're not using gettext here.
 # If this is left out importing modules from src won't work.
-import __builtin__
-
-if not hasattr(__builtin__, "_"):
-     __builtin__.__dict__['_'] = lambda text: text
+import src.translation
+src.translation.initDummy()
 
 
 # Import modules

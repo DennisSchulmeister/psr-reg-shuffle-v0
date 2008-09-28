@@ -36,6 +36,11 @@ import imp
 import os
 
 
+# Provide dummy translation
+import src.translation
+src.translation.initDummy()
+
+
 # Define global constants
 LOAD_ERROR  = "##### ERROR LOADING MODULE #####"
 TEST_BROKEN = "##### TEST FAILED ####"

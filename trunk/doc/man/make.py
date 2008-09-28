@@ -100,6 +100,10 @@ for filename in inputFiles:
     except:
         pass
 
+    # Create script name
+    scriptName = os.path.join("..", "..", "start_dev_version")
+
+
     # Build man page
-    command = "help2man --locale=%s --include=%s --output=%s --no-info ../../start_dev_version" % (localeName, filename, outputFilename)
+    command = "help2man --locale=%s --include=%s --output=%s --no-info %s" % (localeName, filename, outputFilename, scriptName)
     os.system(command)

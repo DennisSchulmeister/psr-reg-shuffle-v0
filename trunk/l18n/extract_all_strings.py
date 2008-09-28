@@ -22,7 +22,7 @@
 # Boston, MA  02110-1301  USA
 
 '''
-Purpose
+PURPOSE
 =======
 
 This script uses xgettext for extracting all translatable strings from
@@ -37,6 +37,25 @@ import os
 import os.path
 import glob
 import sys
+import imp
+
+
+# Import application constants
+fob1 = fob2 = None
+
+try:
+    srcPath = os.path.abspath(os.path.join("..", "src"))
+
+    translation = imp.load_source("translation", os.path.join(srcPath, "translation.py"))
+    translation.initDummy()
+
+    const = imp.load_source("const", os.path.join(srcPath, "const.py"))
+except ImportError:
+    print "WARNING: Couldn't import application constants. Falling back to defaults."
+    const.shortname    = "psrregshuffle"
+    const.version      = "??"
+    const.author       = "Dennis Schulmeister"
+    const.author_email = "dennis -at- ncc-1701a.homelinux.net"
 
 
 # Define parameters
@@ -45,15 +64,14 @@ outputDirectory = os.getcwd()
 outputFilename  = os.path.join(outputDirectory, "psrregshuffle.po")
 xgettextArgs    = "--join-existing --add-location --width=%(width)s --sort-output --copyright-holder=%(copyright)s --package-name=%(package)s --package-version=%(version)s --msgid-bugs-address=%(bugmail)s --output=%(outputFilename)s" \
 % {
-    "package":       "psrregshuffle",
-    "version":       "0.1",
-    "copyright":     "Dennis\ Schulmeister",
-    "bugmail":       "dennis\ -at-\ ncc-1701a.homelinux.net",
+    "package":       const.shortname.replace(" ", "\ "),
+    "version":       const.version.replace(" ", "\ "),
+    "copyright":     const.author.replace(" ", "\ "),
+    "bugmail":       const.author_email.replace(" ", "\ "),
     "width":         "80",
     "outputFilename": outputFilename,
 }
 knownFiletypes  = ["*.py", "*.glade"]
-
 
 
 # Define cleanup function
@@ -113,12 +131,10 @@ for arg in sys.argv[1:]:
         sys.exit()
 
 
-## Clear existing output file
-#try:
-#    file = open(outputFilename, "w")
-#    file.close()
-#except:
-#    pass
+# Create output file if missing
+if not os.path.exists(outputFilename):
+    fobj = file(outputFilename, "w")
+    fobj.close()
 
 
 # Process files of top-directory

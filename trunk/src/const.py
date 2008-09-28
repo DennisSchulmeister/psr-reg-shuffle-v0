@@ -56,7 +56,7 @@ import os.path
 # by adjusting the parameters for xgettext.
 
 progname       = "PSR Registration Shuffler"
-shortname      = "psr-reg-shuffle"
+shortname      = "psrregshuffle"
 version        = "0.3"
 techname       = "%s-%s" % (shortname, version)
 licence        = "GNU General Public Licence 3"

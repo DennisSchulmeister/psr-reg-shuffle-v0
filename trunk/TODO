@@ -1,9 +1,5 @@
  * Investigate in pydoc, source code documentation extractor
 
- * Adopt helper scripts for including src/const and using const.progname
-   or const.techname instead of literals. For this to work move dummy
-   definition of _() from setup.py to its own module file.
-
  * More sensible detection of data directories (data, l18n, ...) in setup
    script (low priority)
 
@@ -20,6 +16,7 @@
    OR FIX: Replace ascii converter (reg names) with better match. (At least
    on Tyros) (V 0.3 ??)
 
- * FIX: Only glade ui gets localized under Windows. (V 0.3)
+ * Fix new bug: Creation of man pages doesn't work because help2man command
+   cannot retrieve --help information ???
 
  * Nice manual (far beyond man page) with lots of pictures (after V 0.3)

@@ -31,6 +31,10 @@ to circular impors which crash the application.
 
 # Import global modules
 import os.path
+import gtk.glade
+import gettext
+import locale
+
 
 # Import application modules
 import appexceptions
@@ -38,6 +42,42 @@ import regfile
 
 
 # Define functions
+def initGettext(domainName, localeDir):
+    '''
+    This function kick-starts internationalization by initializing
+    gettext. As a result the function _("...") will be installed into
+    the global builtin dictionary.
+    '''
+    # Set locale for glade UI
+    gtk.glade.bindtextdomain(domainName, localeDir)
+    gtk.glade.textdomain(domainName)
+
+    # Determine available languages on the system
+    lc, encoding = locale.getdefaultlocale()
+    envLanguage  = os.environ.get("LANGUAGE", None)
+
+    if lc:
+        languages = [lc]
+    else:
+        languages = []
+
+    if envLanguage:
+        languages += envLanguage.split(":")
+
+    # Install global _-function
+    # NOTE: gettext.install(...) would be a nice one-liner if it worked on
+    # Windows, too. Unfortunately it seems to work on *nix only. When used
+    # on Windows no string would be translated at all.
+    translation = gettext.translation(
+        domainName,
+        localeDir,
+        languages = languages,
+        fallback  = True
+    )
+
+    __builtin__.__dict__["_"] = translation.gettext
+
+
 def getFileObject(filename="", file=None):
     '''
     This function can either take a filename or a file object or both.
