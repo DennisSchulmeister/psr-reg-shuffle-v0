@@ -35,23 +35,27 @@ import os
 
 
 # Fake script name to be psrregshuffe. Otherwise man pages generated from
-# the --help and --version output would cite the staartup command as being
+# the --help and --version output would cite the startup command as being
 # start-dev-version.
 sys.argv[0] = "psrregshuffle"
+
+
+# Get base path of script. This should always be the top-directory of the
+# data and the l18n directories.
+topDir = os.path.dirname(__file__)
 
 
 # Initialize l8n support
 import src.translation
 
 domainName = "psrregshuffle"
-localeDir  = os.path.join(sys.path[0], "l18n", "build")
+localeDir  = os.path.join(topDir, "l18n", "build")
 
 src.translation.init(domainName, localeDir)
 
 
 # Set path of data directory
-dataDir = os.getcwd()
-dataDir = os.path.join(dataDir, "data")
+dataDir = os.path.join(topDir, "data")
 __builtin__.__dict__["__PSR_DATA_DIR__"] = dataDir
 
 

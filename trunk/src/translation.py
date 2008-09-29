@@ -64,13 +64,22 @@ def init(domainName, localeDir):
     gtk.glade.textdomain(domainName)
 
     # Determine available languages on the system
-    lc, encoding = locale.getdefaultlocale()
-    envLanguage  = os.environ.get("LANGUAGE", None)
+    # NOTE: Generating man pages for locale "en" only (instead of "en_GB" or
+    # "en_US" ...) results in a locale "en_EN" which makes the below function
+    # call raise an Error (Unknown locale) exception. If the exception won't
+    # be catched (or the man page locale changed) it'll be impossible to create
+    # man pages,
+    try:
+        lc, encoding = locale.getdefaultlocale()
 
-    if lc:
-        languages = [lc]
-    else:
+        if lc:
+            languages = [lc]
+        else:
+            languages = []
+    except Error:
         languages = []
+
+    envLanguage  = os.environ.get("LANGUAGE", None)
 
     if envLanguage:
         languages += envLanguage.split(":")
@@ -87,7 +96,6 @@ def init(domainName, localeDir):
     )
 
     __builtin__.__dict__["_"] = translation.gettext
-
 
 def initDummy():
     '''

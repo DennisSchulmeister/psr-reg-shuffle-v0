@@ -123,10 +123,10 @@ class Main(gobject.GObject):
     def run(self):
         '''
         This is the application's entry point. It gets called by the startup
-        script. The script ../psr-reg-shuffle.py is meant for starting the
+        script. The script ../psr-reg-shuffle is meant for starting the
         system-wide installed version. However for development purposes its
         faster to start the local version without prior installation using
-        ../start-dev-version.py.
+        ../start-dev-version.
         '''
 
         # Parse command line arguments
