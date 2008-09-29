@@ -3,6 +3,9 @@
  * Fixed bug which prevented man page creation by catching the insulting
    exception and by changing the English man page's locale from generic "en"
    to valid "en_US".
+ * Fixed bug created by above's fix. The above fix made the search path for
+   data files a relative path which broke the "batch processing" dialog becuase
+   the ui.glade file couldn't be found anymore.
 
 
 2008-09-28  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>

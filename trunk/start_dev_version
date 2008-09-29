@@ -43,6 +43,7 @@ sys.argv[0] = "psrregshuffle"
 # Get base path of script. This should always be the top-directory of the
 # data and the l18n directories.
 topDir = os.path.dirname(__file__)
+topDir = os.path.abspath(topDir)
 
 
 # Initialize l8n support
