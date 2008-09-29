@@ -5,9 +5,6 @@
 
  * UnitTests, pyLint, Profiler, et al.
 
- * On doc/man/make.py CLEAN remove build/, too. Otherwise it belongs to the
-   super-user once the programs gets installed system-wide.
-
  * Make sure credits can be translated. (partially done, needs retranslation) (V 0.3)
 
  * Respond to ascii-exception UnicodeEncodeError (Umlauts). Maybe filter them

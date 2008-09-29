@@ -6,6 +6,9 @@
  * Fixed bug created by above's fix. The above fix made the search path for
    data files a relative path which broke the "batch processing" dialog becuase
    the ui.glade file couldn't be found anymore.
+ * Changed man page builder script to delete build directory on clean up.
+   Otherwise it might happen that the directory belongs to root once the
+   application was installed system-wide via the setup script.
 
 
 2008-09-28  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>

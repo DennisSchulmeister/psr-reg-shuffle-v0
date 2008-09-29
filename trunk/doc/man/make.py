@@ -61,6 +61,8 @@ def cleanup_build_files():
         for name in dirs:
             os.rmdir(os.path.join(root, name))
 
+    os.rmdir("build")
+
 
 # Check command line options
 for arg in sys.argv[1:]:
