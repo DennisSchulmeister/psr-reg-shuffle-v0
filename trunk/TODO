@@ -7,10 +7,4 @@
 
  * Make sure credits can be translated. (partially done, needs retranslation) (V 0.3)
 
- * Respond to ascii-exception UnicodeEncodeError (Umlauts). Maybe filter them
-   out or so ...
-
-   OR FIX: Replace ascii converter (reg names) with better match. (At least
-   on Tyros) (V 0.3 ??)
-
  * Nice manual (far beyond man page) with lots of pictures (after V 0.3)

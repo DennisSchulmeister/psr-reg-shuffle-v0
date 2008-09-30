@@ -39,6 +39,7 @@ import struct
 import codecs
 
 # Import application modules
+import appexceptions
 import registration
 from .. import const
 from .. import util
@@ -63,8 +64,8 @@ class Registration_PSR2000(registration.Registration):
         registration.Registration.__init__(self, keyboardName)
 
         # Retrieve ascii encoder / decoder
-        self.encoder  = codecs.getencoder("ascii")
-        self.decoder  = codecs.getdecoder("ascii")
+        self.encoder  = codecs.getencoder("latin_1")
+        self.decoder  = codecs.getdecoder("latin_1")
 
         self.to_ascii = lambda t: self.encoder(t)[0]
         self.to_ucode = lambda t: self.decoder(t)[0]
@@ -104,25 +105,27 @@ class Registration_PSR2000(registration.Registration):
 
         position += 1
 
-        # Get maximum length of block
-        length = self.binaryContent[position + 4 : position + 6]
-        length = struct.unpack(">H", length)[0]
+        # Get current length of block
+        prevBlockLength = self.binaryContent[position + 4 : position + 6]
+        prevBlockLength = struct.unpack(">H", prevBlockLength)[0]
 
-        # Skip block header
-        position += 8
-        length   -= 8
+        # For new block always assume fixed length of 80 bytes
+        # NOTE: Any other length may crash the instrument.
+        head = "GP00\x00\x50\x00\x00"
 
-        # Decode name to latin_1
-        if len(name) > length:
-            shorten = length - len(name)
-            name = name[:-shorten]
+        # Check name length (46 characters + 5 icon = 51)
+        if len(name) > 51:
+            raise appexceptions.NameTooLong(name, 51)
 
-        asciiName = self.to_ascii(name) + (length - len(name)) * "\x00"
+        # Insert new name block
+        asciiName = self.to_ascii(name)
+        padding = (80 - len(head) - len(asciiName)) * "\x00"
 
-        # Insert name
         self.binaryContent = self.binaryContent[:position] \
+                           + head \
                            + asciiName \
-                           + self.binaryContent[position + length:]
+                           + padding \
+                           + self.binaryContent[position + prevBlockLength:]
 
 
     def getName(self):

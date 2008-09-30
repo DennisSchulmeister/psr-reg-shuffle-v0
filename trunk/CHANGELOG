@@ -9,7 +9,10 @@
  * Changed man page builder script to delete build directory on clean up.
    Otherwise it might happen that the directory belongs to root once the
    application was installed system-wide via the setup script.
-
+ * After a lot of research changed the instruments' encodings back to latin_1
+   which it realy is. At the same time redesigned the method which allows to
+   set the name of a YAMAHA PSR-2000 registration because of a bug in it which
+   would create invalid data when non-ascii chars (umlauts) would be used.
 
 2008-09-28  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 

@@ -59,3 +59,25 @@ class CannotDetermineKeyboardModel(ExceptionWithMessage):
     '''
 
     _message = _("Neither keyboard model nor file given. Cannot create an empty object without hint about the keyboard model.")
+
+
+class NameTooLong(ExceptionWithMessage):
+    '''
+    This exception indicates that a registration name exceeds to maximum
+    limit set by the file format.
+    '''
+
+    _message = _("Name too long.")
+
+
+    def __init__(self, name="", maxChars=0):
+        '''
+        Constructor which taks additional information.
+        '''
+        # Add given name to message
+        if name:
+            self._message += " %s: %s" % (_("Given name"), name)
+
+        # Add max allowed length
+        if maxChars:
+            self._message += " %s: %i" % (_("Maximum allowed length"), maxChars)

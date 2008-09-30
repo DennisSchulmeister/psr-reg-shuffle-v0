@@ -69,8 +69,8 @@ class Registration_Tyros(registration.Registration):
         registration.Registration.__init__(self, keyboardName)
 
         # Retrieve ascii encoder / decoder
-        self.encoder  = codecs.getencoder("ascii")
-        self.decoder  = codecs.getdecoder("ascii")
+        self.encoder  = codecs.getencoder("latin_1")
+        self.decoder  = codecs.getdecoder("latin_1")
 
         self.to_ascii = lambda t: self.encoder(t)[0]
         self.to_ucode = lambda t: self.decoder(t)[0]
