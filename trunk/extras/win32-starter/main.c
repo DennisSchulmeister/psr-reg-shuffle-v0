@@ -32,6 +32,9 @@
  * windows distribution - which is just a striped down python distribution
  * with the PSR Registration Shuffler included. There the executable tries to
  * invoke the local python interpreter.
+ *
+ * NOTE: The project file psrregshuffle.dev can be opened with the GPL'd
+ * DevCPP 4.x from http://www.bloodshed.net.
  */
 
 #include <windows.h>
