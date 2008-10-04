@@ -42,7 +42,8 @@ On a Windows machine perform the following steps:
 
  8. Rename pythons README and LICENCE to python-README and python-LICENCE
 
- 9. Copy psrregshuffle.bat into the top-directory. (See python25-template)
+ 9. Copy psrregshuffle.exe into the top-directory. (See python25-template/ or
+    /trunk/extras/win32-starter/)
 
 10. Rename the python directory to: psr-reg-shuffle_A.B_winXY_python where as
     A.B is the program version and XY the windows version like win32 or win64.
