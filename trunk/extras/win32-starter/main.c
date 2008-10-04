@@ -6,7 +6,7 @@
  *
  * PSR Registration Shuffler is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
+ * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
  * PSR Registration Shuffler is distributed in the hope that it will be useful,
@@ -62,16 +62,16 @@ int main(int argc, char *argv[]) {
 
     /* Start application */
     rc = CreateProcess(
-        NULL,                   /*Module name not explicitly given */
-        "python.exe Scripts\\psrregshuffle",      /* Invoke local python interpreter */
-        NULL,                           /* Don't inherit procces handle */
-        NULL,                           /* Don't inherit thread handle */
-        FALSE,                          /* Switch handle inheritance off */
-        0,                              /* No special creation flags needed */
-        NULL,                           /* Inherit environment block */
-        NULL,                           /* Inherit procces directory */
-        &startupInfo,                   /* Pointer to startup info structure */
-        &processInfo                    /* Pointer to procces info structure */
+        NULL,                                 /* Module name not explicitly given  */
+        "python.exe Scripts\\psrregshuffle",  /* Invoke local python interpreter   */
+        NULL,                                 /* Don't inherit procces handle      */
+        NULL,                                 /* Don't inherit thread handle       */
+        FALSE,                                /* Switch handle inheritance off     */
+        0,                                    /* No special creation flags needed  */
+        NULL,                                 /* Inherit environment block         */
+        NULL,                                 /* Inherit procces directory         */
+        &startupInfo,                         /* Pointer to startup info structure */
+        &processInfo                          /* Pointer to procces info structure */
     );
 
     if (!rc) {
