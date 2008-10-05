@@ -7,6 +7,8 @@
  * Slightly redesigned "Print/Export Setlist" tab page. Replaced hard-coded
    export buttons with one "Go!" button which pops up a dynamicaly filled menu
    of all export options.
+ * Updated German translation
+ * Several minor fixes to helper scripts
 
 
 2008-10-04  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
