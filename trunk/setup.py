@@ -109,8 +109,9 @@ PACKAGE_DIR = {
 
 DATA_SRC_DIR = os.path.join("data", "*")
 DATA_DST_DIR = os.path.join("share", const.techname)
+
 DATA_FILES   = [
-    (DATA_DST_DIR, glob(DATA_SRC_DIR))
+    (DATA_DST_DIR, glob(DATA_SRC_DIR)),
 ]
 
 

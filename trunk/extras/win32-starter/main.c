@@ -48,6 +48,8 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 */
 int main(int argc, char *argv[]) {
     /* Local variables */
+    char[] commandLine = "program\\python.exe program\\Scripts\\psrregshuffle";
+
     int rc;
     STARTUPINFO startupInfo;
     PROCESS_INFORMATION processInfo;
@@ -62,16 +64,16 @@ int main(int argc, char *argv[]) {
 
     /* Start application */
     rc = CreateProcess(
-        NULL,                                 /* Module name not explicitly given  */
-        "python.exe Scripts\\psrregshuffle",  /* Invoke local python interpreter   */
-        NULL,                                 /* Don't inherit procces handle      */
-        NULL,                                 /* Don't inherit thread handle       */
-        FALSE,                                /* Switch handle inheritance off     */
-        0,                                    /* No special creation flags needed  */
-        NULL,                                 /* Inherit environment block         */
-        NULL,                                 /* Inherit procces directory         */
-        &startupInfo,                         /* Pointer to startup info structure */
-        &processInfo                          /* Pointer to procces info structure */
+        NULL,                           /* Module name not explicitly given  */
+        commandLine,                    /* Invoke local python interpreter   */
+        NULL,                           /* Don't inherit procces handle      */
+        NULL,                           /* Don't inherit thread handle       */
+        FALSE,                          /* Switch handle inheritance off     */
+        0,                              /* No special creation flags needed  */
+        NULL,                           /* Inherit environment block         */
+        NULL,                           /* Inherit procces directory         */
+        &startupInfo,                   /* Pointer to startup info structure */
+        &processInfo                    /* Pointer to procces info structure */
     );
 
     if (!rc) {

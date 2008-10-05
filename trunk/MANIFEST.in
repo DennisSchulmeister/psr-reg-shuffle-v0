@@ -3,6 +3,7 @@ include *
 recursive-include data *
 recursive-include doc *
 recursive-include l18n *
+recursive-include extras *
 
 global-exclude build
 global-exclude build/*
