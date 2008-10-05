@@ -111,14 +111,18 @@ def process_dir(dirName, recursive):
     if not recursive:
         return
 
-    for root, dirs, files in os.walk(dirName, topdown=True):
-        for dir in dirs:
-            # Skip dot-directories and let os.walk() know it
-            if dir[0] == ".":
-                dirs.remove(dir)
-                continue
+    for node in os.listdir(dirName):
+        # Skip dot-files
+        if node[0] == ".":
+            continue
 
-            process_dir(os.path.join(root, dir), recursive=True)
+        # Skip non-directories
+        fullName = os.path.join(dirName, node)
+        if not os.path.isdir(fullName):
+            continue
+
+        # Recursively process directories
+        process_dir(fullName, recursive=True)
 
 
 

@@ -61,7 +61,11 @@ def cleanup_build_files():
         for name in dirs:
             os.rmdir(os.path.join(root, name))
 
-    os.rmdir("build")
+    try:
+        os.rmdir("build")
+    except OSError:
+        # The directory might not exist
+        pass
 
 
 # Check command line options

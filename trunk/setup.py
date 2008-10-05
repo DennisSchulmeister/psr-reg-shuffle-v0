@@ -96,13 +96,15 @@ SCRIPTS  = [
 PACKAGES    = [
     "psrregshuffle",
     "psrregshuffle.regbank",
-    "psrregshuffle.regfile"
+    "psrregshuffle.regfile",
+    "psrregshuffle.exportsetlist",
 ]
 
 PACKAGE_DIR = {
-    "psrregshuffle":         "src/",
-    "psrregshuffle.regbank": "src/regbank",
-    "psrregshuffle.regfile": "src/regfile"
+    "psrregshuffle":               "src/",
+    "psrregshuffle.regbank":       "src/regbank",
+    "psrregshuffle.regfile":       "src/regfile",
+    "psrregshuffle.exportsetlist": "src/exportsetlist",
 }
 
 DATA_SRC_DIR = os.path.join("data", "*")

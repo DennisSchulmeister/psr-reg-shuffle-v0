@@ -71,7 +71,7 @@ class ExportCSVFlat(exportbase.ExportBase):
         '''
         # Ask user for filename
         self.filename = kiwi.ui.dialogs.save(
-            title        = _("Save Flat CSV File"),
+            title        = _("Save flat CSV file"),
             parent       = self.wndMain.wndMain,
             current_name = "*.csv"
         )

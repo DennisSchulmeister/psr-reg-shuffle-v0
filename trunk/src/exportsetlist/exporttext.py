@@ -71,7 +71,7 @@ class ExportText(exportbase.ExportBase):
         '''
         # Ask user for filename
         self.filename = kiwi.ui.dialogs.save(
-            title        = _("Save Text File"),
+            title        = _("Save text file"),
             parent       = self.wndMain.wndMain,
             current_name = "*.txt"
         )

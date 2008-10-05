@@ -70,7 +70,7 @@ class ExportCSVDeep(exportbase.ExportBase):
         '''
         # Ask user for filename
         self.filename = kiwi.ui.dialogs.save(
-            title        = _("Save Deep CSV File"),
+            title        = _("Save deep CSV file"),
             parent       = self.wndMain.wndMain,
             current_name = "*.csv"
         )
