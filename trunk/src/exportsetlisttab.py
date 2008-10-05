@@ -32,7 +32,7 @@ over here.
 
 # Public export of module content
 __all__ = [
-    "PrintSetlistTab"
+    "ExportSetlistTab"
 ]
 
 
@@ -47,9 +47,10 @@ from kiwi.ui.objectlist    import ObjectList
 from kiwi.ui.objectlist    import Column
 
 # Import application modules
+import exportsetlist.exportbase
+import exportsetlist.appexceptions
 import regbank.bankfile
 import appexceptions
-import exportsetlist
 import mainwindow
 import main
 import util
@@ -57,7 +58,7 @@ import const
 
 
 # Class definition
-class PrintSetlistTab(gobject.GObject):
+class ExportSetlistTab(gobject.GObject):
     '''
     This delegate class allows to print the contents of bank files.
 
@@ -81,7 +82,7 @@ class PrintSetlistTab(gobject.GObject):
 
         gobject.signal_new(
             "setlist-updated",
-            PrintSetlistTab,
+            ExportSetlistTab,
             gobject.SIGNAL_RUN_LAST,
             gobject.TYPE_NONE,
             (gobject.TYPE_PYOBJECT,),
@@ -114,6 +115,20 @@ class PrintSetlistTab(gobject.GObject):
         self.oblSetlist.connect("has-rows", self.onListEmptyChanged)
         self.connect("setlist-updated", self.onListUpdated)
 
+        # Create export action popup menu
+        self.goMenu = gtk.Menu()
+        self.goMenu.attach_to_widget(self.wndMain.btnSetlistGo, None)
+
+        classes = exportsetlist.exportbase.ExportBase.getExporterClasses()
+        classes.sort(key=lambda c: c.displayName.upper())
+
+        for cls in classes:
+            menuItem = gtk.MenuItem(cls.displayName, True)
+            menuItem.connect("activate", self.onGoMenuItemActivated, cls)
+            menuItem.show()
+
+            self.goMenu.append(menuItem)
+
         # Add images to buttons
         img = gtk.Image()
         img.set_from_stock(gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON)
@@ -129,22 +144,6 @@ class PrintSetlistTab(gobject.GObject):
         img.set_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
         self.wndMain.btnSetlistClear.set_property("image_position", gtk.POS_TOP)
         self.wndMain.btnSetlistClear.set_image(img)
-
-        img = gtk.Image()
-        img.set_from_stock(gtk.STOCK_PRINT, gtk.ICON_SIZE_BUTTON)
-        self.wndMain.btnSetlistPrint.set_property("image_position", gtk.POS_TOP)
-        self.wndMain.btnSetlistPrint.set_image(img)
-
-        img = gtk.Image()
-        img.set_from_stock(gtk.STOCK_SAVE, gtk.ICON_SIZE_BUTTON)
-        self.wndMain.btnSetlistExportText.set_property("image_position", gtk.POS_TOP)
-        self.wndMain.btnSetlistExportText.set_image(img)
-
-        img = gtk.Image()
-        img.set_from_stock(gtk.STOCK_SAVE, gtk.ICON_SIZE_BUTTON)
-        self.wndMain.btnSetlistExportCSV.set_property("image_position", gtk.POS_TOP)
-        self.wndMain.btnSetlistExportCSV.set_image(img)
-
 
         # Assume empty list
         self.oblSetlist.clear()
@@ -272,29 +271,42 @@ class PrintSetlistTab(gobject.GObject):
 
     # Export...................................................................
 
-    def export(self, format=""):
+    def showGoMenu(self):
         '''
-        Delegate method called by the UI. Exports the setlist to the given
-        format. Format can be:
+        Delegate method called by the UI. Shows a popup menu with all available
+        export and print actions.
+        '''
+        self.goMenu.popup(None, None, None, 0, 0)
 
-        * const.EXPORT_PRINT
-        * const.EXPORT_TEXT
-        * const.EXPORT_CSV
 
-        Otherwise appexceptions.InvalidExportFormat is raised.
+    def onGoMenuItemActivated(self, menuItem, exportClass):
+        '''
+        Event handler method which gets called whenever the user activates
+        a menu entry in the Go! popup menu. Delegates the call to the export
+        method.
+        '''
+        self.export(exportClass)
+
+
+    def export(self, exportClass):
+        '''
+        This method uses the given class in order to export the setlist. The
+        class must be a sub-class of exportsetlist.exportbase.ExportBase.
+        Otherwise appexceptions.InvalidExportClass gets thrown.
         '''
         # Perform export
         try:
             # Get name of setlist
-            name = self.wndMain.entSetlistName.get_text()
+            printName = self.wndMain.entSetlistName.get_text()
 
-            # Get class according to export type (might throw InvalidExportFormat)
-            exportCls = exportsetlist.ExportSetlistBase.getClassByExportType(format)
+            # Check class validity
+            if not issubclass(exportClass, exportsetlist.exportbase.ExportBase):
+                raise appexceptions.InvalidExportClass(exportClass)
 
             # Process
-            exportObj = exportCls(
+            exportObj = exportClass(
                 wndMain = self.wndMain,
-                name = name,
+                printName = printName,
                 setlistEntries = self.oblSetlist[:]
             )
 
@@ -303,7 +315,7 @@ class PrintSetlistTab(gobject.GObject):
             # Give success message
             if successMsg:
                 self.wndMain.setStatusMessage(successMsg)
-        except appexceptions.Cancel:
+        except exportsetlist.appexceptions.Cancel:
             pass
 
 
@@ -319,9 +331,7 @@ class PrintSetlistTab(gobject.GObject):
         # Set buttons (in)active
         self.wndMain.btnSetlistRemove.set_sensitive(hasRows)
         self.wndMain.btnSetlistClear.set_sensitive(hasRows)
-        self.wndMain.btnSetlistPrint.set_sensitive(hasRows)
-        self.wndMain.btnSetlistExportText.set_sensitive(hasRows)
-        self.wndMain.btnSetlistExportCSV.set_sensitive(hasRows)
+        self.wndMain.btnSetlistGo.set_sensitive(hasRows)
 
         # Emit setlist-updated signal
         self.emit("setlist-updated", list)

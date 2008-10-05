@@ -1,3 +1,14 @@
+2008-10-05  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Converted module exportsetlist.py to a real package and put each
+   class into its own sub-module.
+ * Renamed PrintSetlist to ExportSetlist
+ * Implemented new export class "Flat CSV"
+ * Slightly redesigned "Print/Export Setlist" tab page. Replaced hard-coded
+   export buttons with one "Go!" button which pops up a dynamicaly filled menu
+   of all export options.
+
+
 2008-10-04  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Wrote a small Windows program for starting the application. This replaces

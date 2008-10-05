@@ -39,6 +39,7 @@ import locale
 # Import application modules
 import appexceptions
 import regfile
+import main
 
 
 # Define functions
@@ -76,6 +77,15 @@ def initGettext(domainName, localeDir):
     )
 
     __builtin__.__dict__["_"] = translation.gettext
+
+
+def getMainInstance():
+    '''
+    Utility function used to access main singleton object where direct import
+    of main module is not feasible or doesn't work. (e.g. from .. import main
+    doesn't work, whereas from .. import util works ?!?)
+    '''
+    return main.Main.getInstance()
 
 
 def getFileObject(filename="", file=None):

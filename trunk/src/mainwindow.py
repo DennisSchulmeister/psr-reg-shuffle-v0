@@ -50,7 +50,7 @@ import exceptiondialog
 import createbanktab
 import importregstab
 import quickrenametab
-import printsetlisttab
+import exportsetlisttab
 import informationtab
 import abouttab
 
@@ -98,7 +98,7 @@ class MainWindow(GladeDelegate):
         "btnRenameDown",           # needs handler (clicked)
         "btnRenameClear",          # needs handler (clicked)
 
-        # Print setlist page
+        # Print/Export setlist page
         "evtSetlist",
         "entSetlistName",
         "btnSetlistAdd",           # needs handler (clicked)
@@ -106,10 +106,7 @@ class MainWindow(GladeDelegate):
         "btnSetlistUp",            # needs handler (clicked)
         "btnSetlistDown",          # needs handler (clicked)
         "btnSetlistClear",         # needs handler (clicked)
-        "btnSetlistPrint",         # needs handler (clicked)
-        "btnSetlistExportText",    # needs handler (clicked)
-        "btnSetlistExportCSV",     # needs handler (clicked)
-
+        "btnSetlistGo",            # needs handler (clicked)
 
         # Keyboard information page
         "lblKeyboards",
@@ -160,7 +157,7 @@ class MainWindow(GladeDelegate):
         self.createBankTab   = createbanktab.CreateBankTab(wndMain=self)
         self.importRegsTab   = importregstab.ImportRegsTab(wndMain=self)
         self.quickRenameTab  = quickrenametab.QuickRenameTab(wndMain=self)
-        self.printSetlistTab = printsetlisttab.PrintSetlistTab(wndMain=self)
+        self.exportSetlistTab = exportsetlisttab.ExportSetlistTab(wndMain=self)
         self.informationTab  = informationtab.InformationTab(wndMain=self)
         self.aboutTab        = abouttab.AboutTab(wndMain=self)
 
@@ -367,65 +364,49 @@ class MainWindow(GladeDelegate):
     def on_btnSetlistAdd__clicked(self, *args):
         '''
         Event handler for the Add button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
+        Delegates the call to a exportSetlistTab object.
         '''
-        self.printSetlistTab.addBankFile()
+        self.exportSetlistTab.addBankFile()
 
 
     def on_btnSetlistRemove__clicked(self, *args):
         '''
         Event handler for the Remove button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
+        Delegates the call to a exportSetlistTab object.
         '''
-        self.printSetlistTab.removeSelected()
+        self.exportSetlistTab.removeSelected()
 
 
     def on_btnSetlistUp__clicked(self, *args):
         '''
         Event handler for the ### button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
+        Delegates the call to a exportSetlistTab object.
         '''
-        self.printSetlistTab.moveSelectedUp()
+        self.exportSetlistTab.moveSelectedUp()
 
 
     def on_btnSetlistDown__clicked(self, *args):
         '''
         Event handler for the Down button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
+        Delegates the call to a exportSetlistTab object.
         '''
-        self.printSetlistTab.moveSelectedDown()
+        self.exportSetlistTab.moveSelectedDown()
 
 
     def on_btnSetlistClear__clicked(self, *args):
         '''
         Event handler for the Clear button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
+        Delegates the call to a exportSetlistTab object.
         '''
-        self.printSetlistTab.clearList()
+        self.exportSetlistTab.clearList()
 
 
-    def on_btnSetlistPrint__clicked(self, *args):
+    def on_btnSetlistGo__clicked(self, *args):
         '''
-        Event handler for the Print button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
+        Event handler for the Go! button on the print setlist page.
+        Delegates the call to a exportSetlistTab object.
         '''
-        self.printSetlistTab.export("PRINT")
-
-
-    def on_btnSetlistExportText__clicked(self, *args):
-        '''
-        Event handler for the ExportText button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
-        '''
-        self.printSetlistTab.export("TEXT")
-
-
-    def on_btnSetlistExportCSV__clicked(self, *args):
-        '''
-        Event handler for the Export CSV button on the print setlist page.
-        Delegates the call to a PrintSetlistTab object.
-        '''
-        self.printSetlistTab.export("CSV")
+        self.exportSetlistTab.showGoMenu()
 
 
     # Event handlers for "About" page..........................................

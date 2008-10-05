@@ -33,6 +33,8 @@ __all__ = [
     "NoClassObject",
     "NoClassFound",
     "NoFileGiven",
+    "InvalidExportClass",
+    "Cancel",
 ]
 
 
@@ -117,17 +119,17 @@ class DoesNotMatchFilter(ExceptionWithMessage):
         self._message = "%s (%s, %s)" % (self._message, str(regEntry), str(Filter))
 
 
+class InvalidExportClass(ExceptionWithMessage):
+    '''
+    Exception used to signal that a given class cannot export setlists.
+    '''
+
+    _message = _("Invalid export class given. The class must be a sub-class of ExportBase.")
+
+
 class Cancel(ExceptionWithMessage):
     '''
     Exception used to signal that the user wishes to cancal a action.
     '''
 
     _message = _("The user wishes to cancel the current action.")
-
-
-class InvalidExportFormat(ExceptionWithMessage):
-    '''
-    Exception used to signal an unknown export format.
-    '''
-
-    _message = _("Unknown export format.")

@@ -169,11 +169,6 @@ SORT_BY_NAME_DESC = "NAME DESC"
 SORT_RANDOM       = "RAND"
 
 
-# Export modes
-EXPORT_PRINT = "PRINT"
-EXPORT_TEXT  = "TEXT"
-EXPORT_CSV   = "CSV"
-
 # Constants with technical short names for keyboard models
 ALL_MODELS     = ""
 UNKNOWN_MODEL  = "UNKNOWN"
