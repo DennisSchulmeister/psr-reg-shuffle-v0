@@ -77,7 +77,7 @@ class MetaBankFile(modelspecific.MetaModelSpecific):
         # Inject classFinder class attributes
         classFinderByFile = classfinder.ClassFinder(
             superClass   = cls,
-            classes      = __CLASSES__,
+            classes      = __RB_CLASSES__,
             testMethName = "canUnderstandFile",
             hashMethName = "hashFile"
         )

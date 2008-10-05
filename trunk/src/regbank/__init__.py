@@ -47,7 +47,7 @@ modPath = os.path.dirname(os.path.join(os.getcwd(), __file__))
 classes = []
 
 # Visit each module and get classes
-__builtin__.__dict__["__CLASSES__"] = classes
+__builtin__.__dict__["__RB_CLASSES__"] = classes
 
 for filename in os.listdir(modPath):
     (base, ext) = os.path.splitext(filename)

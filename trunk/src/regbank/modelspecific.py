@@ -63,7 +63,7 @@ class MetaModelSpecific(type):
         # Inject classFinder class attribute for search by keyboard name
         classFinder = classfinder.ClassFinder(
             superClass   = cls,
-            classes      = __CLASSES__,
+            classes      = __RB_CLASSES__,
             testMethName = "canUnderstandKeyboardName",
             hashMethName = "hashKeyboardName"
         )
@@ -72,7 +72,7 @@ class MetaModelSpecific(type):
         # Inject classFinder attribute for search of all sub-classes
         classFinder = classfinder.ClassFinder(
             superClass   = cls,
-            classes      = __CLASSES__,
+            classes      = __RB_CLASSES__,
             testMethName = "testNoBaseClass",
             hashMethName = "hashClass"
         )

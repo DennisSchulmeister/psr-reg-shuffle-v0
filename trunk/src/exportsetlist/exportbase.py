@@ -78,7 +78,7 @@ class ExportBase:
         '''
         classes = []
 
-        for candidate in __CLASSES__:
+        for candidate in __EXPORT_CLASSES__:
             if not candidate == ExportBase \
             and issubclass(candidate, ExportBase):
                 classes.append(candidate)
