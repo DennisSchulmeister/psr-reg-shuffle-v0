@@ -42,10 +42,15 @@ On a Windows machine perform the following steps:
 
  8. Rename pythons README and LICENCE to python-README and python-LICENCE
 
- 9. Copy psrregshuffle.exe into the top-directory. (See python25-template/ or
+ 9. Create new directory for the final distribution.
+
+10. Create sub-directory "program" under final distribution directory and copy
+    content of C:\PYTHON25\ there.
+
+11. Copy psrregshuffle.exe into the top-directory. (See python25-template/ or
     /trunk/extras/win32-starter/)
 
-10. Rename the python directory to: psr-reg-shuffle_A.B_winXY_python where as
+12. Rename the top-directory to: psr-reg-shuffle_A.B_winXY_python where as
     A.B is the program version and XY the windows version like win32 or win64.
 
 11. Use your favorite packager for building a neat ZIP-file.

@@ -1,33 +1,33 @@
 [Project]
 FileName=psrregshuffle.dev
 Name=psrregshuffle
-UnitCount=2
+UnitCount=1
 Type=0
 Ver=1
 ObjFiles=
 Includes=
 Libs=
-PrivateResource=psrregshuffle.rc
+PrivateResource=psrregshuffle_private.rc
 ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
 Linker=
 IsCpp=0
-Icon=
+Icon=psrregshuffle.ico
 ExeOutput=
 ObjectOutput=
 OverrideOutput=0
-OverrideOutputName=
+OverrideOutputName=psrregshuffle.exe
 HostApplication=
 Folders=
 CommandLine=
 UseCustomMakefile=0
 CustomMakefile=
-IncludeVersionInfo=0
+IncludeVersionInfo=1
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=
+CompilerSettings=0000000000000000000000
 
 [Unit1]
 FileName=main.c
@@ -41,27 +41,19 @@ BuildCmd=
 
 [VersionInfo]
 Major=0
-Minor=1
+Minor=3
 Release=1
 Build=1
 LanguageID=1033
 CharsetID=1252
-CompanyName=
+CompanyName=Dennis Schulmeister
 FileVersion=
-FileDescription=Developed using the Dev-C++ IDE
+FileDescription=PSR Registration Shuffler - Startup tool
 InternalName=
-LegalCopyright=
-LegalTrademarks=
+LegalCopyright=(C) 2008 Dennis Schulmeister
+LegalTrademarks=Licensed under the terms of GNU GPL 3 or later
 OriginalFilename=
-ProductName=
-ProductVersion=
+ProductName=PSR Registration Shuffler
+ProductVersion=0.3
 AutoIncBuildNr=0
 
-[Unit2]
-FileName=main.rc
-Folder=psrregshuffle
-Compile=1
-Link=0
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=

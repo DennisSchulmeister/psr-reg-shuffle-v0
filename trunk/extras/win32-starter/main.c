@@ -48,7 +48,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 */
 int main(int argc, char *argv[]) {
     /* Local variables */
-    char[] commandLine = "program\\python.exe program\\Scripts\\psrregshuffle";
+    char commandLine[] = "program\\python.exe program\\Scripts\\psrregshuffle";
 
     int rc;
     STARTUPINFO startupInfo;
