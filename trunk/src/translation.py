@@ -32,7 +32,7 @@ contained here are meant to kick-start translation.
 Two functions are defined here:
 
 "init" takes a domain name (usually the name of the application) and a
-locale dir. It then finds a suitable translation and register the global
+locale dir. It then finds a suitable translation and registers the global
 "_"-function in the __builtin__ dictionary.
 
 "initDummy" however takes no argument. It is meant for development scripts
@@ -96,6 +96,7 @@ def init(domainName, localeDir):
     )
 
     __builtin__.__dict__["_"] = translation.gettext
+
 
 def initDummy():
     '''

@@ -1,3 +1,6 @@
+--------------------------------------------------------------------------------
+--GENERAL-----------------------------------------------------------------------
+--------------------------------------------------------------------------------
  * Investigate in pydoc, source code documentation extractor
 
  * More sensible detection of data directories (data, l18n, ...) in setup
@@ -5,4 +8,23 @@
 
  * UnitTests, pyLint, Profiler, et al.
 
- * Nice manual (far beyond man page) with lots of pictures (after V 0.3)
+--------------------------------------------------------------------------------
+---After Version 0.3------------------------------------------------------------
+--------------------------------------------------------------------------------
+ * Nice manual (far beyond man page) with lots of pictures
+
+--------------------------------------------------------------------------------
+--Version 0.4-------------------------------------------------------------------
+--------------------------------------------------------------------------------
+ * Extend registration classes in order to recognize and change:
+    * Voice names (create voice list files for that)
+    * Style names (dito if needed)
+    * Voice & style volume
+    * Voice & style panorama
+
+ * Show extended information in UI registration lists.
+
+ * Allow revoicing and changing styles in the UI.
+    * Can dropdown comboboxes be included in the current list views?
+    * Auto-revoice: Substitute missing voices & styles with those
+      available on the target instrument.

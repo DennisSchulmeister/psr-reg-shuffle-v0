@@ -64,10 +64,10 @@ outputDirectory = os.getcwd()
 outputFilename  = os.path.join(outputDirectory, "psrregshuffle.po")
 xgettextArgs    = "--join-existing --add-location --width=%(width)s --sort-output --copyright-holder=%(copyright)s --package-name=%(package)s --package-version=%(version)s --msgid-bugs-address=%(bugmail)s --output=%(outputFilename)s" \
 % {
-    "package":       const.shortname.replace(" ", "\ "),
-    "version":       const.version.replace(" ", "\ "),
-    "copyright":     const.author.replace(" ", "\ "),
-    "bugmail":       const.author_email.replace(" ", "\ "),
+    "package":       const.shortname.replace(" ", "\ ").replace("(", "\(").replace(")", "\)").replace("&", "\&").replace("'", "\\'"),
+    "version":       const.version.replace(" ", "\ ").replace("(", "\(").replace(")", "\)").replace("&", "\&").replace("'", "\\'"),
+    "copyright":     const.author.replace(" ", "\ ").replace("(", "\(").replace(")", "\)").replace("&", "\&").replace("'", "\\'"),
+    "bugmail":       const.author_email.replace(" ", "\ ").replace("(", "\(").replace(")", "\)").replace("&", "\&").replace("'", "\\'"),
     "width":         "80",
     "outputFilename": outputFilename,
 }
