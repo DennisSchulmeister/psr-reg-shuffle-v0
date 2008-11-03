@@ -1,6 +1,6 @@
 #encoding=utf-8
 
-# exceptions.py
+# appexceptions.py
 # This file is part of PSR Registration Shuffler
 #
 # Copyright (C) 2008 - Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
