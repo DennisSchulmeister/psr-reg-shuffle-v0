@@ -53,6 +53,7 @@ class Registration_Tyros(registration.Registration):
     keyboardNames = [
         const.YAMAHA_TYROS1,
         const.YAMAHA_TYROS2,
+        const.YAMAHA_TYROS3,
         const.YAMAHA_S900,
         const.YAMAHA_S700,
         const.YAMAHA_PSR3000,

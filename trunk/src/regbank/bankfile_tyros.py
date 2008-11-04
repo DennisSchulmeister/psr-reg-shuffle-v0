@@ -46,13 +46,14 @@ from .. import util
 # Define class
 class BankFile_Tyros(bankfile.BankFile):
     '''
-    This class provides support for YAMAHA Tyros and Tyros 2 bank files.
+    This class provides support for YAMAHA Tyros alike bank files.
     '''
 
     # Short names of supported keyboard models
     keyboardNames = [
         const.YAMAHA_TYROS1,
         const.YAMAHA_TYROS2,
+        const.YAMAHA_TYROS3,
         const.YAMAHA_S900,
         const.YAMAHA_S700,
         const.YAMAHA_PSR3000,
@@ -75,6 +76,9 @@ class BankFile_Tyros(bankfile.BankFile):
 
         const.YAMAHA_TYROS2:  "\x53\x70\x66\x46\x00\x10\x0B\x75" \
                               "\x52\x47\x53\x54\x00\x02\x00\x00",
+
+        const.YAMAHA_TYROS3:  "\x53\x70\x66\x46\x00\x10\x0C\x12" \
+                              "\x52\x47\x53\x54\x00\x02\x00\x02",
 
         const.YAMAHA_S900:    "\x53\x70\x66\x46\x00\x10\x0B\xC6" \
                               "\x52\x47\x53\x54\x00\x02\x00\x00",
@@ -100,6 +104,14 @@ class BankFile_Tyros(bankfile.BankFile):
                               "\xFF\xFF",
 
         const.YAMAHA_TYROS2:  "\x00\x82" \
+                              "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF",
+
+        const.YAMAHA_TYROS3:  "\x00\x65" \
                               "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
                               "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
                               "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \

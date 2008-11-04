@@ -124,6 +124,9 @@ thanks = """%(intro)s
 <b>Alan Paganelli</b>
 %(Alan Paganelli)s
 
+<b>Kim Winther</b>
+%(Kim Winther)s
+
 <b>Claudio Bizzarri</b>
 %(Claudio Bizzarri)s
 
@@ -135,7 +138,7 @@ thanks = """%(intro)s
     "intro":                _("Special thanks go to the following people. Without their help this program would still\nsupport Yamaha PSR-2000 and Linux only."),
     "Heiko Plate":          _("For his documentation of the Yamaha PSR-2000 registration file format.\nWithout it I would have never started to write this program."),
     "Jørgen Sørensen":      _("For writing excellent music related software which encouraged me to try the same."),
-    "Michael P. Bedesem":   _("For all his music related software."),
+    "Michael P. Bedesem":   _("For all his music related software. Also for providing Yamaha Tyros 3 test data."),
     "Leroy Luc":            _("For trying to run the program in Windows when there hasn't been\na dedicated package yet."),
     "Jim Wincell":          _("For being one of the first who tried out the Windows package."),
     "Brian Haylett":        _("For answering questions on the different keyboard models."),
@@ -145,6 +148,7 @@ thanks = """%(intro)s
     "Herbert Mauderer":     _("For providing Yamaha S700 registration files."),
     "Norm Ruttle":          _("For providing Yamaha PSR-3000 registration files."),
     "Alan Paganelli":       _("For providing Yamaha Tyros 1 registration files."),
+    "Kim Winther":          _("For providing Yamaha Tyros 3 registration files."),
     "Claudio Bizzarri":     _("For trying to run this program on Ubuntu GNU/Linux 7.10 and reporting about a\nmissing method in the kiwi library.\n\nAlso for offering his help with the Italian translation."),
     "internet_name":        _("The nice folks who hang around the Internet"),
     "The Internet":         _("Including members of the Yamaha-psr-Yahoogroups,\nSVPWorld.com and many more."),
@@ -182,6 +186,7 @@ YAMAHA_PSR8000 = "YAMAHA PSR8000"
 YAMAHA_PSR9000 = "YAMAHA PSR9000"
 YAMAHA_TYROS1  = "YAMAHA TYROS1"
 YAMAHA_TYROS2  = "YAMAHA TYROS2"
+YAMAHA_TYROS3  = "YAMAHA TYROS3"
 YAMAHA_S500    = "YAMAHA S500"
 YAMAHA_S700    = "YAMAHA S700"
 YAMAHA_S900    = "YAMAHA S900"
@@ -201,6 +206,7 @@ keyboardNameLong = {
     YAMAHA_PSR9000: "Yamaha PSR-9000 / 9000pro",
     YAMAHA_TYROS1:  "Yamaha Tyros 1",
     YAMAHA_TYROS2:  "Yamaha Tyros 2",
+    YAMAHA_TYROS3:  "Yamaha Tyros 3",
     YAMAHA_S500:    "Yamaha PSR-S500",
     YAMAHA_S700:    "Yamaha PSR-S700",
     YAMAHA_S900:    "Yamaha PSR-S900",
@@ -232,5 +238,5 @@ msg = {
     "setlist-print-err":  _("PRINT ERROR: %s"),
     "setlist-print-cnc":  _("Print operation canceled."),
     "printjob-name":      _("PSR setlist: %s"),
-    "setlist-page-head":  _("<b>%(name)s</b>\nPage %(page)s from %(pages)s"),
+    "setlist-page-head":  _("<b>%(name)s</b>\nPage %(page)s of %(pages)s"),
 }
