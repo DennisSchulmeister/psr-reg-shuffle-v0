@@ -43,11 +43,6 @@ __all__ = [
     "version_string",
 ]
 
-
-# Import modules
-import sys
-import os.path
-
 # Declare constant values
 #
 # ATTENTION: When program name (or version number) changes don't forget to
