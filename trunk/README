@@ -88,11 +88,6 @@ the alphabet. Unfortunately this can't be influenced. In batch mode however
 a manual sort algorithm gets used which strictly sorts by alphabet as if all
 words were capitalized.
 
-The MS Windows version doesn't respect the user specific GTK-setting, whether
-images should be shown on buttons or not. This is because the default behaviour
-of GTK's Windows version is to hide images and the average user wouldn't want
-to edit the gtkrc files.
-
 At the moment this program is maintained by just one person (me). However as
 it is put under a free-software licence it could definitely use more hands
 working on it. This does not necessarily involve programming. There are many

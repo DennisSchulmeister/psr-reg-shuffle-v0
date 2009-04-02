@@ -93,7 +93,7 @@ Section "Application Data (required)"
   ${WriteUninstallRegValue} "DisplayName"     "${NAME}"
   ${WriteUninstallRegValue} "UninstallString" "$OUTDIR\uninstall.exe"
   ${WriteUninstallRegValue} "InstallLocation" "$OUTDIR"
-  ${WriteUninstallRegValue} "DisplayIcon"     "$OUTDIR\program.exe"
+  ${WriteUninstallRegValue} "DisplayIcon"     "$OUTDIR\icon.ico"
   ${WriteUninstallRegValue} "Publisher"       "${AUTHOR}"
   ${WriteUninstallRegValue} "URLInfoAbout"    "http://www.psrregshuffle.de"
   ${WriteUninstallRegValue} "DisplayVersion"  "${VERSION}"
@@ -102,38 +102,48 @@ Section "Application Data (required)"
 
   # Remember installation path
   WriteRegStr HKLM "Software\${SHORTNAME}" "InstallDir" "$OUTDIR"
+  WriteRegStr HKLM "Software\${SHORTNAME}" "StartMenuDir" "$MY_SMPROGRAMS"
 
   # Copy files
   File /a    psrregshuffle.exe
   File /a    README.txt
   File /a    license.txt
+  File /a    icon.ico
 
   CreateDirectory "$INSTDIR\program"
   SetOutPath "$INSTDIR\program"
+
   File /a /r program\*.*
 
-  # Create Shortcot
+  # Create Shortcuts
+  # NOTE: We need to change OutPath to the root installation directory
+  # again because it is taken is working directory for shortcuts. The
+  # bootstrap EXE file needs the right working directory set.
   SetOutPath "$INSTDIR"
+
   CreateDirectory $MY_SMPROGRAMS
-  CreateShortCut "$MY_SMPROGRAMS\PSR Registration Shuffler.lnk" "$OUTDIR\psrregshuffle.exe"
-  CreateShortCut "$MY_SMPROGRAMS\Read Me.lnk" "$OUTDIR\README.txt"
-  CreateShortCut "$MY_SMPROGRAMS\License.lnk" "$OUTDIR\license.txt"
+  CreateShortCut "$MY_SMPROGRAMS\PSR Registration Shuffler.lnk" "$INSTDIR\psrregshuffle.exe"
+  CreateShortCut "$MY_SMPROGRAMS\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+  CreateShortCut "$MY_SMPROGRAMS\Read Me.lnk" "$WINDIR\notepad.exe" "$INSTDIR\README.txt"
+  CreateShortCut "$MY_SMPROGRAMS\License.lnk" "$WINDIR\notepad.exe" "$INSTDIR\license.txt"
 SectionEnd
 
 Section "Example Files"
   CreateDirectory "$INSTDIR\examples"
   SetOutPath "$INSTDIR\examples"
+
   File /a /r examples\*.*
 
-  CreateShortCut "$MY_SMPROGRAMS\Example Files" "$OUTDIR\examples\"
+  CreateShortCut "$MY_SMPROGRAMS\Example Files.lnk" "$WINDIR\explorer.exe" "$INSTDIR\examples\" "$WINDIR\explorer.exe" 13
 SectionEnd
 
 Section "Manual"
   CreateDirectory "$INSTDIR\manual"
   SetOutPath "$INSTDIR\manual"
+
   File /a /r manual\*.*
 
-  CreateShortCut "$MY_SMPROGRAMS\Documentation.lnk" "$OUTDIR\manual\"
+  CreateShortCut "$MY_SMPROGRAMS\Documentation.lnk" "$WINDIR\explorer.exe" "$INSTDIR\manual\" "$WINDIR\explorer.exe" 13
 SectionEnd
 
 
@@ -147,15 +157,19 @@ Section "Uninstall"
     MessageBox MB_ICONSTOP "Fatal Error: Couldn't find program directory!"
     Return
 
+  # Remove shortcuts
+  ReadRegStr $MY_SMPROGRAMS HKLM "Software\${SHORTNAME}" "StartMenuDir"
+
+  StrCmp $MY_SMPROGRAMS "" +2 0
+    RmDir /r $MY_SMPROGRAMS
+
   # Remove program files
   DeleteRegKey HKLM "Software\${SHORTNAME}"
 
   SetOutPath $TEMP
-  RmDir /r /REBOOTOK $DELDIR
+  StrCmp $DELDIR "" +2 0
+    RmDir /r /REBOOTOK $DELDIR
 
   # Unregister Uninstaller
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}"
-
-  # Remove shortcuts
-  RmDir /r /REBOOTOK $MY_SMPROGRAMS
 SectionEnd
