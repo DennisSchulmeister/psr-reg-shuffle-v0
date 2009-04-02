@@ -3,7 +3,14 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (C) 2008 - Dennis Schulmeister  <dennist -at- ncc-1701a.homelinux.net>
-Licenced under the terms of the GPL for free documentation
+Licensed under the terms of the GPL for free documentation
+
+TABLE OF CONTENTS
+
+ 1. Using the Pre-Configured Python Template
+ 2. Creating a comfortable installer
+ 3. Doing it all from scratch
+
 
 --------------------------------------------------------------------------------
 - Using the Pre-Configured Python Template                                     -
@@ -49,7 +56,20 @@ simple steps on your favorite Windows machine:
 --------------------------------------------------------------------------------
 - Creating a comfortable installer                                             -
 --------------------------------------------------------------------------------
-TODO
+ 1. First create a new distribution either by using one of the python-templates
+    as described above or by doing it all over again as described below.
+
+ 2. Store your new distribution to a new working directory. (Unpacked)
+
+ 3. Copy content from installer/ directory to the working directory.
+
+ 4. Write a README.txt or copy it from ../trunk/. Make sure it uses Windows
+    style line-endings (CRLF).
+
+ 5. Edit first lines of psrregshuffle.nsi (e.g. version number, author, ...)
+
+ 6. Run makensis psrregshuffle.nsi.
+    A file called psr-reg-shuffle_VERSION_win32_setup.exe will be created.
 
 
 --------------------------------------------------------------------------------
