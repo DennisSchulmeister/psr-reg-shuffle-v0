@@ -65,7 +65,7 @@ The current version fully supports the following instruments:
 \h'3' \(bu Yamaha Tyros 3
 
 [ABOUT THE USER-INTERFACE]
-The user-interface mainly consists of four tabs:
+The user-interface mainly consists of six tabs:
 
 .br
 \h'3' \(bu Create Bank Files
@@ -126,11 +126,6 @@ sorts CAPITALIZED words before mixed-case or lower-cased words disregarding
 the alphabet. Unfortunately this can't be influenced. In batch mode however
 a manual sort algorithm gets used which strictly sorts by alphabet as if all
 words were capitalized.
-
-The MS Windows version doesn't respect the user specific GTK-setting, whether
-images should be shown on buttons or not. This is because the default behaviour
-of GTK's Windows version is to hide images and the average user wouldn't want
-to edit the gtkrc files.
 
 At the moment this program is maintained by just one person (me). However as
 it is put under an open-source licence it could definitely use more hands

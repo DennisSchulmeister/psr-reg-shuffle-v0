@@ -32,6 +32,20 @@ This script starts the system-wide installed version of the application.
 import __builtin__
 import sys
 import os
+import os.path
+
+
+# Try to use local GTK library if present
+# NOTE: This needs to be done prior to the first gtk import.
+# NOTE: This only applies to the MS Windows distribution which comes with
+# budled GTK+ binaries. It doesn't affect other operating systems, though.
+gtkLibPath = os.path.join(sys.prefix, "GTK", "lib")
+if os.path.exists(gtkLibPath):
+    os.environ["PATH"] = "%s;%s" % (gtkLibPath, os.environ["PATH"])
+
+gtkBinPath = os.path.join(sys.prefix, "GTK", "bin")
+if os.path.exists(gtkBinPath):
+    os.environ["PATH"] = "%s;%s" % (gtkBinPath, os.environ["PATH"])
 
 
 # Initialize l8n support

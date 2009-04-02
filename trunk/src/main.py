@@ -134,21 +134,6 @@ class Main(gobject.GObject):
         # But respond to given options here if necessay.
         (options, args) = self.parser.parse_args()
 
-        # (MS Windows only) Surpress user-setting of hiding images on buttons.
-        # NOTE: This is done because the default behaviour on Windows is to
-        # hide images. Unfortunately there is no user-friendly (in terms of a
-        # MS Windows user) way to change it. She can just edit her current
-        # theme's gtkrc file but unfortunately she most probably doesn't
-        # know about it and just doesn't care ...
-        self.gtkSettings = gtk.settings_get_default()
-
-        if os.name == "nt":
-            self.gtkSettings.set_long_property(
-                name   = "gtk-button-images",
-                v_long = True,
-                origin = "MAIN OBJECT -> RUN METHOD"
-            )
-
         # Show main window
         self.wnd = mainwindow.MainWindow()
         self.wnd.wndMain.maximize()

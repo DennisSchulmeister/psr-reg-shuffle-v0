@@ -1,3 +1,17 @@
+2009-04-02  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Updated man page.
+
+
+2009-03-31  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Modified start-up script to use local GTK+ binaries if present.
+ * Updated Windows release template to include GTK+ binaries.
+ * Removed special treatment to enable button images in Windows.
+ * Created Nullsoft Installation Script
+ * No news on the User's Guide yet.
+
+
 2009-02-25  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Started with User's Guide.

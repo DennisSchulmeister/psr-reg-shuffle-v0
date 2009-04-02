@@ -5,10 +5,65 @@
 (C) 2008 - Dennis Schulmeister  <dennist -at- ncc-1701a.homelinux.net>
 Licenced under the terms of the GPL for free documentation
 
+--------------------------------------------------------------------------------
+- Using the Pre-Configured Python Template                                     -
+--------------------------------------------------------------------------------
+Using the shipped python template creating a Windows distribution of the
+PSR Registration Shuffler shouldn't be all to hard. Provided you follow this
+simple steps on your favorite Windows machine:
+
+ 1. Make a clean install of python somewhere like D:\PYTHON25\.
+
+ 2. Backup the python directory to say D:\PYTHON25-OLD\
+
+ 3. Unzip python25-tempplate-striped.zip somewhere, say:
+    D:\python25-template-striped
+
+ 4. Make the contained program directory replace your previous python
+    installation. This means copy it to D:\PYTHON25\
+
+ 5. Use distutils from the program's source tree in order to build a setup file
+    for Windows:
+
+    \> python setup.py bdist --format=wininst
+
+    The exe-file will be in .\dist\ !!
+
+ 6. Use the installer to install psr-reg-shuffle into your python directory.
+
+ 7. Copy D:\PYTHON25 back to D:\python25-template-striped\program
+
+ 8. Rename the distribution's top-directory to: psr-reg-shuffle_A.B_winXY_python
+    where as A.B is the program version and XY the windows version like win32
+    or win64.
+
+ 8. Restore your backup of the old python directory.
+
+ 9. Uninstall python again.
+
+10. Either create a huge archive from your disitrubtion or use the shipped
+    Nullsoft Installer Script in order to build a setup program. (Refer to
+    section below)
+
+
+--------------------------------------------------------------------------------
+- Creating a comfortable installer                                             -
+--------------------------------------------------------------------------------
+TODO
+
+
+--------------------------------------------------------------------------------
+- Doing it all from scratch                                                    -
+--------------------------------------------------------------------------------
+Normally the pre-built python template should be suffice for creating a
+Windows distribution of the PSR Registration Shuffler. So before doing it all
+again please try it first. Anyway this is a description how the python template
+was created in the first place:
+
 Building a ready-to-run Windows distribution of »PSR Registrations Shuffler« is
 straight forward once you got all packages together. It's basically just a
-regular python distribution with all python modules pre-installed. Note, that
-this doesn't include GTK+ which needs to be installed separately by the user.
+regular python distribution with all python modules and GTK+ binaries
+pre-installed.
 
 On a Windows machine perform the following steps:
 
@@ -50,10 +105,25 @@ On a Windows machine perform the following steps:
 11. Copy psrregshuffle.exe into the top-directory. (See python25-template/ or
     /trunk/extras/win32-starter/)
 
-12. Rename the top-directory to: psr-reg-shuffle_A.B_winXY_python where as
-    A.B is the program version and XY the windows version like win32 or win64.
+12. Install the bre-compiled GTK+ Runtime Environment on your computer.
+    But make sure it includes libglade. (e.g. by using the neat distribution
+    from http://gladewin32.sourceforge.net)
 
-11. Use your favorite packager for building a neat ZIP-file.
+13. Copy the complete GTK+ installation from something like C:\PROGRAMS\GTK
+    to program\GTK.
+
+14. Remove unnecessary files from the GTK+ disitrubtion like unneeded locales,
+    images and demo applications. (Saves about 19 Meg)
+
+15. Uninstall GTK+ from your system again.
+
+16. Rename the distribution's top-directory to: psr-reg-shuffle_A.B_winXY_python
+    where as A.B is the program version and XY the windows version like win32
+    or win64.
+
+16. Either create a huge archive from your disitrubtion or use the shipped
+    Nullsoft Installer Script in order to build a setup program. (Refer to
+    section above)
 
 That's all there is to do. But of course you should also test-run your newly
 created distribution. Especially since the Windows versions of the employed
