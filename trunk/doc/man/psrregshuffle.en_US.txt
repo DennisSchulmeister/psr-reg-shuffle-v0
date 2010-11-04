@@ -63,6 +63,8 @@ The current version fully supports the following instruments:
 \h'3' \(bu Yamaha Tyros 2
 .br
 \h'3' \(bu Yamaha Tyros 3
+.br
+\h'3' \(bu Yamaha Tyros 4
 
 [ABOUT THE USER-INTERFACE]
 The user-interface mainly consists of six tabs:

@@ -1,5 +1,5 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                         PSR Registration Shuffler 0.3
+                         PSR Registration Shuffler 0.4
 
             (A program for organizing your registration bank files)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,7 +41,7 @@ speed unmatched by the keyboard.
 2. FEATURE OVERVIEW
 -------------------
 
-As of version 0.3 the PSR Registration Shuffler can read and write registration
+As of version 0.4 the PSR Registration Shuffler can read and write registration
 banks of the following keyboard models:
 
  » Yamaha PSR-2000
@@ -51,6 +51,7 @@ banks of the following keyboard models:
  » Yamaha Tyros
  » Yamaha Tyros 2
  » Yamaha Tyros 3
+ » Yamaha Tyros 4
 
 Whereas the following operations can be performed:
 
@@ -115,8 +116,8 @@ website.
 5. COPYRIGHT
 ------------
 
-The PSR Registration Shuffler is (C) 2008 Dennis Schulmeister. It is licenced
+The PSR Registration Shuffler is (C) 2008-2010 Dennis Schulmeister. It is licenced
 under the terms of the GNU GPL 3 or (at your option) any later version.
 
-(C) 2008 Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+(C) 2008-2010 Dennis Schulmeister  <dennis@developer-showcase.de>
 http://www.psrregshuffle.de

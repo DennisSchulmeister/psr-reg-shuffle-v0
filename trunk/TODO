@@ -14,7 +14,7 @@
  * Nice manual (far beyond man page) with lots of pictures
 
 --------------------------------------------------------------------------------
---Version 0.4-------------------------------------------------------------------
+--Version 0.5-------------------------------------------------------------------
 --------------------------------------------------------------------------------
  * Extend registration classes in order to recognize and change:
     * Voice names (create voice list files for that)

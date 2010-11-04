@@ -1,3 +1,20 @@
+2010-11-04  Dennis Schulmeister  <dennis@developer-showcase.de>
+
+ * Added Yamaha Tyros 4 support
+
+
+2009-04-13  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Design chapters: Start-Up Procedure, Decorators.
+
+
+2009-04-12  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
+
+ * Created design directory in order to improve developers documentation.
+ * Started design document for version 0.4
+ * Imported graphics for the design document to SVN.
+
+
 2009-04-02  Dennis Schulmeister  <dennis -at- ncc-1701a.homelinux.net>
 
  * Updated man page.

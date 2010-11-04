@@ -52,15 +52,15 @@ __all__ = [
 
 progname       = "PSR Registration Shuffler"
 shortname      = "psrregshuffle"
-version        = "0.3"
+version        = "0.4"
 techname       = "%s-%s" % (shortname, version)
 licence        = "GNU General Public Licence 3"
 description    = _("A program for organizing PSR registration bank files")
 author         = "Dennis Schulmeister"
-author_email   = "dennis -at- ncc-1701a.homelinux.net"
+author_email   = "dennis@developer-showcase.de"
 url            = "http://www.psrregshuffle.de"
 
-copyright      = "Copyright (C) 2008 %s" % (author)
+copyright      = "Copyright (C) 2008-2010 %s" % (author)
 copyright_long = _("""%s
 
 This is free software; you can redistribute it and/or modify it under the terms
@@ -133,7 +133,7 @@ thanks = """%(intro)s
     "intro":                _("Special thanks go to the following people. Without their help this program would still\nsupport Yamaha PSR-2000 and Linux only."),
     "Heiko Plate":          _("For his documentation of the Yamaha PSR-2000 registration file format.\nWithout it I would have never started to write this program."),
     "Jørgen Sørensen":      _("For writing excellent music related software which encouraged me to try the same."),
-    "Michael P. Bedesem":   _("For all his music related software. Also for providing Yamaha Tyros 3 test data."),
+    "Michael P. Bedesem":   _("For all his music related software. Also for providing Yamaha Tyros 3 and 4 test data."),
     "Leroy Luc":            _("For trying to run the program in Windows when there hasn't been\na dedicated package yet."),
     "Jim Wincell":          _("For being one of the first who tried out the Windows package."),
     "Brian Haylett":        _("For answering questions on the different keyboard models."),
@@ -182,6 +182,7 @@ YAMAHA_PSR9000 = "YAMAHA PSR9000"
 YAMAHA_TYROS1  = "YAMAHA TYROS1"
 YAMAHA_TYROS2  = "YAMAHA TYROS2"
 YAMAHA_TYROS3  = "YAMAHA TYROS3"
+YAMAHA_TYROS4  = "YAMAHA TYROS4"
 YAMAHA_S500    = "YAMAHA S500"
 YAMAHA_S700    = "YAMAHA S700"
 YAMAHA_S900    = "YAMAHA S900"
@@ -202,6 +203,7 @@ keyboardNameLong = {
     YAMAHA_TYROS1:  "Yamaha Tyros 1",
     YAMAHA_TYROS2:  "Yamaha Tyros 2",
     YAMAHA_TYROS3:  "Yamaha Tyros 3",
+    YAMAHA_TYROS4:  "Yamaha Tyros 4",
     YAMAHA_S500:    "Yamaha PSR-S500",
     YAMAHA_S700:    "Yamaha PSR-S700",
     YAMAHA_S900:    "Yamaha PSR-S900",

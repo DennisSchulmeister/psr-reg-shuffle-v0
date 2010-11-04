@@ -25,7 +25,7 @@ PURPOSE
 =======
 
 This module contains the BankFile sub-class for dealing with registration
-bank files from the YAMAHA Tyros and Tyros 2 keyboards.
+bank files from the YAMAHA Tyros descendants.
 '''
 
 # Public export of module content
@@ -54,6 +54,7 @@ class BankFile_Tyros(bankfile.BankFile):
         const.YAMAHA_TYROS1,
         const.YAMAHA_TYROS2,
         const.YAMAHA_TYROS3,
+        const.YAMAHA_TYROS4,
         const.YAMAHA_S900,
         const.YAMAHA_S700,
         const.YAMAHA_PSR3000,
@@ -79,6 +80,9 @@ class BankFile_Tyros(bankfile.BankFile):
 
         const.YAMAHA_TYROS3:  "\x53\x70\x66\x46\x00\x10\x0C\x12" \
                               "\x52\x47\x53\x54\x00\x02\x00\x02",
+
+        const.YAMAHA_TYROS4:  "\x53\x70\x66\x46\x00\x10\x0C\xC1" \
+                              "\x52\x47\x53\x54\x00\x02\x00\x03",
 
         const.YAMAHA_S900:    "\x53\x70\x66\x46\x00\x10\x0B\xC6" \
                               "\x52\x47\x53\x54\x00\x02\x00\x00",
@@ -112,6 +116,14 @@ class BankFile_Tyros(bankfile.BankFile):
                               "\xFF\xFF",
 
         const.YAMAHA_TYROS3:  "\x00\x65" \
+                              "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
+                              "\xFF\xFF",
+
+        const.YAMAHA_TYROS4:  "\x00\x64" \
                               "\x42\x48\x64\x01\x00\x24\xFF\xFF" \
                               "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
                               "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF" \
@@ -174,7 +186,7 @@ class BankFile_Tyros(bankfile.BankFile):
         overwritten by sub-classes in order to initialize a new object from an
         existing bank file whise file object gets passed as argument.
 
-        The most important taske to be carried out here is to extract all
+        The most important task to be carried out here is to extract all
         registrations from the given file, nicely pack them into Registration
         objects and to line them up in a list called self.regList.
         '''

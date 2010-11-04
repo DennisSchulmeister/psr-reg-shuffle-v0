@@ -25,7 +25,7 @@ PURPOSE
 =======
 
 This module contains the Registration class which provides support for
-YAMAHA Tyros and Tyros 2 registrations.
+YAMAHA Tyros descendants registrations.
 '''
 
 # Public export of module content
@@ -54,6 +54,7 @@ class Registration_Tyros(registration.Registration):
         const.YAMAHA_TYROS1,
         const.YAMAHA_TYROS2,
         const.YAMAHA_TYROS3,
+        const.YAMAHA_TYROS4,
         const.YAMAHA_S900,
         const.YAMAHA_S700,
         const.YAMAHA_PSR3000,
