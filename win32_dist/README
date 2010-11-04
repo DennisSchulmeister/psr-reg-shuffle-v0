@@ -125,7 +125,7 @@ On a Windows machine perform the following steps:
 11. Copy psrregshuffle.exe into the top-directory. (See python25-template/ or
     /trunk/extras/win32-starter/)
 
-12. Install the bre-compiled GTK+ Runtime Environment on your computer.
+12. Install the pre-compiled GTK+ Runtime Environment on your computer.
     But make sure it includes libglade. (e.g. by using the neat distribution
     from http://gladewin32.sourceforge.net)
 
@@ -141,7 +141,7 @@ On a Windows machine perform the following steps:
     where as A.B is the program version and XY the windows version like win32
     or win64.
 
-16. Either create a huge archive from your disitrubtion or use the shipped
+17. Either create a huge archive from your disitrubtion or use the shipped
     Nullsoft Installer Script in order to build a setup program. (Refer to
     section above)
 
