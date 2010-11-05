@@ -1,29 +1,46 @@
 --------------------------------------------------------------------------------
---GENERAL-----------------------------------------------------------------------
+- General
 --------------------------------------------------------------------------------
  * Investigate in pydoc, source code documentation extractor
-
  * More sensible detection of data directories (data, l18n, ...) in setup
    script (low priority)
-
  * UnitTests, pyLint, Profiler, et al.
 
 --------------------------------------------------------------------------------
----After Version 0.3------------------------------------------------------------
+- After Version 0.3
 --------------------------------------------------------------------------------
  * Nice manual (far beyond man page) with lots of pictures
 
 --------------------------------------------------------------------------------
---Version 0.5-------------------------------------------------------------------
+- Version 0.4
+--------------------------------------------------------------------------------
+ * Allow to open many registration banks at once on import, rename, setlist tabs
+ * Allow to create many registration banks at once on assembly tab
+ * Make batch dialog fill "New Registration Banks" list instead of direct
+   creation of bank files
+ * Add Yamaha Tyros 4 support
+ * Fix possible Yamaha Tyros 2 bug (bank files not recognized)
+ * Refactor usage of data directory. Create global registration store object
+ * Add first usage wizzard w/ explanatory steps (set data directory, import
+   first registrations)
+ * Add menubar and/or toolbar w/ preferences dialog (default data directory,
+   default keyboard model, default filter)
+ * Open tap pages as needed from menubar/toolbar
+ * Investigate effort for dropping kiwi dependency
+ * Simplify detection of regbank/registration classes (remove cpython woodoo)
+ * Maybe add Yamaha PSR-2100 support (if test files available)
+ * Maybe add french translation (if available)
+ * Replace "classmethod = " with "@classmethod" in source code
+
+--------------------------------------------------------------------------------
+- Version 0.5
 --------------------------------------------------------------------------------
  * Extend registration classes in order to recognize and change:
     * Voice names (create voice list files for that)
     * Style names (dito if needed)
     * Voice & style volume
     * Voice & style panorama
-
  * Show extended information in UI registration lists.
-
  * Allow revoicing and changing styles in the UI.
     * Can dropdown comboboxes be included in the current list views?
     * Auto-revoice: Substitute missing voices & styles with those
