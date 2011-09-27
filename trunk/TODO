@@ -1,13 +1,13 @@
 General
 
  * Investigate in pydoc, source code documentation extractor
- * More sensible detection of data directories (data, l18n, ...) in setup
-   script (low priority)
  * UnitTests, pyLint, Profiler, et al.
 
 
 Version 0.4
 
+ * Add comment field to imported registrations
+ * Add support for Yamaha PSR-9000 / 9000pro
  * Allow to open many registration banks at once on import, rename, setlist tabs
  * Allow to create many registration banks at once on assembly tab
  * Make batch dialog fill "New Registration Banks" list instead of direct
@@ -20,7 +20,6 @@ Version 0.4
  * Add menubar and/or toolbar w/ preferences dialog (default data directory,
    default keyboard model, default filter)
  * Open tap pages as needed from menubar/toolbar
- * Investigate effort for dropping kiwi dependency
  * Simplify detection of regbank/registration classes (remove cpython woodoo)
  * Maybe add Yamaha PSR-2100 support (if test files available)
  * Maybe add french translation (if available)
@@ -30,11 +29,16 @@ Version 0.4
 
 After Version 0.4
 
- * Nice manual (far beyond man page) with lots of pictures
+ * Nice manual (far beyond man page) with lots of pictures (Latex or Wiki ??)
 
 
 Version 0.5
 
+ * Drop kiwi dependency, switch to GTK+ 3.x
+ * Rework setup.py to use distribute
+     * Don't use system data directories anymore
+     * Don't provide self-written startup scripts
+     * Use py2exe on MS Windows
  * Extend registration classes in order to recognize and change:
     * Voice names (create voice list files for that)
     * Style names (dito if needed)
