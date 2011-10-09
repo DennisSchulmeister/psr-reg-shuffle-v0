@@ -1,0 +1,704 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Dennis Schulmeister
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: psrregshuffle 0.4\n"
+"Report-Msgid-Bugs-To: dennis@developer-showcase.de\n"
+"POT-Creation-Date: 2011-10-09 02:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:155
+msgid "### EMPTY ###"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:75
+#, python-format
+msgid ""
+"%(progname)s %(version)s\n"
+"\n"
+"%(copyright_long)s\n"
+"Written by %(author)s <%(author_email)s>"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:64
+#, python-format
+msgid ""
+"%s\n"
+"\n"
+"This is free software; you can redistribute it and/or modify it under the "
+"terms\n"
+"of the GNU General Public License as published by the Free Software "
+"Foundation;\n"
+"either version 3 of the License, or (at your option) any later version.\n"
+"\n"
+"The software is distributed in the hope that it will be useful, but WITHOUT "
+"ANY\n"
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR "
+"A\n"
+"PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1245
+msgid "(Keep unsplittable groups sorted)"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:238
+#, python-format
+msgid ""
+"<b>%(name)s</b>\n"
+"Page %(page)s of %(pages)s"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:878
+msgid ""
+"<b><big>The following instruments are supported by this program version:\n"
+"</big></b>"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1333
+msgid "<big><big><b>Oops, something went wrong here.</b></big></big>"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:974
+msgid ""
+"<big><big><big><b>Program name</b></big></big></big>\n"
+"<i>Short description</i>\n"
+"\n"
+"Long copyright"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1345
+msgid "<big><i>Exception message</i></big>"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:58
+msgid "A program for organizing PSR registration bank files"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:228
+#, python-format
+msgid "ATTENTION: %(dstName)s cannot read registrations from %(srcName)s."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:229
+#, python-format
+msgid ""
+"ATTENTION: A bank file for this instrument can only hold up to %i "
+"registrations."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:216
+msgid "ATTENTION: Please choose a keyboard model first."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1042
+msgid "About"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:230
+#, python-format
+msgid "Added '%s' to new bank."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1170
+msgid ""
+"All created files will have similar filenames. They need at least one "
+"distinguishing characteristic, though in order to not overwrite each other.\n"
+"\n"
+"Write <b>&amp;n&amp;</b> for serial numbers and <b>&amp;hash&amp;</b> for "
+"abbreviations of the first and last registration's name of each file. e.g.\n"
+"<i>&amp;n - Dance Party (&amp;hash).reg</i>"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:193
+msgid "All models"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:150
+msgid "Anyone whom I left out"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:59
+msgid "Available Registrations"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlisttab.py:107
+msgid "Bank File"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:804
+msgid "Bank Files"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1077
+msgid "Batch Creation"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/appexceptions.py:51
+msgid "Cannot handle data of the given keyboard model."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:217
+#, python-format
+msgid "Changed directory to '%s'."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:224
+msgid "Cleared new registration bank."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:990
+msgid "Click me!"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/createbanktab.py:213
+msgid "Compatible Only"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/quickrenametab.py:315
+#, python-format
+msgid "Content of '%s'"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/appexceptions.py:95
+msgid ""
+"Couldn't find a suitable class. Most probably the feature is not implemented."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:344
+msgid "Create Bank Files"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:30
+msgid "Data Directory"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:18
+msgid "Data Directory:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1315
+msgid "Exception Handler"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exporttext.py:55
+msgid "Export Plain _Text"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exportcsvdeep.py:55
+msgid "Export _Deep CSV"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exportcsvflat.py:55
+msgid "Export _Flat CSV"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1154
+msgid "Filename _Pattern:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:146
+msgid "Filter:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:136
+msgid ""
+"For all his music related software. Also for providing Yamaha Tyros 3 and 4 "
+"test data."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:139
+msgid "For answering questions on the different keyboard models."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:138
+msgid "For being one of the first who tried out the Windows package."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:134
+msgid ""
+"For his documentation of the Yamaha PSR-2000 registration file format.\n"
+"Without it I would have never started to write this program."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:144
+msgid "For providing Yamaha PSR-3000 registration files."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:143
+msgid "For providing Yamaha S700 registration files."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:142
+msgid "For providing Yamaha S900 registration files."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:141
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:145
+msgid "For providing Yamaha Tyros 1 registration files."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:140
+msgid "For providing Yamaha Tyros 2 registration files."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:146
+msgid "For providing Yamaha Tyros 3 registration files."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:137
+msgid ""
+"For trying to run the program in Windows when there hasn't been\n"
+"a dedicated package yet."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:147
+msgid ""
+"For trying to run this program on Ubuntu GNU/Linux 7.10 and reporting about "
+"a\n"
+"missing method in the kiwi library.\n"
+"\n"
+"Also for offering his help with the Italian translation."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:135
+msgid ""
+"For writing excellent music related software which encouraged me to try the "
+"same."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/appexceptions.py:79
+msgid "Given name"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/importregstab.py:88
+msgid "Import"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:472
+msgid "Import Registrations"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:149
+msgid ""
+"Including members of the Yamaha-psr-Yahoogroups,\n"
+"SVPWorld.com and many more."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/appexceptions.py:127
+msgid "Invalid export class given. The class must be a sub-class of ExportBase."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/createbanktab.py:130
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlisttab.py:108
+msgid "Keyboard"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:930
+msgid "Keyboard Information"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:281
+msgid "Keyboard model:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:893
+msgid "Keyboard support"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/appexceptions.py:83
+msgid "Maximum allowed length"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/informationtab.py:82
+msgid "Models supported by this class:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:226
+#, python-format
+msgid "Moved '%s' down one position."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:225
+#, python-format
+msgid "Moved '%s' up one position."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/appexceptions.py:70
+msgid "Name too long."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/appexceptions.py:61
+msgid ""
+"Neither keyboard model nor file given. Cannot create an empty object without "
+"hint about the keyboard model."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:183
+msgid "New Registration Bank"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/appexceptions.py:104
+msgid "No file was given at all when one was expected."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/quickrenametab.py:312
+msgid "No open file"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:222
+msgid "Nothing imported."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/importregstab.py:89
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/quickrenametab.py:106
+msgid "Number"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlisttab.py:162
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/importregstab.py:128
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/quickrenametab.py:151
+msgid "Open bank file"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:235
+#, python-format
+msgid "PRINT ERROR: %s"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:6
+msgid "PSR Registration Shuffler"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:237
+#, python-format
+msgid "PSR setlist: %s"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:236
+msgid "Print operation canceled."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:845
+msgid "Print/Export Setlist"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:627
+msgid "Quick Rename"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/batchdialog.py:114
+msgid "Random order"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:215
+msgid "Ready."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:431
+msgid "Registration Bank Content"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/createbanktab.py:129
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/createbanktab.py:137
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/importregstab.py:90
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/quickrenametab.py:107
+msgid "Registration Name"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/batchdialog.py:112
+msgid "Registration name (ascending)"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/batchdialog.py:113
+msgid "Registration name (descending)"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/informationtab.py:80
+#, python-format
+msgid "Registrations per bank: Up to %i"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/bankfile_psr2000.py:57
+msgid ""
+"Released in 2001 the Yamaha PSR-2000 marks the end of the highly successful "
+"PSR-9000 line. It shares many features of its big brothers the PSR-9000 and "
+"9000pro, among them most sounds, styles and a very similar albeit updated "
+"operating system. Updates include a largely re-designed main screen, notation "
+"display as well as icons next to each object name (with the icon descriptor "
+"being a suffix to the name)."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:231
+#, python-format
+msgid "Removed '%s' from new bank."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exceptiondialog.py:149
+msgid "Save Debug Information"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/createbanktab.py:636
+msgid "Save Registration Bank"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1138
+msgid "Save _Directory:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exportcsvdeep.py:73
+msgid "Save deep CSV file"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exportcsvflat.py:74
+msgid "Save flat CSV file"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exporttext.py:74
+msgid "Save text file"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:227
+#, python-format
+msgid "Saved registration bank to '%s'."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/createbanktab.py:214
+msgid "Selected Model"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exportbase.py:62
+msgid "Setlist"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:694
+msgid "Setlist _Name: "
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/createbanktab.py:212
+msgid "Show All"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:133
+msgid ""
+"Special thanks go to the following people. Without their help this program "
+"would still\n"
+"support Yamaha PSR-2000 and Linux only."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:234
+#, python-format
+msgid "Started print job: '%s'"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:221
+#, python-format
+msgid "Successfully added '%(filename)s' to the list."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:232
+#, python-format
+msgid "Successfully created %i registration banks."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:233
+#, python-format
+msgid "Successfully exported setlist to '%s'."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:223
+#, python-format
+msgid "Successfully imported %i registrations."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:220
+#, python-format
+msgid "Successfully opened '%(filename)s' registration bank file."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:218
+msgid "Successfully opened web browser."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1005
+msgid "Thanks"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/bankfile_tyros.py:65
+msgid ""
+"The Yamaha Tyros holds as a milestone for a new generation of Yamaha's top- "
+"and mid-level arranger keyboards. Being loosely based upon its predecessors "
+"it introduced a new technical platform as a base for much offspring. Those "
+"models share very similar file formats which is why they are assumed to be "
+"able to read each-other's data."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1371
+msgid "The error might not be fatal. Please report it nevertheless."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regfile/appexceptions.py:46
+msgid ""
+"The given file doesn't seem to be a registration file. Note that registration "
+"files hold only one registration as opposed to registration banks used by "
+"your instrument."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/appexceptions.py:86
+msgid "The given object is not of type Class."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/appexceptions.py:113
+msgid "The given registration doesn't match the given filter criterion."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:148
+msgid "The nice folks who hang around the Internet"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/appexceptions.py:77
+msgid ""
+"The object is a singleton object which shouldn't be instanciated through a "
+"constructor. Use getInstance() instead."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/appexceptions.py:135
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/appexceptions.py:47
+msgid "The user wishes to cancel the current action."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1100
+msgid "This function respects filter and keyboard model settings."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/informationtab.py:101
+msgid ""
+"This installation comes with no keyboard support at all. In most cases this "
+"is not intended. Please check your installation for possible errors."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/informationtab.py:81
+#, python-format
+msgid "Typical file extension: *.%s"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:219
+msgid "Unable to launch web browser."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:194
+msgid "Unknown model"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/bankfile_psr2000.py:56
+msgid "Yamaha PSR-2000 and alike"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/regbank/bankfile_tyros.py:64
+msgid "Yamaha Tyros descendants"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/const.py:151
+msgid ""
+"You know who you are. Drop me a message  if you want\n"
+"and I'll add your name to the list."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:86
+msgid "_Add"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:715
+msgid "_Add Bank File..."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:109
+msgid "_Batch"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:224
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:398
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:527
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:742
+msgid "_Clear"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:651
+msgid "_Go!"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:384
+msgid "_Import Selected"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:371
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:500
+msgid "_Open Bank File..."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/src/exportsetlist/exportprint.py:56
+msgid "_Print Setlist"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:96
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:728
+msgid "_Remove"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:513
+msgid "_Save Bank File"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1396
+msgid "_Save and Close"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:211
+msgid "_Save..."
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1125
+msgid "_Sort Criterion:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1230
+msgid "_Trailing Letters:"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1286
+msgid "gtk-cancel"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1406
+msgid "gtk-close"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1296
+msgid "gtk-execute"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:253
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:554
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:769
+msgid "gtk-go-down"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:238
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:540
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:755
+msgid "gtk-go-up"
+msgstr ""
+
+#: /home/dennis/Sources/Projects/psr_reg_shuffle/version_0/trunk/data/ui.glade:1364
+msgid "label"
+msgstr ""
