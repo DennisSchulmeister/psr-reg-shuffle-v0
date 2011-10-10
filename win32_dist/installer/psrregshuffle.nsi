@@ -78,6 +78,16 @@ Function .onInit
   StrCpy $MY_SMPROGRAMS "$SMPROGRAMS\${NAME}"
 FunctionEnd
 
+# Verify installation directory
+Function .onVerifyInstDir
+  IfFileExists $INSTDIR BadPath GoodPath
+
+  BadPath:
+    Abort
+
+  GoodPath:
+FunctionEnd
+
 
 #-------------------------------------------------------------------------------
 # Installer sections

@@ -26,7 +26,7 @@ simple steps on your favorite Windows machine:
  3. Unzip python25-tempplate-striped.zip somewhere, say:
     D:\python25-template-striped
 
- 4. Make the contained program directory replace your previous python
+ 4. Make the contained "program" directory replace your previous python
     installation. This means copy it to D:\PYTHON25\
 
  5. Use distutils from the program's source tree in order to build a setup file
@@ -90,6 +90,7 @@ On a Windows machine perform the following steps:
  1. Make a clean install of python somewhere like D:\PYTHON25\.
 
  2. Copy python25.dll from C:\WINDOWS\SYSTEM32 into the program directory.
+    Also copy msvcr71.dll into the program directory.
 
  3. Install all needed python modules there:
 
