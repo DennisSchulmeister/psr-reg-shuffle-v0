@@ -7,14 +7,46 @@
 TALE OF CONTENTS
 ----------------
 
-  1. Purpose of the program
-  2. Feature overview
-  3. Known captchas
-  4. Further information
-  5. Copyright
+  1. Archival notice
+  2. Purpose of the program
+  3. Feature overview
+  4. Known captchas
+  5. Further information
+  6. Copyright
 
 
-1. PURPOSE OF THE PROGRAM
+1. ARCHIVAL NOTICE
+------------------
+
+This is an archive copy of my programm ”PSR Registration Shuffler” that was
+developed and maintained in the years 2008 to 2010. Originally written for
+my Yamaha PSR-2000, the program was soon expanded to the Tyros range. After
+two years I lost interest, as the Yamaha arranger community was totaly
+unfriendly at that time. To my surprise and dispite the effort that went
+into the program, I received many unfriendly messages both in the German
+Yamaha Forum as well as the PSR Styles Yahoo Group, most of them complaining
+about the installation size (30 MB) or that it wouldn't run on then obsolete
+Windows 98. Others would deem the program malware due to the curses library
+contained in the Python standard library, oh boy!
+
+After that I continued to use the program for as long as I had my PSR-2000,
+but didn't publish any updates. A C++ rewrite, that would have resolved
+most of these issues and offered more flexible editing features was started.
+But due to the negative feedback I soon lost intereset and decided that it
+wasn't worth the effort.
+
+This is an archive copy of the latest source code, including the full
+commit history. Unfortunately as of 2020 the source code has suffered
+from bit rot, as it relies on following outdated technologies:
+
+ » Python 2.x
+ » GTK 2.x
+ » Kiwi python library
+
+With some effort it should be possible to drop Kiwi and adap the code
+to Python 3.x and GTK 3.x. But I guess that will never happen. :-)
+
+2. PURPOSE OF THE PROGRAM
 -------------------------
 
 If you're using your PSR keyboard for live gigs you're most probably employing
@@ -38,7 +70,7 @@ registrations only, you can do so within the comfort of your computer at a
 speed unmatched by the keyboard.
 
 
-2. FEATURE OVERVIEW
+3. FEATURE OVERVIEW
 -------------------
 
 As of version 0.4 the PSR Registration Shuffler can read and write registration
@@ -71,7 +103,7 @@ been tested:
  » Microsoft Windows
 
 
-3. KNOWN CAPTCHAS
+4. KNOWN CAPTCHAS
 -----------------
 
 There could be support for many more keyboard models. Although many keyboards
@@ -95,7 +127,7 @@ working on it. This does not necessarily involve programming. There are many
 ways to contribute. If you feel up to the task please get in touch with me.
 
 
-4. FURTHER INFORMATION
+5. FURTHER INFORMATION
 ----------------------
 
 More information about program usage can be found in its man page. If you're
@@ -113,11 +145,11 @@ yet. Future program versions will contain a copy as well as the above mentioned
 website.
 
 
-5. COPYRIGHT
+6. COPYRIGHT
 ------------
 
 The PSR Registration Shuffler is (C) 2008-2010 Dennis Schulmeister. It is licenced
 under the terms of the GNU GPL 3 or (at your option) any later version.
 
-(C) 2008-2010 Dennis Schulmeister  <dennis@developer-showcase.de>
+(C) 2008-2010 Dennis Schulmeister  <dennis@wpvs.de>
 http://www.psrregshuffle.de
