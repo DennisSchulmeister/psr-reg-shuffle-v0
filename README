@@ -43,7 +43,7 @@ from bit rot, as it relies on following outdated technologies:
  » GTK 2.x
  » Kiwi python library
 
-With some effort it should be possible to drop Kiwi and adap the code
+With some effort it should be possible to drop Kiwi and adapt the code
 to Python 3.x and GTK 3.x. But I guess that will never happen. :-)
 
 2. PURPOSE OF THE PROGRAM
